@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PatternDefinition 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="PatternDefinition.xsd">
+	
+	<workwith platform="web" >
+		<face />
+	</workwith>
+	
+	
+</PatternDefinition>
+
+

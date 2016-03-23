@@ -1,0 +1,17 @@
+<!-- Pattern Schema definition -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema 
+	xmlns="PatternDefinition" >
+	
+	<xs:element name="workwith" unique="false" platform="{web;mobile}" icon="../icons/ww.ico" nicename="workwith_${enumerated}">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="face" unique="false" />
+			</xs:secuence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="face" icon="../icons/primefaces.ico" nicename="ww${classname}" />
+	
+</xs:schema>
