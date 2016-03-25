@@ -1,6 +1,12 @@
 package pattern01;
 
+import java.awt.image.BufferedImage;
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -31,7 +37,7 @@ public class PatternNav extends ViewPart{
 		mParent = parent;
 		searchPatternAction = new Action("search..") {
 			public void run(){
-				//Aca va el código de la acción
+				//Aca va el cï¿½digo de la acciï¿½n
 			}
 		};
 		searchPatternAction.setImageDescriptor(getImageDescriptor("lupa.png"));
@@ -56,16 +62,26 @@ public class PatternNav extends ViewPart{
 		sub_item3.setText("Sub item 3");		
 	}
 	
-	private ImageDescriptor getImageDescriptor(String imageName){
+	private URL getFileUrl(String imageName){
 		String iconPath = "icons/";
 		Bundle bundle = Platform.getBundle("Pattern01");
 		Path path = new Path(iconPath + imageName);
 		URL fileUrl = FileLocator.find(bundle, path, null);
-		return ImageDescriptor.createFromURL(fileUrl);
+		return fileUrl;
+	}
+	
+	private ImageDescriptor getImageDescriptor(String imageName){
+		return ImageDescriptor.createFromURL(getFileUrl(imageName));
 	}
 	
 	private Image getImage(String imageName){
-		return ImageDescriptor.createFromURL(getClass().getResource("../icons/" + imageName)).createImage();
+		Image img = null;
+		try{
+			img = ImageDescriptor.createFromURL(getFileUrl(imageName)).createImage();
+		}catch(Exception ex){
+			ex.printStackTrace(System.err);
+		}
+		return img;
 	}
 	
 	private void createActionBar(){

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<project default="main" basedir=".">
+
+<echo message="pulling in property files"/>
+<property file="CrudFactoryBuild.properties"/>
+	
+<echo message="calling the web services generation ant task: axis_bujava"/>
+ 
+<target name="main"></target>	
+	
+<target name="entityGen" >
+	<touch datetime="now" file="${entityfolder}/${classname}"></touch>
+ 	<concat append="false" destfile="${entityfolder}/${classname}">
+ 		<filelist dir="${templatesfolder}" files="entityTemplate.txt" />
+ 	</concat> 
+ </target>
+
+<target name="daoGen" >
+	<touch datetime="now" file="${daofolder}/${classname}"></touch>
+ 	<concat append="false" destfile="${daofolder}/${classname}">
+ 		<filelist dir="${templatesfolder}" files="daoTemplate.txt" />
+ 	</concat> 
+ </target>
+
+<target name="serviceGen" >
+	<touch datetime="now" file="${servicefolder}/${classname}"></touch>
+ 	<concat append="false" destfile="${servicefolder}/${classname}">
+ 		<filelist dir="${templatesfolder}" files="serviceTemplate.txt" />
+ 	</concat> 
+ </target>
+	
+<target name="controllerGen" >
+	<touch datetime="now" file="${controllerfolder}/${classname}"></touch>
+ 	<concat append="false" destfile="${controllerfolder}/${classname}">
+ 		<filelist dir="${templatesfolder}" files="controllerTemplate.txt" />
+ 	</concat> 
+ </target>
+	
+
+</project>
