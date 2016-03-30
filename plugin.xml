@@ -15,6 +15,20 @@
             </command>
          </menu>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.views.ResourceNavigator?after=additions">
+         <menu
+               id="Pattern01.menu1"
+               label="Yogurt"
+               path="popup:org.eclipse.ui.views.ResourceNavigator?after=additions">
+            <command
+                  commandId="Pattern01.classCollectorCommand"
+                  label="Class Collector"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.views">
@@ -24,6 +38,13 @@
             name="Pattern navigation"
             restorable="true">
       </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="pattern01.popup.commands.ClassCollectorHandler"
+            commandId="Pattern01.classCollectorCommand">
+      </handler>
    </extension>
 
 </plugin>
