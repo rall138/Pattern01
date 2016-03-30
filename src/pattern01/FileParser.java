@@ -2,11 +2,10 @@ package pattern01;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.Writer;
 import java.net.URI;
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.Platform;
@@ -37,6 +37,7 @@ public class FileParser {
 //		}
 	}
 	
+	
 	public void collectClasses(IFolder folder){
 		URI folderURI = ((Folder)folder).getLocationURI();
 		File file = new File(folderURI);
@@ -52,7 +53,7 @@ public class FileParser {
 					}
 					reader.close();
 					
-					//Obtenemos los metodos públicos
+					//Obtenemos los metodos pï¿½blicos
 					Pattern pattern = Pattern.compile(strMethodPattern);
 					Matcher matcher = pattern.matcher(allCode);
 					
@@ -85,6 +86,7 @@ public class FileParser {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void toJsonFile(File projectFolder){
 		JSONObject obj = new JSONObject(), item;
 		JSONArray array;
@@ -103,9 +105,7 @@ public class FileParser {
 			obj.put("methods", array);
 		}
 		
-		//Windows url
-		File auxProjectFolder = 
-				new File(Platform.getInstanceLocation().getURL().getPath() + "\\yogurt.txt");
+		File auxProjectFolder = getJSONDBFile();
 		
 		try {
 			Writer wr = new FileWriter(auxProjectFolder); 
@@ -116,6 +116,35 @@ public class FileParser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private File getJSONDBFile(){
+		String operative_system = Platform.getOS();
+		String fileLoc = "";
+		
+		if (operative_system == Platform.OS_LINUX){
+			fileLoc = "/yogurt.txt";
+		}else if(operative_system == Platform.OS_WIN32){
+			fileLoc = "\\yogurt.txt";
+		}
+
+		File auxProjectFolder = 
+				new File(Platform.getInstanceLocation().getURL().getPath() + fileLoc);
+		return auxProjectFolder;
+	}
+	
+	private void generateClasses(){
+		File auxProjectFolder = getJSONDBFile();
+		try{
+			String line = "";
+			BufferedReader br = new BufferedReader(new FileReader(auxProjectFolder));
+			while((line = br.readLine())!=null){
+				
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 /*
