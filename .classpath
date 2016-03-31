@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-antlr.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-apache-bcel.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-apache-bsf.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-apache-log4j.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-apache-oro.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-apache-regexp.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-apache-resolver.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-apache-xalan2.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-commons-logging.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-commons-net.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-jai.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-javamail.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-jdepend.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-jmf.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-jsch.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-junit.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-junit4.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-launcher.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-netrexx.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-swing.jar"/>
-	<classpathentry kind="lib" path="/home/ricardo/Documents/apache-ant-1.9.6/lib/ant-testutil.jar"/>
-=======
-	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="lib" path="resources/libraries/ant-antlr.jar"/>
 	<classpathentry kind="lib" path="resources/libraries/ant-apache-bcel.jar"/>
 	<classpathentry kind="lib" path="resources/libraries/ant-apache-bsf.jar"/>
@@ -51,6 +24,43 @@
 	<classpathentry kind="lib" path="resources/libraries/ant-testutil.jar"/>
 	<classpathentry kind="lib" path="resources/libraries/ant.jar"/>
 	<classpathentry kind="lib" path="resources/libraries/json-simple-1.1.1.jar"/>
->>>>>>> e0ab929259c342b15c69891fb1faae464047b6b2
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt_3.11.2.v20160212-1500.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.annotation_1.1.100.v20140704-0625.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.annotation_2.0.100.v20150311-1658.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.annotation.source_1.1.100.v20140704-0625.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.annotation.source_2.0.100.v20150311-1658.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.core_3.4.0.v20150518-1201.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.core.source_3.4.0.v20150518-1201.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.pluggable.core_1.1.0.v20150423-0947.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.pluggable.core.source_1.1.0.v20150423-0947.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.ui_3.4.0.v20150423-0947.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.apt.ui.source_3.4.0.v20150423-0947.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.compiler.apt_1.2.0.v20150514-0146.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.compiler.apt.source_1.2.0.v20150514-0146.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.compiler.tool_1.1.0.v20150513-2007.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.compiler.tool.source_1.1.0.v20150513-2007.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.core_3.11.2.v20160128-0629.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.core.manipulation_1.5.100.v20141002-1241.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.core.manipulation.source_1.5.100.v20141002-1241.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.core.source_3.11.2.v20160128-0629.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.debug.source_3.9.1.v20160128-1343.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.debug.ui_3.7.101.v20160203-1236.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.debug.ui.source_3.7.101.v20160203-1236.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.doc.isv_3.11.2.v20160203-1325.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.doc.user_3.11.1.v20150819-1130.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit_3.8.0.v20150428-1340.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.core_3.7.400.v20150423-0747.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.core.source_3.7.400.v20150423-0747.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.runtime_3.4.500.v20140527-1138.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.runtime.source_3.4.500.v20140527-1138.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.source_3.8.0.v20150428-1340.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit4.runtime_1.1.500.v20150423-0747.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.junit4.runtime.source_1.1.500.v20150423-0747.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.launching_3.8.0.v20150527-0946.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.launching.source_3.8.0.v20150527-0946.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.ui_3.11.2.v20151123-1510.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.ui.source_3.11.2.v20151123-1510.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

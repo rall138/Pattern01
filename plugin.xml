@@ -17,7 +17,7 @@
       </menuContribution>
       <menuContribution
             allPopups="false"
-            locationURI="popup:org.eclipse.ui.views.ResourceNavigator?after=additions">
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
          <menu
                id="Pattern01.menu1"
                label="Yogurt"

@@ -1,6 +1,7 @@
 package pattern01;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -39,7 +40,18 @@ public class PatternNav extends ViewPart implements Observer{
 		createActionBar();
 
 		Tree tree = new Tree(parent, SWT.H_SCROLL | SWT.V_SCROLL);
+		ClassCollectorHelper classCollectorHelper = new ClassCollectorHelper();
+		classCollectorHelper.classCollectionFromJsonFile();
+		ArrayList<ClassCollectorHelper.Class> classCollection = 
+				new ArrayList<>(classCollectorHelper.getClassCollection());
 		
+		TreeItem item;
+		Image img;
+		for(ClassCollectorHelper.Class class_def : classCollection){
+			item = new TreeItem(tree, 0);
+			item.setText(class_def.getClassName());
+			item.setImage(getImage("class_obj.png"));
+		}
 		
 //		TreeItem item = new TreeItem(tree, 0);
 //		Image image = getImage("package_obj.png");
