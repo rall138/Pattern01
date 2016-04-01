@@ -39,6 +39,7 @@ public class ClassCollectorHelper {
 	public void collectClasses(String packageURI) throws URISyntaxException{
 		URI folderURI = new URI(packageURI);
 		File file = Paths.get(folderURI).toFile();
+		
 		if (file.exists() && file.isDirectory()){
 			File[] list = file.listFiles();
 			for(int index = 0; index < list.length; index++){

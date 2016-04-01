@@ -29,15 +29,15 @@ public class ClassCollectorHandler extends AbstractHandler{
 				
 				IPackageFragment fragment = (IPackageFragment)element;
 				IPath projectPath = fragment.getJavaProject().getProject().getLocation();
-				String fixPath = "", division = "", elementName = "";
+				String fixPath = "";
+				String elementName = fragment.getPath().toString();
 				if(Platform.getOS().compareTo(Platform.OS_LINUX) == 0){
-					division ="/";
-					elementName = fragment.getElementName().replace(".", "/");
+					fixPath = "file://";
 				}else if(Platform.getOS().compareTo(Platform.OS_WIN32) == 0){
-					division ="\\";
-					elementName = fragment.getElementName().replace(".", "\\");
+					fixPath = "file:/";
 				}
-				fixPath = "file://" + projectPath.toString() + division + elementName; 
+				elementName = elementName.replace("/" + fragment.getJavaProject().getElementName(), "");
+				fixPath += projectPath.toString() + elementName; 
 				try{
 					ClassCollectorHelper parser = new ClassCollectorHelper();
 					parser.collectClasses(fixPath);
