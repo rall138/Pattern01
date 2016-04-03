@@ -165,7 +165,7 @@ public class ClassCollectorHelper {
 	
 	//Clases auxiliares
 	
-	class Class{
+	public class Class{
 		private String packageName;
 		private String className;
 		private List<Method> methodCollection = new ArrayList<>();
@@ -189,7 +189,7 @@ public class ClassCollectorHelper {
 		
 	}
 
-	class Method{
+	public class Method{
 		private String methodName;
 		private String returnType;
 		

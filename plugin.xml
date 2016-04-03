@@ -33,7 +33,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="pattern01.PatternNav"
+            class="pattern01.plugin.components.navigator.PatternNav"
             id="Pattern01.navigationView"
             name="Pattern navigation"
             restorable="true">
@@ -45,6 +45,19 @@
             class="pattern01.popup.commands.ClassCollectorHandler"
             commandId="Pattern01.classCollectorCommand">
       </handler>
+      <handler
+            class="pattern01.popup.commands.PatternEditorHandler"
+            commandId="Pattern01.editPatternCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="pattern01.plugin.components.editors.PatternEditor"
+            default="false"
+            id="pattern01.plugin.components.editors.PatternEditor"
+            name="Pattern editor">
+      </editor>
    </extension>
 
 </plugin>
