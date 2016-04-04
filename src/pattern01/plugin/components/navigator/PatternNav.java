@@ -20,11 +20,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.part.ViewPart;
 import org.osgi.framework.Bundle;
 
@@ -95,8 +93,7 @@ public class PatternNav extends ViewPart implements Observer{
 				PatternEditor patternEditor = new PatternEditor();
 				try {
 					getViewSite().getPage()
-					.openEditor(patternEditor.getEditorInput(), 
-							"pattern01.plugin.components.editors.PatternEditor");
+					.openEditor(patternEditor.getEditorInput(), patternEditor.ID);
 				} catch (PartInitException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

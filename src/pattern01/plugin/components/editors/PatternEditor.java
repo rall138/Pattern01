@@ -1,10 +1,13 @@
 package pattern01.plugin.components.editors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.TreeViewerEditor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IWorkbenchPartSite;
@@ -13,8 +16,7 @@ import org.eclipse.ui.part.EditorPart;
 
 public class PatternEditor extends EditorPart{
 	
-	private IEditorInput input;
-	private IEditorSite site;
+	public static final String ID = "pattern01.plugin.components.editors.PatternEditor";
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
@@ -54,7 +56,10 @@ public class PatternEditor extends EditorPart{
 
 	@Override
 	public void createPartControl(Composite parent) {
-		// TODO Auto-generated method stub
+		TreeViewer viewer = new TreeViewer(parent);
+		Tree tree = viewer.getTree();
+		TreeItem item = new TreeItem(tree, 0);
+		item.setText("Prueba");
 		
 	}
 
@@ -112,11 +117,6 @@ public class PatternEditor extends EditorPart{
 		// TODO Cambiar para que se devuelva el input recibido.
 		IEditorInput input = new TreeviewEditorInput();
 		return input;
-	}
-
-	@Override
-	public IEditorSite getEditorSite() {
-		return this.site;
 	}
 
 	@Override
