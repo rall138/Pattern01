@@ -62,5 +62,6 @@
 	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.launching.source_3.8.0.v20150527-0946.jar"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.ui_3.11.2.v20151123-1510.jar"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.eclipse.jdt.ui.source_3.11.2.v20151123-1510.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

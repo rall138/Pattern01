@@ -1,14 +1,23 @@
 <?xml version="1.0"?>
-
 <project default="main" basedir=".">
-		
-	<echo message="calling the web services generation ant task: axis_bujava"/>
+	
+	<!-- Windows -->
+	<property name="classpath.windows">
+		E:\\EclipseWorkSpace\\Pattern01\\bin
+	</property>
+	
+	<!-- Linux -->
+	 <property name="classpath.linux">
+		/home/ricardo/Documents/Eclipse commiters workspace/Pattern01/bin
+	</property> 
+	
+	<echo message="Starting class generation process..."/>
 
 	<taskdef name="ClassGenerator" classname="pattern01.helpers.ClassGenerator" 
-	classpath="/home/ricardo/Documents/Eclipse commiters workspace/Pattern01/bin"/>		
-		
+		classpath="${classpath.windows}"/>
+	
 	<target name="main">
 		<ClassGenerator />
-	</target>	
+	</target>
 
 </project>
