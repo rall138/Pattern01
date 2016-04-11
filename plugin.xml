@@ -52,12 +52,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.editors">
-      <editor
-            class="pattern01.plugin.components.editors.PatternEditor"
-            default="false"
-            id="pattern01.plugin.components.editors.PatternEditor"
-            name="Pattern editor">
-      </editor>
    </extension>
 
 </plugin>

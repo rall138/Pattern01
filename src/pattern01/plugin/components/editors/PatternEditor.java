@@ -2,7 +2,6 @@ package pattern01.plugin.components.editors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.TreeViewerEditor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Tree;
@@ -124,7 +123,15 @@ public class PatternEditor extends EditorPart{
 		if(!(input instanceof TreeviewEditorInput)){
 			throw new RuntimeException("Unexpected input on editor part");
 		}
+		
 		setSite(site);
 		setInput(input);
 	}
+
+	@Override
+	protected void setSite(IWorkbenchPartSite site) {
+		super.setSite(site);
+	}
+	
+	
 }

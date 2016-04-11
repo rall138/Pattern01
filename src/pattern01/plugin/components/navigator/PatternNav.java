@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
@@ -92,10 +91,10 @@ public class PatternNav extends ViewPart implements Observer{
 				
 				PatternEditor patternEditor = new PatternEditor();
 				try {
-					getViewSite().getPage()
+					
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 					.openEditor(patternEditor.getEditorInput(), patternEditor.ID);
 				} catch (PartInitException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -137,29 +136,7 @@ public class PatternNav extends ViewPart implements Observer{
 		mgr.add(searchPatternAction);
 	}
 	
-	private void setSelectionListener(){
-//		ISelectionListener listener = new ISelectionListener() {
-//			
-//			@Override
-//			public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-//				
-//				
-//			}
-//		};
-	}
 	
-	private void setSecundaryClickListener(){
-//		MenuManager mgr = new MenuManager();
-//		mgr.addMenuListener(new IMenuListener() {
-//			
-//			@Override
-//			public void menuAboutToShow(IMenuManager manager) {
-//			
-//				
-//			}
-//		});
-	}
-
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub

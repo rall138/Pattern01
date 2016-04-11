@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<project default="main" basedir=".">
+		
+	<echo message="calling the web services generation ant task: axis_bujava"/>
+
+	<taskdef name="ClassGenerator" classname="pattern01.helpers.ClassGenerator" 
+	classpath="/home/ricardo/Documents/Eclipse commiters workspace/Pattern01/bin"/>		
+		
+	<target name="main">
+		<ClassGenerator />
+	</target>	
+
+</project>
