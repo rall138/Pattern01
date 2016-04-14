@@ -3,7 +3,7 @@
 	
 	<!-- Windows -->
 	<property name="classpath.windows">
-		E:\\EclipseWorkSpace\\Pattern01\\bin
+		C:\\Users\\Hp Amd\\Documents\\EclipseWorkspace\\Pattern01\\bin
 	</property>
 	
 	<!-- Linux -->
@@ -20,4 +20,8 @@
 		<ClassGenerator />
 	</target>
 
+	<target name="fileRelative">
+		<echo append="false" file="${filename}" message="${message}"></echo>
+	</target>
+	
 </project>

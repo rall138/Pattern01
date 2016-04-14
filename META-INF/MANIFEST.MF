@@ -3,13 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Pattern01
 Bundle-SymbolicName: Pattern01;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: pattern01.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.junit,
- org.eclipse.core.resources
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  resources/libraries/ant-antlr.jar,
  resources/libraries/ant-apache-bcel.jar,
@@ -34,6 +27,22 @@ Bundle-ClassPath: .,
  resources/libraries/ant-testutil.jar,
  resources/libraries/ant.jar,
  resources/libraries/json-simple-1.1.1.jar
+Bundle-Activator: pattern01.Activator
+Export-Package: pattern01,
+ pattern01.helpers,
+ pattern01.helpers.temporal_containers,
+ pattern01.plugin.components.editors,
+ pattern01.plugin.components.navigator,
+ pattern01.popup.commands,
+ pattern01.templates
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit,
+ org.eclipse.core.resources,
+ org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.jdt.annotation,
  org.eclipse.jdt.apt.core.build,
  org.eclipse.jdt.apt.core.env,

@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -33,6 +34,7 @@ public class ClassGenerator extends Task{
 	private static final String javaListNamespace = "java.util.List";
 	private static final String elementNamespace = "pattern01.helpers.temporal_containers.Element";
 	
+	private BuildFileRule bfr = new BuildFileRule();
 	private List<Element> collected_elements = new ArrayList<>();
 	
 
@@ -163,11 +165,17 @@ public class ClassGenerator extends Task{
 			builder.append("");
 			builder.append(getterSetterBuilder);
 			builder.append("}");
+			generateClasses(collected_elements.get(index).getName(), builder.toString());		
 		}
-		System.out.println(builder.toString());		
 	}
 	
-	
+
+	private void generateClasses(String className, String classBody){
+		bfr.configureProject("ClassGenerator.xml");
+		bfr.getProject().setNewProperty("filename", "generated/"+className+".java");
+		bfr.getProject().setNewProperty("message", classBody);
+		bfr.executeTarget("fileRelative");
+	}
 	/* Hay que hacer la lógica para completar la información faltante de los childelements dentro de un element,
 	 * luego ver si la relación es simple o compleja para generar dependencia común o colección.
 	 * */
