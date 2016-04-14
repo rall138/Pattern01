@@ -7,16 +7,16 @@ public class Element {
 
 	private List<Attribute> attribute_collection = new ArrayList<>();
 	private List<Element> childElements_collection = new ArrayList<>();
+	private boolean unique;
 	private String name;
 	private String prettyName;
 	
-	public Element(){
-		
-	}
+	public Element(){}
 	
-	public Element(String name, String prettyName){
+	public Element(String name, String prettyName, boolean unique){
 		this.name = name;
 		this.prettyName = prettyName;
+		this.unique = unique;
 	}
 
 	public List<Attribute> getAttribute_collection() {
@@ -50,8 +50,13 @@ public class Element {
 	public void setPrettyName(String prettyName) {
 		this.prettyName = prettyName;
 	}
-	
-	
-	
+
+	public boolean isUnique() {
+		return unique;
+	}
+
+	public void setUnique(boolean unique) {
+		this.unique = unique;
+	}
 	
 }
