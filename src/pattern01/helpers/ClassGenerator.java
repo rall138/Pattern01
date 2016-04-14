@@ -29,6 +29,7 @@ public class ClassGenerator extends Task{
 			.replace("pattern01\\", "").replace("\\helpers", "")
 			+ "\\GeneralConfig\\PatternDefinition.xml";
 	
+	private static final String tabspace = "\t";
 	
 	private List<Element> colected_elements = new ArrayList<>();
 
@@ -51,7 +52,7 @@ public class ClassGenerator extends Task{
 				public void startElement(String uri, String localName, 
 						String qName, Attributes attributes)throws SAXException {
 					
-					//Generaci髇 de elementos padres
+					//Generaci锟絥 de elementos padres
 			
 					if(qName.equalsIgnoreCase("element")){
 						element = new Element();
@@ -69,6 +70,7 @@ public class ClassGenerator extends Task{
 								if (element != null){
 									Element childElement = new Element();
 									childElement.setName(attributes.getValue(index));
+									element.getChildElements_collection().add(childElement);
 								}
 							}
 						}
@@ -84,6 +86,9 @@ public class ClassGenerator extends Task{
 							}else if(attributes.getQName(index).equalsIgnoreCase("type")){
 								attr.setType(attributes.getValue(index));
 							}
+						}
+						if(element != null){
+							element.getAttribute_collection().add(attr);
 						}
 					}
 				}
@@ -106,9 +111,32 @@ public class ClassGenerator extends Task{
 	
 	private void generateAll(){
 		StringBuilder builder = new StringBuilder();
+		StringBuilder attrBuilder;
+		StringBuilder getterSetterBuilder;
 		for(int index = 0; index < colected_elements.size(); index++){
+			builder.append("public class " + colected_elements.get(index).getName() + "{");
+			attrBuilder = new StringBuilder();
+			getterSetterBuilder = new StringBuilder();
+			for(Attribute attr : colected_elements.get(index).getAttribute_collection()){
+				attrBuilder.append(tabspace+"private "+attr.getType()+" "+attr.getPrettyName() + ";");
+				getterSetterBuilder.append(tabspace+"public"+attr.getType()+" get"+attr.getPrettyName()+"(){");
+				getterSetterBuilder.append(tabspace+tabspace+"return this." + attr.getPrettyName() + ";");
+				getterSetterBuilder.append(tabspace+"}");
+				getterSetterBuilder.append("");
+				getterSetterBuilder.append(tabspace+"public void set"+attr.getPrettyName()+"("+attr.getType()+" "+attr.getPrettyName()+"){");
+				getterSetterBuilder.append(tabspace+tabspace+"this."+attr.getPrettyName()+" = "+attr.getPrettyName()+";");
+				getterSetterBuilder.append(tabspace+"}");
 			
+			}
+			builder.append(attrBuilder);
+			builder.append("");
+			builder.append(getterSetterBuilder);
+			builder.append("}");
 		}
 	}
+	
+	/* Hay que hacer la l贸gica para completar la informaci贸n faltante de los childelements dentro de un element,
+	 * luego ver si la relaci贸n es simple o compleja para generar dependencia com煤n o colecci贸n.
+	 * */
 	
 }
