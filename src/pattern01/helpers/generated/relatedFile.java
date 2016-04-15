@@ -1,1 +1,7 @@
-public class relatedFiles{	java.util.List<pattern01.helpers.temporal_containers.Element> collection_relatedFile = new java.util.ListArrayList();	java.util.List<pattern01.helpers.temporal_containers.Element> collection_null = new java.util.ListArrayList();	public void setCollection_null(java.util.List<pattern01.helpers.temporal_containers.Element> collection_null){		this.null = null;	}	public java.util.List<pattern01.helpers.temporal_containers.Element> getCollection_null(){		return this.null;	}	public void setCollection_null(java.util.List<pattern01.helpers.temporal_containers.Element> collection_null){		this.null = null;	}	public java.util.List<pattern01.helpers.temporal_containers.Element> getCollection_null(){		return this.null;	}}public class relatedFiles{	java.util.List<pattern01.helpers.temporal_containers.Element> collection_relatedFile = new java.util.ListArrayList();	java.util.List<pattern01.helpers.temporal_containers.Element> collection_null = new java.util.ListArrayList();	public void setCollection_null(java.util.List<pattern01.helpers.temporal_containers.Element> collection_null){		this.null = null;	}	public java.util.List<pattern01.helpers.temporal_containers.Element> getCollection_null(){		return this.null;	}	public void setCollection_null(java.util.List<pattern01.helpers.temporal_containers.Element> collection_null){		this.null = null;	}	public java.util.List<pattern01.helpers.temporal_containers.Element> getCollection_null(){		return this.null;	}}public class relatedFile{}public class relatedFile{}public class relatedFile{}public class relatedFile{}
+package pattern01.helpers.generated;
+
+public class RelatedFile{
+null
+
+null
+}

@@ -2,9 +2,14 @@
 <project default="main" basedir=".">
 	
 	<!-- Windows -->
-	<property name="classpath.windows">
+	<!--<property name="classpath.windows">
 		C:\\Users\\Hp Amd\\Documents\\EclipseWorkspace\\Pattern01\\bin
+	</property>-->
+	
+	<property name="classpath.windows">
+		E:\\EclipseWorkspace\\Pattern01\\bin
 	</property>
+	
 	
 	<!-- Linux -->
 	 <property name="classpath.linux">
