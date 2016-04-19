@@ -2,6 +2,7 @@ package pattern01.helpers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -33,8 +34,12 @@ public class ClassGenerator extends Task{
 	private static final String tabspace = "\t";
 	private static final String collectionPrefix = "collection_";
 	private static final String javaListNamespace = "java.util.List";
-	private static final String javaArrayListNamespace = "java.util.ArrayList";	
-	private static final String elementNamespace = "pattern01.helpers.temporal_containers.Element";
+	private static final String javaArrayListNamespace = "java.util.ArrayList";
+	private static final String classHeaderComment = tabspace+"/**\n"
+			+tabspace+"* Generated class via ClassGenerator.xml\n"
+			+tabspace+"* Creation date: "+Calendar.getInstance().getTime()+"\n"
+			+tabspace+"* Creator: rlomez\n"
+			+tabspace+"**/";
 	
 	private BuildFileRule bfr = new BuildFileRule();
 	private List<Element> collected_elements = new ArrayList<>();
@@ -58,6 +63,7 @@ public class ClassGenerator extends Task{
 			DefaultHandler handler = new DefaultHandler(){
 				//Lo mantenemos en este scope para poder asignar los hijos mas inmediatos.
 				private Element element = null;
+				private LoggerThread log = new LoggerThread();
 				
 				@Override
 				public void startElement(String uri, String localName, 
@@ -74,7 +80,11 @@ public class ClassGenerator extends Task{
 								element.setPrettyName(attributes.getValue(index));
 							}
 						}
-						System.out.println("Created element: " + element.getName());
+						
+						log.addMessage("Parsed element: "+element.getPrettyName());
+						log.run();
+						log.clearMessages();
+						
 					}else if(qName.equalsIgnoreCase("childelement")){
 						//Asignamos solamente el nombre porque tenemos nada mas que la referencia.
 						Element childElement = new Element();
@@ -86,7 +96,11 @@ public class ClassGenerator extends Task{
 										.parseBoolean(attributes.getValue(index)));
 							}
 						}
-						System.out.println("child element to add: " + childElement.getName());
+						
+						log.addMessage(tabspace+"-Parsed child: "+childElement.getName());
+						log.run();
+						log.clearMessages();
+						
 						element.getChildElements_collection().add(childElement);						
 					}else if(qName.equalsIgnoreCase("attributeelement")){
 						Attribute attr = new Attribute();
@@ -103,7 +117,11 @@ public class ClassGenerator extends Task{
 							//El nombre del grupo del ultimo groupElement.
 							attr.setGroup(groupName);
 						}
-						System.out.println("Attributes to add: " +attr.getPrettyName());
+						
+						log.addMessage(tabspace+"-Parsed Attribute: "+attr.getPrettyName());
+						log.run();
+						log.clearMessages();
+						
 						element.getAttribute_collection().add(attr);
 					}else if(qName.equalsIgnoreCase("attributegroup")){
 						for(int index = 0; index < attributes.getLength(); index++){
@@ -132,7 +150,7 @@ public class ClassGenerator extends Task{
 				
 			};
 			//Cambiar cuando se necesita para otro OS.
-			parser.parse(linux_generalConfigPath, handler);
+			parser.parse(windows_generalConfigPath, handler);
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
@@ -185,10 +203,15 @@ public class ClassGenerator extends Task{
 				}
 			}
 		}
-		
 	}
 	
 	private void generateAll(){
+		LoggerThread log = new LoggerThread();
+		
+		log.addMessage("*** File generation ***");
+		log.run();
+		log.clearMessages();		
+		
 		CustomStringBuilder builder;
 		CustomStringBuilder attributeBuilder;
 		CustomStringBuilder getterSetterBuilder;
@@ -196,68 +219,87 @@ public class ClassGenerator extends Task{
 		PropertyHelper propertyHelper = new PropertyHelper();
 
 		for(int index = 0; index < collected_elements.size(); index++){
+			log.addMessage("Generating class: "+collected_elements.get(index).getPrettyName());
+			log.run();
+			log.clearMessages();		
+			
 			builder = new CustomStringBuilder();
 			builder.appendLn("package pattern01.helpers.generated;");
 			builder.appendLn("");
+			builder.appendLn(classHeaderComment);
 			builder.appendLn("public class "+collected_elements.get(index).getPrettyName()+"{");
 			attributeBuilder = new CustomStringBuilder();
-			System.out.println("ClassName: "+collected_elements.get(index).getPrettyName());
+			
 			getterSetterBuilder = new CustomStringBuilder();
 			attributeBuilder.appendLn("");
+			//Getters and setters y propiedades para el .properties de atributos generales.
 			for(Attribute attr : collected_elements.get(index).getAttribute_collection()){
-				attributeBuilder.appendLn(tabspace+"private "+attr.getType()+" "+attr.getPrettyName() + ";");
-				getterSetterBuilder.appendLn(tabspace+"public "+attr.getType()+" get"+attr.getPrettyName()+"(){");
-				getterSetterBuilder.appendLn(tabspace+tabspace+"return this." + attr.getPrettyName() + ";");
-				getterSetterBuilder.appendLn(tabspace+"}");
-				getterSetterBuilder.appendLn("");
-				getterSetterBuilder.appendLn(tabspace+"public void set"+attr.getPrettyName()+"("+attr.getType()+" "+attr.getPrettyName()+"){");
-				getterSetterBuilder.appendLn(tabspace+tabspace+"this."+attr.getPrettyName()+" = "+attr.getPrettyName()+";");
-				getterSetterBuilder.appendLn(tabspace+"}");
+				generateGetterAndSettersOfAttributes(attributeBuilder, getterSetterBuilder, 
+						attr.getName(), attr.getPrettyName(), attr.getType());
+				
+				//Generamos las propiedades de los agrupadores
 				propertyHelper.putProperty(collected_elements.get(index).getPrettyName()+"."+
 				attr.getPrettyName()+".Group", attr.getGroup());				
 			}
 
-			//Getter del grupo al que pertenece
+			//Getters and setters generales 
+			for(Element child : collected_elements.get(index).getChildElements_collection()){
+				generateGettersAndSettersOfReferences(attributeBuilder, getterSetterBuilder, child.getName(),
+						child.getPrettyName(),child.isUnique());
+			}
+			
+			//Getter [Grupo]
 			generatePropertyGetter(getterSetterBuilder);
 			
-			for(Element child : collected_elements.get(index).getChildElements_collection()){
-				System.out.println("Child name: "+child.getPrettyName());
-				//Si es coleccion
-				if(!child.isUnique()){
-					attributeBuilder.appendLn(tabspace+"private "+javaListNamespace+"<"+child.getPrettyName()+">"+
-								" collection_"+child.getPrettyName()+" = new "+javaArrayListNamespace+"<>();");
-					//Setter for collection
-					getterSetterBuilder.appendLn(tabspace+"public void setCollection_"+child.getPrettyName()+
-							"("+javaListNamespace+"<"+child.getPrettyName()+"> "+collectionPrefix+child.getPrettyName()+"){");
-					getterSetterBuilder.appendLn(tabspace+tabspace+"this."+collectionPrefix+child.getPrettyName()+
-							" = "+collectionPrefix+child.getPrettyName()+";");
-					getterSetterBuilder.appendLn(tabspace+"}");
-					getterSetterBuilder.appendLn("");
-
-					//Getter for collection
-					getterSetterBuilder.appendLn(tabspace+"public "+javaListNamespace+"<"+child.getPrettyName()+"> getCollection_"+
-							child.getPrettyName()+"(){");
-					getterSetterBuilder.appendLn(tabspace+tabspace+"return this."+collectionPrefix+child.getPrettyName()+";");
-					getterSetterBuilder.appendLn(tabspace+"}");
-				}else if(child.isUnique()){
-					attributeBuilder.appendLn(tabspace+"private "+child.getPrettyName()+" "+child.getName() + ";");					
-					getterSetterBuilder.appendLn(tabspace+"public "+child.getPrettyName()+" get"+child.getName()+"(){");
-					getterSetterBuilder.appendLn(tabspace+tabspace+"return this." + child.getName() + ";");
-					getterSetterBuilder.appendLn(tabspace+"}");
-					getterSetterBuilder.appendLn("");
-					getterSetterBuilder.appendLn(tabspace+"public void set"+child.getPrettyName()+"("+child.getPrettyName()+" "
-					+child.getName()+"){");
-					getterSetterBuilder.appendLn(tabspace+tabspace+"this."+child.getName()+" = "+child.getName()+";");
-					getterSetterBuilder.appendLn(tabspace+"}");
-				}
-			}
 			builder.appendLn(attributeBuilder.toString());
-			builder.appendLn("");
 			builder.appendLn(getterSetterBuilder.toString());
 			builder.appendLn("}");
 			generateClasses(collected_elements.get(index).getPrettyName(), builder.toString());
-			//Generamos el file de propiedades
-			propertyHelper.impactPropertiesOnFile();
+		}
+		//Generamos el file de propiedades
+		propertyHelper.impactPropertiesOnFile();
+	}
+	
+	private void generateGetterAndSettersOfAttributes(CustomStringBuilder attributeBuilder, 
+			CustomStringBuilder builder, String attrName, String attrPrettyName, String type){
+		attributeBuilder.appendLn(tabspace+"private "+type+" "+attrPrettyName+";");
+		builder.appendLn(tabspace+"public "+type+" get"+attrPrettyName+"(){");
+		builder.appendLn(tabspace+tabspace+"return this."+attrPrettyName+";");
+		builder.appendLn(tabspace+"}");
+		builder.appendLn("");
+		builder.appendLn(tabspace+"public void set"+attrPrettyName+"("+type+" "+attrPrettyName+"){");
+		builder.appendLn(tabspace+tabspace+"this."+attrPrettyName+" = "+attrPrettyName+";");
+		builder.appendLn(tabspace+"}");
+	}
+	
+	private void generateGettersAndSettersOfReferences(CustomStringBuilder attributeBuilder, 
+			CustomStringBuilder builder, String attrName, String attrPrettyName, boolean isUnique){
+		if(!isUnique){
+			attributeBuilder.appendLn(tabspace+"private "+javaListNamespace+"<"+attrPrettyName+">"+
+						" collection_"+attrPrettyName+" = new "+javaArrayListNamespace+"<>();");
+			//Setter for collection
+			builder.appendLn(tabspace+"public void setCollection_"+attrPrettyName+
+					"("+javaListNamespace+"<"+attrPrettyName+"> "+collectionPrefix+attrPrettyName+"){");
+			builder.appendLn(tabspace+tabspace+"this."+collectionPrefix+attrPrettyName+
+					" = "+collectionPrefix+attrPrettyName+";");
+			builder.appendLn(tabspace+"}");
+			builder.appendLn("");
+
+			//Getter for collection
+			builder.appendLn(tabspace+"public "+javaListNamespace+"<"+attrPrettyName+"> getCollection_"+
+					attrPrettyName+"(){");
+			builder.appendLn(tabspace+tabspace+"return this."+collectionPrefix+attrPrettyName+";");
+			builder.appendLn(tabspace+"}");
+		}else{
+			attributeBuilder.appendLn(tabspace+"private "+attrPrettyName+" "+attrName + ";");					
+			builder.appendLn(tabspace+"public "+attrPrettyName+" get"+attrName+"(){");
+			builder.appendLn(tabspace+tabspace+"return this."+attrName+";");
+			builder.appendLn(tabspace+"}");
+			builder.appendLn("");
+			builder.appendLn(tabspace+"public void set"+attrPrettyName+"("+attrPrettyName+" "
+			+attrName+"){");
+			builder.appendLn(tabspace+tabspace+"this."+attrName+" = "+attrName+";");
+			builder.appendLn(tabspace+"}");
 		}
 	}
 	
