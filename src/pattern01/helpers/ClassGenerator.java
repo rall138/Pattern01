@@ -39,6 +39,8 @@ public class ClassGenerator extends Task{
 	private BuildFileRule bfr = new BuildFileRule();
 	private List<Element> collected_elements = new ArrayList<>();
 	
+	private String groupName = "Default";
+	
 
 	public void execute(){
 		parsePatternDefinition();
@@ -86,7 +88,7 @@ public class ClassGenerator extends Task{
 						}
 						System.out.println("child element to add: " + childElement.getName());
 						element.getChildElements_collection().add(childElement);						
-					}else if(qName.equalsIgnoreCase("attribute")){
+					}else if(qName.equalsIgnoreCase("attributeelement")){
 						Attribute attr = new Attribute();
 						for (int index = 0; index < attributes.getLength(); index++){
 							if(attributes.getQName(index).equalsIgnoreCase("name")){
@@ -98,27 +100,34 @@ public class ClassGenerator extends Task{
 							}else if(attributes.getQName(index).equalsIgnoreCase("type")){
 								attr.setType(attributes.getValue(index));
 							}
+							//El nombre del grupo del ultimo groupElement.
+							attr.setGroup(groupName);
 						}
 						System.out.println("Attributes to add: " +attr.getPrettyName());
 						element.getAttribute_collection().add(attr);
+					}else if(qName.equalsIgnoreCase("attributegroup")){
+						for(int index = 0; index < attributes.getLength(); index++){
+							if(attributes.getQName(index).equalsIgnoreCase("prettyName")){
+								groupName = attributes.getValue(index);
+							}
+						}
 					}
 					
-					
-					Element auxiliarElement = get(element.getName());
-					if(auxiliarElement == null){
-						//Verificamos si se encuentra dentro de la colección, porque estamos corroborando comienzo de tags
-						// se generan más elementos de los debidos.
-						addElementIfnotExists(element);
-					}else{
-						//Reemplazamos el elemento.
-						auxiliarElement = element;
-					}
+					//Adherimos el elemento si no existe.
+					addElementIfnotExists(element);
 				}
 
 				@Override
 				public void characters(char[] ch, int start, int length) throws SAXException {
 					// TODO Auto-generated method stub
 					super.characters(ch, start, length);
+				}
+
+				@Override
+				public void endElement(String uri, String localName, String qName) throws SAXException {
+					if(qName.equalsIgnoreCase("attributegroup")){
+						groupName = "Default";
+					}
 				}
 				
 			};
@@ -144,22 +153,6 @@ public class ClassGenerator extends Task{
 				collected_elements.add(element);
 			}
 		}
-	}
-	
-	private Element get(String name){
-		boolean itemFound = false;
-		int index = 0;
-		while(!itemFound && index < collected_elements.size()){
-			if(collected_elements.get(index).getName() == name){
-				itemFound = true;
-			}else{
-				index++;
-			}
-		}
-		if(itemFound)
-			return collected_elements.get(index);
-		else
-			return null;
 	}
 	
 	private void childElementsFix(){
@@ -197,18 +190,22 @@ public class ClassGenerator extends Task{
 	
 	private void generateAll(){
 		CustomStringBuilder builder;
-		CustomStringBuilder attrBuilder;
+		CustomStringBuilder attributeBuilder;
 		CustomStringBuilder getterSetterBuilder;
+		
+		PropertyHelper propertyHelper = new PropertyHelper();
+
 		for(int index = 0; index < collected_elements.size(); index++){
 			builder = new CustomStringBuilder();
 			builder.appendLn("package pattern01.helpers.generated;");
 			builder.appendLn("");
 			builder.appendLn("public class "+collected_elements.get(index).getPrettyName()+"{");
-			attrBuilder = new CustomStringBuilder();
+			attributeBuilder = new CustomStringBuilder();
 			System.out.println("ClassName: "+collected_elements.get(index).getPrettyName());
 			getterSetterBuilder = new CustomStringBuilder();
+			attributeBuilder.appendLn("");
 			for(Attribute attr : collected_elements.get(index).getAttribute_collection()){
-				attrBuilder.appendLn(tabspace+"private "+attr.getType()+" "+attr.getPrettyName() + ";");
+				attributeBuilder.appendLn(tabspace+"private "+attr.getType()+" "+attr.getPrettyName() + ";");
 				getterSetterBuilder.appendLn(tabspace+"public "+attr.getType()+" get"+attr.getPrettyName()+"(){");
 				getterSetterBuilder.appendLn(tabspace+tabspace+"return this." + attr.getPrettyName() + ";");
 				getterSetterBuilder.appendLn(tabspace+"}");
@@ -216,46 +213,68 @@ public class ClassGenerator extends Task{
 				getterSetterBuilder.appendLn(tabspace+"public void set"+attr.getPrettyName()+"("+attr.getType()+" "+attr.getPrettyName()+"){");
 				getterSetterBuilder.appendLn(tabspace+tabspace+"this."+attr.getPrettyName()+" = "+attr.getPrettyName()+";");
 				getterSetterBuilder.appendLn(tabspace+"}");
+				propertyHelper.putProperty(collected_elements.get(index).getPrettyName()+"."+
+				attr.getPrettyName()+".Group", attr.getGroup());				
 			}
+
+			//Getter del grupo al que pertenece
+			generatePropertyGetter(getterSetterBuilder);
+			
 			for(Element child : collected_elements.get(index).getChildElements_collection()){
 				System.out.println("Child name: "+child.getPrettyName());
-				//Si es colecci�n
+				//Si es coleccion
 				if(!child.isUnique()){
-					attrBuilder.appendLn(tabspace+"private "+javaListNamespace+"<"+elementNamespace+">"+
+					attributeBuilder.appendLn(tabspace+"private "+javaListNamespace+"<"+child.getPrettyName()+">"+
 								" collection_"+child.getPrettyName()+" = new "+javaArrayListNamespace+"<>();");
 					//Setter for collection
 					getterSetterBuilder.appendLn(tabspace+"public void setCollection_"+child.getPrettyName()+
-							"("+javaListNamespace+"<"+elementNamespace+"> "+collectionPrefix+child.getPrettyName()+"){");
+							"("+javaListNamespace+"<"+child.getPrettyName()+"> "+collectionPrefix+child.getPrettyName()+"){");
 					getterSetterBuilder.appendLn(tabspace+tabspace+"this."+collectionPrefix+child.getPrettyName()+
 							" = "+collectionPrefix+child.getPrettyName()+";");
 					getterSetterBuilder.appendLn(tabspace+"}");
-					getterSetterBuilder.appendLn("");					
+					getterSetterBuilder.appendLn("");
 
 					//Getter for collection
-					getterSetterBuilder.appendLn(tabspace+"public "+javaListNamespace+"<"+elementNamespace+"> getCollection_"+
+					getterSetterBuilder.appendLn(tabspace+"public "+javaListNamespace+"<"+child.getPrettyName()+"> getCollection_"+
 							child.getPrettyName()+"(){");
 					getterSetterBuilder.appendLn(tabspace+tabspace+"return this."+collectionPrefix+child.getPrettyName()+";");
 					getterSetterBuilder.appendLn(tabspace+"}");
 				}else if(child.isUnique()){
-					attrBuilder.appendLn(tabspace+"private "+elementNamespace+" "+child.getPrettyName() + ";");					
-					getterSetterBuilder.appendLn(tabspace+"public "+elementNamespace+" get"+child.getPrettyName()+"(){");
-					getterSetterBuilder.appendLn(tabspace+tabspace+"return this." + child.getPrettyName() + ";");
+					attributeBuilder.appendLn(tabspace+"private "+child.getPrettyName()+" "+child.getName() + ";");					
+					getterSetterBuilder.appendLn(tabspace+"public "+child.getPrettyName()+" get"+child.getName()+"(){");
+					getterSetterBuilder.appendLn(tabspace+tabspace+"return this." + child.getName() + ";");
 					getterSetterBuilder.appendLn(tabspace+"}");
 					getterSetterBuilder.appendLn("");
-					getterSetterBuilder.appendLn(tabspace+"public void set"+child.getPrettyName()+"("+elementNamespace+" "+child.getPrettyName()+"){");
-					getterSetterBuilder.appendLn(tabspace+tabspace+"this."+child.getPrettyName()+" = "+child.getPrettyName()+";");
+					getterSetterBuilder.appendLn(tabspace+"public void set"+child.getPrettyName()+"("+child.getPrettyName()+" "
+					+child.getName()+"){");
+					getterSetterBuilder.appendLn(tabspace+tabspace+"this."+child.getName()+" = "+child.getName()+";");
 					getterSetterBuilder.appendLn(tabspace+"}");
 				}
 			}
-			builder.appendLn(attrBuilder.toString());
+			builder.appendLn(attributeBuilder.toString());
 			builder.appendLn("");
 			builder.appendLn(getterSetterBuilder.toString());
 			builder.appendLn("}");
-			generateClasses(collected_elements.get(index).getPrettyName(), builder.toString());		
+			generateClasses(collected_elements.get(index).getPrettyName(), builder.toString());
+			//Generamos el file de propiedades
+			propertyHelper.impactPropertiesOnFile();
 		}
 	}
 	
-
+	private void generatePropertyGetter(CustomStringBuilder builder){
+		builder.appendLn("");
+		builder.appendLn(tabspace+"public java.lang.String getProperty(java.lang.String propertyName){");
+		builder.appendLn(tabspace+tabspace+"java.util.Properties properties = new java.util.Properties();");
+		builder.appendLn(tabspace+tabspace+"try{");
+		builder.appendLn(tabspace+tabspace+tabspace+"java.io.FileInputStream input = new java.io.FileInputStream(\"Custom.properties\");");
+		builder.appendLn(tabspace+tabspace+tabspace+"properties.load(input);");
+		builder.appendLn(tabspace+tabspace+"} catch (java.io.IOException e) {");
+		builder.appendLn(tabspace+tabspace+tabspace+"e.printStackTrace(System.err);");
+		builder.appendLn(tabspace+tabspace+"}");
+		builder.appendLn(tabspace+tabspace+"return properties.getProperty(propertyName);");
+		builder.appendLn(tabspace+"}");
+	}
+	
 	private void generateClasses(String className, String classBody){
 		bfr.configureProject("ClassGenerator.xml");
 		bfr.getProject().setNewProperty("filename", "generated/"+className+".java");

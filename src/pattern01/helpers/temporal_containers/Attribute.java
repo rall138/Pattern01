@@ -6,6 +6,7 @@ public class Attribute {
 	private String prettyName;
 	private String type;
 	private boolean requiered;
+	private String group = "Default";
 	
 	public Attribute(){
 		
@@ -51,5 +52,12 @@ public class Attribute {
 		this.requiered = requiered;
 	}
 
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
 	
 }
