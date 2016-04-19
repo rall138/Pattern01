@@ -1,6 +1,7 @@
 package pattern01.helpers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,9 +17,22 @@ import pattern01.helpers.temporal_containers.Element;
 
 public class PatternDefinitionParser {
 
-	public PatternDefinitionParser(){
-		
-	}
+	private static final String linux_generalConfigPath = 
+			System.getProperty("user.dir").replace("src/", "")
+			.replace("pattern01/", "").replace("/helpers", "")
+			+ "/GeneralConfig/PatternDefinition.xml";
+
+
+	private static final String windows_generalConfigPath = 
+			System.getProperty("user.dir").replace("src\\", "")
+			.replace("pattern01\\", "").replace("\\helpers", "")
+			+ "\\GeneralConfig\\PatternDefinition.xml";
+
+	private static final String tabspace = "\t";
+	private String groupName = "Default";	
+	private List<Element> collected_elements = new ArrayList<>();
+	
+	public PatternDefinitionParser(){}
 	
 	public List<Element> parseDefinition(){
 		try {
@@ -118,7 +132,25 @@ public class PatternDefinitionParser {
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
-		
+		return this.collected_elements;
 	}
+	
+	private void addElementIfnotExists(Element element){
+		if(element != null){
+			boolean itemFound = false;
+			int index = 0;
+			while(!itemFound && index < collected_elements.size()){
+				if(collected_elements.get(index).getName() == element.getName()){
+					itemFound = true;
+				}else{
+					index++;
+				}
+			}
+			if(!itemFound){
+				collected_elements.add(element);
+			}
+		}
+	}
+	
 	
 }
