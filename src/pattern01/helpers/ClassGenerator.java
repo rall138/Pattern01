@@ -31,6 +31,7 @@ public class ClassGenerator extends Task{
 		//Se anaden los datos faltantes a los childselements creados
 		childElementsFix();
 		generateClasses();
+		generatePatternInstanceInterface();
 	}
 	
 	private void parsePatternDefinition(){
@@ -123,6 +124,7 @@ public class ClassGenerator extends Task{
 	private void generateGetterAndSettersOfAttributes(CustomStringBuilder attributeBuilder, 
 			CustomStringBuilder builder, String attrName, String attrPrettyName, String type){
 		attributeBuilder.appendLn(tabspace+"private "+type+" "+attrPrettyName+";");
+		builder.appendLn("");
 		builder.appendLn(tabspace+"public "+type+" get"+attrPrettyName+"(){");
 		builder.appendLn(tabspace+tabspace+"return this."+attrPrettyName+";");
 		builder.appendLn(tabspace+"}");
@@ -152,6 +154,7 @@ public class ClassGenerator extends Task{
 			builder.appendLn(tabspace+"}");
 		}else{
 			attributeBuilder.appendLn(tabspace+"private "+attrPrettyName+" "+attrName + ";");					
+			builder.appendLn("");
 			builder.appendLn(tabspace+"public "+attrPrettyName+" get"+attrName+"(){");
 			builder.appendLn(tabspace+tabspace+"return this."+attrName+";");
 			builder.appendLn(tabspace+"}");
@@ -163,6 +166,7 @@ public class ClassGenerator extends Task{
 		}
 	}
 	
+	//Properties from .property file
 	private void generatePropertyGetter(CustomStringBuilder builder){
 		builder.appendLn("");
 		builder.appendLn(tabspace+"public java.lang.String getProperty(java.lang.String propertyName){");
@@ -182,5 +186,10 @@ public class ClassGenerator extends Task{
 		bfr.getProject().setNewProperty("filename", "generated/"+className+".java");
 		bfr.getProject().setNewProperty("message", classBody);
 		bfr.executeTarget("fileRelative");
+	}
+	
+	private void generatePatternInstanceInterface(){
+		PatternInstanceClassGenerator generator = new PatternInstanceClassGenerator();
+		generator.generate(collected_elements);
 	}
 }

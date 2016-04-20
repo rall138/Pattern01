@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Apr 19 22:28:46 UYT 2016
+	* Creation date: Wed Apr 20 12:49:46 GFT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFile{
@@ -11,6 +11,7 @@ public class RelatedFile{
 	private java.lang.String Description;
 	private java.lang.String Reference;
 
+
 	public java.lang.String getName(){
 		return this.Name;
 	}
@@ -18,6 +19,7 @@ public class RelatedFile{
 	public void setName(java.lang.String Name){
 		this.Name = Name;
 	}
+
 	public java.lang.String getDescription(){
 		return this.Description;
 	}
@@ -25,6 +27,7 @@ public class RelatedFile{
 	public void setDescription(java.lang.String Description){
 		this.Description = Description;
 	}
+
 	public java.lang.String getReference(){
 		return this.Reference;
 	}

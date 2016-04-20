@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Apr 19 22:28:46 UYT 2016
+	* Creation date: Wed Apr 20 12:49:46 GFT 2016
 	* Creator: rlomez
 	**/
 public class Faces{
@@ -11,6 +11,7 @@ public class Faces{
 	private Register register;
 	private java.util.List<Dialog> collection_Dialog = new java.util.ArrayList<>();
 
+
 	public Selection getselection(){
 		return this.selection;
 	}
@@ -18,6 +19,7 @@ public class Faces{
 	public void setSelection(Selection selection){
 		this.selection = selection;
 	}
+
 	public Register getregister(){
 		return this.register;
 	}

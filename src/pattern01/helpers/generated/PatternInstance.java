@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Apr 19 22:28:46 UYT 2016
+	* Creation date: Wed Apr 20 12:49:46 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance{
@@ -12,6 +12,7 @@ public class PatternInstance{
 	private RelatedFiles relatedFiles;
 	private Faces faces;
 
+
 	public java.lang.String getName(){
 		return this.Name;
 	}
@@ -19,6 +20,7 @@ public class PatternInstance{
 	public void setName(java.lang.String Name){
 		this.Name = Name;
 	}
+
 	public java.lang.String getDescription(){
 		return this.Description;
 	}
@@ -26,6 +28,7 @@ public class PatternInstance{
 	public void setDescription(java.lang.String Description){
 		this.Description = Description;
 	}
+
 	public RelatedFiles getrelatedFiles(){
 		return this.relatedFiles;
 	}
@@ -33,6 +36,7 @@ public class PatternInstance{
 	public void setRelatedFiles(RelatedFiles relatedFiles){
 		this.relatedFiles = relatedFiles;
 	}
+
 	public Faces getfaces(){
 		return this.faces;
 	}

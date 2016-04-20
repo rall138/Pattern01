@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Apr 19 22:28:46 UYT 2016
+	* Creation date: Wed Apr 20 12:49:46 GFT 2016
 	* Creator: rlomez
 	**/
 public class Selection{
@@ -15,6 +15,7 @@ public class Selection{
 	private java.lang.Boolean Delete;
 	private java.lang.Boolean Display;
 
+
 	public java.lang.String getName(){
 		return this.Name;
 	}
@@ -22,6 +23,7 @@ public class Selection{
 	public void setName(java.lang.String Name){
 		this.Name = Name;
 	}
+
 	public java.lang.String getDescription(){
 		return this.Description;
 	}
@@ -29,6 +31,7 @@ public class Selection{
 	public void setDescription(java.lang.String Description){
 		this.Description = Description;
 	}
+
 	public java.lang.String getReference(){
 		return this.Reference;
 	}
@@ -36,6 +39,7 @@ public class Selection{
 	public void setReference(java.lang.String Reference){
 		this.Reference = Reference;
 	}
+
 	public java.lang.Boolean getInsert(){
 		return this.Insert;
 	}
@@ -43,6 +47,7 @@ public class Selection{
 	public void setInsert(java.lang.Boolean Insert){
 		this.Insert = Insert;
 	}
+
 	public java.lang.Boolean getUpdate(){
 		return this.Update;
 	}
@@ -50,6 +55,7 @@ public class Selection{
 	public void setUpdate(java.lang.Boolean Update){
 		this.Update = Update;
 	}
+
 	public java.lang.Boolean getDelete(){
 		return this.Delete;
 	}
@@ -57,6 +63,7 @@ public class Selection{
 	public void setDelete(java.lang.Boolean Delete){
 		this.Delete = Delete;
 	}
+
 	public java.lang.Boolean getDisplay(){
 		return this.Display;
 	}

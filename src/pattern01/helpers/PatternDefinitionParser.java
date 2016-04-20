@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.eclipse.core.runtime.Platform;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -114,8 +115,14 @@ public class PatternDefinitionParser {
 				}
 				
 			};
-			//Cambiar cuando se necesita para otro OS.
-			parser.parse(linux_generalConfigPath, handler);
+			
+			//Parseing depending on OS
+//			if(Platform.getOS().equalsIgnoreCase(Platform.OS_LINUX)){
+//				parser.parse(linux_generalConfigPath, handler);				
+//			}else if (Platform.getOS().equalsIgnoreCase(Platform.OS_WIN32)){
+				parser.parse(windows_generalConfigPath, handler);
+//			}
+
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
