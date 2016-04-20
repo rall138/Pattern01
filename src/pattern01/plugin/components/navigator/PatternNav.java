@@ -43,7 +43,7 @@ public class PatternNav extends ViewPart implements Observer{
 				//Aca va el c�digo de la acci�n
 			}
 		};
-		searchPatternAction.setImageDescriptor(getImageDescriptor("lupa.png"));
+		searchPatternAction.setImageDescriptor(ImageHelper.getImageDescriptor("lupa.png"));
 		createActionBar();
 
 		Tree tree = tviewer.getTree();
@@ -59,7 +59,7 @@ public class PatternNav extends ViewPart implements Observer{
 		for(ClassCollectorHelper.Class class_def : classCollection){
 			item = new TreeItem(tree, 0);
 			item.setText(class_def.getClassName());
-			item.setImage(getImage("class_obj.png"));
+			item.setImage(ImageHelper.getImage("class_obj.png"));
 		}
 		
 	}
@@ -109,28 +109,6 @@ public class PatternNav extends ViewPart implements Observer{
 		
 	}
 
-	private URL getFileUrl(String imageName){
-		String iconPath = "icons/";
-		Bundle bundle = Platform.getBundle("Pattern01");
-		Path path = new Path(iconPath + imageName);
-		URL fileUrl = FileLocator.find(bundle, path, null);
-		return fileUrl;
-	}
-	
-	private ImageDescriptor getImageDescriptor(String imageName){
-		return ImageDescriptor.createFromURL(getFileUrl(imageName));
-	}
-	
-	private Image getImage(String imageName){
-		Image img = null;
-		try{
-			img = ImageDescriptor.createFromURL(getFileUrl(imageName)).createImage();
-		}catch(Exception ex){
-			ex.printStackTrace(System.err);
-		}
-		return img;
-	}
-	
 	private void createActionBar(){
 		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
 		mgr.add(searchPatternAction);

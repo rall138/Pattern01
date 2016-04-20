@@ -17,6 +17,12 @@ public class LoggerThread extends Thread{
 		this.messageCollection.clear();
 	}
 	
+	public void writeSingleMessage(String message){
+		clearMessages();
+		this.messageCollection.add(0, message);
+		run();
+	}
+	
 	@Override
 	public void run() {
 		for(String message : this.messageCollection){

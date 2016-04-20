@@ -73,10 +73,8 @@ public class ClassGenerator extends Task{
 	private void generateClasses(){
 		LoggerThread log = new LoggerThread();
 		
-		log.addMessage("*** File generation ***");
-		log.run();
-		log.clearMessages();		
-		
+		log.writeSingleMessage("*** File generation ***");
+	
 		CustomStringBuilder builder;
 		CustomStringBuilder attributeBuilder;
 		CustomStringBuilder getterSetterBuilder;
@@ -84,10 +82,7 @@ public class ClassGenerator extends Task{
 		PropertyHelper propertyHelper = new PropertyHelper();
 
 		for(int index = 0; index < collected_elements.size(); index++){
-			log.addMessage("Generating class: "+collected_elements.get(index).getPrettyName());
-			log.run();
-			log.clearMessages();		
-			
+			log.writeSingleMessage("Generating class: "+collected_elements.get(index).getPrettyName());
 			builder = new CustomStringBuilder();
 			builder.appendLn("package pattern01.helpers.generated;");
 			builder.appendLn("");

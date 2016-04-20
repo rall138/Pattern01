@@ -58,11 +58,7 @@ public class PatternDefinitionParser {
 								element.setPrettyName(attributes.getValue(index));
 							}
 						}
-						
-						log.addMessage("Parsed element: "+element.getPrettyName());
-						log.run();
-						log.clearMessages();
-						
+						log.writeSingleMessage("Parsed element: "+element.getPrettyName());
 					}else if(qName.equalsIgnoreCase("childelement")){
 						//Asignamos solamente el nombre porque tenemos nada mas que la referencia.
 						Element childElement = new Element();
@@ -74,11 +70,7 @@ public class PatternDefinitionParser {
 										.parseBoolean(attributes.getValue(index)));
 							}
 						}
-						
-						log.addMessage(tabspace+"-Parsed child: "+childElement.getName());
-						log.run();
-						log.clearMessages();
-						
+						log.writeSingleMessage(tabspace+"-Parsed child: "+childElement.getName());
 						element.getChildElements_collection().add(childElement);						
 					}else if(qName.equalsIgnoreCase("attributeelement")){
 						Attribute attr = new Attribute();
@@ -95,11 +87,7 @@ public class PatternDefinitionParser {
 							//El nombre del grupo del ultimo groupElement.
 							attr.setGroup(groupName);
 						}
-						
-						log.addMessage(tabspace+"-Parsed Attribute: "+attr.getPrettyName());
-						log.run();
-						log.clearMessages();
-						
+						log.writeSingleMessage(tabspace+"-Parsed Attribute: "+attr.getPrettyName());
 						element.getAttribute_collection().add(attr);
 					}else if(qName.equalsIgnoreCase("attributegroup")){
 						for(int index = 0; index < attributes.getLength(); index++){
@@ -108,7 +96,6 @@ public class PatternDefinitionParser {
 							}
 						}
 					}
-					
 					//Adherimos el elemento si no existe.
 					addElementIfnotExists(element);
 				}
@@ -128,7 +115,7 @@ public class PatternDefinitionParser {
 				
 			};
 			//Cambiar cuando se necesita para otro OS.
-			parser.parse(windows_generalConfigPath, handler);
+			parser.parse(linux_generalConfigPath, handler);
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
@@ -151,6 +138,5 @@ public class PatternDefinitionParser {
 			}
 		}
 	}
-	
 	
 }

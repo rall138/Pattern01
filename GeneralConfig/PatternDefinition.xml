@@ -3,6 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="PatternDefinition.xsd">
 	
+	<Element name="patterninstance" prettyName="PatternInstance" >
+		<AttributeElement name="name" prettyName="Name" type="java.lang.String" requiered="true" />
+		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
+		<ChildElement ref="relatedFiles" unique="true" />
+		<ChildElement ref="faces" unique="true" />		
+	</Element>
+	
 	<Element name="relatedFiles" prettyName="RelatedFiles" unique="true">
 		<ChildElement ref="relatedFile" unique="false" />
 	</Element>
