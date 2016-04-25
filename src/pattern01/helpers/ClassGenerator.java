@@ -31,7 +31,6 @@ public class ClassGenerator extends Task{
 		//Se anaden los datos faltantes a los childselements creados
 		childElementsFix();
 		generateClasses();
-		generatePatternInstanceInterface();
 	}
 	
 	private void parsePatternDefinition(){
@@ -188,8 +187,4 @@ public class ClassGenerator extends Task{
 		bfr.executeTarget("fileRelative");
 	}
 	
-	private void generatePatternInstanceInterface(){
-		PatternInstanceClassGenerator generator = new PatternInstanceClassGenerator();
-		generator.generate(collected_elements);
-	}
 }

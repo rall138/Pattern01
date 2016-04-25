@@ -1,4 +1,4 @@
-package pattern01.helpers;
+package pattern01.helpers.instancegen;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,6 +17,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.xpath.XPathResult;
 import org.xml.sax.InputSource;
 
+import pattern01.helpers.CustomStringBuilder;
+import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.temporal_containers.Element;
 import pattern01.plugin.components.navigator.ImageHelper;
 
@@ -58,7 +60,7 @@ public class PatternInstanceClassGenerator {
 			defaultInstance = new Tree(null, 0);
 			recursiveElementGeneration(defaultInstance, collected_elements, 0);
 			
-			XPath xpath = XPathFactory.newInstance(new URI("file:///"));
+			//XPath xpath = XPathFactory.newInstance(new URI("file:///").getPath());
 			
 			
 			builder.appendLn(tabgen(2)+"instance = "+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PatternInstance
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="PatternDefinition.xsd"
+	name="default-instance"
+	description="Descripcion de instance">
+	<RelatedFiles name="default-relatedFiles" description="Descripcion de related files" >
+		<RelatedFile name="Archivo relativo 1" description="Descripcion de archivo relativo 1" reference="../archivo1.java" />
+		<RelatedFile name="Archivo relativo 2" description="Descripcion de archivo relativo 2" reference="../archivo2.java" />
+		<RelatedFile name="Archivo relativo 3" description="Descripcion de archivo relativo 3" reference="../archivo3.java" />
+	</RelatedFiles>
+	<Faces>
+		<Selection name="default-selection" description="Descripcion de selection" reference="../selection.java"
+		insert="true" update="true" delete="true" display="true" />
+		<Register name="default-register" description="Descripcion de register" reference="../register.java" />
+		<Dialog name="default-selection" description="Descripcion de dialog" reference="../dialog.java" />
+	</Faces> 
+</PatternInstance>

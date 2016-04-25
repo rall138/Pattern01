@@ -120,7 +120,7 @@ public class PatternDefinitionParser {
 //			if(Platform.getOS().equalsIgnoreCase(Platform.OS_LINUX)){
 //				parser.parse(linux_generalConfigPath, handler);				
 //			}else if (Platform.getOS().equalsIgnoreCase(Platform.OS_WIN32)){
-				parser.parse(windows_generalConfigPath, handler);
+				parser.parse(linux_generalConfigPath, handler);
 //			}
 
 		} catch (SAXException | ParserConfigurationException | IOException e) {

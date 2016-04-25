@@ -1,21 +1,29 @@
 package pattern01.plugin.components.navigator;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
-import org.osgi.framework.Bundle;
+
+import pattern01.helpers.location.LocationHelper;
+import pattern01.helpers.location.LocationHelper.RL_PLUGIN;
 
 public class ImageHelper {
 
 	public static URL getFileUrl(String imageName){
 		String iconPath = "icons/";
-		Bundle bundle = Platform.getBundle("Pattern01");
 		Path path = new Path(iconPath + imageName);
-		URL fileUrl = FileLocator.find(bundle, path, null);
+		URL fileUrl = null;
+		try {
+			fileUrl = new URI(LocationHelper.getPluginPath(RL_PLUGIN.PATTERN01)).toURL();
+			fileUrl = new URL(fileUrl.getPath()+path);
+		} catch (MalformedURLException | URISyntaxException e) {
+			e.printStackTrace();
+		}
 		return fileUrl;
 	}
 	

@@ -18,7 +18,7 @@
 	<echo message="Starting class generation process..."/>
 
 	<taskdef name="ClassGenerator" classname="pattern01.helpers.ClassGenerator" 
-		classpath="${classpath.windows}"/>
+		classpath="${classpath.linux}"/>
 	
 	<target name="main">
 		<ClassGenerator />

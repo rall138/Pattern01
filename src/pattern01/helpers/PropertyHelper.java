@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.tools.ant.BuildFileRule;
-import org.eclipse.core.runtime.Platform;
 
 public class PropertyHelper {
 

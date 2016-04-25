@@ -14,8 +14,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.internal.Workbench;
 
-import pattern01.ClassCollectorHelper;
-
 @SuppressWarnings("restriction")
 public class ClassCollectorHandler extends AbstractHandler{
 

@@ -1,4 +1,4 @@
-package pattern01;
+package pattern01.popup.commands;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,16 +25,8 @@ public class ClassCollectorHelper {
 	private static final String strMethodPattern = "(public) (\\s*\\w*) (get\\w++)";
 	private static final String strPackagePattern = "(package) (.*?;)";
 	private List<ClassCollectorHelper.Class> classCollection = new ArrayList<>();
-
 	
-	public ClassCollectorHelper(){
-//		URL url = Platform.getInstanceLocation().getURL();
-//		File file = new File(url.getPath());
-//		if (file.exists()){
-//			recursiveClassCollector(file);
-//		}
-	}
-	
+	public ClassCollectorHelper(){}
 	
 	public void collectClasses(String packageURI) throws URISyntaxException{
 		URI folderURI = new URI(packageURI);
@@ -52,7 +44,7 @@ public class ClassCollectorHelper {
 					}
 					reader.close();
 					
-					//Obtenemos los metodos p�blicos
+					//Obtenemos los metodos publicos
 					Pattern pattern = Pattern.compile(strMethodPattern);
 					Matcher matcher = pattern.matcher(allCode);
 					
@@ -71,11 +63,11 @@ public class ClassCollectorHelper {
 						Method method = new Method(matcher.group(3), matcher.group(2));
 						class_def.getMethodCollection().add(method);
 					}
-					classCollection.add(class_def);					
+					classCollection.add(class_def);
 
 				}catch(IOException ex){
 					ex.printStackTrace();
-				}				
+				}
 			}
 			toJsonFile(file);
 		}
@@ -115,7 +107,6 @@ public class ClassCollectorHelper {
 			wr.flush();
 			wr.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

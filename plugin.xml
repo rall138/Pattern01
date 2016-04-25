@@ -50,8 +50,5 @@
             commandId="Pattern01.editPatternCommand">
       </handler>
    </extension>
-   <extension
-         point="org.eclipse.ui.editors">
-   </extension>
 
 </plugin>

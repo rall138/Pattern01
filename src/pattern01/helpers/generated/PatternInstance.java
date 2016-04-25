@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Apr 20 12:49:46 GFT 2016
+	* Creation date: Sun Apr 24 15:09:46 UYT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance{
