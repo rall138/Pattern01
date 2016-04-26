@@ -33,9 +33,9 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="pattern01.plugin.components.navigator.PatternNav"
-            id="Pattern01.navigationView"
-            name="Pattern navigation"
+            class="pattern01.plugin.components.navigator.PatternNavigator"
+            id="Pattern01.NavigatorView"
+            name="Pattern Navigator"
             restorable="true">
       </view>
    </extension>

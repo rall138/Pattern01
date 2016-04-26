@@ -9,6 +9,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -24,14 +25,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import pattern01.helpers.LoggerThread;
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.helpers.location.LocationHelper;
 import pattern01.plugin.components.editors.PatternEditor;
 
-public class PatternNav extends ViewPart {
+public class PatternNavigator extends ViewPart {
 
 	private Action searchPatternAction;
-	//TreeViewer tviewer;
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -43,7 +44,7 @@ public class PatternNav extends ViewPart {
 				//Aca va el codigo de la accion
 			}
 		};
-		searchPatternAction.setImageDescriptor(ImageHelper.getImageDescriptor("lupa.png"));
+		//searchPatternAction.setImageDescriptor(ImageHelper.getImageDescriptor("lupa.png"));
 		createActionBar();
 
 		//Tree tree = tviewer.getTree();
@@ -53,18 +54,16 @@ public class PatternNav extends ViewPart {
 		
 		
 		TreeItem item;
-		File fileInstance = null, patternFolder = null;
+		File fileInstance = null;
 		URI uri = null;
 		PatternInstanceParser instanceParser = new PatternInstanceParser(tree);
+		LoggerThread lg = new LoggerThread();
+		System.err.println("Aca llega");
 		
 		//Obtenemos la carpeta PatternFolder
-		try {
-			uri = new URI("file:///"+LocationHelper.getActualProjectPath());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
+		File patternFolder = new File("./../resources/PatternFolder");
+		lg.writeSingleMessage("PatternFolder: "+patternFolder.getAbsolutePath());
 		
-		patternFolder = new File(uri);
 		if (patternFolder.isDirectory()){
 			File[] files = patternFolder.listFiles(new FileNameFilterImpl());
 			int index = 0;
@@ -78,6 +77,7 @@ public class PatternNav extends ViewPart {
 			}
 
 			if (itemFound){
+				lg.writeSingleMessage("Item encontrado");
 				XPath xpath = XPathFactory.newInstance().newXPath();
 				String expression = "/Classes/Class";
 				NodeList classNodeList;
@@ -89,7 +89,8 @@ public class PatternNav extends ViewPart {
 							if(classNodeList.item(index).getNodeType() == Node.ELEMENT_NODE){
 								item = new TreeItem(tree, 0);
 								item.setText(classNodeList.item(index).getAttributes().getNamedItem("name").getNodeValue());
-								item.setImage(ImageHelper.getImage("class_obj.png"));							
+								item.setImage(ImageHelper.getImage("class_obj.png"));
+								lg.writeSingleMessage("Item generado: " + item.getText());
 							}
 						}
 					}
@@ -98,6 +99,7 @@ public class PatternNav extends ViewPart {
 				}
 			}
 		}
+		
 	}
 	
 	private void menuBuilder(){
@@ -140,11 +142,12 @@ public class PatternNav extends ViewPart {
 	private void createActionBar(){
 		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
 		mgr.add(searchPatternAction);
-	}
-	
+	}	
+
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

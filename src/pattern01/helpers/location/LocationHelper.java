@@ -7,9 +7,10 @@ public class LocationHelper {
 	
 	public enum RL_PLUGIN {PATTERN01};
 	
-	public static String getActualProjectPath(){
-		return System.getProperty("user.dir");
-	}
+	/*
+	public static String getPatternFolderPath(){
+		return LocationHelper.class.getResource("../resources/PatternFolder").getPath();
+	}*/
 	
 	public static String getPluginPath(RL_PLUGIN pluginName){
 		Bundle bundle = null;

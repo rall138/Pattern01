@@ -3,8 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Pattern01
 Bundle-SymbolicName: Pattern01;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-ClassPath: .,
- resources/libraries/ant-antlr.jar,
+Bundle-ClassPath: resources/libraries/ant-antlr.jar,
  resources/libraries/ant-apache-bcel.jar,
  resources/libraries/ant-apache-bsf.jar,
  resources/libraries/ant-apache-log4j.jar,
@@ -26,12 +25,11 @@ Bundle-ClassPath: .,
  resources/libraries/ant-swing.jar,
  resources/libraries/ant-testutil.jar,
  resources/libraries/ant.jar,
- resources/libraries/json-simple-1.1.1.jar
+ resources/libraries/json-simple-1.1.1.jar,
+ resources/libraries/junit.jar,
+ bin/
 Bundle-Activator: pattern01.Activator
-Export-Package: org.eclipse.core.internal.preferences.legacy,
- org.eclipse.core.runtime,
- org.eclipse.ui.internal,
- pattern01,
+Export-Package: pattern01,
  pattern01.helpers,
  pattern01.helpers.generated,
  pattern01.helpers.instancegen,
