@@ -1,4 +1,4 @@
-package pattern01.helpers;
+package pattern01.helpers.definitiongen;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +7,10 @@ import java.util.List;
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
 
+import pattern01.helpers.CustomStringBuilder;
+import pattern01.helpers.LoggerThread;
+import pattern01.helpers.definitiongen.PatternDefinitionParser;
+import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
 
@@ -117,7 +121,7 @@ public class ClassGenerator extends Task{
 			generateClasses(collected_elements.get(index).getPrettyName(), builder.toString());
 		}
 		//Generamos el file de propiedades
-		propertyHelper.impactPropertiesOnFile();
+		propertyHelper.impactPropertiesOnFile("../generated/Custom.properties");
 	}
 	
 	private void generateGetterAndSettersOfAttributes(CustomStringBuilder attributeBuilder, 
@@ -182,7 +186,7 @@ public class ClassGenerator extends Task{
 	
 	private void generateClasses(String className, String classBody){
 		bfr.configureProject("ClassGenerator.xml");
-		bfr.getProject().setNewProperty("filename", "generated/"+className+".java");
+		bfr.getProject().setNewProperty("filename", "../generated/"+className+".java");
 		bfr.getProject().setNewProperty("message", classBody);
 		bfr.executeTarget("fileRelative");
 	}

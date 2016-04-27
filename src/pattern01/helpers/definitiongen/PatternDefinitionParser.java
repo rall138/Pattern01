@@ -1,4 +1,4 @@
-package pattern01.helpers;
+package pattern01.helpers.definitiongen;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,11 +8,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.eclipse.core.runtime.Platform;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import pattern01.helpers.LoggerThread;
+import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
 
@@ -103,7 +104,6 @@ public class PatternDefinitionParser {
 
 				@Override
 				public void characters(char[] ch, int start, int length) throws SAXException {
-					// TODO Auto-generated method stub
 					super.characters(ch, start, length);
 				}
 
@@ -116,12 +116,17 @@ public class PatternDefinitionParser {
 				
 			};
 			
-			//Parseing depending on OS
-//			if(Platform.getOS().equalsIgnoreCase(Platform.OS_LINUX)){
-//				parser.parse(linux_generalConfigPath, handler);				
-//			}else if (Platform.getOS().equalsIgnoreCase(Platform.OS_WIN32)){
+			//Se obtiene el archivo de propiedades.
+			PropertyHelper proph = new PropertyHelper();
+			String platform = proph
+					.getProperty("../../../GeneralConfig/Configuration.properties",
+					"platform").toString();
+			
+			if(platform.equalsIgnoreCase("windows")){
+				parser.parse(windows_generalConfigPath, handler);				
+			}else if(platform.equalsIgnoreCase("linux")){
 				parser.parse(linux_generalConfigPath, handler);
-//			}
+			}
 
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();

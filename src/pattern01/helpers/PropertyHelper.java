@@ -10,6 +10,9 @@ import java.util.Properties;
 
 import org.apache.tools.ant.BuildFileRule;
 
+import pattern01.helpers.location.LocationHelper;
+import pattern01.helpers.location.LocationHelper.RL_PLUGIN;
+
 public class PropertyHelper {
 
 	private BuildFileRule bfr = new BuildFileRule();
@@ -22,9 +25,9 @@ public class PropertyHelper {
 		this.propertyValue.put(propertyName, propertyValue);
 	}
 	
-	public void impactPropertiesOnFile(){
+	public void impactPropertiesOnFile(String propertyFilePath){
 		bfr.configureProject("ClassGenerator.xml");
-		bfr.getProject().setNewProperty("filename", "generated/Custom.properties");
+		bfr.getProject().setNewProperty("filename", propertyFilePath);
 		
 		LoggerThread log = new LoggerThread();
 		log.addMessage("Generating property file");
@@ -40,9 +43,13 @@ public class PropertyHelper {
 		bfr.executeTarget("fileRelative");
 	}
 	
-	public String getProperty(String propertyName){
+	public String getProperty(String propertyFilePath, String propertyName){
 		try {
-			URI uri = new URI("file:///");
+			
+			URI uri = new URI("file:///"+
+			LocationHelper.getPluginPath(RL_PLUGIN.PATTERN01)+
+			propertyFilePath);
+			System.out.println(uri.getPath());
 			prop.load(new FileInputStream(uri.getPath()));
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();

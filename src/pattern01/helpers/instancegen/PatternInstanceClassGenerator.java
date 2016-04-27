@@ -1,26 +1,20 @@
 package pattern01.helpers.instancegen;
 
-import java.io.IOException;
-import java.net.URI;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Node;
-import org.w3c.dom.xpath.XPathResult;
 import org.xml.sax.InputSource;
 
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.temporal_containers.Element;
-import pattern01.plugin.components.navigator.ImageHelper;
 
 /*
  * A traves de la estructura definida en el PatternDefinition 
@@ -69,8 +63,10 @@ public class PatternInstanceClassGenerator {
 					collected_elements.get(0).getPrettyName()+quotscape+");");
 			builder.appendLn(tabgen(2)+"instance.setData(Type,"+quotscape+
 					collected_elements.get(0).getPrettyName()+quotscape+");");
-			builder.appendLn(tabgen(2)+"instance.setImage("+
-					ImageHelper.getImage(prophelper.getProperty(collected_elements.get(0).getPrettyName()+"."+"Image")));
+//			builder.appendLn(tabgen(2)+"instance.setImage("+
+//					ImageHelper.getImage(prophelper
+//							.getProperty("../../../../"
+//									collected_elements.get(0).getPrettyName()+"."+"Image")));
 
 		}
 		builder.appendLn(tabspace+"}");		
@@ -112,7 +108,7 @@ public class PatternInstanceClassGenerator {
 			TreeItem item = new TreeItem(parent, 0);
 			item.setText(collected_elements.get(index).getClass().getName()+" - "+collected_elements.get(index).getName());
 			item.setData("Type", collected_elements.get(index).getClass().getName());
-			item.setImage(ImageHelper.getImage(prophelper.getProperty(collected_elements.get(0).getPrettyName()+"."+"Image")));
+//			item.setImage(ImageHelper.getImage(prophelper.getProperty(collected_elements.get(0).getPrettyName()+"."+"Image")));
 		}
 	}
 	

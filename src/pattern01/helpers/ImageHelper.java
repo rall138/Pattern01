@@ -1,4 +1,4 @@
-package pattern01.plugin.components.navigator;
+package pattern01.helpers;
 
 import java.net.MalformedURLException;
 import java.net.URI;

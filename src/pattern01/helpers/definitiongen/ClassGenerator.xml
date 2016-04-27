@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<project default="main" basedir=".">
+	
+	<!-- For load properties from propertyfile
+	<loadproperties 
+	srcfile="$${basedir}/../../../../../GeneralConfig/Configuration.properties" />
+	-->
+		
+	<echo message="Starting class generation process..."/>
+
+	<taskdef name="ClassGenerator" classname="pattern01.helpers.definitiongen.ClassGenerator" 
+		classpath="$${basedir}/../../../../../bin/" />
+	
+	<target name="main">
+		<ClassGenerator />
+	</target>
+
+	<target name="fileRelative">
+		<echo append="false" file="${filename}" message="${message}"></echo>
+	</target>
+	
+</project>
