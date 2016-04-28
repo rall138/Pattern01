@@ -48,79 +48,77 @@ public class PatternNavigator extends ViewPart {
 				.getImageDescriptor("lupa.png"));
 		createActionBar();
 
-		Tree tree = new Tree(parent, 0);
-		
-		TreeItem item;
-		PatternInstanceParser instanceParser = null;
-		LoggerThread lg = new LoggerThread();
-		
-		//Obtenemos la carpeta PatternFolder
-		File patternFolder = null;
-		try {
-			patternFolder = new File(new URI("file:///"+
-					LocationHelper.getSelectedProjectPath()+"/PatternFolder"));
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-		
-		if (patternFolder.isDirectory()){
-			File[] files = patternFolder.listFiles(new FileNameFilterImpl());
-			int index = 0;
-			boolean itemFound = false;
-			while(index < files.length && !itemFound){
-				if (files[index].getName().equalsIgnoreCase("classinstances.xml")){
-					itemFound = true;
-				}else{
-					index++;
-				}
-			}
-
-			if (itemFound){
-				lg.writeSingleMessage("Item encontrado");
-				XPath xpath = XPathFactory.newInstance().newXPath();
-				String expression = "/Classes/Class";
-				NodeList classNodeList;
-				try {
-					classNodeList = (NodeList) xpath.evaluate(expression, new InputSource(files[index].getAbsolutePath()), 
-							XPathConstants.NODESET);
-					TreeItem parentItem = new TreeItem(tree, 0);
-					parentItem.setText("Pattern Instances");
-					if(classNodeList != null && classNodeList.getLength() > 0){
-						String className = "";
-						for(index = 0; index < classNodeList.getLength(); index++){
-							if(classNodeList.item(index).getNodeType() == Node.ELEMENT_NODE){
-								item = new TreeItem(parentItem, 0);
-								className = classNodeList.item(index)
-										.getAttributes().getNamedItem("name").getNodeValue();
-								item.setText(className);
-								item.setImage(ImageHelper.getImage("class_obj.png"));
-								instanceParser = new PatternInstanceParser(item);
-								instanceParser.generateTreeFromDefinition(className);
-								item = instanceParser.getInstance();
-							}
-						}
-					}
-				} catch (XPathExpressionException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		//Tree de navegacion
+		generateTree(parent);
 	}
 	
+	private void generateTree(Composite parent){
+		Tree tree = new Tree(parent, 0);
+		generateItems(tree);
+	}
 	
-	private void generateBasicTree(Tree tree){
+	private void generateItems(Tree tree){
 		try {
 			TreeItem projectItem = null;
 			URI uri = new URI("file:///"+LocationHelper.getActiveWorkSpace());
 			File workspaceFolder = new File(uri);
+			File projectFolder = null;
 			for(int index = 0; index < workspaceFolder.listFiles().length; index++){
 				if(workspaceFolder.listFiles()[index].isDirectory()){
 					projectItem = new TreeItem(tree, 0);
 					projectItem.setText(workspaceFolder.listFiles()[index].getName());
-					projectItem.setImage("");
+					projectItem.setImage(ImageHelper.getImage("prj_obj.png"));
+					projectFolder = workspaceFolder.listFiles()[index];
+					int hindex = 0;
+					boolean itemFound = false;
+					while (hindex < projectFolder.listFiles().length && !itemFound){
+						if (projectFolder.listFiles()[hindex].isDirectory() &&
+								projectFolder.listFiles()[hindex].getName()
+								.equalsIgnoreCase("patternfolder")){
+							itemFound = true;
+							uri = LocationHelper.fromFileToURI(projectFolder.listFiles()[hindex]);
+							uri = new URI(uri+"ClassInstances.xml");
+							generateTreeItemInstances(projectItem, uri);
+						}else{
+							hindex++;
+						}
+					}
 				}
 			}
 		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void generateTreeItemInstances(TreeItem parent, URI uri){
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		String expression = "/Classes/Class";
+		NodeList classNodeList;
+		try {
+			classNodeList = (NodeList) xpath.evaluate
+					(expression, new InputSource(uri.getPath()), 
+					XPathConstants.NODESET);
+			
+			if(classNodeList != null && classNodeList.getLength() > 0){
+				for(int index = 0; index < classNodeList.getLength(); index++){
+					
+					if(classNodeList.item(index).getNodeType() == Node.ELEMENT_NODE){
+						//Nombre de lo clase 
+						String className = classNodeList.item(index)
+								.getAttributes().getNamedItem("name").getNodeValue();
+						
+						TreeItem classInstance = new TreeItem(parent, 0);
+						classInstance.setText("Class ["+className+"]");
+						classInstance.setImage(ImageHelper.getImage("class_obj.png"));
+
+						PatternInstanceParser instanceParser = 
+								new PatternInstanceParser(classInstance);
+						instanceParser.generateTreeFromDefinition(className);
+						classInstance = instanceParser.getInstance();
+					}
+				}
+			}
+		} catch (XPathExpressionException e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,5 +1,8 @@
 package pattern01.helpers.location;
 
+import java.io.File;
+import java.net.URI;
+
 import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
@@ -42,6 +45,10 @@ public class LocationHelper {
 			bundle = Platform.getBundle("Pattern01");
 		}
 		return bundle.getLocation();
+	}
+	
+	public static URI fromFileToURI(File fileinstance){
+		return fileinstance.toURI();
 	}
 
 }

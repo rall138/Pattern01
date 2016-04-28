@@ -1,6 +1,7 @@
 package pattern01.helpers.definitiongen;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,9 +119,8 @@ public class PatternDefinitionParser {
 			
 			//Se obtiene el archivo de propiedades.
 			PropertyHelper proph = new PropertyHelper();
-			String platform = proph
-					.getProperty("../../../GeneralConfig/Configuration.properties",
-					"platform").toString();
+			URL url = getClass().getResource("../../../../GeneralConfig/Configuration.properties");			
+			String platform = proph.getProperty(url.getPath(),"platform").toString();
 			
 			if(platform.equalsIgnoreCase("windows")){
 				parser.parse(windows_generalConfigPath, handler);				

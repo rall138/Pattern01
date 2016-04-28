@@ -45,11 +45,8 @@ public class PropertyHelper {
 	
 	public String getProperty(String propertyFilePath, String propertyName){
 		try {
-			
-			URI uri = new URI("file:///"+
-			LocationHelper.getPluginPath(RL_PLUGIN.PATTERN01)+
-			propertyFilePath);
-			System.out.println(uri.getPath());
+			URI uri = new URI(propertyFilePath);
+			System.out.println("Path obtenido: "+uri.getPath());
 			prop.load(new FileInputStream(uri.getPath()));
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();

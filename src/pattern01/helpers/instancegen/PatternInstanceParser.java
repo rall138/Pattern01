@@ -8,10 +8,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
@@ -34,7 +30,7 @@ public class PatternInstanceParser {
 		String expression = "/PatternInstance";
 		lgt.writeSingleMessage("Reading instances from: "+className);
 		try {
-			URI uri = new URI("file:///"+LocationHelper.getSelectedProjectPath()+"/PatternFolder/"+className+".xml");
+			URI uri = new URI("file:///"+LocationHelper.getSelectedProjectPath()+"/PatternFolder/"+className+"Instance.xml");
 			InputSource is = new InputSource(uri.getPath());
 			//Obtenemos el nodo padre (Siempre es patterninstance)
 			Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);

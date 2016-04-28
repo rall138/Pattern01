@@ -5,11 +5,13 @@
 	<loadproperties 
 	srcfile="$${basedir}/../../../../../GeneralConfig/Configuration.properties" />
 	-->
-		
+	
 	<echo message="Starting class generation process..."/>
 
-	<taskdef name="ClassGenerator" classname="pattern01.helpers.definitiongen.ClassGenerator" 
-		classpath="$${basedir}/../../../../../bin/" />
+	<taskdef name="ClassGenerator"
+		classpath="$${basedir}/../../../../../bin"
+		classname="pattern01.helpers.definitiongen.ClassGenerator">
+	</taskdef>
 	
 	<target name="main">
 		<ClassGenerator />
