@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.activities.WorkbenchTriggerPointAdvisor;
 import org.eclipse.ui.part.ViewPart;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -50,9 +51,7 @@ public class PatternNavigator extends ViewPart {
 		Tree tree = new Tree(parent, 0);
 		
 		TreeItem item;
-		File fileInstance = null;
-		URI uri = null;
-		PatternInstanceParser instanceParser = new PatternInstanceParser(tree);
+		PatternInstanceParser instanceParser = null;
 		LoggerThread lg = new LoggerThread();
 		
 		//Obtenemos la carpeta PatternFolder
@@ -87,12 +86,17 @@ public class PatternNavigator extends ViewPart {
 					TreeItem parentItem = new TreeItem(tree, 0);
 					parentItem.setText("Pattern Instances");
 					if(classNodeList != null && classNodeList.getLength() > 0){
+						String className = "";
 						for(index = 0; index < classNodeList.getLength(); index++){
 							if(classNodeList.item(index).getNodeType() == Node.ELEMENT_NODE){
 								item = new TreeItem(parentItem, 0);
-								item.setText(classNodeList.item(index)
-										.getAttributes().getNamedItem("name").getNodeValue());
+								className = classNodeList.item(index)
+										.getAttributes().getNamedItem("name").getNodeValue();
+								item.setText(className);
 								item.setImage(ImageHelper.getImage("class_obj.png"));
+								instanceParser = new PatternInstanceParser(item);
+								instanceParser.generateTreeFromDefinition(className);
+								item = instanceParser.getInstance();
 							}
 						}
 					}
@@ -100,6 +104,24 @@ public class PatternNavigator extends ViewPart {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	
+	
+	private void generateBasicTree(Tree tree){
+		try {
+			TreeItem projectItem = null;
+			URI uri = new URI("file:///"+LocationHelper.getActiveWorkSpace());
+			File workspaceFolder = new File(uri);
+			for(int index = 0; index < workspaceFolder.listFiles().length; index++){
+				if(workspaceFolder.listFiles()[index].isDirectory()){
+					projectItem = new TreeItem(tree, 0);
+					projectItem.setText(workspaceFolder.listFiles()[index].getName());
+					projectItem.setImage("");
+				}
+			}
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
 	}
 	

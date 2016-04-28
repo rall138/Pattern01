@@ -1,5 +1,8 @@
 package pattern01.helpers.instancegen;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -14,41 +17,33 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 import pattern01.helpers.LoggerThread;
+import pattern01.helpers.location.LocationHelper;
 
 public class PatternInstanceParser {
 
-	private static final String linux_generalConfigPath = 
-			System.getProperty("user.dir").replace("src/", "")
-			.replace("pattern01/", "").replace("/helpers", "")
-			+ "/GeneralConfig/PatternInstance.xml";
-
-	private static final String windows_generalConfigPath = 
-			System.getProperty("user.dir").replace("src\\", "")
-			.replace("pattern01\\", "").replace("\\helpers", "")
-			+ "\\GeneralConfig\\PatternInstance.xml";
-
 	private TreeItem instance = null;
 	private LoggerThread lgt = new LoggerThread();
-	private Tree tree = null;
+	private TreeItem parentItem = null;
 	
-	public PatternInstanceParser(Tree tree){
-		this.tree = tree;
+	public PatternInstanceParser(TreeItem parentItem){
+		this.parentItem = parentItem;
 	}
 	
 	public void generateTreeFromDefinition(String className){
-		lgt.writeSingleMessage("generateTreeFromDefinition");
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		String expression = "/PatternInstance";
+		lgt.writeSingleMessage("Reading instances from: "+className);
 		try {
-			InputSource is = new InputSource(linux_generalConfigPath);
+			URI uri = new URI("file:///"+LocationHelper.getSelectedProjectPath()+"/PatternFolder/"+className+".xml");
+			InputSource is = new InputSource(uri.getPath());
 			//Obtenemos el nodo padre (Siempre es patterninstance)
 			Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 			if (parentNode != null){
-				TreeItem item = new TreeItem(tree, 0);
+				TreeItem item = new TreeItem(this.parentItem, 0);
 				item.setText(parentNode.getNodeName());
 				recursiveParseing(parentNode, item);
 			}
-		} catch (XPathExpressionException | IllegalStateException e) {
+		} catch (XPathExpressionException | IllegalStateException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}

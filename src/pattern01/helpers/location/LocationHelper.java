@@ -31,6 +31,10 @@ public class LocationHelper {
 		return projectPath.toString();
 	}
 	
+	public static String getActiveWorkSpace(){
+		return Platform.getInstanceLocation().getURL().getPath();
+	}
+	
 	public static String getPluginPath(RL_PLUGIN pluginName){
 		Bundle bundle = null;
 		switch(pluginName){
