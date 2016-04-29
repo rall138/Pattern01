@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import org.apache.tools.ant.BuildFileRule;
 
+import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.location.LocationHelper;
 import pattern01.helpers.location.LocationHelper.RL_PLUGIN;
 
@@ -26,19 +27,19 @@ public class PropertyHelper {
 	}
 	
 	public void impactPropertiesOnFile(String propertyFilePath){
-		bfr.configureProject("ClassGenerator.xml");
+		bfr.configureProject(CommonPathFix
+				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
+		
 		bfr.getProject().setNewProperty("filename", propertyFilePath);
 		
 		LoggerThread log = new LoggerThread();
-		log.addMessage("Generating property file");
+		log.writeSingleMessage("Generating property file");
 		
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for(Map.Entry<String, String> entry : propertyValue.entrySet()){
 			builder.appendLn(entry.getKey()+"="+entry.getValue());
 		}
 		
-		log.run();
-
 		bfr.getProject().setNewProperty("message", builder.toString());
 		bfr.executeTarget("fileRelative");
 	}

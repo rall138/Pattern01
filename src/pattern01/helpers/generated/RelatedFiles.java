@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Fri Apr 29 17:49:26 GFT 2016
+	* Creation date: Fri Apr 29 17:57:54 GFT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFiles{
