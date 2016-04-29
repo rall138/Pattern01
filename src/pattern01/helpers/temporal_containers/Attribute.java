@@ -5,6 +5,7 @@ public class Attribute {
 	private String name;
 	private String prettyName;
 	private String type;
+	private String default_value;
 	private boolean requiered;
 	private String group = "Default";
 	
@@ -59,5 +60,12 @@ public class Attribute {
 	public void setGroup(String group) {
 		this.group = group;
 	}
-	
+
+	public String getDefault_value() {
+		return default_value;
+	}
+
+	public void setDefault_value(String default_value) {
+		this.default_value = default_value;
+	}
 }

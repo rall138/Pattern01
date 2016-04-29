@@ -9,7 +9,7 @@
 	<echo message="Starting class generation process..."/>
 
 	<taskdef name="ClassGenerator"
-		classpath="$${basedir}/../../../../../bin"
+		classpath="${basedir}/../../../../bin"
 		classname="pattern01.helpers.definitiongen.ClassGenerator">
 	</taskdef>
 	

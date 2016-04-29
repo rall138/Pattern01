@@ -1,7 +1,6 @@
 package pattern01.helpers.definitiongen;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,26 +12,16 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import pattern01.helpers.CommonPathFix;
+import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.LoggerThread;
-import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
 
 public class PatternDefinitionParser {
 
-	private static final String linux_generalConfigPath = 
-			System.getProperty("user.dir").replace("src/", "")
-			.replace("pattern01/", "").replace("/helpers", "")
-			+ "/GeneralConfig/PatternDefinition.xml";
-
-
-	private static final String windows_generalConfigPath = 
-			System.getProperty("user.dir").replace("src\\", "")
-			.replace("pattern01\\", "").replace("\\helpers", "")
-			+ "\\GeneralConfig\\PatternDefinition.xml";
-
 	private static final String tabspace = "\t";
-	private String groupName = "Default";	
+	private String groupName = "Default";
 	private List<Element> collected_elements = new ArrayList<>();
 	
 	public PatternDefinitionParser(){}
@@ -77,6 +66,8 @@ public class PatternDefinitionParser {
 						element.getChildElements_collection().add(childElement);						
 					}else if(qName.equalsIgnoreCase("attributeelement")){
 						Attribute attr = new Attribute();
+						//Dejamos por defecto el default value vacio.
+						attr.setDefault_value("");
 						for (int index = 0; index < attributes.getLength(); index++){
 							if(attributes.getQName(index).equalsIgnoreCase("name")){
 								attr.setName(attributes.getValue(index));
@@ -86,6 +77,8 @@ public class PatternDefinitionParser {
 								attr.setRequiered(Boolean.parseBoolean(attributes.getValue(index)));
 							}else if(attributes.getQName(index).equalsIgnoreCase("type")){
 								attr.setType(attributes.getValue(index));
+							}else if(attributes.getQName(index).equalsIgnoreCase("default")){
+								attr.setDefault_value(attributes.getValue(index));
 							}
 							//El nombre del grupo del ultimo groupElement.
 							attr.setGroup(groupName);
@@ -116,18 +109,9 @@ public class PatternDefinitionParser {
 				}
 				
 			};
-			
-			//Se obtiene el archivo de propiedades.
-			PropertyHelper proph = new PropertyHelper();
-			URL url = getClass().getResource("../../../../GeneralConfig/Configuration.properties");			
-			String platform = proph.getProperty(url.getPath(),"platform").toString();
-			
-			if(platform.equalsIgnoreCase("windows")){
-				parser.parse(windows_generalConfigPath, handler);				
-			}else if(platform.equalsIgnoreCase("linux")){
-				parser.parse(linux_generalConfigPath, handler);
-			}
-
+			parser.parse(CommonPathFix
+					.getHardCodedPath(PATH_NAME.PATTERNDEFINITION_XML)
+					.getPath(), handler);				
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}

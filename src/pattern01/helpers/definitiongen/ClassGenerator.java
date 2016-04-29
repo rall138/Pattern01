@@ -7,9 +7,10 @@ import java.util.List;
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
 
+import pattern01.helpers.CommonPathFix;
+import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.LoggerThread;
-import pattern01.helpers.definitiongen.PatternDefinitionParser;
 import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
@@ -17,6 +18,7 @@ import pattern01.helpers.temporal_containers.Element;
 public class ClassGenerator extends Task{
 
 	private static final String tabspace = "\t";
+	private static final String quotscape = "\"";
 	private static final String collectionPrefix = "collection_";
 	private static final String javaListNamespace = "java.util.List";
 	private static final String javaArrayListNamespace = "java.util.ArrayList";
@@ -38,7 +40,15 @@ public class ClassGenerator extends Task{
 	}
 	
 	private void parsePatternDefinition(){
-		PatternDefinitionParser parser = new PatternDefinitionParser();
+		bfr.configureProject(CommonPathFix
+				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
+		
+		//Se establece la propiedad de workspace para el build file 
+		bfr.getProject().setProperty("binfolder", CommonPathFix
+				.getHardCodedPath(PATH_NAME.BINFOLDER).getPath());
+		
+		PatternDefinitionParser parser = 
+				new PatternDefinitionParser();
 		collected_elements = parser.parseDefinition();
 	}
 	
@@ -99,7 +109,7 @@ public class ClassGenerator extends Task{
 			//Getters and setters y propiedades para el .properties de atributos generales.
 			for(Attribute attr : collected_elements.get(index).getAttribute_collection()){
 				generateGetterAndSettersOfAttributes(attributeBuilder, getterSetterBuilder, 
-						attr.getName(), attr.getPrettyName(), attr.getType());
+						attr.getName(), attr.getPrettyName(), attr.getType(), attr.getDefault_value());
 				
 				//Generamos las propiedades de los agrupadores
 				propertyHelper.putProperty(collected_elements.get(index).getPrettyName()+"."+
@@ -120,13 +130,17 @@ public class ClassGenerator extends Task{
 			builder.appendLn("}");
 			generateClasses(collected_elements.get(index).getPrettyName(), builder.toString());
 		}
+		
 		//Generamos el file de propiedades
-		propertyHelper.impactPropertiesOnFile("../generated/Custom.properties");
+		propertyHelper.impactPropertiesOnFile(CommonPathFix
+				.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath());
 	}
 	
 	private void generateGetterAndSettersOfAttributes(CustomStringBuilder attributeBuilder, 
-			CustomStringBuilder builder, String attrName, String attrPrettyName, String type){
-		attributeBuilder.appendLn(tabspace+"private "+type+" "+attrPrettyName+";");
+			CustomStringBuilder builder, String attrName, String attrPrettyName, String type,
+			String default_value){
+		attributeBuilder.appendLn(tabspace+"private "+type+" "+attrPrettyName+
+				(default_value.equalsIgnoreCase("")?"":"="+quotscape+default_value+quotscape)+";");
 		builder.appendLn("");
 		builder.appendLn(tabspace+"public "+type+" get"+attrPrettyName+"(){");
 		builder.appendLn(tabspace+tabspace+"return this."+attrPrettyName+";");
@@ -185,9 +199,8 @@ public class ClassGenerator extends Task{
 	}
 	
 	private void generateClasses(String className, String classBody){
-		bfr.configureProject("ClassGenerator.xml");
-		bfr.getProject().setNewProperty("filename", "../generated/"+className+".java");
-		bfr.getProject().setNewProperty("message", classBody);
+		bfr.getProject().setProperty("filename", "../generated/"+className+".java");
+		bfr.getProject().setProperty("message", classBody);
 		bfr.executeTarget("fileRelative");
 	}
 	

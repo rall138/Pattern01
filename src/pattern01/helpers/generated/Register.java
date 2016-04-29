@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sun Apr 24 15:09:46 UYT 2016
+	* Creation date: Fri Apr 29 17:49:26 GFT 2016
 	* Creator: rlomez
 	**/
 public class Register{
@@ -10,6 +10,7 @@ public class Register{
 	private java.lang.String Name;
 	private java.lang.String Description;
 	private java.lang.String Reference;
+	private java.lang.String Image="ww.png";
 
 
 	public java.lang.String getName(){
@@ -34,6 +35,14 @@ public class Register{
 
 	public void setReference(java.lang.String Reference){
 		this.Reference = Reference;
+	}
+
+	public java.lang.String getImage(){
+		return this.Image;
+	}
+
+	public void setImage(java.lang.String Image){
+		this.Image = Image;
 	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){

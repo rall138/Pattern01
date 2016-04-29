@@ -2,13 +2,14 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sun Apr 24 15:09:46 UYT 2016
+	* Creation date: Fri Apr 29 17:49:26 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance{
 
 	private java.lang.String Name;
 	private java.lang.String Description;
+	private java.lang.String Image="ww.png";
 	private RelatedFiles relatedFiles;
 	private Faces faces;
 
@@ -27,6 +28,14 @@ public class PatternInstance{
 
 	public void setDescription(java.lang.String Description){
 		this.Description = Description;
+	}
+
+	public java.lang.String getImage(){
+		return this.Image;
+	}
+
+	public void setImage(java.lang.String Image){
+		this.Image = Image;
 	}
 
 	public RelatedFiles getrelatedFiles(){
