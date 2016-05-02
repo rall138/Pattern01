@@ -26,9 +26,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import pattern01.helpers.ImageHelper;
+import pattern01.helpers.LocationHelper;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.instancegen.PatternInstanceParser;
-import pattern01.helpers.location.LocationHelper;
 import pattern01.plugin.components.editors.PatternEditor;
 
 public class PatternNavigator extends ViewPart {
@@ -73,11 +73,12 @@ public class PatternNavigator extends ViewPart {
 					boolean itemFound = false;
 					while (hindex < projectFolder.listFiles().length && !itemFound){
 						if (projectFolder.listFiles()[hindex].isDirectory() &&
-								projectFolder.listFiles()[hindex].getName()
-								.equalsIgnoreCase("patternfolder")){
+								projectFolder.listFiles()[hindex].getName().equalsIgnoreCase("patternfolder")){
 							itemFound = true;
-							uri = LocationHelper.fromFileToURI(projectFolder.listFiles()[hindex]);
-							uri = new URI(uri+"ClassInstances.xml");
+							
+							uri = projectFolder.listFiles()[hindex].toURI();
+							
+							//Generamos todos los hijos para e proyecto
 							generateTreeItemInstances(projectItem, uri);
 						}else{
 							hindex++;
@@ -90,30 +91,41 @@ public class PatternNavigator extends ViewPart {
 		}
 	}
 	
-	private void generateTreeItemInstances(TreeItem parent, URI uri){
+	private void generateTreeItemInstances(TreeItem parent, URI patternFolderURI){
+		
+		//Archivo que contiene las instancias generadas
+		URI classInstancexml_uri = null;
+		try {
+			classInstancexml_uri = new URI("file://"+patternFolderURI.getPath()+"ClassInstances.xml");
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
+		
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		String expression = "/Classes/Class";
 		NodeList classNodeList;
 		try {
+			
 			classNodeList = (NodeList) xpath.evaluate
-					(expression, new InputSource(uri.getPath()), 
+					(expression, new InputSource(classInstancexml_uri.getPath()), 
 					XPathConstants.NODESET);
 			
 			if(classNodeList != null && classNodeList.getLength() > 0){
 				for(int index = 0; index < classNodeList.getLength(); index++){
 					
 					if(classNodeList.item(index).getNodeType() == Node.ELEMENT_NODE){
+						
 						//Nombre de lo clase 
 						String className = classNodeList.item(index)
 								.getAttributes().getNamedItem("name").getNodeValue();
 						
+						//Genera el item [class] como nodo "raiz"
 						TreeItem classInstance = new TreeItem(parent, 0);
 						classInstance.setText("Class ["+className+"]");
 						classInstance.setImage(ImageHelper.getImage("class_obj.png"));
 
-						PatternInstanceParser instanceParser = 
-								new PatternInstanceParser(classInstance);
-						instanceParser.generateTreeFromDefinition(className);
+						PatternInstanceParser instanceParser = new PatternInstanceParser(classInstance);
+						instanceParser.generateTreeFromDefinition(className, patternFolderURI.getPath());
 						classInstance = instanceParser.getInstance();
 					}
 				}

@@ -12,8 +12,9 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import pattern01.helpers.ImageHelper;
 import pattern01.helpers.LoggerThread;
-import pattern01.helpers.location.LocationHelper;
+
 
 public class PatternInstanceParser {
 
@@ -25,19 +26,18 @@ public class PatternInstanceParser {
 		this.parentItem = parentItem;
 	}
 	
-	public void generateTreeFromDefinition(String className){
+	public void generateTreeFromDefinition(String className, String patternfolderPath){
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		String expression = "/PatternInstance";
 		lgt.writeSingleMessage("Reading instances from: "+className);
 		try {
-			URI uri = new URI("file:///"+LocationHelper.getSelectedProjectPath()+"/PatternFolder/"+className+"Instance.xml");
-			InputSource is = new InputSource(uri.getPath());
+			URI classInstanceXml_uri = new URI("file://"+patternfolderPath+className+"Instance.xml");
+			InputSource is = new InputSource(classInstanceXml_uri.getPath());
+			
 			//Obtenemos el nodo padre (Siempre es patterninstance)
 			Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 			if (parentNode != null){
-				TreeItem item = new TreeItem(this.parentItem, 0);
-				item.setText(parentNode.getNodeName());
-				recursiveParseing(parentNode, item);
+				recursiveParseing(parentNode, this.parentItem);
 			}
 		} catch (XPathExpressionException | IllegalStateException | URISyntaxException e) {
 			e.printStackTrace();
@@ -47,6 +47,12 @@ public class PatternInstanceParser {
 	private void recursiveParseing(Node actualNode, TreeItem parent){
 		TreeItem item = new TreeItem(parent, 0);
 		item.setText(actualNode.getNodeName());
+		
+		if (actualNode.getAttributes().getNamedItem("image") != null){
+			item.setImage(ImageHelper.getImage(actualNode.getAttributes()
+					.getNamedItem("image").getNodeValue()));
+		}
+		
 		//Se obtiene el valor de los atributos
 		for(int index = 0; index < actualNode.getAttributes().getLength(); index++){
 			item.setData(actualNode.getAttributes().item(index).getNodeName(), 
