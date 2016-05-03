@@ -5,58 +5,43 @@ import java.util.List;
 
 public class Element {
 
-	private List<Attribute> attribute_collection = new ArrayList<>();
-	private List<Element> childElements_collection = new ArrayList<>();
-	private boolean unique;
-	private String name;
-	private String prettyName;
-	
-	public Element(){}
-	
-	public Element(String name, String prettyName, boolean unique){
-		this.name = name;
-		this.prettyName = prettyName;
-		this.unique = unique;
-	}
-
+	protected List<Attribute> attribute_collection = new ArrayList<>();
+	protected List<CommonElement> childElements_collection = new ArrayList<>();
+	protected boolean unique;
+	protected String name;
+	protected String prettyName;
 	public List<Attribute> getAttribute_collection() {
 		return attribute_collection;
 	}
-
-	public List<Element> getChildElements_collection() {
-		return childElements_collection;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public String getPrettyName() {
-		return prettyName;
-	}
-
 	public void setAttribute_collection(List<Attribute> attribute_collection) {
 		this.attribute_collection = attribute_collection;
 	}
-
-	public void setChildElements_collection(List<Element> childElements_collection) {
+	public List<CommonElement> getChildElements_collection() {
+		return childElements_collection;
+	}
+	public void setChildElements_collection(List<CommonElement> childElements_collection) {
 		this.childElements_collection = childElements_collection;
 	}
-
+	public boolean isUnique() {
+		return unique;
+	}
+	public void setUnique(boolean unique) {
+		this.unique = unique;
+	}
+	public String getName() {
+		return name;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public String getPrettyName() {
+		return prettyName;
+	}
 	public void setPrettyName(String prettyName) {
 		this.prettyName = prettyName;
 	}
 
-	public boolean isUnique() {
-		return unique;
-	}
-
-	public void setUnique(boolean unique) {
-		this.unique = unique;
-	}
+	
+	
 	
 }

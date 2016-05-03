@@ -13,6 +13,7 @@ import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.temporal_containers.Attribute;
+import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
 
 public class ClassGenerator extends Task{
@@ -58,8 +59,8 @@ public class ClassGenerator extends Task{
 		ArrayList<Element> coleccion_auxiliar_parent = new ArrayList<>(collected_elements);
 		//Parent elements
 		for(int index = 0; index < collected_elements.size(); index++){
-			ArrayList<Element> collected_childs = 
-					new ArrayList<Element>(collected_elements.get(index).getChildElements_collection());
+			ArrayList<CommonElement> collected_childs = 
+					new ArrayList<CommonElement>(collected_elements.get(index).getChildElements_collection());
 			//Child of parents
 			for(int hindex = 0; hindex < collected_childs.size(); hindex++){
 				Element childElement = collected_childs.get(hindex);
@@ -117,7 +118,7 @@ public class ClassGenerator extends Task{
 			}
 
 			//Getters and setters generales 
-			for(Element child : collected_elements.get(index).getChildElements_collection()){
+			for(CommonElement child : collected_elements.get(index).getChildElements_collection()){
 				generateGettersAndSettersOfReferences(attributeBuilder, getterSetterBuilder, child.getName(),
 						child.getPrettyName(),child.isUnique());
 			}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomValueDefinition	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<CustomValue name="generator" prettyName="Generator" type="java.lang.String">
+		<Value name="generator1">Web</Value>
+		<Value name="generator2">Mobile</Value>
+	</CustomValue>
+	
+</CustomValueDefinition>

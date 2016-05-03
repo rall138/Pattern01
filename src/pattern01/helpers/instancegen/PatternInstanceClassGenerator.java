@@ -14,7 +14,7 @@ import org.xml.sax.InputSource;
 
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.PropertyHelper;
-import pattern01.helpers.temporal_containers.Element;
+import pattern01.helpers.temporal_containers.CommonElement;
 
 /*
  * A traves de la estructura definida en el PatternDefinition 
@@ -39,7 +39,7 @@ public class PatternInstanceClassGenerator {
 	private PropertyHelper prophelper = new PropertyHelper();
 	Tree defaultInstance = null;
 	
-	public void generate(List<Element> collected_elements){
+	public void generate(List<CommonElement> collected_elements){
 		CustomStringBuilder builder = new CustomStringBuilder();
 		builder.appendLn("package pattern01.helpers.generated;");
 		builder.appendLn("");
@@ -99,7 +99,7 @@ public class PatternInstanceClassGenerator {
 	}
 	
 	
-	private void recursiveElementGeneration(Tree parent, List<Element> collected_elements, int index){
+	private void recursiveElementGeneration(Tree parent, List<CommonElement> collected_elements, int index){
 		if(collected_elements.get(index).getChildElements_collection().size() > 0){
 			for(int jindex = 0; jindex < collected_elements.get(index).getChildElements_collection().size(); jindex++){
 				recursiveElementGeneration(parent, collected_elements.get(index).getChildElements_collection(), jindex);

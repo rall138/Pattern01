@@ -16,7 +16,9 @@ import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
+import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
+import pattern01.helpers.temporal_containers.EnumElement;
 
 public class PatternDefinitionParser {
 
@@ -32,7 +34,7 @@ public class PatternDefinitionParser {
 			SAXParser parser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler(){
 				//Lo mantenemos en este scope para poder asignar los hijos mas inmediatos.
-				private Element element = null;
+				private CommonElement element = null;
 				private LoggerThread log = new LoggerThread();
 				
 				@Override
@@ -42,7 +44,7 @@ public class PatternDefinitionParser {
 					//Generacion de elementos padres
 			
 					if(qName.equalsIgnoreCase("element")){
-						element = new Element();
+						element = new CommonElement();
 						for (int index = 0; index < attributes.getLength(); index++){
 							if (attributes.getQName(index).equalsIgnoreCase("name")){
 								element.setName(attributes.getValue(index));
@@ -53,7 +55,7 @@ public class PatternDefinitionParser {
 						log.writeSingleMessage("Parsed element: "+element.getPrettyName());
 					}else if(qName.equalsIgnoreCase("childelement")){
 						//Asignamos solamente el nombre porque tenemos nada mas que la referencia.
-						Element childElement = new Element();
+						CommonElement childElement = new CommonElement();
 						for (int index = 0; index < attributes.getLength(); index++){
 							if (attributes.getQName(index).equalsIgnoreCase("ref")){
 								childElement.setName(attributes.getValue(index));
@@ -118,7 +120,7 @@ public class PatternDefinitionParser {
 		return this.collected_elements;
 	}
 	
-	private void addElementIfnotExists(Element element){
+	private void addElementIfnotExists(CommonElement element){
 		if(element != null){
 			boolean itemFound = false;
 			int index = 0;
@@ -134,5 +136,13 @@ public class PatternDefinitionParser {
 			}
 		}
 	}
+
 	
+	private EnumElement enumValues(Attributes attributes){
+		EnumElement enumElement = new EnumElement();
+		enumElement.setName(attributes.getValue("name"));
+		enumElement.setVisible_info(EnumElement.VISIBLE_INFO
+				.valueOf(attributes.getValue("visibleInfo")));
+		return enumElement;
+	}
 }
