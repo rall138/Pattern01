@@ -26,21 +26,35 @@ public class CustomValuesDefinitionParser {
 	
 	public List<Element> parseDefinition(){
 		SAXParserFactory factory = SAXParserFactory.newInstance();
+		List<Element> collected_elements = new ArrayList<>();
 		try {
 			SAXParser parser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler(){
 
 				Element customValueElement = new EnumElement();
+				boolean isElementTag = false;
+				String valueName = "";
 				
 				@Override
 				public void startElement(String uri, String localName, 
 						String qName, Attributes attributes)throws SAXException {
 					if(qName.equalsIgnoreCase("customvalue")){
 						customValueElement.setName(getValue(attributes, "name"));
+						isElementTag = true;
+					}else if(qName.equalsIgnoreCase("value")){
+						isElementTag = false;
+						valueName = getValue(attributes, "name");
 					}
 
 				}
 				
+				@Override
+				public void characters(char[] ch, int start, int length) throws SAXException {
+					String valueDescription = new String(ch, start, length);
+					((EnumElement)customValueElement).getValue_list()
+						.put(valueName, valueDescription);
+				}
+
 				private String getValue(Attributes attributes, String qName){
 					String value = "";
 					if (attributes.getValue(qName) != null){
@@ -50,9 +64,10 @@ public class CustomValuesDefinitionParser {
 				}
 				
 			};
+
 		} catch (ParserConfigurationException | SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return collected_elements;		
 	}
 }
