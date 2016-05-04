@@ -13,7 +13,9 @@ import java.net.URISyntaxException;
 public class CommonPathFix {
 
 	public enum PATH_NAME{CLASSGENERATOR_XML, WORKSPACE_LOC, 
-		PATTERNDEFINITION_XML, BINFOLDER, CUSTOMPROPERTIES_PROPERTIES, ICONFOLDER};
+		PATTERNDEFINITION_XML, BINFOLDER, 
+		CUSTOMPROPERTIES_PROPERTIES, ICONFOLDER,
+		CUSTOMVALUESDEFINITION};
 	
 	public static URI getHardCodedPath(PATH_NAME path_name){
 		URI uri = null;
@@ -47,6 +49,9 @@ public class CommonPathFix {
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
 					barFix(os, "/src/pattern01/helpers/generated/Custom.properties"));
 				break;
+			case CUSTOMVALUESDEFINITION:
+				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
+						barFix(os, "/GeneralConfig/CustomValuesDefinition.xml"));						
 		}
 		if (file.exists()){
 			uri = file.toURI();

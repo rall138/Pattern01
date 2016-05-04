@@ -44,9 +44,9 @@ public class ClassGenerator extends Task{
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		
-		//Se establece la propiedad de workspace para el build file 
-		bfr.getProject().setProperty("binfolder", CommonPathFix
-				.getHardCodedPath(PATH_NAME.BINFOLDER).getPath());
+//		//Se establece la propiedad de workspace para el build file 
+//		bfr.getProject().setProperty("binfolder", CommonPathFix
+//				.getHardCodedPath(PATH_NAME.BINFOLDER).getPath());
 		
 		PatternDefinitionParser parser = 
 				new PatternDefinitionParser();

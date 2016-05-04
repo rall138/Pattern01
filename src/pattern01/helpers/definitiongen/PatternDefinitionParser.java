@@ -94,7 +94,8 @@ public class PatternDefinitionParser {
 							}
 						}
 					}
-					//Adherimos el elemento si no existe.
+						
+					//Adherimos el elemento solo si no existe.
 					addElementIfnotExists(element);
 				}
 

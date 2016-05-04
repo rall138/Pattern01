@@ -13,8 +13,14 @@
 		classname="pattern01.helpers.definitiongen.ClassGenerator">
 	</taskdef>
 	
+	<taskdef name="EnumGenerator"
+		classpath="${basedir}/../../../../bin"
+		classname="pattern01.helpers.definitiongen.EnumGenerator">
+	</taskdef>	
+	
 	<target name="main">
-		<ClassGenerator />
+		<EnumGenerator />
+		<!-- <ClassGenerator /> -->
 	</target>
 
 	<target name="fileRelative">

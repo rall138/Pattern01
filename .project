@@ -25,10 +25,4 @@
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<variableList>
-		<variable>
-			<name>Configuration_Properties</name>
-			<value>file:/E:/EclipseWorkspace/Pattern01/Configuration.properties</value>
-		</variable>
-	</variableList>
 </projectDescription>

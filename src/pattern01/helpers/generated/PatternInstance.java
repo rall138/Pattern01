@@ -2,17 +2,26 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue May 03 10:43:05 GFT 2016
+	* Creation date: Wed May 04 17:33:25 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance{
 
+	private #{CustomValues.generator} Generator="#{CustomValues.generator[generator1]}";
 	private java.lang.String Name;
 	private java.lang.String Description;
 	private java.lang.String Image="ww.png";
 	private RelatedFiles relatedFiles;
 	private Faces faces;
 
+
+	public #{CustomValues.generator} getGenerator(){
+		return this.Generator;
+	}
+
+	public void setGenerator(#{CustomValues.generator} Generator){
+		this.Generator = Generator;
+	}
 
 	public java.lang.String getName(){
 		return this.Name;

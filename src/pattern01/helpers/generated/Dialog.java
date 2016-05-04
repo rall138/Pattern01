@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue May 03 10:43:05 GFT 2016
+	* Creation date: Wed May 04 17:33:25 GFT 2016
 	* Creator: rlomez
 	**/
 public class Dialog{
