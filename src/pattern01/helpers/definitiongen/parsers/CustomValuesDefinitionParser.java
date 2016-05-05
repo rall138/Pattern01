@@ -1,4 +1,4 @@
-package pattern01.helpers.definitiongen;
+package pattern01.helpers.definitiongen.parsers;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,22 +40,24 @@ public class CustomValuesDefinitionParser {
 				public void startElement(String uri, String localName, 
 						String qName, Attributes attributes)throws SAXException {
 					if(qName.equalsIgnoreCase("customvalue")){
-						log.writeSingleMessage("Parsed element: "+getValue(attributes, "name"));
+						log.writeSingleMessage("Parsed element: "+getValue(attributes, "prettyName"));
 						customValueElement.setName(getValue(attributes, "name"));
+						customValueElement.setPrettyName(getValue(attributes, "prettyName"));
 						addElementIfnotExists(customValueElement);
-					}else if(qName.equalsIgnoreCase("value")){
-						//valueName toma el name para la opcion especifica definida en el xml.
+					}else if(qName.equalsIgnoreCase("value")){ //Valores dentro de la defincion de opciones
 						valueName = getValue(attributes, "name");
+						log.writeSingleMessage("Parsed value: "+valueName);
 					}
 				}
 				
 				@Override
 				public void characters(char[] ch, int start, int length) throws SAXException {
 					String valueDescription = new String(ch, start, length);
-					if (valueDescription)
-					((EnumElement)customValueElement).getValue_list()
-						.put(valueName, valueDescription);
-					log.writeSingleMessage("Parsed value: "+valueName);
+					if (valueDescription.trim().compareTo("")!=0){
+						((EnumElement)customValueElement).getValue_list()
+							.put(valueName, valueDescription);
+						log.writeSingleMessage("Value description: "+valueName+" "+valueDescription);
+					}
 				}
 
 				private String getValue(Attributes attributes, String qName){

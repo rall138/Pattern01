@@ -1,4 +1,4 @@
-package pattern01.helpers.definitiongen;
+package pattern01.helpers.definitiongen.parsers;
 
 import java.io.IOException;
 import java.util.ArrayList;

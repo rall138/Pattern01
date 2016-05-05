@@ -1,9 +1,7 @@
 package pattern01.helpers;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 /***
  * Nasty work-around for getting location of some necessary files

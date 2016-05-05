@@ -4,7 +4,7 @@
 	xsi:schemaLocation="PatternDefinition.xsd">
 	
 	<Element name="patterninstance" prettyName="PatternInstance" >
-		<AttributeElement name="generator" prettyName="Generator" type="#{CustomValues.generator}" requiered="true" default="#{CustomValues.generator[generator1]}" />
+		<AttributeElement name="generator" prettyName="Generator" type="#{generator}" requiered="true" default="#{Generator.generator1}" />
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" requiered="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
 		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="ww.png" />		

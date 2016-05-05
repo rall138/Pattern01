@@ -11,6 +11,7 @@ import org.apache.tools.ant.Task;
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
+import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
 import pattern01.helpers.temporal_containers.Element;
 import pattern01.helpers.temporal_containers.EnumElement;
 
@@ -48,24 +49,29 @@ public class EnumGenerator extends Task{
 			builder.appendLn("package pattern01.helpers.generated;");
 			builder.appendLn("");
 			builder.appendLn(classHeaderComment);
-			builder.appendLn("public enum "+el.getName()+" {" );
-			hindex = 0;
+			builder.appendLn("public enum "+el.getPrettyName()+" {" );
+			hindex = 1;
 			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
 				if(hindex <  el.getValue_list().size()){
-					builder.appendLn(entry.getKey()+",");
+					builder.appendLn(tabGen(1)+entry.getKey()+",");
 				}else{
-					builder.appendLn(entry.getKey());					
+					builder.appendLn(tabGen(1)+entry.getKey()+";");					
 				}
+				hindex++;
 			}
+			builder.appendLn("");
 			builder.appendLn(tabGen(1)+"public java.lang.String getValueDescription("+
-					el.getName()+" description){");
+					el.getPrettyName()+" description){");
 			builder.appendLn(tabGen(2)+"switch(description){");
 			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
 				builder.appendLn(tabGen(3)+"case "+entry.getKey()+":");
 				builder.appendLn(tabGen(4)+"return "+quotscape+entry.getValue()+quotscape+";");
 			}
+			builder.appendLn(tabGen(3)+"default:");
+			builder.appendLn(tabGen(4)+"return "+quotscape+quotscape+";");
 			builder.appendLn(tabGen(2)+"}");
 			builder.appendLn(tabGen(1)+"}");
+			builder.appendLn("}");			
 			//Generamos las clases
 			generateClasses(el.getPrettyName(), builder.toString());
 		}

@@ -20,7 +20,7 @@
 	
 	<target name="main">
 		<EnumGenerator />
-		<!-- <ClassGenerator /> -->
+		<ClassGenerator />
 	</target>
 
 	<target name="fileRelative">
