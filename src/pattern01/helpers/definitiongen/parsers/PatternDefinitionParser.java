@@ -18,7 +18,6 @@ import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
-import pattern01.helpers.temporal_containers.EnumElement;
 
 public class PatternDefinitionParser {
 
@@ -136,14 +135,5 @@ public class PatternDefinitionParser {
 				collected_elements.add(element);
 			}
 		}
-	}
-
-	
-	private EnumElement enumValues(Attributes attributes){
-		EnumElement enumElement = new EnumElement();
-		enumElement.setName(attributes.getValue("name"));
-		enumElement.setVisible_info(EnumElement.VISIBLE_INFO
-				.valueOf(attributes.getValue("visibleInfo")));
-		return enumElement;
 	}
 }

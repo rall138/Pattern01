@@ -11,7 +11,6 @@ import java.util.Properties;
 import org.apache.tools.ant.BuildFileRule;
 
 import pattern01.helpers.CommonPathFix.PATH_NAME;
-import pattern01.helpers.LocationHelper.RL_PLUGIN;
 
 public class PropertyHelper {
 

@@ -10,6 +10,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -19,7 +20,6 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.activities.WorkbenchTriggerPointAdvisor;
 import org.eclipse.ui.part.ViewPart;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -27,7 +27,6 @@ import org.xml.sax.InputSource;
 
 import pattern01.helpers.ImageHelper;
 import pattern01.helpers.LocationHelper;
-import pattern01.helpers.LoggerThread;
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.PatternEditor;
 
@@ -142,21 +141,23 @@ public class PatternNavigator extends ViewPart {
 			
 			@Override
 			public void menuAboutToShow(IMenuManager manager) {
-				populateMenu(manager);
+				MenuManager itemsMenu = new MenuManager("Yogurt pattern", "Pattern01.main");
+				itemsMenu.add(new Action("[+]Add new item..") {});
+				itemsMenu.add(new Action("[*]Modify selected item..") {});
+				itemsMenu.add(new Action("[-]Delete selected item..") {});
+				manager.add(itemsMenu);
+				//populateMenu(manager);
 				
 			}
 		});
 		
-		//Agregameos el menú al viewpart
-//		Menu menu = mgr.createContextMenu(tviewer.getControl());
-//		tviewer.getControl().setMenu(menu);
-//
-//		//Registramos el manejador del menú
-//		this.getViewSite().registerContextMenu(mgr, this.getViewSite().getSelectionProvider());
+		//Registramos el manejador del menu
+		this.getViewSite().registerContextMenu(mgr, this.getViewSite().getSelectionProvider());
 	}
 	
 	private void populateMenu(IMenuManager mgr){
-		Action editPattern = new Action("Edit patterns") {
+	
+		Action editPattern = new Action("Add") {
 			public void run(){
 				
 				PatternEditor patternEditor = new PatternEditor();

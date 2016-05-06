@@ -14,9 +14,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import pattern01.helpers.CommonPathFix;
-import pattern01.helpers.LoggerThread;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
-import pattern01.helpers.temporal_containers.CommonElement;
+import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Element;
 import pattern01.helpers.temporal_containers.EnumElement;
 
