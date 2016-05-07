@@ -1,5 +1,7 @@
 package pattern01.plugin.components.navigator;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,7 +17,10 @@ import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PartInitException;
@@ -33,9 +38,12 @@ import pattern01.plugin.components.editors.PatternEditor;
 public class PatternNavigator extends ViewPart {
 
 	private Action searchPatternAction;
+	private TreeViewer trview = null;
 	
 	@Override
 	public void createPartControl(Composite parent) {
+		//Tree de navegacion
+		generateTree(parent);
 		menuBuilder();
 		
 		searchPatternAction = new Action("search..") {
@@ -46,14 +54,11 @@ public class PatternNavigator extends ViewPart {
 		searchPatternAction.setImageDescriptor(ImageHelper
 				.getImageDescriptor("lupa.png"));
 		createActionBar();
-
-		//Tree de navegacion
-		generateTree(parent);
 	}
 	
 	private void generateTree(Composite parent){
-		Tree tree = new Tree(parent, 0);
-		generateItems(tree);
+		this.trview = new TreeViewer(parent);
+		generateItems(this.trview.getTree());
 	}
 	
 	private void generateItems(Tree tree){
@@ -138,36 +143,27 @@ public class PatternNavigator extends ViewPart {
 		MenuManager mgr = new MenuManager();
 		mgr.setRemoveAllWhenShown(true);
 		mgr.addMenuListener(new IMenuListener() {
-			
 			@Override
 			public void menuAboutToShow(IMenuManager manager) {
 				MenuManager itemsMenu = new MenuManager("Yogurt pattern", "Pattern01.main");
-				itemsMenu.add(new Action("[+]Add new item..") {});
-				itemsMenu.add(new Action("[*]Modify selected item..") {});
-				itemsMenu.add(new Action("[-]Delete selected item..") {});
+//				itemsMenu.add(new Action("[+]Add new item..") {});
+//				itemsMenu.add(new Action("[*]Modify selected item..") {});
+//				itemsMenu.add(new Action("[-]Delete selected item..") {});
+				populateMenu(itemsMenu);
 				manager.add(itemsMenu);
-				//populateMenu(manager);
-				
 			}
 		});
-		
-		//Registramos el manejador del menu
+		mgr.createContextMenu(this.trview.getControl());
+		this.trview.getControl().setMenu(mgr.getMenu());
 		this.getViewSite().registerContextMenu(mgr, this.getViewSite().getSelectionProvider());
 	}
 	
 	private void populateMenu(IMenuManager mgr){
-	
-		Action editPattern = new Action("Add") {
-			public void run(){
+		Action editPattern = new Action("[+]Add new item..") {
+			@Override
+			public void run() {
+				System.out.println("Nombre de clase: "+trview.getStructuredSelection());
 				
-				PatternEditor patternEditor = new PatternEditor();
-				try {
-					
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.openEditor(patternEditor.getEditorInput(), patternEditor.ID);
-				} catch (PartInitException e) {
-					e.printStackTrace();
-				}
 			}
 		};
 		mgr.add(editPattern);
