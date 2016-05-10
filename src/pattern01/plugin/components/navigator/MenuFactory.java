@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 
 import pattern01.helpers.instancegen.PatternInstanceParser;
 
@@ -21,11 +22,10 @@ public class MenuFactory {
 	
 	public void generateDisplayableOptions(NodeType nodeType, Tree parent){
 		this.parent = parent;
-		Menu menu = null;
+		Menu menu =  new Menu(parent);
 		MenuItem auxiliarMenuItem = null;
 		switch (nodeType) {
 			case classType:
-				menu = new Menu(parent);
 				auxiliarMenuItem = new MenuItem(menu, SWT.CASCADE);
 				auxiliarMenuItem.setText("Patterns");
 				parent.setMenu(menu);
@@ -45,6 +45,11 @@ public class MenuFactory {
 			default:
 				break;
 		}
+		if (parent.getMenu() == null){
+			parent.setMenu(menu);
+		}
+		auxiliarMenuItem = new MenuItem(parent.getMenu(), SWT.PUSH);
+		auxiliarMenuItem.setText("Properties");
 	}
 	
 	private void applyDefaultPatternListener(MenuItem menu_item){
@@ -52,10 +57,10 @@ public class MenuFactory {
 			@Override
 			public void handleEvent(Event event) {
 				PatternInstanceParser parser = new PatternInstanceParser(parent.getSelection()[0]);
-				parent.getSelection()[0].clearAll(true);
+				parent.getSelection()[0].removeAll();
 				parser.generateTreeFromDefaultDefinition();
 				parent.getSelection()[0] = parser.getInstance();
 			}
-		});		
+		});
 	}
 }

@@ -1,5 +1,6 @@
 package pattern01.helpers.instancegen;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,13 +52,18 @@ public class PatternInstanceParser {
 		String expression = "/PatternInstance";
 		lgt.writeSingleMessage("Reading instances from: "+className);
 		try {
-			URI classInstanceXml_uri = new URI("file://"+patternfolderPath+className+"Instance.xml");
-			InputSource is = new InputSource(classInstanceXml_uri.getPath());
-			
-			//Obtenemos el nodo padre (Siempre es patterninstance)
-			Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
-			if (parentNode != null){
-				recursiveParseing(parentNode, this.parentItem);
+			File file = new File(patternfolderPath+className+"Instance.xml");
+			if (file.exists()){
+				URI classInstanceXml_uri = new URI("file://"+patternfolderPath+className+"Instance.xml");
+				InputSource is = new InputSource(classInstanceXml_uri.getPath());
+				
+				//Obtenemos el nodo padre (Siempre es patterninstance)
+				Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
+				if (parentNode != null){
+					recursiveParseing(parentNode, this.parentItem);
+				}
+			}else{
+				lgt.writeSingleMessage("Warning no definition found for: "+className);
 			}
 		} catch (XPathExpressionException | IllegalStateException | URISyntaxException e) {
 			e.printStackTrace();

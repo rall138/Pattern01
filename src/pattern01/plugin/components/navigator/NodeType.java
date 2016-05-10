@@ -1,10 +1,10 @@
 package pattern01.plugin.components.navigator;
 
 public enum NodeType {
-	classType, wwType, facesType, faceType, referencedFilesType, referencedFileType;
+	classType, wwType, facesType, faceType, referencedFilesType, referencedFileType, undefined;
 	
 	static public String toString(NodeType nodeType){
-		String typeToString = "undefinded";
+		String typeToString = "";
 		switch (nodeType) {
 		case classType:
 			typeToString = "class";
@@ -23,6 +23,9 @@ public enum NodeType {
 			break;
 		case referencedFileType:
 			typeToString = "referencedFile";
+			break;
+		case undefined:
+			typeToString = "undefinded";
 			break;
 		}
 		return typeToString;

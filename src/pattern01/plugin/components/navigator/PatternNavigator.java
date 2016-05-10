@@ -10,20 +10,13 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MenuAdapter;
-import org.eclipse.swt.events.MenuEvent;
-import org.eclipse.swt.events.MenuListener;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.ViewPart;
@@ -143,21 +136,35 @@ public class PatternNavigator extends ViewPart {
 	}
 	
 	private void menuBuilder(){
-		Menu main_menu = new Menu(instanceTree);
-		MenuItem main_menu_item = new MenuItem(main_menu, SWT.DROP_DOWN);
-		instanceTree.setMenu(main_menu);
-		mainListener(main_menu_item);
-	}
-	
-	private void mainListener(MenuItem item){
-		
-		item.addListener(SWT.Selection, new Listener() {
+		instanceTree.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
-				System.out.println("Contempla evento");
+				instanceTree.setMenu(null);
 				MenuFactory mfact = new MenuFactory();
 				TreeItem aux_item = (TreeItem )event.item;
-				mfact.generateDisplayableOptions((NodeType)aux_item.getData("type"), instanceTree);
+				NodeType aux_nodeType = aux_item.getData("type") != null ? 
+					(NodeType)aux_item.getData("type"): NodeType.undefined;
+				if (aux_nodeType != null){
+					mfact.generateDisplayableOptions(aux_nodeType, instanceTree);
+				}
+			}
+		});
+		
+		instanceTree.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == SWT.DEL){
+					TreeItem item_to_delete = instanceTree.getSelection()[0];
+
+				}
+				
 			}
 		});
 	}
