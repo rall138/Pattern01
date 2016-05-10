@@ -20,6 +20,8 @@ import org.eclipse.swt.events.MenuAdapter;
 import org.eclipse.swt.events.MenuEvent;
 import org.eclipse.swt.events.MenuListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tree;
@@ -141,35 +143,23 @@ public class PatternNavigator extends ViewPart {
 	}
 	
 	private void menuBuilder(){
-
+		Menu main_menu = new Menu(instanceTree);
+		MenuItem main_menu_item = new MenuItem(main_menu, SWT.DROP_DOWN);
+		instanceTree.setMenu(main_menu);
+		mainListener(main_menu_item);
+	}
+	
+	private void mainListener(MenuItem item){
 		
-		MenuFactory mfact = new MenuFactory();
-		mfact.generateDisplayableOptions(NodeType.classType, this.instanceTree);
-		
-		
-//		final Menu menu_principal = new Menu(this.instanceTree);
-//		final MenuItem menu_item = new MenuItem(menu_principal, SWT.CASCADE);
-//		menu_item.setText("Patterns");
-//		this.instanceTree.setMenu(menu_principal);
-//		menu_principal.addMenuListener(new MenuAdapter(){
-//			@Override
-//			public void menuShown(MenuEvent e) {
-//				TreeItem event_item = instanceTree.getSelection()[0];
-//				if (event_item.getData("type").equals(NodeType.classType)){
-//					
-//					Menu ww_menu = new Menu(menu_principal);
-//					menu_item.setMenu(ww_menu);
-//					
-//					MenuItem ww_menuitem = new MenuItem(ww_menu, SWT.PUSH);
-//					ww_menuitem.setText("WorkWith");
-//				}else if(event_item.getData("type").toString()
-//						.equalsIgnoreCase(NodeType.toString(NodeType.wwType))){
-//					//TODO - Agregar logica de instancia
-//				}
-//			}
-//			
-//		});
-		
+		item.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				System.out.println("Contempla evento");
+				MenuFactory mfact = new MenuFactory();
+				TreeItem aux_item = (TreeItem )event.item;
+				mfact.generateDisplayableOptions((NodeType)aux_item.getData("type"), instanceTree);
+			}
+		});
 	}
 	
 	private void createActionBar(){

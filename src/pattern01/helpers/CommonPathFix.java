@@ -13,7 +13,7 @@ public class CommonPathFix {
 	public enum PATH_NAME{CLASSGENERATOR_XML, WORKSPACE_LOC, 
 		PATTERNDEFINITION_XML, BINFOLDER, 
 		CUSTOMPROPERTIES_PROPERTIES, ICONFOLDER,
-		CUSTOMVALUESDEFINITION};
+		CUSTOMVALUESDEFINITION, DEFAULTWWDEFINITION};
 	
 	public static URI getHardCodedPath(PATH_NAME path_name){
 		URI uri = null;
@@ -49,7 +49,12 @@ public class CommonPathFix {
 				break;
 			case CUSTOMVALUESDEFINITION:
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
-						barFix(os, "/GeneralConfig/CustomValuesDefinition.xml"));						
+						barFix(os, "/GeneralConfig/CustomValuesDefinition.xml"));
+				break;
+			case DEFAULTWWDEFINITION:
+				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
+						barFix(os, "/GeneralConfig/DefaultPatternDefinition.xml"));
+				break;
 		}
 		if (file.exists()){
 			uri = file.toURI();
