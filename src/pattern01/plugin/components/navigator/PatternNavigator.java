@@ -30,23 +30,14 @@ import pattern01.helpers.instancegen.PatternInstanceParser;
 
 public class PatternNavigator extends ViewPart {
 
-	private Action searchPatternAction;
+	private Action searchPatternAction, savePatternAction;
 	private Tree instanceTree = null;
 	
 	@Override
 	public void createPartControl(Composite parent) {
-		//Tree de navegacion
 		generateTree(parent);
 		menuBuilder();
-		
-		searchPatternAction = new Action("search..") {
-			public void run(){
-				//Aca va el codigo de la accion
-			}
-		};
-		searchPatternAction.setImageDescriptor(ImageHelper
-				.getImageDescriptor("lupa.png"));
-		createActionBar();
+		defineActionBarActions();
 	}
 	
 	private void generateTree(Composite parent){
@@ -153,10 +144,7 @@ public class PatternNavigator extends ViewPart {
 		instanceTree.addKeyListener(new KeyListener() {
 			
 			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void keyReleased(KeyEvent e) {}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -167,6 +155,25 @@ public class PatternNavigator extends ViewPart {
 				
 			}
 		});
+	}
+	
+	private void defineActionBarActions(){
+		searchPatternAction = new Action("Search class") {
+			public void run(){
+				//Aca va el codigo de la accion
+			}
+		};
+		searchPatternAction.setImageDescriptor(ImageHelper
+				.getImageDescriptor("lupa.png"));
+		
+		savePatternAction = new Action("Save instance") {
+			public void run(){
+				
+			}
+		};
+		savePatternAction.setImageDescriptor(ImageHelper
+				.getImageDescriptor("save.png"));
+		createActionBar();
 	}
 	
 	private void createActionBar(){

@@ -1,11 +1,14 @@
 package pattern01.plugin.components.navigator;
 
 public enum NodeType {
-	classType, wwType, facesType, faceType, referencedFilesType, referencedFileType, undefined;
+	patternInstanceType, classType, wwType, facesType, faceType, referencedFilesType, referencedFileType, undefined;
 	
 	static public String toString(NodeType nodeType){
 		String typeToString = "";
 		switch (nodeType) {
+		case patternInstanceType:
+			typeToString = "patternInstance";
+			break;
 		case classType:
 			typeToString = "class";
 			break;
