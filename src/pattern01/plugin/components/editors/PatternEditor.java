@@ -2,8 +2,10 @@ package pattern01.plugin.components.editors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IEditorInput;
@@ -59,7 +61,6 @@ public class PatternEditor extends EditorPart{
 		Tree tree = viewer.getTree();
 		TreeItem item = new TreeItem(tree, 0);
 		item.setText("Prueba");
-		
 	}
 
 	@Override

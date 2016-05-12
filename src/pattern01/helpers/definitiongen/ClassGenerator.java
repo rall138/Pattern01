@@ -1,6 +1,5 @@
 package pattern01.helpers.definitiongen;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -41,6 +40,7 @@ public class ClassGenerator extends Task{
 		//Se anaden los datos faltantes a los childselements creados
 		childElementsFix();
 		generateClasses();
+		generatePatterEditorClasses();
 	}
 	
 	private void parsePatternDefinition(){
@@ -283,6 +283,11 @@ public class ClassGenerator extends Task{
 		bfr.getProject().setProperty("filename", "../generated/"+className+".java");
 		bfr.getProject().setProperty("message", classBody);
 		bfr.executeTarget("fileRelative");
+	}
+	
+	private void generatePatterEditorClasses(){
+		EditorPartGenerator epgen = new EditorPartGenerator(collected_elements);
+		epgen.execute();
 	}
 	
 }

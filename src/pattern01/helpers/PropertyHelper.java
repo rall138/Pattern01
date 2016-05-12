@@ -30,12 +30,8 @@ public class PropertyHelper {
 		
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
-		
-		log.writeSingleMessage(bfr.getProject().getBaseDir().getPath());
-		
 		bfr.getProject().setNewProperty("filename", propertyFilePath);
-		
-		
+
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for(Map.Entry<String, String> entry : propertyValue.entrySet()){
 			builder.appendLn(entry.getKey()+"="+entry.getValue());
