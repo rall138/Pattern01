@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated enum class via ClassGenerator.xml
-	* Creation date: Wed May 04 22:41:34 UYT 2016
+	* Creation date: Thu May 12 00:10:36 UYT 2016
 	* Creator: rlomez
 	**/
 public enum Generator {

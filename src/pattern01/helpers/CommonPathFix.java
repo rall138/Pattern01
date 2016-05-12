@@ -56,9 +56,9 @@ public class CommonPathFix {
 						barFix(os, "/GeneralConfig/DefaultPatternDefinition.xml"));
 				break;
 		}
-		if (file.exists()){
+//		if (file.exists()){
 			uri = file.toURI();
-		}
+//		}
 		return uri;
 	}
 	

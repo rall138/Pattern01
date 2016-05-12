@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed May 04 22:41:34 UYT 2016
+	* Creation date: Thu May 12 00:10:36 UYT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFiles{
@@ -28,4 +28,13 @@ public class RelatedFiles{
 		return properties.getProperty(propertyName);
 	}
 
+	public java.lang.String toXml(){
+		java.lang.String xml ="<RelatedFiles "
+		+ ">";
+			for(int index = 0; index < collection_RelatedFile.size(); index++){
+				xml+=collection_RelatedFile.get(index).toXml();
+			}
+		xml+="</RelatedFiles>";
+		return xml;
+	}
 }

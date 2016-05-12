@@ -1,5 +1,6 @@
 package pattern01.helpers.definitiongen;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -9,11 +10,11 @@ import org.apache.tools.ant.Task;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
-import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
-import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.PropertyHelper;
+import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
+import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
@@ -140,6 +141,11 @@ public class ClassGenerator extends Task{
 			
 			builder.appendLn(attributeBuilder.toString());
 			builder.appendLn(getterSetterBuilder.toString());
+			
+			//Xml marshaller
+			marshallerBuilder(builder, collected_elements.get(index),
+					collected_elements.get(index).getChildElements_collection());
+			
 			builder.appendLn("}");
 			generateClasses(collected_elements.get(index).getPrettyName(), builder.toString());
 		}
@@ -152,15 +158,15 @@ public class ClassGenerator extends Task{
 	private void generateGetterAndSettersOfAttributes(CustomStringBuilder attributeBuilder, 
 			CustomStringBuilder builder, String attrName, String attrPrettyName, String type,
 			String default_value){
-		attributeBuilder.appendLn(tabGen(1)+"private "+type+" "+attrPrettyName+
+		attributeBuilder.appendLn(tabGen(1)+"private "+type+" "+attrName+
 				(default_value.equalsIgnoreCase("")?"":"="+quotscape+default_value+quotscape)+";");
 		builder.appendLn("");
 		builder.appendLn(tabGen(1)+"public "+type+" get"+attrPrettyName+"(){");
-		builder.appendLn(tabGen(2)+"return this."+attrPrettyName+";");
+		builder.appendLn(tabGen(2)+"return this."+attrName+";");
 		builder.appendLn(tabGen(1)+"}");
 		builder.appendLn("");
-		builder.appendLn(tabGen(1)+"public void set"+attrPrettyName+"("+type+" "+attrPrettyName+"){");
-		builder.appendLn(tabGen(2)+"this."+attrPrettyName+" = "+attrPrettyName+";");
+		builder.appendLn(tabGen(1)+"public void set"+attrPrettyName+"("+type+" "+attrName+"){");
+		builder.appendLn(tabGen(2)+"this."+attrName+" = "+attrName+";");
 		builder.appendLn(tabGen(1)+"}");
 	}
 	
@@ -237,6 +243,32 @@ public class ClassGenerator extends Task{
 			builder.appendLn(tabGen(1)+"}");
 			
 		}
+	}
+	
+	private void marshallerBuilder(CustomStringBuilder builder, Element element,
+			List<CommonElement> childElementCollection){
+		builder.appendLn(tabGen(1)+"public java.lang.String toXml(){");
+		builder.appendLn(tabGen(2)+"java.lang.String xml ="+quotscape+"<"+element.getPrettyName()+" "+quotscape);
+		for(int index = 0; index < element.getAttribute_collection().size(); index++){
+			Attribute attr = element.getAttribute_collection().get(index);
+			builder.appendLn(tabGen(2)+"+ "+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName()+"+"
+					+quotscape+"\'"+quotscape+"");
+		}
+		builder.appendLn(tabGen(2)+"+ "+quotscape+">"+quotscape+";");
+		for(int index = 0; index < childElementCollection.size(); index++){
+			if(childElementCollection.get(index).isUnique()){
+				builder.appendLn(tabGen(3)+"xml+=this."+childElementCollection.get(index).getName()+".toXml();");
+			}else{
+				builder.appendLn(tabGen(3)+"for(int index = 0; index < "+collectionPrefix+
+						childElementCollection.get(index).getPrettyName()+".size(); index++){");
+				builder.appendLn(tabGen(4)+"xml+="+collectionPrefix
+						+childElementCollection.get(index).getPrettyName()+".get(index).toXml();");
+				builder.appendLn(tabGen(3)+"}");
+			}
+		}
+		builder.appendLn(tabGen(2)+"xml+="+quotscape+"</"+element.getPrettyName()+">"+quotscape+";");
+		builder.appendLn(tabGen(2)+"return xml;");		
+		builder.appendLn(tabGen(1)+"}");
 	}
 	
 	private String tabGen(int quantity){

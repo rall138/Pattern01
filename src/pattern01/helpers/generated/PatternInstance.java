@@ -2,15 +2,15 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed May 04 22:41:34 UYT 2016
+	* Creation date: Thu May 12 00:10:36 UYT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance{
 
 	private Generator generator = Generator.generator1;
-	private java.lang.String Name;
-	private java.lang.String Description;
-	private java.lang.String Image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String image="ww.png";
 	private RelatedFiles relatedFiles;
 	private Faces faces;
 
@@ -23,27 +23,27 @@ public class PatternInstance{
 	}
 
 	public java.lang.String getName(){
-		return this.Name;
+		return this.name;
 	}
 
-	public void setName(java.lang.String Name){
-		this.Name = Name;
+	public void setName(java.lang.String name){
+		this.name = name;
 	}
 
 	public java.lang.String getDescription(){
-		return this.Description;
+		return this.description;
 	}
 
-	public void setDescription(java.lang.String Description){
-		this.Description = Description;
+	public void setDescription(java.lang.String description){
+		this.description = description;
 	}
 
 	public java.lang.String getImage(){
-		return this.Image;
+		return this.image;
 	}
 
-	public void setImage(java.lang.String Image){
-		this.Image = Image;
+	public void setImage(java.lang.String image){
+		this.image = image;
 	}
 
 	public RelatedFiles getrelatedFiles(){
@@ -73,4 +73,16 @@ public class PatternInstance{
 		return properties.getProperty(propertyName);
 	}
 
+	public java.lang.String toXml(){
+		java.lang.String xml ="<PatternInstance "
+		+ "generator='"+this.generator+"'"
+		+ "name='"+this.name+"'"
+		+ "description='"+this.description+"'"
+		+ "image='"+this.image+"'"
+		+ ">";
+			xml+=this.relatedFiles.toXml();
+			xml+=this.faces.toXml();
+		xml+="</PatternInstance>";
+		return xml;
+	}
 }

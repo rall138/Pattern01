@@ -39,7 +39,6 @@ public class CustomValuesDefinitionParser {
 				public void startElement(String uri, String localName, 
 						String qName, Attributes attributes)throws SAXException {
 					if(qName.equalsIgnoreCase("customvalue")){
-						log.writeSingleMessage("Parsed element: "+getValue(attributes, "prettyName"));
 						customValueElement.setName(getValue(attributes, "name"));
 						customValueElement.setPrettyName(getValue(attributes, "prettyName"));
 						addElementIfnotExists(customValueElement);
@@ -55,7 +54,6 @@ public class CustomValuesDefinitionParser {
 					if (valueDescription.trim().compareTo("")!=0){
 						((EnumElement)customValueElement).getValue_list()
 							.put(valueName, valueDescription);
-						log.writeSingleMessage("Value description: "+valueName+" "+valueDescription);
 					}
 				}
 

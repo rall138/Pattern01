@@ -2,83 +2,83 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed May 04 22:41:34 UYT 2016
+	* Creation date: Thu May 12 00:10:36 UYT 2016
 	* Creator: rlomez
 	**/
 public class Selection{
 
-	private java.lang.String Name;
-	private java.lang.String Description;
-	private java.lang.String Reference;
-	private java.lang.String Image="ww.png";
-	private java.lang.Boolean Insert;
-	private java.lang.Boolean Update;
-	private java.lang.Boolean Delete;
-	private java.lang.Boolean Display;
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.Boolean insert;
+	private java.lang.Boolean update;
+	private java.lang.Boolean delete;
+	private java.lang.Boolean display;
 
 
 	public java.lang.String getName(){
-		return this.Name;
+		return this.name;
 	}
 
-	public void setName(java.lang.String Name){
-		this.Name = Name;
+	public void setName(java.lang.String name){
+		this.name = name;
 	}
 
 	public java.lang.String getDescription(){
-		return this.Description;
+		return this.description;
 	}
 
-	public void setDescription(java.lang.String Description){
-		this.Description = Description;
+	public void setDescription(java.lang.String description){
+		this.description = description;
 	}
 
 	public java.lang.String getReference(){
-		return this.Reference;
+		return this.reference;
 	}
 
-	public void setReference(java.lang.String Reference){
-		this.Reference = Reference;
+	public void setReference(java.lang.String reference){
+		this.reference = reference;
 	}
 
 	public java.lang.String getImage(){
-		return this.Image;
+		return this.image;
 	}
 
-	public void setImage(java.lang.String Image){
-		this.Image = Image;
+	public void setImage(java.lang.String image){
+		this.image = image;
 	}
 
 	public java.lang.Boolean getInsert(){
-		return this.Insert;
+		return this.insert;
 	}
 
-	public void setInsert(java.lang.Boolean Insert){
-		this.Insert = Insert;
+	public void setInsert(java.lang.Boolean insert){
+		this.insert = insert;
 	}
 
 	public java.lang.Boolean getUpdate(){
-		return this.Update;
+		return this.update;
 	}
 
-	public void setUpdate(java.lang.Boolean Update){
-		this.Update = Update;
+	public void setUpdate(java.lang.Boolean update){
+		this.update = update;
 	}
 
 	public java.lang.Boolean getDelete(){
-		return this.Delete;
+		return this.delete;
 	}
 
-	public void setDelete(java.lang.Boolean Delete){
-		this.Delete = Delete;
+	public void setDelete(java.lang.Boolean delete){
+		this.delete = delete;
 	}
 
 	public java.lang.Boolean getDisplay(){
-		return this.Display;
+		return this.display;
 	}
 
-	public void setDisplay(java.lang.Boolean Display){
-		this.Display = Display;
+	public void setDisplay(java.lang.Boolean display){
+		this.display = display;
 	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){
@@ -92,4 +92,18 @@ public class Selection{
 		return properties.getProperty(propertyName);
 	}
 
+	public java.lang.String toXml(){
+		java.lang.String xml ="<Selection "
+		+ "name='"+this.name+"'"
+		+ "description='"+this.description+"'"
+		+ "reference='"+this.reference+"'"
+		+ "image='"+this.image+"'"
+		+ "insert='"+this.insert+"'"
+		+ "update='"+this.update+"'"
+		+ "delete='"+this.delete+"'"
+		+ "display='"+this.display+"'"
+		+ ">";
+		xml+="</Selection>";
+		return xml;
+	}
 }

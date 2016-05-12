@@ -25,19 +25,21 @@ public class PropertyHelper {
 	}
 	
 	public void impactPropertiesOnFile(String propertyFilePath){
+		LoggerThread log = new LoggerThread();
+		log.writeSingleMessage("Generating property file");
+		
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		
+		log.writeSingleMessage(bfr.getProject().getBaseDir().getPath());
+		
 		bfr.getProject().setNewProperty("filename", propertyFilePath);
 		
-		LoggerThread log = new LoggerThread();
-		log.writeSingleMessage("Generating property file");
 		
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for(Map.Entry<String, String> entry : propertyValue.entrySet()){
 			builder.appendLn(entry.getKey()+"="+entry.getValue());
 		}
-		
 		bfr.getProject().setNewProperty("message", builder.toString());
 		bfr.executeTarget("fileRelative");
 	}
