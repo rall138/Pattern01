@@ -1,5 +1,7 @@
 package pattern01.plugin.components.navigator;
 
+import java.lang.reflect.Method;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -10,8 +12,14 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import pattern01.helpers.instancegen.PatternInstanceParser;
+import pattern01.plugin.components.editors.generated.PatternInstanceEditorPart;
 
 @SuppressWarnings("unused")
 public class MenuFactory {
@@ -25,7 +33,7 @@ public class MenuFactory {
 		Menu menu =  new Menu(parent);
 		MenuItem auxiliarMenuItem = null;
 		switch (nodeType) {
-			case classType:
+			case CLASS:
 				auxiliarMenuItem = new MenuItem(menu, SWT.CASCADE);
 				auxiliarMenuItem.setText("Patterns");
 				parent.setMenu(menu);
@@ -50,6 +58,37 @@ public class MenuFactory {
 		}
 		auxiliarMenuItem = new MenuItem(parent.getMenu(), SWT.PUSH);
 		auxiliarMenuItem.setText("Properties");
+		propertiesListener(auxiliarMenuItem);
+	}
+	
+	private void propertiesListener(MenuItem menu_item){
+		menu_item.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+//				Class editorPart = Class.forName("pattern01.plugin.components.editors.generated."+
+//						parent.getSelection()[0].getText()+"EditorPart");
+//				
+//				if (editorPart != null){
+//					
+//					Method createParentControl = 
+//							editorPart.getMethod("createParentControl", new Class[]{org.eclipse.swt.widgets.Composite.class}); 
+//					
+//					createParentControl.invoke(this, new Object(){});
+//					page.openEditor(editorPart.newInstance(), editorId)
+//					
+//				}
+				if(parent.getSelection()[0].getData("type") != null && 
+						((NodeType)parent.getSelection()[0].getData("type")) == NodeType.PATTERNINSTANCE){
+					try {
+						Pattern01DefaultEditorInput pde = new Pattern01DefaultEditorInput();
+						page.openEditor(pde, PatternInstanceEditorPart.ID);
+					} catch (PartInitException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		} );
 	}
 	
 	private void applyDefaultPatternListener(MenuItem menu_item){

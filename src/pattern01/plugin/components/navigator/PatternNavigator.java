@@ -111,7 +111,7 @@ public class PatternNavigator extends ViewPart {
 						//Genera el item [class] como nodo "raiz"
 						classInstance = new TreeItem(parent, 0);
 						classInstance.setText(className);
-						classInstance.setData("type", NodeType.classType);
+						classInstance.setData("type", NodeType.nodeTypeFromString(classNodeList.item(index).getNodeName()));
 						classInstance.setImage(ImageHelper.getImage("class_obj.png"));
 						
 						//Se generan los demas elementos debajo del nodo clase por intermedio de parseing del xml correspondiente.
@@ -134,8 +134,9 @@ public class PatternNavigator extends ViewPart {
 				MenuFactory mfact = new MenuFactory();
 				TreeItem aux_item = (TreeItem )event.item;
 				NodeType aux_nodeType = aux_item.getData("type") != null ? 
-					(NodeType)aux_item.getData("type"): NodeType.undefined;
-				if (aux_nodeType != null){
+					(NodeType)aux_item.getData("type"): NodeType.UNDEFINED;
+					System.err.println("Tipo de nodo:"+NodeType.toString(aux_nodeType));
+				if (aux_nodeType != NodeType.UNDEFINED){
 					mfact.generateDisplayableOptions(aux_nodeType, instanceTree);
 				}
 			}

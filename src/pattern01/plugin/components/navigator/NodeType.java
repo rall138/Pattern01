@@ -1,36 +1,79 @@
+	/**
+	* Generated class via ClassGenerator.xml
+	* Creation date: Mon May 16 12:35:08 GFT 2016
+	* Creator: rlomez
+	**/
 package pattern01.plugin.components.navigator;
 
 public enum NodeType {
-	patternInstanceType, classType, wwType, facesType, faceType, referencedFilesType, referencedFileType, undefined;
-	
-	static public String toString(NodeType nodeType){
-		String typeToString = "";
-		switch (nodeType) {
-		case patternInstanceType:
-			typeToString = "patternInstance";
-			break;
-		case classType:
-			typeToString = "class";
-			break;
-		case wwType:
-			typeToString = "workwith";
-			break;
-		case facesType:
-			typeToString = "faces";
-			break;
-		case faceType:
-			typeToString = "face";
-			break;
-		case referencedFilesType:
-			typeToString = "referencedFiles";
-			break;
-		case referencedFileType:
-			typeToString = "referencedFile";
-			break;
-		case undefined:
-			typeToString = "undefinded";
-			break;
+	UNDEFINED,CLASS,PATTERNINSTANCE,RELATEDFILES,RELATEDFILE,FACES,SELECTION,REGISTER,DIALOG;
+
+	public static String toString(NodeType nodetype){
+		String nodetypestr = "";
+			switch(nodetype){
+			case UNDEFINED:
+				nodetypestr = "UNDEFINED";
+				break;
+			case CLASS:
+				nodetypestr = "CLASS";
+				break;
+			case PATTERNINSTANCE:
+				nodetypestr = "PATTERNINSTANCE";
+				break;
+			case RELATEDFILES:
+				nodetypestr = "RELATEDFILES";
+				break;
+			case RELATEDFILE:
+				nodetypestr = "RELATEDFILE";
+				break;
+			case FACES:
+				nodetypestr = "FACES";
+				break;
+			case SELECTION:
+				nodetypestr = "SELECTION";
+				break;
+			case REGISTER:
+				nodetypestr = "REGISTER";
+				break;
+			case DIALOG:
+				nodetypestr = "DIALOG";
+				break;
 		}
-		return typeToString;
+		return nodetypestr;
 	}
+
+	public static NodeType nodeTypeFromString(String nodetypestr){
+		NodeType nodetype = NodeType.UNDEFINED;
+			switch(nodetypestr.toUpperCase()){
+			case "UNDEFINED":
+				nodetype = NodeType.UNDEFINED;
+				break;
+			case "CLASS":
+				nodetype = NodeType.CLASS;
+				break;
+			case "PATTERNINSTANCE":
+				nodetype = NodeType.PATTERNINSTANCE;
+				break;
+			case "RELATEDFILES":
+				nodetype = NodeType.RELATEDFILES;
+				break;
+			case "RELATEDFILE":
+				nodetype = NodeType.RELATEDFILE;
+				break;
+			case "FACES":
+				nodetype = NodeType.FACES;
+				break;
+			case "SELECTION":
+				nodetype = NodeType.SELECTION;
+				break;
+			case "REGISTER":
+				nodetype = NodeType.REGISTER;
+				break;
+			case "DIALOG":
+				nodetype = NodeType.DIALOG;
+				break;
+		}
+		return nodetype;
+	}
+
 }

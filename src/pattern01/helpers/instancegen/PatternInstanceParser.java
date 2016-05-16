@@ -17,6 +17,7 @@ import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.ImageHelper;
 import pattern01.helpers.LoggerThread;
+import pattern01.plugin.components.navigator.NodeType;
 
 
 public class PatternInstanceParser {
@@ -73,6 +74,7 @@ public class PatternInstanceParser {
 	private void recursiveParseing(Node actualNode, TreeItem parent){
 		TreeItem item = new TreeItem(parent, 0);
 		item.setText(actualNode.getNodeName());
+		item.setData("type", NodeType.nodeTypeFromString(actualNode.getNodeName()));
 		
 		if (actualNode.getAttributes().getNamedItem("image") != null){
 			item.setImage(ImageHelper.getImage(actualNode.getAttributes()

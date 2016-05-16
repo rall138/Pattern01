@@ -41,6 +41,7 @@ public class ClassGenerator extends Task{
 		childElementsFix();
 		generateClasses();
 		generatePatterEditorClasses();
+		generateNodeTypeClass();
 	}
 	
 	private void parsePatternDefinition(){
@@ -288,6 +289,11 @@ public class ClassGenerator extends Task{
 	private void generatePatterEditorClasses(){
 		EditorPartGenerator epgen = new EditorPartGenerator(collected_elements);
 		epgen.execute();
+	}
+	
+	private void generateNodeTypeClass(){
+		NodeTypeEnumGenerator ntgen = new NodeTypeEnumGenerator(collected_elements);
+		ntgen.execute();
 	}
 	
 }

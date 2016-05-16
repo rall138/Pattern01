@@ -1,10 +1,10 @@
-package pattern01.plugin.components.editors;
+package pattern01.plugin.components.navigator;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
-public class TreeviewEditorInput implements IEditorInput{
+public class Pattern01DefaultEditorInput implements IEditorInput{
 
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {

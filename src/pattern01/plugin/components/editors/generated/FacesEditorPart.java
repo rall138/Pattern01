@@ -2,15 +2,28 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu May 12 17:45:00 GFT 2016
+	* Creation date: Mon May 16 12:35:08 GFT 2016
 	* Creator: rlomez
 	**/
 public class FacesEditorPart extends org.eclipse.ui.part.EditorPart{
 
+	public static final String ID = "pattern01.plugin.components.editors.generated.FacesEditorPart";
+
+	private boolean dirty;
 
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
+		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
+		layout.numColumns = 2;
+		layout.makeColumnsEqualWidth = true;
+		layout.horizontalSpacing = 8;
+		parent.setLayout(layout);
+		addListeners();
+	}
+
+	/* Listeners for all node properties */
+	private void addListeners(){
 	}
 
 	@Override
@@ -21,24 +34,25 @@ public class FacesEditorPart extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {
+		dirty = false;
 	}
 
 	@Override
 	public void doSaveAs() {
+		dirty = false;
 	}
 
 	@Override
 	public boolean isDirty() {
-		return false;
+		return this.dirty;
 	}
 
 	@Override
 	public boolean isSaveAsAllowed() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void setFocus() {
 	}
-null
 }

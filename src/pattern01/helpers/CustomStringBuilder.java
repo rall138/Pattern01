@@ -4,6 +4,13 @@ public class CustomStringBuilder{
 	
 	private String complete_text;
 	
+	public void append(String text){
+		if (complete_text == null){
+			complete_text = new String();
+		}
+		complete_text += text;
+	}
+	
 	public void appendLn(String text){
 		if (complete_text == null){
 			complete_text = "";
