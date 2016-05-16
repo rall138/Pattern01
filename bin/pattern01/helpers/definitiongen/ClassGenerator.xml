@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project default="main" basedir=".">
+	
+	<!-- For load properties from propertyfile
+	<loadproperties 
+	srcfile="$${basedir}/../../../../../GeneralConfig/Configuration.properties" />
+	-->
+	
+	<echo message="Starting class generation process..."/>
+
+	<taskdef name="ClassGenerator"
+		classpath="${basedir}/../../../../bin"
+		classname="pattern01.helpers.definitiongen.ClassGenerator">
+	</taskdef>
+	
+	<taskdef name="EnumGenerator"
+		classpath="${basedir}/../../../../bin"
+		classname="pattern01.helpers.definitiongen.EnumGenerator">
+	</taskdef>	
+	
+	<target name="main">
+		<EnumGenerator />
+		<ClassGenerator />
+	</target>
+
+	<target name="fileRelative">
+		<echo append="false" file="${filename}" message="${message}"></echo>
+	</target>
+	
+</project>
