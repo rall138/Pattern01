@@ -2,21 +2,26 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated enum class via ClassGenerator.xml
-	* Creation date: Mon May 16 12:35:08 GFT 2016
+	* Creation date: Tue May 17 12:31:32 GFT 2016
 	* Creator: rlomez
 	**/
 public enum Generator {
-	generator2,
-	generator1;
-
-	public java.lang.String getValueDescription(Generator description){
+UNDEFINED,	WEB,	MOBILE;
+	public static java.lang.String getValueDescription(Generator description){
 		switch(description){
-			case generator2:
-				return "Mobile";
-			case generator1:
-				return "Web";
+			case WEB:
+				return "WEB";
+			case MOBILE:
+				return "MOBILE";
 			default:
 				return "";
 		}
+	}
+
+	public static java.util.List<java.lang.String> getOptionCollection(){
+		java.util.List<java.lang.String> optionCollection = new java.util.ArrayList<>();
+		optionCollection.add("WEB");
+		optionCollection.add("MOBILE");
+		return optionCollection;
 	}
 }

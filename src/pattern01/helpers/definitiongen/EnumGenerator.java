@@ -51,27 +51,39 @@ public class EnumGenerator extends Task{
 			builder.appendLn(classHeaderComment);
 			builder.appendLn("public enum "+el.getPrettyName()+" {" );
 			hindex = 1;
+			builder.append("UNDEFINED,");
 			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
 				if(hindex <  el.getValue_list().size()){
-					builder.appendLn(tabGen(1)+entry.getKey()+",");
+					builder.append(tabGen(1)+entry.getKey().toUpperCase()+",");
 				}else{
-					builder.appendLn(tabGen(1)+entry.getKey()+";");					
+					builder.append(tabGen(1)+entry.getKey().toUpperCase()+";");					
 				}
 				hindex++;
 			}
 			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"public java.lang.String getValueDescription("+
+			builder.appendLn(tabGen(1)+"public static java.lang.String getValueDescription("+
 					el.getPrettyName()+" description){");
 			builder.appendLn(tabGen(2)+"switch(description){");
 			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
-				builder.appendLn(tabGen(3)+"case "+entry.getKey()+":");
-				builder.appendLn(tabGen(4)+"return "+quotscape+entry.getValue()+quotscape+";");
+				builder.appendLn(tabGen(3)+"case "+entry.getKey().toUpperCase()+":");
+				builder.appendLn(tabGen(4)+"return "+quotscape+entry.getValue().toUpperCase()+quotscape+";");
 			}
 			builder.appendLn(tabGen(3)+"default:");
 			builder.appendLn(tabGen(4)+"return "+quotscape+quotscape+";");
 			builder.appendLn(tabGen(2)+"}");
 			builder.appendLn(tabGen(1)+"}");
-			builder.appendLn("}");			
+			
+			builder.appendLn("");
+			builder.appendLn(tabGen(1)+"public static java.util.List<java.lang.String> getOptionCollection(){");
+			builder.appendLn(tabGen(2)+"java.util.List<java.lang.String> optionCollection = new java.util.ArrayList<>();");
+			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
+				builder.appendLn(tabGen(2)+"optionCollection.add("+quotscape+entry.getValue().toUpperCase()+quotscape+");");
+			}
+			builder.appendLn(tabGen(2)+"return optionCollection;");
+			builder.appendLn(tabGen(1)+"}");
+			
+			builder.appendLn("}");
+			
 			//Generamos las clases
 			generateClasses(el.getPrettyName(), builder.toString());
 		}

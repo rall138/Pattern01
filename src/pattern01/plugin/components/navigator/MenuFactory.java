@@ -78,11 +78,12 @@ public class MenuFactory {
 //					page.openEditor(editorPart.newInstance(), editorId)
 //					
 //				}
+
 				if(parent.getSelection()[0].getData("type") != null && 
 						((NodeType)parent.getSelection()[0].getData("type")) == NodeType.PATTERNINSTANCE){
 					try {
-						Pattern01DefaultEditorInput pde = new Pattern01DefaultEditorInput();
-						page.openEditor(pde, PatternInstanceEditorPart.ID);
+						DefaultEditorInput dei = new DefaultEditorInput();
+						page.openEditor(dei, PatternInstanceEditorPart.ID);
 					} catch (PartInitException e) {
 						e.printStackTrace();
 					}

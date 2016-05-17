@@ -4,7 +4,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
-public class Pattern01DefaultEditorInput implements IEditorInput{
+public class DefaultEditorInput implements IEditorInput{
 
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {

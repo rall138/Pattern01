@@ -3,8 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	
 	<CustomValue name="generator" prettyName="Generator" type="java.lang.String">
-		<Value name="generator1">Web</Value>
-		<Value name="generator2">Mobile</Value>
+		<Value name="Web">Web</Value>
+		<Value name="Mobile">Mobile</Value>
 	</CustomValue>
 	
 </CustomValueDefinition>

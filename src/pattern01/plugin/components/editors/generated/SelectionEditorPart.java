@@ -2,7 +2,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon May 16 12:35:08 GFT 2016
+	* Creation date: Tue May 17 12:31:32 GFT 2016
 	* Creator: rlomez
 	**/
 public class SelectionEditorPart extends org.eclipse.ui.part.EditorPart{
@@ -30,124 +30,107 @@ public class SelectionEditorPart extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
+
 		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
 		layout.numColumns = 2;
-		layout.makeColumnsEqualWidth = true;
 		layout.horizontalSpacing = 8;
 		parent.setLayout(layout);
-		this.label_name = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_name = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_name.setText("Name");
-		this.name = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.name = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.name.setText("");
-		this.label_description = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_description = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_description.setText("Description");
-		this.description = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.description = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.description.setText("");
-		this.label_reference = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_reference = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_reference.setText("Reference");
-		this.reference = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.reference = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.reference.setText("");
-		this.label_image = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_image = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_image.setText("Image");
-		this.image = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.image = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.image.setText("ww.png");
-		this.label_insert = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_insert = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_insert.setText("Insert");
-		this.insert = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.insert = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.insert.setText("");
-		this.label_update = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_update = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_update.setText("Update");
-		this.update = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.update = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.update.setText("");
-		this.label_delete = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_delete = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_delete.setText("Delete");
-		this.delete = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.delete = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.delete.setText("");
-		this.label_display = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.FLAT);
+		this.label_display = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_display.setText("Display");
-		this.display = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.FLAT);
+		this.display = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.display.setText("");
 		addListeners();
 	}
 
-	/* Listeners for all node properties */
-	private void addListeners(){
-
-		this.name.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+	private void addListeners() {
+		
+		this.name.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-
-		this.description.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+		
+		this.description.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-
-		this.reference.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+		
+		this.reference.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-
-		this.image.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+		
+		this.image.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-
-		this.insert.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+		
+		this.insert.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-
-		this.update.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+		
+		this.update.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-
-		this.delete.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+		
+		this.delete.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-
-		this.display.addKeyListener(new org.eclipse.swt.events.KeyListener() {
-		@Override
-			public void keyReleased(org.eclipse.swt.events.KeyEvent e) {}
-		@Override
-			public void keyPressed(org.eclipse.swt.events.KeyEvent e) {
+		
+		this.display.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				dirty = true;
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
@@ -162,12 +145,12 @@ public class SelectionEditorPart extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {
-		dirty = false;
+		this.dirty = false;
 	}
 
 	@Override
 	public void doSaveAs() {
-		dirty = false;
+		this.dirty = false;
 	}
 
 	@Override

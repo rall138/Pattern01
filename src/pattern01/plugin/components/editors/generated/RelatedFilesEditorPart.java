@@ -2,7 +2,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon May 16 12:35:08 GFT 2016
+	* Creation date: Tue May 17 12:31:32 GFT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFilesEditorPart extends org.eclipse.ui.part.EditorPart{
@@ -14,16 +14,15 @@ public class RelatedFilesEditorPart extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
+
 		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
 		layout.numColumns = 2;
-		layout.makeColumnsEqualWidth = true;
 		layout.horizontalSpacing = 8;
 		parent.setLayout(layout);
 		addListeners();
 	}
 
-	/* Listeners for all node properties */
-	private void addListeners(){
+	private void addListeners() {
 	}
 
 	@Override
@@ -34,12 +33,12 @@ public class RelatedFilesEditorPart extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {
-		dirty = false;
+		this.dirty = false;
 	}
 
 	@Override
 	public void doSaveAs() {
-		dirty = false;
+		this.dirty = false;
 	}
 
 	@Override

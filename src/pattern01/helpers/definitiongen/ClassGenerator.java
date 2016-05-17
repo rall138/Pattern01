@@ -114,13 +114,12 @@ public class ClassGenerator extends Task{
 					String processedType = attr.getType()
 							.substring(attr.getType().indexOf("#{")+2, attr.getType().indexOf("}"));
 					
-					String defaultValue = !attr.getDefault_value().equalsIgnoreCase("")?
-							attr.getDefault_value().substring(attr.getDefault_value().indexOf("#{")+2, 
-									attr.getDefault_value().indexOf("}")):"";
+					String defaultValue = processedType+"."+attr.getDefault_value()
+							.substring(attr.getDefault_value().lastIndexOf(".")+1, 
+									attr.getDefault_value().indexOf("}"));
 					
 					generateCustomValueBasedProperties(attributeBuilder, getterSetterBuilder, 
-							processedType, attr.getName(), 
-							defaultValue);
+							processedType, attr.getName(), defaultValue);
 				}else{
 					generateGetterAndSettersOfAttributes(attributeBuilder, getterSetterBuilder, 
 							attr.getName(), attr.getPrettyName(), attr.getType(), attr.getDefault_value());

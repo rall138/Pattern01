@@ -15,7 +15,7 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
-import pattern01.plugin.components.navigator.Pattern01DefaultEditorInput;
+import pattern01.plugin.components.navigator.DefaultEditorInput;
 
 public class PatternEditor extends EditorPart{
 	
@@ -117,13 +117,13 @@ public class PatternEditor extends EditorPart{
 	public IEditorInput getEditorInput() {
 		
 		// TODO Cambiar para que se devuelva el input recibido.
-		IEditorInput input = new Pattern01DefaultEditorInput();
+		IEditorInput input = new DefaultEditorInput();
 		return input;
 	}
 
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		if(!(input instanceof Pattern01DefaultEditorInput)){
+		if(!(input instanceof DefaultEditorInput)){
 			throw new RuntimeException("Unexpected input on editor part");
 		}
 		
