@@ -143,7 +143,6 @@ public class PatternNavigator extends ViewPart {
 		});
 		
 		instanceTree.addKeyListener(new KeyListener() {
-			
 			@Override
 			public void keyReleased(KeyEvent e) {}
 			
@@ -151,9 +150,8 @@ public class PatternNavigator extends ViewPart {
 			public void keyPressed(KeyEvent e) {
 				if (e.character == SWT.DEL){
 					TreeItem item_to_delete = instanceTree.getSelection()[0];
-
+					item_to_delete = null;
 				}
-				
 			}
 		});
 	}
