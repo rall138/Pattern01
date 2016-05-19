@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.xml.xpath.XPathConstants;
+
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
+import org.xml.sax.InputSource;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
@@ -63,13 +66,18 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(2)+"try{");
 		builder.appendLn(tabGen(3)+"java.io.File instance_file = new java.io.File(patternfolder_path/+instance_name.xml);");
 		builder.appendLn(tabGen(3)+"if(instance_file.exists(){");
-		builder.appendLn(tabGen(4)+"Node instance_node = (Node) xpath.evaluate(expression, is, XPath.Node);");
+		builder.appendLn(tabGen(4)+"org.xml.sax.InputSource is = new org.xml.sax.InputSource(instance_file.getPath());");
+		builder.appendLn(tabGen(4)+"org.w3c.dom.Node instance_node = (org.w3c.dom.Node) xpath.evaluate(expression, is, XPathConstants.NODE);");
 		builder.appendLn(tabGen(4)+"recursiveParseing(instance_file);");		
 		builder.appendLn(tabGen(3)+"}");		
 		builder.appendLn(tabGen(2)+"}catch(javax.xml.xpath.XPathExpressionException | java.lang.IllegalStateException e){");		
 		builder.appendLn(tabGen(3)+"e.printStackTrace(System.err);");
 		builder.appendLn(tabGen(2)+"}");
 		builder.appendLn(tabGen(1)+"}");
+		
+		builder.appendLn("");
+		builder.appendLn(tabGen(1)+"private void recursive(org.w3c.dom.Node parent_node){");
+		builder.appendLn(tabGen(2)+"");
 		for(int index = 0; index < collected_elements.size(); index++){
 			
 		}
