@@ -100,13 +100,13 @@ public class ClassGenerator extends Task{
 			log.writeSingleMessage("Generating class: "+collected_elements.get(index).getPrettyName());
 			builder = new CustomStringBuilder();
 			builder.appendLn("package pattern01.helpers.generated;");
-			builder.appendLn("");
+			builder.clrlf();
 			builder.appendLn(classHeaderComment);
 			builder.appendLn("public class "+collected_elements.get(index).getPrettyName()+"{");
 			attributeBuilder = new CustomStringBuilder();
-			
 			getterSetterBuilder = new CustomStringBuilder();
-			attributeBuilder.appendLn("");
+			attributeBuilder.clrlf();
+
 			//Getters and setters y propiedades para el .properties de atributos generales.
 			for(Attribute attr : collected_elements.get(index).getAttribute_collection()){
 				
@@ -160,11 +160,11 @@ public class ClassGenerator extends Task{
 			String default_value){
 		attributeBuilder.appendLn(tabGen(1)+"private "+type+" "+attrName+
 				(default_value.equalsIgnoreCase("")?"":"="+quotscape+default_value+quotscape)+";");
-		builder.appendLn("");
+		builder.clrlf();
 		builder.appendLn(tabGen(1)+"public "+type+" get"+attrPrettyName+"(){");
 		builder.appendLn(tabGen(2)+"return this."+attrName+";");
 		builder.appendLn(tabGen(1)+"}");
-		builder.appendLn("");
+		builder.clrlf();
 		builder.appendLn(tabGen(1)+"public void set"+attrPrettyName+"("+type+" "+attrName+"){");
 		builder.appendLn(tabGen(2)+"this."+attrName+" = "+attrName+";");
 		builder.appendLn(tabGen(1)+"}");
@@ -181,7 +181,7 @@ public class ClassGenerator extends Task{
 			builder.appendLn(tabGen(2)+"this."+collectionPrefix+attrPrettyName+
 					" = "+collectionPrefix+attrPrettyName+";");
 			builder.appendLn(tabGen(1)+"}");
-			builder.appendLn("");
+			builder.clrlf();
 
 			//Getter for collection
 			builder.appendLn(tabGen(1)+"public "+javaListNamespace+"<"+attrPrettyName+"> getCollection_"+
@@ -190,11 +190,11 @@ public class ClassGenerator extends Task{
 			builder.appendLn(tabGen(1)+"}");
 		}else{
 			attributeBuilder.appendLn(tabGen(1)+"private "+attrPrettyName+" "+attrName + ";");					
-			builder.appendLn("");
+			builder.clrlf();
 			builder.appendLn(tabGen(1)+"public "+attrPrettyName+" get"+attrName+"(){");
 			builder.appendLn(tabGen(2)+"return this."+attrName+";");
 			builder.appendLn(tabGen(1)+"}");
-			builder.appendLn("");
+			builder.clrlf();
 			builder.appendLn(tabGen(1)+"public void set"+attrPrettyName+"("+attrPrettyName+" "
 			+attrName+"){");
 			builder.appendLn(tabGen(2)+"this."+attrName+" = "+attrName+";");
@@ -204,7 +204,7 @@ public class ClassGenerator extends Task{
 	
 	//Properties from .property file
 	private void generatePropertyGetter(CustomStringBuilder builder){
-		builder.appendLn("");
+		builder.clrlf();
 		builder.appendLn(tabGen(1)+"public java.lang.String getProperty(java.lang.String propertyName){");
 		builder.appendLn(tabGen(2)+"java.util.Properties properties = new java.util.Properties();");
 		builder.appendLn(tabGen(2)+"try{");
@@ -236,7 +236,7 @@ public class ClassGenerator extends Task{
 					+" get"+collected_custom_values.get(index).getPrettyName()+"(){");
 			builder.appendLn(tabGen(2)+"return this."+attrName+";");
 			builder.appendLn(tabGen(1)+"}");
-			builder.appendLn("");
+			builder.clrlf();
 			builder.appendLn(tabGen(1)+"public void set"+collected_custom_values.get(index).getPrettyName()
 					+"("+collected_custom_values.get(index).getPrettyName()+" "+collected_custom_values.get(index).getName()+"){");
 			builder.appendLn(tabGen(2)+"this."+attrName+" = "+collected_custom_values.get(index).getName()+";");
