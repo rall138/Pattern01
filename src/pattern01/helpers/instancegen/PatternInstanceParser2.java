@@ -20,13 +20,13 @@ import pattern01.helpers.LoggerThread;
 import pattern01.plugin.components.navigator.NodeType;
 
 
-public class PatternInstanceParser {
+public class PatternInstanceParser2 {
 
 	private TreeItem instance = null;
 	private LoggerThread lgt = new LoggerThread();
 	private TreeItem parentItem = null;
 	
-	public PatternInstanceParser(TreeItem parentItem){
+	public PatternInstanceParser2(TreeItem parentItem){
 		this.parentItem = parentItem;
 	}
 	
@@ -71,15 +71,30 @@ public class PatternInstanceParser {
 		}
 	}
 	
-	/* [Begin] Auto-generated code for pattern instance parser do not remove */
-	
 	private void recursiveParseing(Node actualNode, TreeItem parent){
+		TreeItem item = new TreeItem(parent, 0);
+		item.setText(actualNode.getNodeName());
+		item.setData("type", NodeType.nodeTypeFromString(actualNode.getNodeName()));
 		
-		actualNode.getNa
-	
+		if (actualNode.getAttributes().getNamedItem("image") != null){
+			item.setImage(ImageHelper.getImage(actualNode.getAttributes()
+					.getNamedItem("image").getNodeValue()));
+		}
+		
+		//Se obtiene el valor de los atributos
+		for(int index = 0; index < actualNode.getAttributes().getLength(); index++){
+			item.setData(actualNode.getAttributes().item(index).getNodeName(), 
+					actualNode.getAttributes().item(index).getNodeValue().toString());
+		}
+		//Si el nodo es padre entonces iteramos sobre sus hijos
+		if (actualNode.getChildNodes().getLength() > 0){
+			for(int index = 0; index < actualNode.getChildNodes().getLength(); index++){
+				if (actualNode.getChildNodes().item(index).getNodeType() == Node.ELEMENT_NODE){
+					recursiveParseing(actualNode.getChildNodes().item(index), item);
+				}
+			}
+		}
 	}
-	
-	/* [End] Auto-generated code for pattern instance parser do not remove */	
 	
 	public TreeItem getInstance(){
 		return this.instance;

@@ -12,6 +12,7 @@ import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
+import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
 
 public class PatternInstanceParserGenerator extends Task{
@@ -48,34 +49,6 @@ public class PatternInstanceParserGenerator extends Task{
 		CustomStringBuilder builder;
 
 		builder = new CustomStringBuilder();
-		builder.appendLn("package pattern01.helpers.generated;");
-		builder.clrlf();
-		builder.appendLn(classHeaderComment);
-		builder.appendLn("public class PatternInstanceParser {");
-		
-		builder.clrlf();
-		builder.appendLn(tabGen(1)+"private org.eclipse.swt.widgets.TreeItem parentItem = null;");
-		
-		builder.clrlf();
-		builder.appendLn(tabGen(1)+"public PatternInstanceParser(org.eclipse.swt.widgets.TreeItem parentItem){");
-		builder.appendLn(tabGen(2)+"this.parentItem = parentItem;");
-		builder.appendLn(tabGen(1)+"}");
-		
-		builder.clrlf();
-		builder.appendLn(tabGen(1)+"public void parseInstance(String instance_name, String patternfolder_path){");
-		builder.appendLn(tabGen(2)+"javax.xml.xpath.XPath xpath = javax.xml.xpath.XPathFactory.newInstance().newXPath();");
-		builder.appendLn(tabGen(2)+"String expression = "+quotscape+"/PatternInstance"+quotscape+";");
-		builder.appendLn(tabGen(2)+"try{");
-		builder.appendLn(tabGen(3)+"java.io.File instance_file = new java.io.File(patternfolder_path/+instance_name.xml);");
-		builder.appendLn(tabGen(3)+"if(instance_file.exists(){");
-		builder.appendLn(tabGen(4)+"org.xml.sax.InputSource is = new org.xml.sax.InputSource(instance_file.getPath());");
-		builder.appendLn(tabGen(4)+"org.w3c.dom.Node instance_node = (org.w3c.dom.Node) xpath.evaluate(expression, is, XPathConstants.NODE);");
-		builder.appendLn(tabGen(4)+"recursiveParseing(instance_file, this.parentItem);");		
-		builder.appendLn(tabGen(3)+"}");		
-		builder.appendLn(tabGen(2)+"}catch(javax.xml.xpath.XPathExpressionException | java.lang.IllegalStateException e){");		
-		builder.appendLn(tabGen(3)+"e.printStackTrace(System.err);");
-		builder.appendLn(tabGen(2)+"}");
-		builder.appendLn(tabGen(1)+"}");
 		
 		builder.clrlf();
 		builder.appendLn(tabGen(1)+"private void recursive(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){");
@@ -90,15 +63,22 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(2)+"}");
 		
 		for(int index = 0; index < collected_elements.size(); index++){
+			
+			// Variable auxiliar.
+			CommonElement co = (CommonElement)collected_elements.get(index);
+			
 			builder.clrlf();
-			builder.appendLn(tabGen(2)+"pattern01.plugin.components.editors.generated."+collected_elements.get(index).getPrettyName()+
-					" "+collected_elements.get(index).getName()+" = new pattern01.plugin.components.editors.generated."+
-							collected_elements.get(index).getPrettyName()+"();");
-			for(Attribute attr : collected_elements.get(index).getAttribute_collection()){
-				builder.appendLn(tabGen(2)+collected_elements.get(index).getName()+".set"+attr.getPrettyName()+
-						"("+quotscape+attr.getDefault_value()+quotscape+");");
+			
+			//New de la variable 
+			builder.appendLn(tabGen(2)+"pattern01.plugin.components.editors.generated."+co.getPrettyName()+
+					" "+co.getName()+" = new pattern01.plugin.components.editors.generated."+co.getPrettyName()+"();");
+			
+			for(Attribute attr : co.getAttribute_collection()){
+				builder.appendLn(tabGen(2)+co.getName()+".set"+attr.getPrettyName()+"("+quotscape+attr.getDefault_value()+quotscape+");");
 			}
-			builder.appendLn(tabGen(2)+"item.setData(class_instance,"+collected_elements.get(index).getName()+");");
+			builder.appendLn(tabGen(2)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getPrettyName()+quotscape+")){");
+			builder.appendLn(tabGen(3)+"item.setData(class_instance,"+co.getName()+");");
+			builder.appendLn(tabGen(2)+"}");
 		}
 		
 		builder.clrlf();
@@ -115,6 +95,37 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn("}");
 		
 		generateClasses("PatternInstanceParser", builder.toString());
+	}
+	
+	private void elementStrategy(CustomStringBuilder builder){
+		builder.appendLn(tabGen(2)+"private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){");
+		builder.appendLn(tabGen(3)+"");
+		for(int index = 0; index < collected_elements.size(); index++){
+
+			// Variable auxiliar.
+			CommonElement co = (CommonElement)collected_elements.get(index);
+			
+			builder.clrlf();
+			
+			if(index == 0){
+				builder.appendLn(tabGen(3)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");
+			}else{
+				builder.appendLn(tabGen(3)+"}else if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");				
+			}
+		
+			//New de la variable 
+			builder.appendLn(tabGen(2)+"pattern01.plugin.components.editors.generated."+co.getPrettyName()+
+					" "+co.getName()+" = new pattern01.plugin.components.editors.generated."+co.getPrettyName()+"();");
+
+			for(Attribute attr : co.getAttribute_collection()){
+				builder.appendLn(tabGen(2)+co.getName()+".set"+attr.getPrettyName()+"("+quotscape+attr.getDefault_value()+quotscape+");");
+			}
+			
+			builder.appendLn(tabGen(2)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getPrettyName()+quotscape+")){");
+			builder.appendLn(tabGen(3)+"item.setData(class_instance,"+co.getName()+");");
+			builder.appendLn(tabGen(2)+"}");
+		}
+		builder.appendLn(tabGen(2)+"}");
 	}
 	
 	private String tabGen(int quantity){
