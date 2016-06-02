@@ -19,6 +19,9 @@ public class PatternInstanceParserGenerator extends Task{
 
 	private static final String tabspace = "\t";
 	private static final String quotscape = "\"";
+	private static final String beginTag = "/* [Begin] Auto-generated code for pattern instance parser do not remove */";
+	private static final String endTag = "/* [End] Auto-generated code for pattern instance parser do not remove */";
+	private static final String regex ="(\\/\\* \\[Begin\\] Auto-generated code for pattern instance parser do not remove \\*/)";
 	private static final String classHeaderComment = 
 			tabspace+"/**\n"
 			+tabspace+"* Generated class via ClassGenerator.xml\n"
@@ -51,6 +54,7 @@ public class PatternInstanceParserGenerator extends Task{
 		builder = new CustomStringBuilder();
 		
 		builder.clrlf();
+		builder.appendLn(classHeaderComment);
 		builder.appendLn(tabGen(1)+"private void recursive(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){");
 		builder.appendLn(tabGen(2)+"org.eclipse.swt.widgets.TreeItem item = new org.eclipse.swt.widgets.TreeItem(parent, 0);");
 		builder.appendLn(tabGen(2)+"item.setText(actualNode.getNodeName());");
@@ -62,24 +66,8 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(4)+"actualNode.getAttributes().item(index).getNodeValue().toString());");
 		builder.appendLn(tabGen(2)+"}");
 		
-		for(int index = 0; index < collected_elements.size(); index++){
-			
-			// Variable auxiliar.
-			CommonElement co = (CommonElement)collected_elements.get(index);
-			
-			builder.clrlf();
-			
-			//New de la variable 
-			builder.appendLn(tabGen(2)+"pattern01.plugin.components.editors.generated."+co.getPrettyName()+
-					" "+co.getName()+" = new pattern01.plugin.components.editors.generated."+co.getPrettyName()+"();");
-			
-			for(Attribute attr : co.getAttribute_collection()){
-				builder.appendLn(tabGen(2)+co.getName()+".set"+attr.getPrettyName()+"("+quotscape+attr.getDefault_value()+quotscape+");");
-			}
-			builder.appendLn(tabGen(2)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getPrettyName()+quotscape+")){");
-			builder.appendLn(tabGen(3)+"item.setData(class_instance,"+co.getName()+");");
-			builder.appendLn(tabGen(2)+"}");
-		}
+		//Generamos el codigo para las instancias 
+		elementStrategy(builder);
 		
 		builder.clrlf();
 		builder.appendLn(tabGen(2)+"// Recursion over child nodes");
@@ -104,27 +92,24 @@ public class PatternInstanceParserGenerator extends Task{
 
 			// Variable auxiliar.
 			CommonElement co = (CommonElement)collected_elements.get(index);
-			
+
 			builder.clrlf();
-			
 			if(index == 0){
 				builder.appendLn(tabGen(3)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");
 			}else{
 				builder.appendLn(tabGen(3)+"}else if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");				
 			}
-		
+
 			//New de la variable 
-			builder.appendLn(tabGen(2)+"pattern01.plugin.components.editors.generated."+co.getPrettyName()+
+			builder.appendLn(tabGen(4)+"pattern01.plugin.components.editors.generated."+co.getPrettyName()+
 					" "+co.getName()+" = new pattern01.plugin.components.editors.generated."+co.getPrettyName()+"();");
 
 			for(Attribute attr : co.getAttribute_collection()){
 				builder.appendLn(tabGen(2)+co.getName()+".set"+attr.getPrettyName()+"("+quotscape+attr.getDefault_value()+quotscape+");");
 			}
-			
-			builder.appendLn(tabGen(2)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getPrettyName()+quotscape+")){");
-			builder.appendLn(tabGen(3)+"item.setData(class_instance,"+co.getName()+");");
-			builder.appendLn(tabGen(2)+"}");
+
 		}
+		builder.appendLn(tabGen(3)+"}");
 		builder.appendLn(tabGen(2)+"}");
 	}
 	
@@ -137,9 +122,10 @@ public class PatternInstanceParserGenerator extends Task{
 	}
 	
 	private void generateClasses(String className, String classBody){
-		bfr.getProject().setProperty("filename", "../definitiongen/parsers/"+className+".java");
+		bfr.getProject().setProperty("filename", "../instancegen/"+className+".java");
+		bfr.getProject().setProperty("token", beginTag);
 		bfr.getProject().setProperty("message", classBody);
-		bfr.executeTarget("fileRelative");
+		bfr.executeTarget("replacer");
 	}
 	
 }

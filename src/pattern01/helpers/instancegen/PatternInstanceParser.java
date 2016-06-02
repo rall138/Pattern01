@@ -75,11 +75,9 @@ public class PatternInstanceParser {
 	
 	private void recursiveParseing(Node actualNode, TreeItem parent){
 		
-		actualNode.getNa
-	
 	}
 	
-	/* [End] Auto-generated code for pattern instance parser do not remove */	
+	/* [End] Auto-generated code for pattern instance parser do not remove */
 	
 	public TreeItem getInstance(){
 		return this.instance;
