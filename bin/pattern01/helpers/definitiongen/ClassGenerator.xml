@@ -27,4 +27,8 @@
 		<echo append="false" file="${filename}" message="${message}"></echo>
 	</target>
 	
+	<target name="replacer">
+		<replaceregexp file="${filename}" match="${token}" replace="${message}"></replaceregexp>
+	</target>
+	
 </project>

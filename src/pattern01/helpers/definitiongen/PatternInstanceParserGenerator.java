@@ -21,7 +21,11 @@ public class PatternInstanceParserGenerator extends Task{
 	private static final String quotscape = "\"";
 	private static final String beginTag = "/* [Begin] Auto-generated code for pattern instance parser do not remove */";
 	private static final String endTag = "/* [End] Auto-generated code for pattern instance parser do not remove */";
-	private static final String regex ="(\\/\\* \\[Begin\\] Auto-generated code for pattern instance parser do not remove \\*/)";
+	
+	//Regula expression for template code replacement.
+	private static final String regex = "(\\/\\* \\[Begin\\] Auto-generated code for pattern instance parser do not remove \\*/)[\\s+\\S+]+"
+			+ "(\\/\\* \\[End\\] Auto-generated code for pattern instance parser do not remove \\*/)";	
+	
 	private static final String classHeaderComment = 
 			tabspace+"/**\n"
 			+tabspace+"* Generated class via ClassGenerator.xml\n"
@@ -54,8 +58,9 @@ public class PatternInstanceParserGenerator extends Task{
 		builder = new CustomStringBuilder();
 		
 		builder.clrlf();
+		builder.appendLn(beginTag);
 		builder.appendLn(classHeaderComment);
-		builder.appendLn(tabGen(1)+"private void recursive(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){");
+		builder.appendLn(tabGen(1)+"private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){");
 		builder.appendLn(tabGen(2)+"org.eclipse.swt.widgets.TreeItem item = new org.eclipse.swt.widgets.TreeItem(parent, 0);");
 		builder.appendLn(tabGen(2)+"item.setText(actualNode.getNodeName());");
 		builder.appendLn(tabGen(2)+"item.setData("+quotscape+"type"+quotscape+", NodeType.nodeTypeFromString(actualNode.getNodeName()));");
@@ -65,9 +70,8 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(3)+"item.setData(actualNode.getAttributes().item(index).getNodeName(),"); 
 		builder.appendLn(tabGen(4)+"actualNode.getAttributes().item(index).getNodeValue().toString());");
 		builder.appendLn(tabGen(2)+"}");
-		
-		//Generamos el codigo para las instancias 
-		elementStrategy(builder);
+
+		builder.appendLn(tabGen(2)+"classInstanceStrategy(actualNode, item);");
 		
 		builder.clrlf();
 		builder.appendLn(tabGen(2)+"// Recursion over child nodes");
@@ -78,39 +82,37 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(4)+"}");
 		builder.appendLn(tabGen(3)+"}");
 		builder.appendLn(tabGen(2)+"}");
-		
 		builder.clrlf();
-		builder.appendLn("}");
+		builder.appendLn(tabGen(1)+"}");
+
+		//Generamos el codigo para las instancias 
+		builder.clrlf();
+		elementStrategy(builder);
 		
+		builder.appendLn(endTag);
 		generateClasses("PatternInstanceParser", builder.toString());
 	}
 	
 	private void elementStrategy(CustomStringBuilder builder){
-		builder.appendLn(tabGen(2)+"private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){");
-		builder.appendLn(tabGen(3)+"");
+		builder.appendLn(tabGen(1)+"private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){");
 		for(int index = 0; index < collected_elements.size(); index++){
-
-			// Variable auxiliar.
 			CommonElement co = (CommonElement)collected_elements.get(index);
-
-			builder.clrlf();
 			if(index == 0){
-				builder.appendLn(tabGen(3)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");
+				builder.appendLn(tabGen(2)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");
 			}else{
-				builder.appendLn(tabGen(3)+"}else if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");				
+				builder.appendLn(tabGen(2)+"}else if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");				
 			}
 
 			//New de la variable 
-			builder.appendLn(tabGen(4)+"pattern01.plugin.components.editors.generated."+co.getPrettyName()+
-					" "+co.getName()+" = new pattern01.plugin.components.editors.generated."+co.getPrettyName()+"();");
+			builder.appendLn(tabGen(3)+"pattern01.helpers.generated."+co.getPrettyName()+
+					" "+co.getName()+" = new pattern01.helpers.generated."+co.getPrettyName()+"();");
 
 			for(Attribute attr : co.getAttribute_collection()){
-				builder.appendLn(tabGen(2)+co.getName()+".set"+attr.getPrettyName()+"("+quotscape+attr.getDefault_value()+quotscape+");");
+				builder.appendLn(tabGen(3)+co.getName()+".set"+attr.getPrettyName()+"("+quotscape+attr.getDefault_value()+quotscape+");");
 			}
-
 		}
-		builder.appendLn(tabGen(3)+"}");
 		builder.appendLn(tabGen(2)+"}");
+		builder.appendLn(tabGen(1)+"}");
 	}
 	
 	private String tabGen(int quantity){
@@ -123,7 +125,7 @@ public class PatternInstanceParserGenerator extends Task{
 	
 	private void generateClasses(String className, String classBody){
 		bfr.getProject().setProperty("filename", "../instancegen/"+className+".java");
-		bfr.getProject().setProperty("token", beginTag);
+		bfr.getProject().setProperty("token", regex);
 		bfr.getProject().setProperty("message", classBody);
 		bfr.executeTarget("replacer");
 	}

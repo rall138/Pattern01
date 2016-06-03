@@ -24,7 +24,6 @@ public class CustomStringBuilder{
 		if (complete_text == null){
 			complete_text = "";
 		}
-		complete_text += System.getProperty("line.separator");		
 	}
 
 	public String toString(){

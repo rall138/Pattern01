@@ -70,15 +70,81 @@ public class PatternInstanceParser {
 			e.printStackTrace();
 		}
 	}
-	
-	/* [Begin] Auto-generated code for pattern instance parser do not remove */
-	
-	private void recursiveParseing(Node actualNode, TreeItem parent){
-		
+
+
+/* [Begin] Auto-generated code for pattern instance parser do not remove */
+	/**
+	* Generated class via ClassGenerator.xml
+	* Creation date: Thu Jun 02 23:33:24 UYT 2016
+	* Creator: rlomez
+	**/
+	private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){
+		org.eclipse.swt.widgets.TreeItem item = new org.eclipse.swt.widgets.TreeItem(parent, 0);
+		item.setText(actualNode.getNodeName());
+		item.setData("type", NodeType.nodeTypeFromString(actualNode.getNodeName()));
+
+		// Attribute traspasseing (from xpath node --> treeItem node)
+		for(int index = 0; index < actualNode.getAttributes().getLength(); index++){
+			item.setData(actualNode.getAttributes().item(index).getNodeName(),
+				actualNode.getAttributes().item(index).getNodeValue().toString());
+		}
+		classInstanceStrategy(actualNode, item);
+
+		// Recursion over child nodes
+		if (actualNode.getChildNodes().getLength() > 0){
+			for(int index = 0; index < actualNode.getChildNodes().getLength(); index++){
+				if (actualNode.getChildNodes().item(index).getNodeType() == Node.ELEMENT_NODE){
+					recursiveParseing(actualNode.getChildNodes().item(index), item);
+				}
+			}
+		}
+
 	}
-	
-	/* [End] Auto-generated code for pattern instance parser do not remove */
-	
+
+	private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){
+		if(actualNode.getNodeName().equalsIgnoreCase("patterninstance")){
+			pattern01.helpers.generated.PatternInstance patterninstance = new pattern01.helpers.generated.PatternInstance();
+			patterninstance.setGenerator("#{Generator.WEB}");
+			patterninstance.setName("");
+			patterninstance.setDescription("");
+			patterninstance.setImage("ww.png");
+		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFiles")){
+			pattern01.helpers.generated.RelatedFiles relatedFiles = new pattern01.helpers.generated.RelatedFiles();
+		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFile")){
+			pattern01.helpers.generated.RelatedFile relatedFile = new pattern01.helpers.generated.RelatedFile();
+			relatedFile.setName("");
+			relatedFile.setDescription("");
+			relatedFile.setReference("");
+			relatedFile.setImage("ww.png");
+		}else if(actualNode.getNodeName().equalsIgnoreCase("faces")){
+			pattern01.helpers.generated.Faces faces = new pattern01.helpers.generated.Faces();
+		}else if(actualNode.getNodeName().equalsIgnoreCase("selection")){
+			pattern01.helpers.generated.Selection selection = new pattern01.helpers.generated.Selection();
+			selection.setName("");
+			selection.setDescription("");
+			selection.setReference("");
+			selection.setImage("ww.png");
+			selection.setInsert("");
+			selection.setUpdate("");
+			selection.setDelete("");
+			selection.setDisplay("");
+		}else if(actualNode.getNodeName().equalsIgnoreCase("register")){
+			pattern01.helpers.generated.Register register = new pattern01.helpers.generated.Register();
+			register.setName("");
+			register.setDescription("");
+			register.setReference("");
+			register.setImage("ww.png");
+		}else if(actualNode.getNodeName().equalsIgnoreCase("dialog")){
+			pattern01.helpers.generated.Dialog dialog = new pattern01.helpers.generated.Dialog();
+			dialog.setName("");
+			dialog.setDescription("");
+			dialog.setReference("");
+			dialog.setImage("ww.png");
+		}
+	}
+/* [End] Auto-generated code for pattern instance parser do not remove */
+
+
 	public TreeItem getInstance(){
 		return this.instance;
 	}
