@@ -75,7 +75,7 @@ public class EditorPartGenerator extends Task{
 			comboInitializerBuilder = new CustomStringBuilder();
 
 			attributeBuilder.appendLn("");
-			attributeBuilder.appendLn(tabGen(1)+"private boolean dirty;");
+			attributeBuilder.appendLn(tabGen(1)+"private boolean dirty = false;");
 			for(Attribute attr : collected_elements.get(index).getAttribute_collection()){
 				attributeBuilder.appendLn(tabGen(1)+
 						"public org.eclipse.swt.widgets.Label label_"+attr.getName()+" = null;");
@@ -235,7 +235,7 @@ public class EditorPartGenerator extends Task{
 		}
 		getterAndSetterBuilder.appendLn(tabGen(1)+"}");
 	}
-
+	
 	private String tabGen(int quantity){
 		String tabappender = "";
 		for(int total = 0; total < quantity; total++){

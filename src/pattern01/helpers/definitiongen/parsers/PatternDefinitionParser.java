@@ -51,6 +51,8 @@ public class PatternDefinitionParser {
 								element.setPrettyName(attributes.getValue(index));
 							}
 						}
+						// Parent elements are always uniques
+						element.setUnique(true);
 						log.writeSingleMessage("Parsed element: "+element.getPrettyName());
 					}else if(qName.equalsIgnoreCase("childelement")){
 						//Asignamos solamente el nombre porque tenemos nada mas que la referencia.
@@ -64,7 +66,8 @@ public class PatternDefinitionParser {
 							}
 						}
 						log.writeSingleMessage(tabspace+"-Parsed child: "+childElement.getName());
-						element.getChildElements_collection().add(childElement);						
+						childElement.setParentElement(element);
+						element.getChildElements_collection().add(childElement);
 					}else if(qName.equalsIgnoreCase("attributeelement")){
 						Attribute attr = new Attribute();
 						//Dejamos por defecto el default value vacio.

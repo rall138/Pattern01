@@ -6,6 +6,7 @@ import org.eclipse.ui.IPersistableElement;
 
 public class DefaultEditorInput implements IEditorInput{
 
+	private org.eclipse.swt.widgets.Tree treeInstance = null;	
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
 		// TODO Auto-generated method stub
@@ -41,6 +42,12 @@ public class DefaultEditorInput implements IEditorInput{
 		return null;
 	}
 
-	
+	public org.eclipse.swt.widgets.Tree getInstanceTree(){
+		return this.treeInstance;
+	}
+
+	public void setInstanceTree(org.eclipse.swt.widgets.Tree treeInstance){
+		this.treeInstance = treeInstance;
+	}
 	
 }

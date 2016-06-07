@@ -2,14 +2,14 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Jun 02 23:33:24 UYT 2016
+	* Creation date: Mon Jun 06 21:21:10 UYT 2016
 	* Creator: rlomez
 	**/
 public class FacesEditorPart extends org.eclipse.ui.part.EditorPart{
 
 	public static final String ID = "pattern01.plugin.components.editors.generated.FacesEditorPart";
 
-	private boolean dirty;
+	private boolean dirty = false;
 
 
 	@Override
@@ -54,4 +54,5 @@ public class FacesEditorPart extends org.eclipse.ui.part.EditorPart{
 	@Override
 	public void setFocus() {
 	}
+
 }

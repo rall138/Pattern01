@@ -1,32 +1,23 @@
 package pattern01.helpers;
 
-public class CustomStringBuilder{
+public class CustomStringBuilder {
 	
-	private String complete_text;
+	private StringBuilder sb = new StringBuilder();
+	
 	
 	public void append(String text){
-		initializeString();
-		complete_text += text;
+		sb.append(text);
 	}
 	
 	public void appendLn(String text){
-		initializeString();
-		complete_text += text;
-		complete_text += System.getProperty("line.separator");
+		sb.append(text+System.getProperty("line.separator"));
 	}
 	
 	public void clrlf(){
-		initializeString();
-		complete_text += System.getProperty("line.separator");
+		sb.append(System.getProperty("line.separator"));
 	}
 	
-	private void initializeString(){
-		if (complete_text == null){
-			complete_text = "";
-		}
-	}
-
 	public String toString(){
-		return complete_text;
+		return sb.toString();
 	}
 }

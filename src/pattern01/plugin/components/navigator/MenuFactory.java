@@ -83,6 +83,7 @@ public class MenuFactory {
 						((NodeType)parent.getSelection()[0].getData("type")) == NodeType.PATTERNINSTANCE){
 					try {
 						DefaultEditorInput dei = new DefaultEditorInput();
+						dei.setInstanceTree(parent);
 						page.openEditor(dei, PatternInstanceEditorPart.ID);
 					} catch (PartInitException e) {
 						e.printStackTrace();

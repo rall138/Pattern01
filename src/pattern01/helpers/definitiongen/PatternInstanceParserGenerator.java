@@ -10,6 +10,7 @@ import org.apache.tools.ant.Task;
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
+import pattern01.helpers.DataTypeConversion;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.CommonElement;
@@ -57,7 +58,6 @@ public class PatternInstanceParserGenerator extends Task{
 
 		builder = new CustomStringBuilder();
 		
-		builder.clrlf();
 		builder.appendLn(beginTag);
 		builder.appendLn(classHeaderComment);
 		builder.appendLn(tabGen(1)+"private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){");
@@ -108,11 +108,33 @@ public class PatternInstanceParserGenerator extends Task{
 					" "+co.getName()+" = new pattern01.helpers.generated."+co.getPrettyName()+"();");
 
 			for(Attribute attr : co.getAttribute_collection()){
-				builder.appendLn(tabGen(3)+co.getName()+".set"+attr.getPrettyName()+"("+quotscape+attr.getDefault_value()+quotscape+");");
+				builder.appendLn(tabGen(3)+"if("+quotscape+attr.getName()+quotscape+" == actualNode.getNodeName()){");
+				builder.appendLn(tabGen(4)+co.getName()+".set"+attr.getPrettyName()+"(actualNode.getNodeValue() != null "
+						+"? "+DataTypeConversion.getDataTypeWrapper(attr.getType(),"actualNode.getNodeValue().toString()")+":"+
+						DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
+				builder.appendLn(tabGen(3)+"}");
+			}
+			builder.appendLn(tabGen(3)+"item.setData("+quotscape+"class_instance"+quotscape+","+co.getName()+");");
+			if (index > 0){
+				dependenciesAssignment(builder, co, index);
 			}
 		}
 		builder.appendLn(tabGen(2)+"}");
 		builder.appendLn(tabGen(1)+"}");
+	}
+	
+	private void dependenciesAssignment(CustomStringBuilder builder, CommonElement co,  int element_idex){
+		if (!co.isUnique() && co.getParentElement() != null){
+			builder.appendLn(tabGen(3)+
+				"((pattern01.helpers.generated."+co.getParentElement().getPrettyName()+")"+
+				"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).getCollection_"+
+				collected_elements.get(element_idex).getPrettyName()+".add("+co.getName()+");");
+		}else if (co.isUnique() && co.getParentElement() != null){
+			builder.appendLn(tabGen(3)+
+				"((pattern01.helpers.generated."+co.getParentElement().getPrettyName()+")"+
+				"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).set"+
+				collected_elements.get(element_idex).getPrettyName()+"("+co.getName()+");");
+		}
 	}
 	
 	private String tabGen(int quantity){
