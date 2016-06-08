@@ -41,7 +41,6 @@ public class PatternDefinitionParser {
 						String qName, Attributes attributes)throws SAXException {
 					
 					//Generacion de elementos padres
-			
 					if(qName.equalsIgnoreCase("element")){
 						element = new CommonElement();
 						for (int index = 0; index < attributes.getLength(); index++){
@@ -56,7 +55,7 @@ public class PatternDefinitionParser {
 						log.writeSingleMessage("Parsed element: "+element.getPrettyName());
 					}else if(qName.equalsIgnoreCase("childelement")){
 						//Asignamos solamente el nombre porque tenemos nada mas que la referencia.
-						CommonElement childElement = new CommonElement();
+						CommonElement childElement = new CommonElement(element);
 						for (int index = 0; index < attributes.getLength(); index++){
 							if (attributes.getQName(index).equalsIgnoreCase("ref")){
 								childElement.setName(attributes.getValue(index));
@@ -66,7 +65,6 @@ public class PatternDefinitionParser {
 							}
 						}
 						log.writeSingleMessage(tabspace+"-Parsed child: "+childElement.getName());
-						childElement.setParentElement(element);
 						element.getChildElements_collection().add(childElement);
 					}else if(qName.equalsIgnoreCase("attributeelement")){
 						Attribute attr = new Attribute();

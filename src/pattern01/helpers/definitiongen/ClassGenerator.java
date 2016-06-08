@@ -34,7 +34,8 @@ public class ClassGenerator extends Task{
 	
 	private BuildFileRule bfr = new BuildFileRule();
 	private List<Element> collected_elements = new ArrayList<>();
-
+	LoggerThread log = new LoggerThread();
+	
 	public void execute(){
 		parsePatternDefinition();
 		//Se anaden los datos faltantes a los childselements creados

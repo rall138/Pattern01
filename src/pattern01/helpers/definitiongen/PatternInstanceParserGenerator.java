@@ -36,6 +36,7 @@ public class PatternInstanceParserGenerator extends Task{
 	
 	private BuildFileRule bfr = new BuildFileRule();
 	private List<Element> collected_elements = new ArrayList<>();
+	LoggerThread log = new LoggerThread();
 	
 	public PatternInstanceParserGenerator(List<Element> collected_elements){
 		this.collected_elements = collected_elements;
@@ -124,7 +125,9 @@ public class PatternInstanceParserGenerator extends Task{
 	}
 	
 	private void dependenciesAssignment(CustomStringBuilder builder, CommonElement co,  int element_idex){
+		log.writeSingleMessage("parentElement on dependencies assignment:"+co.getParentElement());
 		if (!co.isUnique() && co.getParentElement() != null){
+			
 			builder.appendLn(tabGen(3)+
 				"((pattern01.helpers.generated."+co.getParentElement().getPrettyName()+")"+
 				"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).getCollection_"+
