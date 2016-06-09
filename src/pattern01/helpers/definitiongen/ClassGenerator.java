@@ -15,6 +15,7 @@ import pattern01.helpers.LoggerThread;
 import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
 import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser;
+import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser2;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
@@ -54,8 +55,8 @@ public class ClassGenerator extends Task{
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		
-		PatternDefinitionParser parser = 
-				new PatternDefinitionParser();
+		PatternDefinitionParser2 parser = 
+				new PatternDefinitionParser2();
 		collected_elements = parser.parseDefinition();
 	}
 	

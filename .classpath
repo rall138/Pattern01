@@ -26,5 +26,12 @@
 	<classpathentry kind="lib" path="resources/libraries/ant-testutil.jar"/>
 	<classpathentry kind="lib" path="resources/libraries/ant.jar"/>
 	<classpathentry kind="lib" path="resources/libraries/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="resources/libraries/junit.jar"/>
+	<classpathentry kind="lib" path="resources/libraries/org.eclipse.core.runtime_3.11.1.v20150903-1804.jar"/>
+	<classpathentry kind="lib" path="resources/libraries/org.eclipse.core.runtime.compatibility_3.2.300.v20150423-0821.jar"/>
+	<classpathentry kind="lib" path="resources/libraries/org.eclipse.core.runtime.compatibility.registry.source_3.6.0.v20150318-1505.jar"/>
+	<classpathentry kind="lib" path="resources/libraries/org.eclipse.core.runtime.compatibility.source_3.2.300.v20150423-0821.jar"/>
+	<classpathentry kind="lib" path="resources/libraries/org.eclipse.core.runtime.source_3.11.1.v20150903-1804.jar"/>
+	<classpathentry kind="lib" path="resources/libraries/org.eclipse.ui_3.107.0.v20150507-1945.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
