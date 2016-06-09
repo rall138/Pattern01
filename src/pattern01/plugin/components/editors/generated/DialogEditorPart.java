@@ -2,7 +2,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jun 07 23:00:40 UYT 2016
+	* Creation date: Thu Jun 09 06:48:16 UYT 2016
 	* Creator: rlomez
 	**/
 public class DialogEditorPart extends org.eclipse.ui.part.EditorPart{

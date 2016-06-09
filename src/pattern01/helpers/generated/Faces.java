@@ -2,38 +2,10 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jun 07 23:00:40 UYT 2016
+	* Creation date: Thu Jun 09 06:48:16 UYT 2016
 	* Creator: rlomez
 	**/
 public class Faces{
-
-	private Selection selection;
-	private Register register;
-	private java.util.List<Dialog> collection_Dialog = new java.util.ArrayList<>();
-
-
-	public Selection getselection(){
-		return this.selection;
-	}
-
-	public void setSelection(Selection selection){
-		this.selection = selection;
-	}
-
-	public Register getregister(){
-		return this.register;
-	}
-
-	public void setRegister(Register register){
-		this.register = register;
-	}
-	public void setCollection_Dialog(java.util.List<Dialog> collection_Dialog){
-		this.collection_Dialog = collection_Dialog;
-	}
-
-	public java.util.List<Dialog> getCollection_Dialog(){
-		return this.collection_Dialog;
-	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){
 		java.util.Properties properties = new java.util.Properties();
@@ -45,16 +17,84 @@ public class Faces{
 		}
 		return properties.getProperty(propertyName);
 	}
-
-	public java.lang.String toXml(){
-		java.lang.String xml ="<Faces "
-		+ ">";
-			xml+=this.selection.toXml();
-			xml+=this.register.toXml();
-			for(int index = 0; index < collection_Dialog.size(); index++){
-				xml+=collection_Dialog.get(index).toXml();
-			}
-		xml+="</Faces>";
-		return xml;
-	}
-}
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String image="ww.png";
+	private RelatedFiles relatedFiles;
+	private Faces faces;
+	private java.util.List<RelatedFile> collection_RelatedFile = new java.util.ArrayList<>();
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private Selection selection;
+	private Register register;
+	private java.util.List<Dialog> collection_Dialog = new java.util.ArrayList<>();
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.Boolean insert;
+	private java.lang.Boolean update;
+	private java.lang.Boolean delete;
+	private java.lang.Boolean display;
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.Boolean insert;
+	private java.lang.Boolean update;
+	private java.lang.Boolean delete;
+	private java.lang.Boolean display;
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.Boolean insert;
+	private java.lang.Boolean update;
+	private java.lang.Boolean delete;
+	private java.lang.Boolean display;
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.Boolean insert;
+	private java.lang.Boolean update;
+	private java.lang.Boolean delete;
+	private java.lang.Boolean display;
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String reference;
+	private java.lang.String image="ww.png";

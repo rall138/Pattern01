@@ -30,6 +30,21 @@ public class DataTypeConversion {
 		return processed_value;
 	}
 	
+	/***
+	 * This method receives the raw data type like #{Generator} and returns pattern01.helpers.generated.Generator 
+	 * @param data_type
+	 * @return
+	 */
+	public static String getProcessedType(String data_type){
+		String processedType = "";
+		if (data_type.contains("#{")){ //Custom type
+			processedType = data_type
+					.substring(data_type.indexOf("#{")+2, data_type.indexOf("}"));
+			processedType = "pattern01.helpers.generated."+processedType;
+		}
+		return processedType;
+	}
+	
 	public static String getDataTypeWrapper(String data_type, String value){
 		String processed_wrapper = "";
 		if (data_type.equalsIgnoreCase("boolean") || data_type.equalsIgnoreCase("java.lang.Boolean")){

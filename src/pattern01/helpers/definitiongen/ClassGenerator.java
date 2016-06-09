@@ -10,6 +10,7 @@ import org.apache.tools.ant.Task;
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
+import pattern01.helpers.DataTypeConversion;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
@@ -31,10 +32,13 @@ public class ClassGenerator extends Task{
 			+tabspace+"* Creation date: "+Calendar.getInstance().getTime()+"\n"
 			+tabspace+"* Creator: rlomez\n"
 			+tabspace+"**/";
-	
+
+	private LoggerThread log = new LoggerThread();
 	private BuildFileRule bfr = new BuildFileRule();
 	private List<Element> collected_elements = new ArrayList<>();
-	LoggerThread log = new LoggerThread();
+	private CustomStringBuilder builder = new CustomStringBuilder();
+	private CustomStringBuilder attributeBuilder = new CustomStringBuilder();
+	private CustomStringBuilder getterAndSetterBuilder = new CustomStringBuilder();
 	
 	public void execute(){
 		parsePatternDefinition();
@@ -90,14 +94,15 @@ public class ClassGenerator extends Task{
 	private void generateClasses(){
 		LoggerThread log = new LoggerThread();
 		
+		/*
 		log.writeSingleMessage("*** File generation ***");
 	
 		CustomStringBuilder builder;
 		CustomStringBuilder attributeBuilder;
 		CustomStringBuilder getterSetterBuilder;
-		
+		*/
 		PropertyHelper propertyHelper = new PropertyHelper();
-
+		/*
 		for(int index = 0; index < collected_elements.size(); index++){
 			log.writeSingleMessage("Generating class: "+collected_elements.get(index).getPrettyName());
 			builder = new CustomStringBuilder();
@@ -151,61 +156,118 @@ public class ClassGenerator extends Task{
 			builder.appendLn("}");
 			generateClasses(collected_elements.get(index).getPrettyName(), builder.toString());
 		}
+		*/
 		
-		//Generamos el file de propiedades
-		propertyHelper.impactPropertiesOnFile(CommonPathFix
-				.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath());
+		if (collected_elements.size() > 0){
+			recursiveClassIteration((CommonElement)collected_elements.get(0), 0);
+		
+			//Generamos el file de propiedades
+			propertyHelper.impactPropertiesOnFile(CommonPathFix
+					.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath());
+		}
 	}
 	
-	private void generateGetterAndSettersOfAttributes(CustomStringBuilder attributeBuilder, 
-			CustomStringBuilder builder, String attrName, String attrPrettyName, String type,
-			String default_value){
-		attributeBuilder.appendLn(tabGen(1)+"private "+type+" "+attrName+
-				(default_value.equalsIgnoreCase("")?"":"="+quotscape+default_value+quotscape)+";");
+	private void recursiveClassIteration(CommonElement co, int index){
+		generateClassHeader(co);
+		generateAttributes(co.getPrettyName(), co.getAttribute_collection());
+		generatePropertyGetter();
+		log.writeSingleMessage("Generating class: "+co.getPrettyName());
+		
+		if (co.getChildElements_collection() != null &&
+				co.getChildElements_collection().size() > 0){
+			
+			for (CommonElement child: co.getChildElements_collection()){
+				generateGettersAndSettersOfReferences(child);
+			}
+
+			builder.append(attributeBuilder.toString());
+			builder.append(getterAndSetterBuilder.toString());
+//			generateClasses(co.getPrettyName(), builder.toString());
+		
+			for (CommonElement child: co.getChildElements_collection()){
+				recursiveClassIteration(child, index);				
+			}
+			
+		}else if ((index + 1) < collected_elements.size()){
+			builder.append(attributeBuilder.toString());
+			builder.append(getterAndSetterBuilder.toString());
+			generateClasses(co.getPrettyName(), builder.toString());			
+			recursiveClassIteration((CommonElement)collected_elements.get(++index), index);
+		}
+	}
+	
+	private void generateClassHeader(CommonElement co){
+		log.writeSingleMessage("Generating class: "+co.getPrettyName());
+		builder = new CustomStringBuilder();
+		builder.appendLn("package pattern01.helpers.generated;");
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"public "+type+" get"+attrPrettyName+"(){");
-		builder.appendLn(tabGen(2)+"return this."+attrName+";");
+		builder.appendLn(classHeaderComment);
+		builder.appendLn("public class "+co.getPrettyName()+"{");
+	}
+	
+	private void generateAttributes(String prettyName, List<Attribute> attribute_collection){
+		PropertyHelper propertyHelper = new PropertyHelper();
+		for(Attribute attr : attribute_collection){
+			if (attr.getType().contains("#{")){
+//				String processedValue = DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value());
+//				String processedType = DataTypeConversion.getProcessedType(attr.getType());
+//				generateCustomValueBasedProperties(processedType, processedValue, attr.getName());
+			}else{
+				generateGetterAndSettersOfAttributes(attr);
+			}
+			//Generamos las propiedades de los agrupadores
+			propertyHelper.putProperty(prettyName+"."+attr.getPrettyName()+".Group", attr.getGroup());				
+		}
+	}
+	
+	private void generateGetterAndSettersOfAttributes(Attribute attr){
+		attributeBuilder.appendLn(tabGen(1)+"private "+attr.getType()+" "+attr.getName()+
+				(attr.getDefault_value().equalsIgnoreCase("")?"":"="+
+						DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value()))+";");
+		
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"public "+attr.getType()+" get"+attr.getPrettyName()+"(){");
+		builder.appendLn(tabGen(2)+"return this."+attr.getName()+";");
 		builder.appendLn(tabGen(1)+"}");
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"public void set"+attrPrettyName+"("+type+" "+attrName+"){");
-		builder.appendLn(tabGen(2)+"this."+attrName+" = "+attrName+";");
+		builder.appendLn(tabGen(1)+"public void set"+attr.getPrettyName()+"("+attr.getType()+" "+attr.getName()+"){");
+		builder.appendLn(tabGen(2)+"this."+attr.getName()+" = "+attr.getName()+";");
 		builder.appendLn(tabGen(1)+"}");
 	}
 	
-	private void generateGettersAndSettersOfReferences(CustomStringBuilder attributeBuilder, 
-			CustomStringBuilder builder, String attrName, String attrPrettyName, boolean isUnique){
-		if(!isUnique){
-			attributeBuilder.appendLn(tabGen(1)+"private "+javaListNamespace+"<"+attrPrettyName+">"+
-						" collection_"+attrPrettyName+" = new "+javaArrayListNamespace+"<>();");
+	private void generateGettersAndSettersOfReferences(CommonElement co){
+		if(!co.isUnique()){
+			attributeBuilder.appendLn(tabGen(1)+"private "+javaListNamespace+"<"+co.getPrettyName()+">"+
+						" collection_"+co.getPrettyName()+" = new "+javaArrayListNamespace+"<>();");
 			//Setter for collection
-			builder.appendLn(tabGen(1)+"public void setCollection_"+attrPrettyName+
-					"("+javaListNamespace+"<"+attrPrettyName+"> "+collectionPrefix+attrPrettyName+"){");
-			builder.appendLn(tabGen(2)+"this."+collectionPrefix+attrPrettyName+
-					" = "+collectionPrefix+attrPrettyName+";");
+			builder.appendLn(tabGen(1)+"public void setCollection_"+co.getPrettyName()+
+					"("+javaListNamespace+"<"+co.getPrettyName()+"> "+collectionPrefix+co.getPrettyName()+"){");
+			builder.appendLn(tabGen(2)+"this."+collectionPrefix+co.getPrettyName()+
+					" = "+collectionPrefix+co.getPrettyName()+";");
 			builder.appendLn(tabGen(1)+"}");
 			builder.clrlf();
 
 			//Getter for collection
-			builder.appendLn(tabGen(1)+"public "+javaListNamespace+"<"+attrPrettyName+"> getCollection_"+
-					attrPrettyName+"(){");
-			builder.appendLn(tabGen(2)+"return this."+collectionPrefix+attrPrettyName+";");
+			builder.appendLn(tabGen(1)+"public "+javaListNamespace+"<"+co.getPrettyName()+"> getCollection_"+
+					co.getPrettyName()+"(){");
+			builder.appendLn(tabGen(2)+"return this."+collectionPrefix+co.getPrettyName()+";");
 			builder.appendLn(tabGen(1)+"}");
 		}else{
-			attributeBuilder.appendLn(tabGen(1)+"private "+attrPrettyName+" "+attrName + ";");					
+			attributeBuilder.appendLn(tabGen(1)+"private "+co.getPrettyName()+" "+co.getName()+ ";");					
 			builder.clrlf();
-			builder.appendLn(tabGen(1)+"public "+attrPrettyName+" get"+attrName+"(){");
-			builder.appendLn(tabGen(2)+"return this."+attrName+";");
+			builder.appendLn(tabGen(1)+"public "+co.getPrettyName()+" get"+co.getName()+"(){");
+			builder.appendLn(tabGen(2)+"return this."+co.getName()+";");
 			builder.appendLn(tabGen(1)+"}");
 			builder.clrlf();
-			builder.appendLn(tabGen(1)+"public void set"+attrPrettyName+"("+attrPrettyName+" "
-			+attrName+"){");
-			builder.appendLn(tabGen(2)+"this."+attrName+" = "+attrName+";");
+			builder.appendLn(tabGen(1)+"public void set"+co.getPrettyName()+"("+co.getPrettyName()+" "
+			+co.getName()+"){");
+			builder.appendLn(tabGen(2)+"this."+co.getPrettyName()+" = "+co.getName()+";");
 			builder.appendLn(tabGen(1)+"}");
 		}
 	}
 	
 	//Properties from .property file
-	private void generatePropertyGetter(CustomStringBuilder builder){
+	private void generatePropertyGetter(){
 		builder.clrlf();
 		builder.appendLn(tabGen(1)+"public java.lang.String getProperty(java.lang.String propertyName){");
 		builder.appendLn(tabGen(2)+"java.util.Properties properties = new java.util.Properties();");
@@ -219,16 +281,43 @@ public class ClassGenerator extends Task{
 		builder.appendLn(tabGen(1)+"}");
 	}
 	
-	private void generateCustomValueBasedProperties(CustomStringBuilder attrBuilder, 
-			CustomStringBuilder builder, String processedType, String attrName, String processedDefaultValue){
+//	private void generateCustomValueBasedProperties(CustomStringBuilder attrBuilder, 
+//			CustomStringBuilder builder, String processedType, String attrName, String processedDefaultValue){
+//		List<Element> collected_custom_values = (new CustomValuesDefinitionParser()).parseDefinition();
+//		if (collected_custom_values.size() > 0){
+//			int index = 0;
+//			boolean itemFound = false;
+//			while(index < collected_custom_values.size() && !itemFound){
+//				if (collected_custom_values.get(index).getName().equalsIgnoreCase(processedType)){
+//					attrBuilder.appendLn(tabGen(1)+"private "+collected_custom_values.get(index).getPrettyName()
+//							+" "+attrName+(processedDefaultValue.isEmpty()?";" : " = "+processedDefaultValue+";"));
+//					itemFound = true;
+//				}else{
+//					index++;
+//				}
+//			}
+//			builder.appendLn(tabGen(1)+"public "+collected_custom_values.get(index).getPrettyName()
+//					+" get"+collected_custom_values.get(index).getPrettyName()+"(){");
+//			builder.appendLn(tabGen(2)+"return this."+attrName+";");
+//			builder.appendLn(tabGen(1)+"}");
+//			builder.clrlf();
+//			builder.appendLn(tabGen(1)+"public void set"+collected_custom_values.get(index).getPrettyName()
+//					+"("+collected_custom_values.get(index).getPrettyName()+" "+collected_custom_values.get(index).getName()+"){");
+//			builder.appendLn(tabGen(2)+"this."+attrName+" = "+collected_custom_values.get(index).getName()+";");
+//			builder.appendLn(tabGen(1)+"}");
+//			
+//		}
+//	}
+
+	private void generateCustomValueBasedProperties(String processedType, String processedValue, String attrName){
 		List<Element> collected_custom_values = (new CustomValuesDefinitionParser()).parseDefinition();
 		if (collected_custom_values.size() > 0){
 			int index = 0;
 			boolean itemFound = false;
 			while(index < collected_custom_values.size() && !itemFound){
 				if (collected_custom_values.get(index).getName().equalsIgnoreCase(processedType)){
-					attrBuilder.appendLn(tabGen(1)+"private "+collected_custom_values.get(index).getPrettyName()
-							+" "+attrName+(processedDefaultValue.isEmpty()?";" : " = "+processedDefaultValue+";"));
+					attributeBuilder.appendLn(tabGen(1)+"private "+collected_custom_values.get(index).getPrettyName()
+							+" "+attrName+"="+processedValue+";");
 					itemFound = true;
 				}else{
 					index++;

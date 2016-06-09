@@ -2,7 +2,9 @@ package pattern01.helpers.definitiongen.parsers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -24,6 +26,7 @@ public class PatternDefinitionParser {
 	private static final String tabspace = "\t";
 	private String groupName = "Default";
 	private List<Element> collected_elements = new ArrayList<>();
+	private Map<CommonElement, Boolean> classes_marked_as_child = new HashMap<>();
 	
 	public PatternDefinitionParser(){}
 	
@@ -65,6 +68,7 @@ public class PatternDefinitionParser {
 							}
 						}
 						log.writeSingleMessage(tabspace+"-Parsed child: "+childElement.getName());
+						classes_marked_as_child.put(childElement, Boolean.TRUE);
 						element.getChildElements_collection().add(childElement);
 					}else if(qName.equalsIgnoreCase("attributeelement")){
 						Attribute attr = new Attribute();
@@ -122,19 +126,9 @@ public class PatternDefinitionParser {
 	}
 	
 	private void addElementIfnotExists(CommonElement element){
-		if(element != null){
-			boolean itemFound = false;
-			int index = 0;
-			while(!itemFound && index < collected_elements.size()){
-				if(collected_elements.get(index).getName() == element.getName()){
-					itemFound = true;
-				}else{
-					index++;
-				}
-			}
-			if(!itemFound){
-				collected_elements.add(element);
-			}
+		if(element != null && classes_marked_as_child.get(element) == null){
+			collected_elements.add(element);
 		}
 	}
+
 }

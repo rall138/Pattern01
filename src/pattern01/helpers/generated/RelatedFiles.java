@@ -2,20 +2,10 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jun 07 23:00:40 UYT 2016
+	* Creation date: Thu Jun 09 06:48:16 UYT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFiles{
-
-	private java.util.List<RelatedFile> collection_RelatedFile = new java.util.ArrayList<>();
-
-	public void setCollection_RelatedFile(java.util.List<RelatedFile> collection_RelatedFile){
-		this.collection_RelatedFile = collection_RelatedFile;
-	}
-
-	public java.util.List<RelatedFile> getCollection_RelatedFile(){
-		return this.collection_RelatedFile;
-	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){
 		java.util.Properties properties = new java.util.Properties();
@@ -27,14 +17,8 @@ public class RelatedFiles{
 		}
 		return properties.getProperty(propertyName);
 	}
-
-	public java.lang.String toXml(){
-		java.lang.String xml ="<RelatedFiles "
-		+ ">";
-			for(int index = 0; index < collection_RelatedFile.size(); index++){
-				xml+=collection_RelatedFile.get(index).toXml();
-			}
-		xml+="</RelatedFiles>";
-		return xml;
-	}
-}
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String image="ww.png";
+	private RelatedFiles relatedFiles;
+	private Faces faces;
