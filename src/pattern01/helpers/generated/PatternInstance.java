@@ -1,0 +1,64 @@
+package pattern01.helpers.generated;
+
+	/**
+	* Generated class via ClassGenerator.xml
+	* Creation date: Fri Jun 10 17:23:09 GFT 2016
+	* Creator: rlomez
+	**/
+public class PatternInstance{
+	private java.lang.String name;
+	private java.lang.String description;
+	private java.lang.String image="ww.png";
+	private RelatedFiles relatedFiles;
+	private java.util.List<Faces> collection_Faces = new java.util.ArrayList<>();
+
+	public java.lang.String getName(){
+		return this.name;
+	}
+
+	public void setName(java.lang.String name){
+		this.name = name;
+	}
+
+	public java.lang.String getDescription(){
+		return this.description;
+	}
+
+	public void setDescription(java.lang.String description){
+		this.description = description;
+	}
+
+	public java.lang.String getImage(){
+		return this.image;
+	}
+
+	public void setImage(java.lang.String image){
+		this.image = image;
+	}
+
+	public RelatedFiles getrelatedFiles(){
+		return this.relatedFiles;
+	}
+
+	public void setRelatedFiles(RelatedFiles relatedFiles){
+		this.RelatedFiles = relatedFiles;
+	}
+	public void setCollection_Faces(java.util.List<Faces> collection_Faces){
+		this.collection_Faces = collection_Faces;
+	}
+
+	public java.util.List<Faces> getCollection_Faces(){
+		return this.collection_Faces;
+	}
+
+	public java.lang.String getProperty(java.lang.String propertyName){
+		java.util.Properties properties = new java.util.Properties();
+		try{
+			java.io.FileInputStream input = new java.io.FileInputStream("Custom.properties");
+			properties.load(input);
+		} catch (java.io.IOException e) {
+			e.printStackTrace(System.err);
+		}
+		return properties.getProperty(propertyName);
+	}
+}

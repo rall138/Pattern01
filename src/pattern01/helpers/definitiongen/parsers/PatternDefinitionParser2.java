@@ -1,8 +1,6 @@
 package pattern01.helpers.definitiongen.parsers;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -15,23 +13,28 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import pattern01.helpers.CommonPathFix;
-import pattern01.helpers.LoggerThread;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
+import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
 
 public class PatternDefinitionParser2 {
 
-	private String groupName = "Default";
 	private LoggerThread log = new LoggerThread();
-	private List<Element> collected_elements = new ArrayList<>();
 	private XPath xpath = XPathFactory.newInstance().newXPath();
 	private String expression = "";
 	
-	public PatternDefinitionParser2(){}
+	public PatternDefinitionParser2(){
+		
+	}
 	
-	public List<Element> parseDefinition(){
+	/***
+	 * Convert from definition file to auxiliar structures [PatternDefinition.xml --> Element.class]
+	 * @return Element
+	 */
+	public Element parseDefinition(){
+		CommonElement parentElement = null;
 		expression = "/PatternDefinition/Element[@name='patterninstance'][1]"; //First element
 		try {
 			URI classInstanceXml_uri = CommonPathFix.getHardCodedPath(PATH_NAME.PATTERNDEFINITION_XML);
@@ -40,20 +43,26 @@ public class PatternDefinitionParser2 {
 			//Obtenemos el nodo padre (Siempre es patterninstance)
 			Node firstNodeElement = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 			if (firstNodeElement != null){
-				CommonElement parentElement = new CommonElement();
+				parentElement = new CommonElement();
+				initializeCommonElement(parentElement, firstNodeElement.getAttributes());
 				recursiveParseing(parentElement, firstNodeElement, is);
 			}
 		} catch (XPathExpressionException | IllegalStateException e) {
 			e.printStackTrace();
 		}
- 
-		return this.collected_elements;
+		return parentElement;
 	}
 	
-//	private void recursiveParseing(NodeList childNodes, int index, CommonElement parentElement, InputSource is) throws XPathExpressionException{
+	/***
+	 * This is how i get all the defined elements at PatterDefinition file. 
+	 * @param parentElement
+	 * @param actualNode
+	 * @param is
+	 * @throws XPathExpressionException
+	 */
 	private void recursiveParseing(CommonElement parentElement, Node actualNode, InputSource is) throws XPathExpressionException{
 		NodeList childNodes = actualNode.getChildNodes();
-		log.writeSingleMessage("Analizing element as parent: "+actualNode.getAttributes().getNamedItem("prettyName").getNodeValue());
+		log.writeSingleMessage("Analizing element: "+actualNode.getAttributes().getNamedItem("prettyName").getNodeValue());
 		if (actualNode.hasChildNodes()){
 			for (int index = 0; index < childNodes.getLength(); index++){
 				if (childNodes.item(index).getNodeName().equalsIgnoreCase("attributeelement")){
@@ -61,14 +70,12 @@ public class PatternDefinitionParser2 {
 				}else if (childNodes.item(index).getNodeName().equalsIgnoreCase("childelement")){
 					expression = "/PatternDefinition/Element[@name='"+
 							childNodes.item(index).getAttributes().getNamedItem("ref").getNodeValue()+"']";
-					
 					Node auxililarNode = (Node)xpath.evaluate(expression, is, XPathConstants.NODE);
 					if (auxililarNode != null){
 						CommonElement childElement = new CommonElement(parentElement);
 						initializeCommonElement(childElement, auxililarNode.getAttributes());
-						log.writeSingleMessage("Analizing childelement: "+childElement.getPrettyName());
+						parentElement.getChildElements_collection().add(childElement);
 						recursiveParseing(childElement, auxililarNode, is);
-						
 					}
 				}
 			}
@@ -88,33 +95,7 @@ public class PatternDefinitionParser2 {
 		}
 	}
 	
-	/*
-	private void recursiveParseing(CommonElement parentElement, Node actualNode, InputSource is) throws XPathExpressionException{
-		log.writeSingleMessage("Analizing element: "+actualNode.getAttributes().getNamedItem("name").getNodeValue());
-		element = new CommonElement();
-		if ()
-		
-		
-		if (actualNode.hasChildNodes()){
-			for (int index = 0; index < actualNode.getChildNodes().getLength(); index++){
-				Node childNode = actualNode.getChildNodes().item(index);
-				if (childNode.getNodeName().equalsIgnoreCase("childelement")){
-					log.writeSingleMessage("Searching for child element: "+childNode.getAttributes().getNamedItem("ref").getNodeValue());
-					expression = "/PatternDefinition/Element[@name='"+childNode.getAttributes().getNamedItem("ref").getNodeValue()+"']";
-					//Recursion over childs
-					recursiveParseing(element, (Node) xpath.evaluate(expression, is, XPathConstants.NODE), is);
-				}else if (childNode.getNodeName().equalsIgnoreCase("attributeelement")){
-					log.writeSingleMessage("Analizing attribute: "+childNode.getAttributes().getNamedItem("name").getNodeValue());
-					attributeAttacher(element, actualNode.getAttributes());
-				}
-			}
-		}else{
-			parentElement.getChildElements_collection().add(element);
-		}
-		collected_elements.add(element);
-	}	*/
-
-	private void attributeAttacher(CommonElement co, NamedNodeMap attribute_node_collection){
+	private void attributeAttacher(CommonElement commonElement, NamedNodeMap attribute_node_collection){
 		Attribute attr = new Attribute();
 		for (int hindex = 0; hindex < attribute_node_collection.getLength(); hindex++){
 			Node attributeNode = attribute_node_collection.item(hindex);
@@ -128,9 +109,10 @@ public class PatternDefinitionParser2 {
 				attr.setRequiered(Boolean.valueOf(attributeNode.getNodeValue()));
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("default")){
 				attr.setDefault_value(attributeNode.getNodeValue());
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("group")){
+				attr.setGroup(attributeNode.getNodeValue());
 			}
 		}
-		co.getAttribute_collection().add(attr);
+		commonElement.getAttribute_collection().add(attr);
 	}
-	
 }

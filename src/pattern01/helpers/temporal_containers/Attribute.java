@@ -68,4 +68,11 @@ public class Attribute {
 	public void setDefault_value(String default_value) {
 		this.default_value = default_value;
 	}
+	
+	@Override
+	public String toString(){
+		return "Attribute: Name["+this.getName()+"], PrettyName["+this.getPrettyName()+"], Type["+this.getType()+"], "+
+				"Requiered["+Boolean.toString(this.isRequiered())+"], DefaultValue["+this.getDefault_value()+"], "+
+				"Group["+this.getGroup()+"]";
+	}
 }
