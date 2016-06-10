@@ -53,19 +53,39 @@ public class PatternDefinitionParser2 {
 //	private void recursiveParseing(NodeList childNodes, int index, CommonElement parentElement, InputSource is) throws XPathExpressionException{
 	private void recursiveParseing(CommonElement parentElement, Node actualNode, InputSource is) throws XPathExpressionException{
 		NodeList childNodes = actualNode.getChildNodes();
-		log.writeSingleMessage("Entrando en recursive: "+childNodes.getLength());
+		log.writeSingleMessage("Analizing element as parent: "+actualNode.getAttributes().getNamedItem("prettyName").getNodeValue());
 		if (actualNode.hasChildNodes()){
 			for (int index = 0; index < childNodes.getLength(); index++){
 				if (childNodes.item(index).getNodeName().equalsIgnoreCase("attributeelement")){
 					attributeAttacher(parentElement, childNodes.item(index).getAttributes());
 				}else if (childNodes.item(index).getNodeName().equalsIgnoreCase("childelement")){
-					expression = "/PatternInstance/Element[@name='"+
+					expression = "/PatternDefinition/Element[@name='"+
 							childNodes.item(index).getAttributes().getNamedItem("ref").getNodeValue()+"']";
-					recursiveParseing(parentElement, (Node)xpath.evaluate(expression, is, XPathConstants.NODE), is);
+					
+					Node auxililarNode = (Node)xpath.evaluate(expression, is, XPathConstants.NODE);
+					if (auxililarNode != null){
+						CommonElement childElement = new CommonElement(parentElement);
+						initializeCommonElement(childElement, auxililarNode.getAttributes());
+						log.writeSingleMessage("Analizing childelement: "+childElement.getPrettyName());
+						recursiveParseing(childElement, auxililarNode, is);
+						
+					}
 				}
 			}
 		}
-
+	}
+	
+	private void initializeCommonElement(CommonElement commonElement, NamedNodeMap attribute_node_collection){
+		for (int hindex = 0; hindex < attribute_node_collection.getLength(); hindex++){
+			Node attributeNode = attribute_node_collection.item(hindex);
+			if (attributeNode.getNodeName().equalsIgnoreCase("name")){
+				commonElement.setName(attributeNode.getNodeValue());
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("prettyname")){
+				commonElement.setPrettyName(attributeNode.getNodeValue());
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
+				commonElement.setUnique(Boolean.valueOf(attributeNode.getNodeValue()));
+			}
+		}
 	}
 	
 	/*
