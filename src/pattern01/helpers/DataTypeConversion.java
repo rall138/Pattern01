@@ -23,7 +23,6 @@ public class DataTypeConversion {
 			String processedType = data_type
 					.substring(data_type.indexOf("#{")+2, data_type.indexOf("}"));
 			processed_value = processedType+"."+value.substring(value.lastIndexOf(".")+1,value.indexOf("}"));
-			processed_value = "pattern01.helpers.generated."+processed_value;
 		}else {
 			processed_value = value;
 		}
@@ -40,7 +39,6 @@ public class DataTypeConversion {
 		if (data_type.contains("#{")){ //Custom type
 			processedType = data_type
 					.substring(data_type.indexOf("#{")+2, data_type.indexOf("}"));
-			processedType = "pattern01.helpers.generated."+processedType;
 		}
 		return processedType;
 	}

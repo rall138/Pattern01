@@ -5,20 +5,11 @@ package pattern01.helpers.generated;
 	* Creation date: Sun Jun 12 15:19:05 UYT 2016
 	* Creator: rlomez
 	**/
-public class PatternInstance{
-	private Generator generator=Generator.WEB;
+public class Dialog{
 	private java.lang.String name;
 	private java.lang.String description;
+	private java.lang.String reference;
 	private java.lang.String image = "ww.png";
-	private RelatedFiles relatedFiles;
-	private java.util.List<Faces> collection_Faces = new java.util.ArrayList<>();
-	public Generator getGenerator(){
-		return this.generator;
-	}
-
-	public void setGenerator(Generator generator){
-		this.generator = generator;
-	}
 
 	public java.lang.String getName(){
 		return this.name;
@@ -36,27 +27,20 @@ public class PatternInstance{
 		this.description = description;
 	}
 
+	public java.lang.String getReference(){
+		return this.reference;
+	}
+
+	public void setReference(java.lang.String reference){
+		this.reference = reference;
+	}
+
 	public java.lang.String getImage(){
 		return this.image;
 	}
 
 	public void setImage(java.lang.String image){
 		this.image = image;
-	}
-
-	public RelatedFiles getrelatedFiles(){
-		return this.relatedFiles;
-	}
-
-	public void setRelatedFiles(RelatedFiles relatedFiles){
-		this.relatedFiles = relatedFiles;
-	}
-	public void setCollection_Faces(java.util.List<Faces> collection_Faces){
-		this.collection_Faces = collection_Faces;
-	}
-
-	public java.util.List<Faces> getCollection_Faces(){
-		return this.collection_Faces;
 	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){
@@ -71,17 +55,13 @@ public class PatternInstance{
 	}
 
 	public java.lang.String toXml(){
-		java.lang.String xml ="<PatternInstance "
-		+ "generator='"+this.generator+"'"
+		java.lang.String xml ="<Dialog "
 		+ "name='"+this.name+"'"
 		+ "description='"+this.description+"'"
+		+ "reference='"+this.reference+"'"
 		+ "image='"+this.image+"'"
 		+ ">";
-			xml+=this.relatedFiles.toXml();
-			for(int index = 0; index < collection_Faces.size(); index++){
-				xml+=collection_Faces.get(index).toXml();
-			}
-		xml+="</PatternInstance>";
+		xml+="</Dialog>";
 		return xml;
 	}
 }
