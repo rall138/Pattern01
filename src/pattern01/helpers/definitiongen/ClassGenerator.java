@@ -41,7 +41,7 @@ public class ClassGenerator extends Task{
 	public void execute(){
 		parsePatternDefinition();
 		generateClasses(patterninstanceElement);
-		generatePatterEditorClasses();
+		generatePatternEditorClasses();
 //		generateNodeTypeClass();
 //		generatePatternInstanceClass();*/
 	}

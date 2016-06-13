@@ -1,8 +1,6 @@
 package pattern01.helpers.definitiongen;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -11,7 +9,6 @@ import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.DataTypeConversion;
-import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
 
@@ -31,6 +28,8 @@ public class EditorPartGenerator extends Task{
 	private CustomStringBuilder builder = null;
 	private CustomStringBuilder attributeBuilder = null;
 	private CustomStringBuilder getterAndSetterBuilder = null;
+	private CustomStringBuilder comboInitializerBuilder = null;
+	private boolean hasCustomValueDefined = false;
 	
 	public EditorPartGenerator(Element patternInstanceElement){
 		this.patternInstanceElement = patternInstanceElement;
@@ -40,99 +39,42 @@ public class EditorPartGenerator extends Task{
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		
-		generateClasses();
+		generateClasses(patternInstanceElement);
 	}
 	
 	private void generateClasses(Element element){
 		
 		if(element != null){
+			initializeCustomStringBuilders();
 			generateClassHeader(element);
 			generateAttributes(element);
-			
-		}
-	
-		
-		generateClassHeader(element);
-		
-			
+			generateConstructor(element);
+			builder.appendLn(tabGen(2)+"addListeners();");
 			if (hasCustomValueDefined){
 				builder.appendLn(tabGen(2)+"initializeCombos();");
 			}
-			builder.appendLn(tabGen(2)+"addListeners();");
-			builder.appendLn(tabGen(1)+"}");
-			
-			//Solo si existen valores custom definidos
+			generateEditorOverrides();
 			if(hasCustomValueDefined){
-				builder.appendLn("");
-				builder.appendLn(tabGen(1)+"private void initializeCombos(){");
-				builder.append(comboInitializerBuilder.toString());
-				builder.appendLn(tabGen(1)+"}");
+				generateComboInitializerMethod();
 			}
-			
-			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"private void addListeners() {");
-			for(Attribute attr : collected_elements.get(index).getAttribute_collection()){
-				String eventType ="";
-				if(attr.getType().contains("#{")){
-					eventType = "org.eclipse.swt.SWT.Selection";
-				}else{
-					eventType = "org.eclipse.swt.SWT.KeyDown";
-				}
-				builder.appendLn(tabGen(2)+"");
-				builder.appendLn(tabGen(2)+"this."+attr.getName()+".addListener("+eventType+", "+
-						"new org.eclipse.swt.widgets.Listener() {");
-				builder.appendLn(tabGen(3)+"@Override");
-				builder.appendLn(tabGen(3)+"public void handleEvent(org.eclipse.swt.widgets.Event event) {");
-				builder.appendLn(tabGen(4)+"dirty = true;");
-				builder.appendLn(tabGen(4)+"firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);");
-				builder.appendLn(tabGen(3)+"}");
-				builder.appendLn(tabGen(2)+"});");
-			}
-			builder.appendLn(tabGen(1)+"}");
-			
-			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"@Override");
-			builder.appendLn(tabGen(1)+"public void init(org.eclipse.ui.IEditorSite site, org.eclipse.ui.IEditorInput input) {");
-			builder.appendLn(tabGen(2)+"setSite(site);");
-			builder.appendLn(tabGen(2)+"setInput(input);");
-			builder.appendLn(tabGen(1)+"}");
-			
-			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"@Override");
-			builder.appendLn(tabGen(1)+"public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {");
-			builder.appendLn(tabGen(2)+"this.dirty = false;");
-			builder.appendLn(tabGen(1)+"}");
-
-			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"@Override");
-			builder.appendLn(tabGen(1)+"public void doSaveAs() {");
-			builder.appendLn(tabGen(2)+"this.dirty = false;");
-			builder.appendLn(tabGen(1)+"}");
-
-			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"@Override");
-			builder.appendLn(tabGen(1)+"public boolean isDirty() {");
-			builder.appendLn(tabGen(2)+"return this.dirty;");
-			builder.appendLn(tabGen(1)+"}");
-			
-			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"@Override");
-			builder.appendLn(tabGen(1)+"public boolean isSaveAsAllowed() {");
-			builder.appendLn(tabGen(2)+"return true;");
-			builder.appendLn(tabGen(1)+"}");
-
-			builder.appendLn("");
-			builder.appendLn(tabGen(1)+"@Override");
-			builder.appendLn(tabGen(1)+"public void setFocus() {");
-			builder.appendLn(tabGen(1)+"}");
-
-			if (getterSetterBuilder != null && getterSetterBuilder.toString() != null){
-				builder.appendLn(getterSetterBuilder.toString());
-			}
-			
+			generateListeners(element);
+			builder.append(attributeBuilder.toString());
+			builder.append(getterAndSetterBuilder.toString());
+			builder.append(comboInitializerBuilder.toString());
 			builder.appendLn("}");
-			generateClasses(className, builder.toString());
+			
+			generateClasses(element.getName(), builder.toString());
+			for(Element childElement : element.getChildElements_collection()){
+				generateClasses(childElement);
+			}
 		}
+	}
+	
+	private void initializeCustomStringBuilders(){
+		builder = new CustomStringBuilder();
+		attributeBuilder = new CustomStringBuilder();
+		getterAndSetterBuilder = new CustomStringBuilder();
+		comboInitializerBuilder = new CustomStringBuilder();
 	}
 	
 	private void generateClassHeader(Element element){
@@ -195,6 +137,13 @@ public class EditorPartGenerator extends Task{
 		controlInitializer(element);
 	}
 
+	private void generateComboInitializerMethod(){
+		builder.appendLn("");
+		builder.appendLn(tabGen(1)+"private void initializeCombos(){");
+		builder.append(comboInitializerBuilder.toString());
+		builder.appendLn(tabGen(1)+"}");
+	}
+
 	private void controlInitializer(Element element){
 		for(Attribute attr : element.getAttribute_collection()){
 			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+" = new org.eclipse.swt.widgets.Label(parent, "+
@@ -204,6 +153,7 @@ public class EditorPartGenerator extends Task{
 			if (attr.getType().contains("#{")){
 				builder.appendLn(tabGen(2)+"this."+attr.getName()+
 						" = new org.eclipse.swt.widgets.Combo(parent, org.eclipse.swt.SWT.NONE);");
+				hasCustomValueDefined = true;
 				try {
 					String processedType = DataTypeConversion.getProcessedType(attr.getType());
 					String processedDefaultValue = DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value());
@@ -230,6 +180,67 @@ public class EditorPartGenerator extends Task{
 						".setText("+quotscape+attr.getDefault_value()+quotscape+");");
 			}
 		}
+	}
+	
+	private void generateListeners(Element element){
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"private void addListeners() {");
+		for(Attribute attr : element.getAttribute_collection()){
+			String eventType ="";
+			if(attr.getType().contains("#{")){
+				eventType = "org.eclipse.swt.SWT.Selection";
+			}else{
+				eventType = "org.eclipse.swt.SWT.KeyDown";
+			}
+			builder.appendLn(tabGen(2)+"");
+			builder.appendLn(tabGen(2)+"this."+attr.getName()+".addListener("+eventType+", "+
+					"new org.eclipse.swt.widgets.Listener() {");
+			builder.appendLn(tabGen(3)+"@Override");
+			builder.appendLn(tabGen(3)+"public void handleEvent(org.eclipse.swt.widgets.Event event) {");
+			builder.appendLn(tabGen(4)+"dirty = true;");
+			builder.appendLn(tabGen(4)+"firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);");
+			builder.appendLn(tabGen(3)+"}");
+			builder.appendLn(tabGen(2)+"});");
+		}
+		builder.appendLn(tabGen(1)+"}");
+	}
+	
+	private void generateEditorOverrides(){
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"@Override");
+		builder.appendLn(tabGen(1)+"public void init(org.eclipse.ui.IEditorSite site, org.eclipse.ui.IEditorInput input) {");
+		builder.appendLn(tabGen(2)+"setSite(site);");
+		builder.appendLn(tabGen(2)+"setInput(input);");
+		builder.appendLn(tabGen(1)+"}");
+		
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"@Override");
+		builder.appendLn(tabGen(1)+"public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {");
+		builder.appendLn(tabGen(2)+"this.dirty = false;");
+		builder.appendLn(tabGen(1)+"}");
+
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"@Override");
+		builder.appendLn(tabGen(1)+"public void doSaveAs() {");
+		builder.appendLn(tabGen(2)+"this.dirty = false;");
+		builder.appendLn(tabGen(1)+"}");
+
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"@Override");
+		builder.appendLn(tabGen(1)+"public boolean isDirty() {");
+		builder.appendLn(tabGen(2)+"return this.dirty;");
+		builder.appendLn(tabGen(1)+"}");
+		
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"@Override");
+		builder.appendLn(tabGen(1)+"public boolean isSaveAsAllowed() {");
+		builder.appendLn(tabGen(2)+"return true;");
+		builder.appendLn(tabGen(1)+"}");
+
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"@Override");
+		builder.appendLn(tabGen(1)+"public void setFocus() {");
+		builder.appendLn(tabGen(1)+"}");
 	}
 	
 	private String tabGen(int quantity){
