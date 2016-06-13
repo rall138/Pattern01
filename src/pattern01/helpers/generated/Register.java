@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Jun 13 00:25:13 UYT 2016
+	* Creation date: Mon Jun 13 12:21:09 GFT 2016
 	* Creator: rlomez
 	**/
 public class Register{
