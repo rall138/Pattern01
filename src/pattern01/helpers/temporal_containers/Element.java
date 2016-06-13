@@ -5,11 +5,16 @@ import java.util.List;
 
 public class Element {
 
+	/* Package reference, if you want to change generation location modify this */
+	public static final String classPackage = "pattern01.helpers.generated";
+	public static final String editorPackage = "pattern01.plugin.components.editors.generated";
+	
 	protected List<Attribute> attribute_collection = new ArrayList<>();
 	protected List<CommonElement> childElements_collection = new ArrayList<>();
 	protected boolean unique;
 	protected String name;
 	protected String prettyName;
+	
 	public List<Attribute> getAttribute_collection() {
 		return attribute_collection;
 	}
