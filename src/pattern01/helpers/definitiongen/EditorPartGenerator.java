@@ -58,10 +58,17 @@ public class EditorPartGenerator extends Task{
 			builder.appendLn("}");
 			
 			generateClasses(element.getPrettyName()+"PatternEditor", builder.toString());
+			declarePatternEditorOnPlugin(element);
 			for(Element childElement : element.getChildElements_collection()){
 				generateClasses(childElement);
 			}
 		}
+	}
+	
+	private void declarePatternEditorOnPlugin(Element element){
+		bfr.getProject().setProperty("filename", CommonPathFix.getHardCodedPath(PATH_NAME.MANIFEST_XML).getPath());
+		bfr.getProject().setProperty("message", EditorPartRegister.generatePluginCode(element));
+		bfr.executeTarget("fileRelative");
 	}
 	
 	private void initializeCustomStringBuilders(){
@@ -107,8 +114,6 @@ public class EditorPartGenerator extends Task{
 		builder.append(attributeBuilder.toString());
 	}
 
-	private void generate
-	
 	private void generateGetterAndSettersOfAttributes(Attribute attr){
 		getterAndSetterBuilder.appendLn("");
 		getterAndSetterBuilder.appendLn(tabGen(1)+"public "+attr.getType()+

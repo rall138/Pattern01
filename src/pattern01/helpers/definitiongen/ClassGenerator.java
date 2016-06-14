@@ -177,34 +177,6 @@ public class ClassGenerator extends Task{
 		getterAndSetterBuilder.appendLn(tabGen(1)+"}");
 	}
 	
-//	private void generateCustomValueBasedProperties(CustomStringBuilder attrBuilder, 
-//			CustomStringBuilder builder, String processedType, String attrName, String processedDefaultValue){
-//		List<Element> collected_custom_values = (new CustomValuesDefinitionParser()).parseDefinition();
-//		if (collected_custom_values.size() > 0){
-//			int index = 0;
-//			boolean itemFound = false;
-//			while(index < collected_custom_values.size() && !itemFound){
-//				if (collected_custom_values.get(index).getName().equalsIgnoreCase(processedType)){
-//					attrBuilder.appendLn(tabGen(1)+"private "+collected_custom_values.get(index).getPrettyName()
-//							+" "+attrName+(processedDefaultValue.isEmpty()?";" : " = "+processedDefaultValue+";"));
-//					itemFound = true;
-//				}else{
-//					index++;
-//				}
-//			}
-//			builder.appendLn(tabGen(1)+"public "+collected_custom_values.get(index).getPrettyName()
-//					+" get"+collected_custom_values.get(index).getPrettyName()+"(){");
-//			builder.appendLn(tabGen(2)+"return this."+attrName+";");
-//			builder.appendLn(tabGen(1)+"}");
-//			builder.clrlf();
-//			builder.appendLn(tabGen(1)+"public void set"+collected_custom_values.get(index).getPrettyName()
-//					+"("+collected_custom_values.get(index).getPrettyName()+" "+collected_custom_values.get(index).getName()+"){");
-//			builder.appendLn(tabGen(2)+"this."+attrName+" = "+collected_custom_values.get(index).getName()+";");
-//			builder.appendLn(tabGen(1)+"}");
-//			
-//		}
-//	}
-
 	private void generateCustomValueBasedProperties(String processedType, String processedValue, String attrName){
 		List<Element> collected_custom_values = (new CustomValuesDefinitionParser()).parseDefinition();
 		if (collected_custom_values.size() > 0){
@@ -284,12 +256,13 @@ public class ClassGenerator extends Task{
 		EditorPartGenerator epgen = new EditorPartGenerator(this.patterninstanceElement);
 		epgen.execute();
 	}
-	/*
+	
 	private void generateNodeTypeClass(){
-		NodeTypeEnumGenerator ntgen = new NodeTypeEnumGenerator(collected_elements);
+		NodeTypeEnumGenerator ntgen = new NodeTypeEnumGenerator(this.patterninstanceElement);
 		ntgen.execute();
 	}
 	
+	/*
 	private void generatePatternInstanceClass(){
 		PatternInstanceParserGenerator pipgen = new PatternInstanceParserGenerator(collected_elements);
 		pipgen.execute();

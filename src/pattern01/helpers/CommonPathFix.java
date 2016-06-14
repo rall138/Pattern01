@@ -13,10 +13,9 @@ public class CommonPathFix {
 	public enum PATH_NAME{CLASSGENERATOR_XML, WORKSPACE_LOC, 
 		PATTERNDEFINITION_XML, BINFOLDER, 
 		CUSTOMPROPERTIES_PROPERTIES, ICONFOLDER,
-		CUSTOMVALUESDEFINITION, DEFAULTWWDEFINITION};
+		CUSTOMVALUESDEFINITION, DEFAULTWWDEFINITION, MANIFEST_XML};
 	
 	public static URI getHardCodedPath(PATH_NAME path_name){
-		URI uri = null;
 		File file = null;
 		String os = System.getProperty("os.name");
 		switch (path_name) {
@@ -55,11 +54,11 @@ public class CommonPathFix {
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
 						barFix(os, "/GeneralConfig/DefaultPatternDefinition.xml"));
 				break;
-		}
-//		if (file.exists()){
-			uri = file.toURI();
-//		}
-		return uri;
+			case MANIFEST_XML:
+				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
+						barFix(os, "/plugin.xml"));
+		} 
+		return file.toURI();
 	}
 	
 	private static String barFix(String os, String relative_path){

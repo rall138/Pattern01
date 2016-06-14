@@ -8,6 +8,7 @@ public class Element {
 	/* Package reference, if you want to change generation location modify this */
 	public static final String classPackage = "pattern01.helpers.generated";
 	public static final String editorPackage = "pattern01.plugin.components.editors.generated";
+	public static final String postFix = "PatternEditor";
 	
 	protected List<Attribute> attribute_collection = new ArrayList<>();
 	protected List<CommonElement> childElements_collection = new ArrayList<>();

@@ -20,6 +20,7 @@ import org.eclipse.ui.PlatformUI;
 
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.generated.PatternInstanceEditorPart;
+import pattern01.plugin.components.editors.generated.PatternInstancePatternEditor;
 
 @SuppressWarnings("unused")
 public class MenuFactory {
@@ -84,7 +85,7 @@ public class MenuFactory {
 					try {
 						DefaultEditorInput dei = new DefaultEditorInput();
 						dei.setInstanceTree(parent);
-						page.openEditor(dei, PatternInstanceEditorPart.ID);
+						page.openEditor(dei, PatternInstancePatternEditor.ID);
 					} catch (PartInitException e) {
 						e.printStackTrace();
 					}
