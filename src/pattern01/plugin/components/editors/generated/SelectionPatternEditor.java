@@ -2,7 +2,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Jun 13 23:49:44 UYT 2016
+	* Creation date: Wed Jun 15 00:10:46 UYT 2016
 	* Creator: rlomez
 	**/
 public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{

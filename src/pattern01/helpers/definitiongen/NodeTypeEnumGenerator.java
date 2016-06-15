@@ -1,8 +1,6 @@
 package pattern01.helpers.definitiongen;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -25,24 +23,36 @@ public class NodeTypeEnumGenerator extends Task{
 			+tabspace+"**/";
 	
 	private BuildFileRule bfr = new BuildFileRule();
-	private List<Element> collected_elements = new ArrayList<>();
+	private Element patternInstanceElement = null;
+	private CustomStringBuilder builder = null;
 	
-	public NodeTypeEnumGenerator(List<Element> collected_elements){
-		this.collected_elements = collected_elements;
+	public NodeTypeEnumGenerator(Element patternInstanceElement){
+		this.patternInstanceElement = patternInstanceElement;
 	}
 
 	public void execute(){
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
-		
-		generateClasses();
+		generateClasses(this.patternInstanceElement);
 	}
 	
-	private void generateClasses(){
+	private void generateClasses(Element element){
 		LoggerThread log = new LoggerThread();
-		CustomStringBuilder builder;
 		log.writeSingleMessage("Generating NodeType");
-
+		if (element != null){
+			builder = new CustomStringBuilder();
+			generateClassHeader(element);
+			generateElementList(element);
+			//TODO reemplazar coma por punto y coma en el ultimo elemento de la lista
+			generateHardCodedToStringMethod();
+			generateToStringMethod(element);
+			generateToStringMethodFooter();
+			builder.appendLn("}");
+		}
+		generateClasses("NodeType", builder.toString());
+	}
+	
+	private void generateClassHeader(Element element){
 		builder = new CustomStringBuilder();
 		builder.appendLn(classHeaderComment);
 		builder.appendLn("package pattern01.plugin.components.navigator;");
@@ -50,16 +60,20 @@ public class NodeTypeEnumGenerator extends Task{
 		builder.appendLn("public enum NodeType {");
 		builder.append(tabGen(1)+"UNDEFINED,");
 		builder.append("CLASS,");
-		for(int index = 0; index < collected_elements.size(); index++){
-			if(index < collected_elements.size() -1){
-				builder.append(collected_elements.get(index).getName().toUpperCase()+",");
-			}else{
-				builder.append(collected_elements.get(index).getName().toUpperCase()+";");
+	}
+	
+	private void generateElementList(Element element){
+		if (element != null){
+			builder.append(element.getName().toUpperCase()+",");
+			for (Element childElement : element.getChildElements_collection()){
+				generateElementList(childElement);
 			}
 		}
-		
-		builder.appendLn("");
-		builder.appendLn("");
+	}
+	
+	private void generateHardCodedToStringMethod(){
+		builder.clrlf();
+		builder.clrlf();
 		builder.appendLn(tabGen(1)+"public static String toString(NodeType nodetype){");
 		builder.appendLn(tabGen(2)+"String nodetypestr = "+quotscape+quotscape+";");
 		builder.appendLn(tabGen(3)+"switch(nodetype){");
@@ -69,38 +83,23 @@ public class NodeTypeEnumGenerator extends Task{
 		builder.appendLn(tabGen(3)+"case CLASS:");
 		builder.appendLn(tabGen(4)+"nodetypestr = "+quotscape+"CLASS"+quotscape+";");
 		builder.appendLn(tabGen(4)+"break;");
-		for(int index = 0; index < collected_elements.size(); index++){
-			builder.appendLn(tabGen(3)+"case "+collected_elements.get(index).getName().toUpperCase()+":");
-			builder.appendLn(tabGen(4)+"nodetypestr = "+
-					quotscape+collected_elements.get(index).getName().toUpperCase()+quotscape+";");
+	}
+	
+	private void generateToStringMethod(Element element){
+		if (element != null){
+			builder.appendLn(tabGen(3)+"case "+element.getName().toUpperCase()+":");
+			builder.appendLn(tabGen(4)+"nodetypestr ="+quotscape+element.getName().toUpperCase()+quotscape);
 			builder.appendLn(tabGen(4)+"break;");
+			for (Element childElement : element.getChildElements_collection()){
+				generateToStringMethod(childElement);
+			}
 		}
+	}
+	
+	private void generateToStringMethodFooter(){
 		builder.appendLn(tabGen(2)+"}");
 		builder.appendLn(tabGen(2)+"return nodetypestr;");
 		builder.appendLn(tabGen(1)+"}");
-		
-		builder.appendLn("");
-		builder.appendLn(tabGen(1)+"public static NodeType nodeTypeFromString(String nodetypestr){");
-		builder.appendLn(tabGen(2)+"NodeType nodetype = NodeType.UNDEFINED;");
-		builder.appendLn(tabGen(3)+"switch(nodetypestr.toUpperCase()){");
-		builder.appendLn(tabGen(3)+"case "+quotscape+"UNDEFINED"+quotscape+":");
-		builder.appendLn(tabGen(4)+"nodetype = NodeType.UNDEFINED;");
-		builder.appendLn(tabGen(4)+"break;");
-		builder.appendLn(tabGen(3)+"case "+quotscape+"CLASS"+quotscape+":");
-		builder.appendLn(tabGen(4)+"nodetype = NodeType.CLASS;");
-		builder.appendLn(tabGen(4)+"break;");
-		for(int index = 0; index < collected_elements.size(); index++){
-			builder.appendLn(tabGen(3)+"case "+quotscape+collected_elements.get(index).getName().toUpperCase()+quotscape+":");
-			builder.appendLn(tabGen(4)+"nodetype = NodeType."+
-					collected_elements.get(index).getName().toUpperCase()+";");
-			builder.appendLn(tabGen(4)+"break;");
-		}
-		builder.appendLn(tabGen(2)+"}");
-		builder.appendLn(tabGen(2)+"return nodetype;");
-		builder.appendLn(tabGen(1)+"}");
-		builder.appendLn("");
-		builder.appendLn("}");
-		generateClasses("NodeType", builder.toString());
 	}
 	
 	private String tabGen(int quantity){

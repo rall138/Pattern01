@@ -2,7 +2,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Jun 13 23:49:43 UYT 2016
+	* Creation date: Wed Jun 15 00:10:46 UYT 2016
 	* Creator: rlomez
 	**/
 public class Selection{
