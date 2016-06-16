@@ -111,7 +111,7 @@ public class PatternNavigator extends ViewPart {
 						//Genera el item [class] como nodo "raiz"
 						classInstance = new TreeItem(parent, 0);
 						classInstance.setText(className);
-						classInstance.setData("type", NodeType.nodeTypeFromString(classNodeList.item(index).getNodeName()));
+						classInstance.setData("type", NodeType.valueOf(classNodeList.item(index).getNodeName().toUpperCase()));
 						classInstance.setImage(ImageHelper.getImage("class_obj.png"));
 						
 						//Se generan los demas elementos debajo del nodo clase por intermedio de parseing del xml correspondiente.

@@ -2,7 +2,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 00:10:46 UYT 2016
+	* Creation date: Wed Jun 15 22:44:39 UYT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart{
@@ -113,7 +113,7 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 		for(int index = 0; index < pattern01.helpers.generated.Generator.getOptionCollection().size(); index++){
 			this.generator.add(pattern01.helpers.generated.Generator.getOptionCollection().get(index));
 		}
-		this.generator.select(this.generator.indexOf("Generator.WEB"));
+		this.generator.select(this.generator.indexOf("pattern01.helpers.generated.Generator.WEB"));
 	}
 
 	public java.lang.String getLabel_NameText(){

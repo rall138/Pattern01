@@ -25,6 +25,7 @@ public class NodeTypeEnumGenerator extends Task{
 	private BuildFileRule bfr = new BuildFileRule();
 	private Element patternInstanceElement = null;
 	private CustomStringBuilder builder = null;
+	private CustomStringBuilder elementListBuilder = null;
 	
 	public NodeTypeEnumGenerator(Element patternInstanceElement){
 		this.patternInstanceElement = patternInstanceElement;
@@ -41,8 +42,10 @@ public class NodeTypeEnumGenerator extends Task{
 		log.writeSingleMessage("Generating NodeType");
 		if (element != null){
 			builder = new CustomStringBuilder();
+			elementListBuilder = new CustomStringBuilder();
 			generateClassHeader(element);
 			generateElementList(element);
+			builder.append(elementListBuilder.toString().substring(0, elementListBuilder.toString().length()-1)+";");
 			//TODO reemplazar coma por punto y coma en el ultimo elemento de la lista
 			generateHardCodedToStringMethod();
 			generateToStringMethod(element);
@@ -64,7 +67,7 @@ public class NodeTypeEnumGenerator extends Task{
 	
 	private void generateElementList(Element element){
 		if (element != null){
-			builder.append(element.getName().toUpperCase()+",");
+			elementListBuilder.append(element.getName().toUpperCase()+",");
 			for (Element childElement : element.getChildElements_collection()){
 				generateElementList(childElement);
 			}
@@ -88,7 +91,7 @@ public class NodeTypeEnumGenerator extends Task{
 	private void generateToStringMethod(Element element){
 		if (element != null){
 			builder.appendLn(tabGen(3)+"case "+element.getName().toUpperCase()+":");
-			builder.appendLn(tabGen(4)+"nodetypestr ="+quotscape+element.getName().toUpperCase()+quotscape);
+			builder.appendLn(tabGen(4)+"nodetypestr ="+quotscape+element.getName().toUpperCase()+quotscape+";");
 			builder.appendLn(tabGen(4)+"break;");
 			for (Element childElement : element.getChildElements_collection()){
 				generateToStringMethod(childElement);

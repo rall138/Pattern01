@@ -43,7 +43,7 @@ public class ClassGenerator extends Task{
 		generateClasses(this.patterninstanceElement);
 		generatePatternEditorClasses();
 		generateNodeTypeClass();
-//		generatePatternInstanceClass();*/
+		generatePatternInstanceClass();
 	}
 	
 	private void parsePatternDefinition(){
@@ -262,9 +262,9 @@ public class ClassGenerator extends Task{
 		ntgen.execute();
 	}
 	
-	/*
+	
 	private void generatePatternInstanceClass(){
-		PatternInstanceParserGenerator pipgen = new PatternInstanceParserGenerator(collected_elements);
+		PatternInstanceParserGenerator pipgen = new PatternInstanceParserGenerator(this.patterninstanceElement);
 		pipgen.execute();
-	}*/
+	}
 }

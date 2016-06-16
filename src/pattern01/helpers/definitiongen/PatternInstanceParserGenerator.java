@@ -1,8 +1,6 @@
 package pattern01.helpers.definitiongen;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -35,36 +33,32 @@ public class PatternInstanceParserGenerator extends Task{
 			+tabspace+"**/";
 	
 	private BuildFileRule bfr = new BuildFileRule();
-	private List<Element> collected_elements = new ArrayList<>();
+	private Element patternInstanceElement = null;
+	private CustomStringBuilder builder = null;
 	LoggerThread log = new LoggerThread();
 	
-	public PatternInstanceParserGenerator(List<Element> collected_elements){
-		this.collected_elements = collected_elements;
+	public PatternInstanceParserGenerator(Element patternInstanceElement){
+		this.patternInstanceElement = patternInstanceElement;
 	}
 
 	public void execute(){
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
+
 		//Se anaden los datos faltantes a los childselements creados
-		generateClasses();
+		generateClasses(this.patternInstanceElement);
 	}
 	
 	
-	private void generateClasses(){
-		LoggerThread log = new LoggerThread();
-		
-		log.writeSingleMessage("*** File generation ***");
-	
-		CustomStringBuilder builder;
-
+	private void generateClasses(Element element){
+		log.writeSingleMessage("Generating PatternInstanceSaver code-sustituttion");
 		builder = new CustomStringBuilder();
-		
 		builder.appendLn(beginTag);
 		builder.appendLn(classHeaderComment);
 		builder.appendLn(tabGen(1)+"private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){");
 		builder.appendLn(tabGen(2)+"org.eclipse.swt.widgets.TreeItem item = new org.eclipse.swt.widgets.TreeItem(parent, 0);");
 		builder.appendLn(tabGen(2)+"item.setText(actualNode.getNodeName());");
-		builder.appendLn(tabGen(2)+"item.setData("+quotscape+"type"+quotscape+", NodeType.nodeTypeFromString(actualNode.getNodeName()));");
+		builder.appendLn(tabGen(2)+"item.setData("+quotscape+"type"+quotscape+", NodeType.valueOf(actualNode.getNodeName().toUpperCase()));");
 		builder.clrlf();
 		builder.appendLn(tabGen(2)+"// Attribute traspasseing (from xpath node --> treeItem node)");
 		builder.appendLn(tabGen(2)+"for(int index = 0; index < actualNode.getAttributes().getLength(); index++){");
@@ -88,55 +82,72 @@ public class PatternInstanceParserGenerator extends Task{
 
 		//Generamos el codigo para las instancias 
 		builder.clrlf();
-		elementStrategy(builder);
-		
+		generateElementStrategyHeader();
+		generateElementStrategy(element, true);
+		generateElementStrategyFooter();
 		builder.appendLn(endTag);
 		generateClasses("PatternInstanceParser", builder.toString());
 	}
 	
-	private void elementStrategy(CustomStringBuilder builder){
-		builder.appendLn(tabGen(1)+"private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){");
-		for(int index = 0; index < collected_elements.size(); index++){
-			CommonElement co = (CommonElement)collected_elements.get(index);
-			if(index == 0){
-				builder.appendLn(tabGen(2)+"if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");
+	private void generateElementStrategyHeader(){
+		builder.appendLn(tabGen(1)+"private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){");		
+	}
+	
+	private void generateElementStrategy(Element element, boolean isParentElement){
+		if (element != null){
+			if (isParentElement){
+				builder.appendLn(tabGen(2)+"if(actualNode.getNodeName()"
+						+ ".equalsIgnoreCase("+quotscape+element.getName()+quotscape+")){");
 			}else{
-				builder.appendLn(tabGen(2)+"}else if(actualNode.getNodeName().equalsIgnoreCase("+quotscape+co.getName()+quotscape+")){");				
-			}
-
-			//New de la variable 
-			builder.appendLn(tabGen(3)+"pattern01.helpers.generated."+co.getPrettyName()+
-					" "+co.getName()+" = new pattern01.helpers.generated."+co.getPrettyName()+"();");
-
-			for(Attribute attr : co.getAttribute_collection()){
-				builder.appendLn(tabGen(3)+"if("+quotscape+attr.getName()+quotscape+" == actualNode.getNodeName()){");
-				builder.appendLn(tabGen(4)+co.getName()+".set"+attr.getPrettyName()+"(actualNode.getNodeValue() != null "
-						+"? "+DataTypeConversion.getDataTypeWrapper(attr.getType(),"actualNode.getNodeValue().toString()")+":"+
-						DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
-				builder.appendLn(tabGen(3)+"}");
-			}
-			builder.appendLn(tabGen(3)+"item.setData("+quotscape+"class_instance"+quotscape+","+co.getName()+");");
-			if (index > 0){
-				dependenciesAssignment(builder, co, index);
+				builder.appendLn(tabGen(2)+"}else if(actualNode.getNodeName()"
+						+ ".equalsIgnoreCase("+quotscape+element.getName()+quotscape+")){");				
 			}
 		}
+		
+		//New de la variable 
+		builder.appendLn(tabGen(3)+"pattern01.helpers.generated."+element.getPrettyName()+
+				" "+element.getName()+" = new pattern01.helpers.generated."+element.getPrettyName()+"();");
+		
+		generatePropertiesAssignment(element);
+
+		//Element instance assignment in treeviewItem Data
+		builder.appendLn(tabGen(3)+"item.setData("+quotscape+"class_instance"+quotscape+","+element.getName()+");");
+
+		generateDependenciesInjection(element);
+		
+		for (Element childElement : element.getChildElements_collection()){
+			generateElementStrategy(childElement, false);
+		}
+	}
+
+	private void generateElementStrategyFooter(){
 		builder.appendLn(tabGen(2)+"}");
 		builder.appendLn(tabGen(1)+"}");
 	}
 	
-	private void dependenciesAssignment(CustomStringBuilder builder, CommonElement co,  int element_idex){
-		log.writeSingleMessage("parentElement on dependencies assignment:"+co.getParentElement());
-		if (!co.isUnique() && co.getParentElement() != null){
-			
-			builder.appendLn(tabGen(3)+
-				"((pattern01.helpers.generated."+co.getParentElement().getPrettyName()+")"+
-				"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).getCollection_"+
-				collected_elements.get(element_idex).getPrettyName()+".add("+co.getName()+");");
-		}else if (co.isUnique() && co.getParentElement() != null){
-			builder.appendLn(tabGen(3)+
-				"((pattern01.helpers.generated."+co.getParentElement().getPrettyName()+")"+
-				"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).set"+
-				collected_elements.get(element_idex).getPrettyName()+"("+co.getName()+");");
+	private void generatePropertiesAssignment(Element element){
+		for(Attribute attr : element.getAttribute_collection()){
+			builder.appendLn(tabGen(3)+"if("+quotscape+attr.getName()+quotscape+" == actualNode.getNodeName()){");
+			builder.appendLn(tabGen(4)+element.getName()+".set"+attr.getPrettyName()+"(actualNode.getNodeValue() != null "+
+					"? "+DataTypeConversion.getDataTypeWrapper(attr.getType(),"actualNode.getNodeValue().toString()")+":"+
+					DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
+			builder.appendLn(tabGen(3)+"}");
+		}
+	}
+	
+	private void generateDependenciesInjection(Element element){
+		if (element != null && ((CommonElement)element).getParentElement() != null){
+			if (!element.isUnique()){
+				builder.appendLn(tabGen(3)+
+					"((pattern01.helpers.generated."+((CommonElement)element).getParentElement().getPrettyName()+")"+
+					"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).getCollection_"+
+					element.getPrettyName()+"().add("+element.getName()+");");
+			}else {
+				builder.appendLn(tabGen(3)+
+					"((pattern01.helpers.generated."+((CommonElement)element).getParentElement().getPrettyName()+")"+
+					"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).set"+
+					element.getPrettyName()+"("+element.getName()+");");
+			}
 		}
 	}
 	

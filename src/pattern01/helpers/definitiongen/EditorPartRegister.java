@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CustomStringBuilder;
+import pattern01.helpers.LoggerThread;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.temporal_containers.Element;
 
@@ -18,10 +19,12 @@ public class EditorPartRegister {
 	private static final String quotscape = "\"";	
 	private static final String sustitution_token = "<<EDITOR_NAME>>";
 	private static final String sustitution_prettyNameToken = "<<PRETTY_NAME>>";
-	private static final String regularExpression = "(<extension)(\\s*)(point=\\\"org.eclipse.ui.editors\\\">)"
-			+ "(\\s*)(<editor)(\\s*)"
-			+ "(class=\\\""+sustitution_token+"\\\")"
-			+ "(\\s*\\S*\\.*)*(</extension>)";
+	private static final String regularExpression = "(<extension)(\\s*)(point=\\\"org.eclipse.ui.editors\\\">)"+
+			 "(\\s*)(<editor)(\\s*)"+
+			 "(class=\\\""+sustitution_token+"\\\")"+
+			 "(\\s*\\S*\\.*)*(</extension>)";
+	
+	private static final LoggerThread logger = new LoggerThread();
 	
 	private static final String editorDeclaration = tabGen(1)+"<extension"+System.lineSeparator()
          +tabGen(2)+"point="+quotscape+"org.eclipse.ui.editors"+quotscape+">"+System.lineSeparator()
@@ -38,7 +41,7 @@ public class EditorPartRegister {
 		String processedRegEx = regularExpression
 				.replace(sustitution_token,Element.editorPackage+"."+element.getPrettyName()+Element.postFix);
 		
-		System.out.println("RegEx:"+processedRegEx);
+		logger.writeSingleMessage("Registration of: "+Element.editorPackage+"."+element.getPrettyName()+Element.postFix);
 		Pattern pattern = Pattern.compile(processedRegEx);
 		Matcher matcher = pattern.matcher(pluginCode);
 		if (!matcher.find()){

@@ -18,9 +18,13 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import pattern01.helpers.generated.RelatedFile;
 import pattern01.helpers.instancegen.PatternInstanceParser;
-import pattern01.plugin.components.editors.generated.PatternInstanceEditorPart;
+import pattern01.plugin.components.editors.generated.DialogPatternEditor;
 import pattern01.plugin.components.editors.generated.PatternInstancePatternEditor;
+import pattern01.plugin.components.editors.generated.RegisterPatternEditor;
+import pattern01.plugin.components.editors.generated.RelatedFilePatternEditor;
+import pattern01.plugin.components.editors.generated.SelectionPatternEditor;
 
 @SuppressWarnings("unused")
 public class MenuFactory {
@@ -80,17 +84,28 @@ public class MenuFactory {
 //					
 //				}
 
-				if(parent.getSelection()[0].getData("type") != null && 
-						((NodeType)parent.getSelection()[0].getData("type")) == NodeType.PATTERNINSTANCE){
-					try {
-						DefaultEditorInput dei = new DefaultEditorInput();
-						dei.setInstanceTree(parent);
-						page.openEditor(dei, PatternInstancePatternEditor.ID);
-					} catch (PartInitException e) {
-						e.printStackTrace();
+				//TODO Flexibilizar esta logica				
+				if(parent.getSelection()[0].getData("type") != null){
+						try{
+							DefaultEditorInput dei = new DefaultEditorInput();
+							dei.setInstanceTree(parent);
+							NodeType nodetype_pointer = (NodeType)parent.getSelection()[0].getData("type");
+							if (nodetype_pointer == NodeType.PATTERNINSTANCE){
+								page.openEditor(dei, PatternInstancePatternEditor.ID);
+							}else if (nodetype_pointer == NodeType.RELATEDFILE){
+								page.openEditor(dei, RelatedFilePatternEditor.ID);
+							}else if (nodetype_pointer == NodeType.SELECTION){
+								page.openEditor(dei, SelectionPatternEditor.ID);
+							}else if (nodetype_pointer == NodeType.DIALOG){
+								page.openEditor(dei, DialogPatternEditor.ID);
+							}else if (nodetype_pointer == NodeType.REGISTER){
+								page.openEditor(dei, RegisterPatternEditor.ID);
+							}
+						} catch (PartInitException e) {
+							e.printStackTrace();
+						}
 					}
 				}
-			}
 		} );
 	}
 	

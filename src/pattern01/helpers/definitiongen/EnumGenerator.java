@@ -17,6 +17,8 @@ import pattern01.helpers.temporal_containers.EnumElement;
 
 public class EnumGenerator extends Task{
 	
+	/* Package reference, if you want to change generation location modify this */
+	public static final String classPackage = "pattern01.helpers.generated";
 	private static final String tabspace = "\t";
 	private static final String quotscape = "\"";
 	private static final String classHeaderComment = 

@@ -71,10 +71,11 @@ public class PatternInstanceParser2 {
 		}
 	}
 	
+/* [Begin] Auto-generated code for pattern instance parser do not remove */	
 	private void recursiveParseing(Node actualNode, TreeItem parent){
 		TreeItem item = new TreeItem(parent, 0);
 		item.setText(actualNode.getNodeName());
-		item.setData("type", NodeType.nodeTypeFromString(actualNode.getNodeName()));
+		item.setData("type", NodeType.valueOf(actualNode.getNodeName()));
 		
 		if (actualNode.getAttributes().getNamedItem("image") != null){
 			item.setImage(ImageHelper.getImage(actualNode.getAttributes()
@@ -95,6 +96,7 @@ public class PatternInstanceParser2 {
 			}
 		}
 	}
+/* [End] Auto-generated code for pattern instance parser do not remove */
 	
 	public TreeItem getInstance(){
 		return this.instance;

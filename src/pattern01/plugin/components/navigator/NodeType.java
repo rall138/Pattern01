@@ -1,12 +1,13 @@
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 00:10:51 UYT 2016
+	* Creation date: Wed Jun 15 22:44:44 UYT 2016
 	* Creator: rlomez
 	**/
 package pattern01.plugin.components.navigator;
 
 public enum NodeType {
-	UNDEFINED,CLASS,PATTERNINSTANCE,
+	UNDEFINED,CLASS,PATTERNINSTANCE,RELATEDFILES,RELATEDFILE,FACES,SELECTION,REGISTER,DIALOG;
+
 	public static String toString(NodeType nodetype){
 		String nodetypestr = "";
 			switch(nodetype){
@@ -17,25 +18,25 @@ public enum NodeType {
 				nodetypestr = "CLASS";
 				break;
 			case PATTERNINSTANCE:
-				nodetypestr ="PATTERNINSTANCE"
+				nodetypestr ="PATTERNINSTANCE";
 				break;
 			case RELATEDFILES:
-				nodetypestr ="RELATEDFILES"
+				nodetypestr ="RELATEDFILES";
 				break;
 			case RELATEDFILE:
-				nodetypestr ="RELATEDFILE"
+				nodetypestr ="RELATEDFILE";
 				break;
 			case FACES:
-				nodetypestr ="FACES"
+				nodetypestr ="FACES";
 				break;
 			case SELECTION:
-				nodetypestr ="SELECTION"
+				nodetypestr ="SELECTION";
 				break;
 			case REGISTER:
-				nodetypestr ="REGISTER"
+				nodetypestr ="REGISTER";
 				break;
 			case DIALOG:
-				nodetypestr ="DIALOG"
+				nodetypestr ="DIALOG";
 				break;
 		}
 		return nodetypestr;

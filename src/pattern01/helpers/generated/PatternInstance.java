@@ -2,11 +2,11 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 00:10:46 UYT 2016
+	* Creation date: Wed Jun 15 22:44:39 UYT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance{
-	private Generator generator=Generator.WEB;
+	private Generator generator=pattern01.helpers.generated.Generator.WEB;
 	private java.lang.String name;
 	private java.lang.String description;
 	private java.lang.String image = "ww.png";

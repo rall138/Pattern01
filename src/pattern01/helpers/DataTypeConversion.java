@@ -1,5 +1,7 @@
 package pattern01.helpers;
 
+import pattern01.helpers.definitiongen.EnumGenerator;
+
 public class DataTypeConversion {
 
 	private static final String quotscape = "\"";
@@ -16,13 +18,22 @@ public class DataTypeConversion {
 				processed_value = "false";
 			}
 		}else if (data_type.equalsIgnoreCase("java.lang.String")){
-			processed_value = quotscape+value+quotscape;
+			if (value == null){
+				processed_value = quotscape+quotscape;				
+			}else{
+				processed_value = quotscape+value+quotscape;				
+			}
 		}else if (data_type.equalsIgnoreCase("char")){
-			processed_value = simplequotscape+value+simplequotscape;
+			if (value == null){
+				processed_value = simplequotscape+simplequotscape;				
+			}else{
+				processed_value = simplequotscape+value+simplequotscape;				
+			}
 		}else if (value.contains("#{")){ //Custom type
 			String processedType = data_type
 					.substring(data_type.indexOf("#{")+2, data_type.indexOf("}"));
 			processed_value = processedType+"."+value.substring(value.lastIndexOf(".")+1,value.indexOf("}"));
+			processed_value = EnumGenerator.classPackage+"."+processed_value;
 		}else {
 			processed_value = value;
 		}
