@@ -70,10 +70,27 @@ public class PatternInstanceParser {
 		}
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 22:44:44 UYT 2016
+	* Creation date: Sun Jun 19 20:44:05 UYT 2016
 	* Creator: rlomez
 	**/
 	private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){
@@ -153,6 +170,18 @@ public class PatternInstanceParser {
 			if("image" == actualNode.getNodeName()){
 				selection.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"ww.png");
 			}
+			if("insert" == actualNode.getNodeName()){
+				selection.setInsert(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			}
+			if("update" == actualNode.getNodeName()){
+				selection.setUpdate(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			}
+			if("delete" == actualNode.getNodeName()){
+				selection.setDelete(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			}
+			if("display" == actualNode.getNodeName()){
+				selection.setDisplay(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			}
 			item.setData("class_instance",selection);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Selection().add(selection);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("register")){
@@ -190,6 +219,15 @@ public class PatternInstanceParser {
 		}
 	}
 /* [End] Auto-generated code for pattern instance parser do not remove */
+
+
+
+
+
+
+
+
+
 
 
 	public TreeItem getInstance(){

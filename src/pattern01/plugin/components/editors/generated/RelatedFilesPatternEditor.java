@@ -1,21 +1,24 @@
+
 package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 22:44:39 UYT 2016
+	* Creation date: Sun Jun 19 20:44:02 UYT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFilesPatternEditor extends org.eclipse.ui.part.EditorPart{
 
-	public static final String ID = "pattern01.plugin.components.editors.generated.RelatedFilesEditorPart";
+	public static final String ID = "pattern01.plugin.components.editors.generated.RelatedFilesPatternEditor";
 	private boolean dirty = false;
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
 
-		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
-		layout.numColumns = 2;
+		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout(2, false);
+		org.eclipse.swt.layout.GridData controlLayout = new org.eclipse.swt.layout.GridData();
+		controlLayout.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL_HORIZONTAL;
 		layout.horizontalSpacing = 8;
+		layout.verticalSpacing = 5;
 		parent.setLayout(layout);
 		addListeners();
 		initializeCombos();

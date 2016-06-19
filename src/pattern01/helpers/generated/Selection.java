@@ -1,8 +1,9 @@
+
 package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 22:44:39 UYT 2016
+	* Creation date: Sun Jun 19 20:44:01 UYT 2016
 	* Creator: rlomez
 	**/
 public class Selection{
@@ -10,6 +11,10 @@ public class Selection{
 	private java.lang.String description;
 	private java.lang.String reference;
 	private java.lang.String image = "ww.png";
+	private java.lang.Boolean insert = true;
+	private java.lang.Boolean update = true;
+	private java.lang.Boolean delete = true;
+	private java.lang.Boolean display = true;
 
 	public java.lang.String getName(){
 		return this.name;
@@ -43,6 +48,38 @@ public class Selection{
 		this.image = image;
 	}
 
+	public java.lang.Boolean getInsert(){
+		return this.insert;
+	}
+
+	public void setInsert(java.lang.Boolean insert){
+		this.insert = insert;
+	}
+
+	public java.lang.Boolean getUpdate(){
+		return this.update;
+	}
+
+	public void setUpdate(java.lang.Boolean update){
+		this.update = update;
+	}
+
+	public java.lang.Boolean getDelete(){
+		return this.delete;
+	}
+
+	public void setDelete(java.lang.Boolean delete){
+		this.delete = delete;
+	}
+
+	public java.lang.Boolean getDisplay(){
+		return this.display;
+	}
+
+	public void setDisplay(java.lang.Boolean display){
+		this.display = display;
+	}
+
 	public java.lang.String getProperty(java.lang.String propertyName){
 		java.util.Properties properties = new java.util.Properties();
 		try{
@@ -60,6 +97,10 @@ public class Selection{
 		+ "description='"+this.description+"'"
 		+ "reference='"+this.reference+"'"
 		+ "image='"+this.image+"'"
+		+ "insert='"+this.insert+"'"
+		+ "update='"+this.update+"'"
+		+ "delete='"+this.delete+"'"
+		+ "display='"+this.display+"'"
 		+ ">";
 		xml+="</Selection>";
 		return xml;

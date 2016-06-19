@@ -45,7 +45,6 @@ public class EditorPartRegister {
 		Pattern pattern = Pattern.compile(processedRegEx);
 		Matcher matcher = pattern.matcher(pluginCode);
 		if (!matcher.find()){
-			System.out.println("Matcher matches:"+matcher.matches());
 			String processedSustitution = editorDeclaration
 					.replace(sustitution_token, Element.editorPackage+"."+element.getPrettyName()+Element.postFix)
 					.replace(sustitution_prettyNameToken, element.getPrettyName()+Element.postFix);
@@ -62,8 +61,14 @@ public class EditorPartRegister {
 					new BufferedReader(new FileReader(
 							new File(CommonPathFix.getHardCodedPath(PATH_NAME.MANIFEST_XML).getPath())));
 			String line = "";
+			boolean firstline = true;
 			while((line = bfr.readLine()) != null){
-				pluginCode.appendLn(line);
+				if (firstline){
+					pluginCode.append(line);
+					firstline = false;
+				}else{
+					pluginCode.appendLn(line);
+				}
 			}
 			bfr.close();
 		} catch (IOException e) {

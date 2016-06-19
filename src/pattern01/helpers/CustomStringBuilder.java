@@ -10,7 +10,7 @@ public class CustomStringBuilder {
 	}
 	
 	public void appendLn(String text){
-		sb.append(text+System.getProperty("line.separator"));
+		sb.append(System.getProperty("line.separator")+text);
 	}
 	
 	public void clrlf(){

@@ -11,10 +11,10 @@ import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.DataTypeConversion;
 import pattern01.helpers.LoggerThread;
+import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
 import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser2;
 import pattern01.helpers.temporal_containers.Attribute;
-import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
 
 public class ClassGenerator extends Task{
@@ -37,6 +37,7 @@ public class ClassGenerator extends Task{
 	private CustomStringBuilder builder = null;
 	private CustomStringBuilder attributeBuilder = null;
 	private CustomStringBuilder getterAndSetterBuilder = null;
+	private CustomStringBuilder attributePropertiesBuilder = new CustomStringBuilder();
 	
 	public void execute(){
 		parsePatternDefinition();
@@ -44,6 +45,7 @@ public class ClassGenerator extends Task{
 		generatePatternEditorClasses();
 		generateNodeTypeClass();
 		generatePatternInstanceClass();
+		generatePropertyFile();
 	}
 	
 	private void parsePatternDefinition(){
@@ -58,14 +60,13 @@ public class ClassGenerator extends Task{
 	private void generateClasses(Element element){
 		if (element != null){
 			initializeCustomStringBuilders();
-			CommonElement commonElement = (CommonElement)element;
-			generateClassHeader(commonElement);
-			generateAttributes(commonElement);
-			generateGettersAndSettersOfReferences(commonElement);
+			generateClassHeader(element);
+			generateAttributes(element);
+			generateGettersAndSettersOfReferences(element);
 			generatePropertyGetter();
-			marshallerHeader(commonElement);
-			marshallerBuilder(commonElement);
-			marshallerFooter(commonElement);
+			marshallerHeader(element);
+			marshallerBuilder(element);
+			marshallerFooter(element);
 			builder.append(attributeBuilder.toString());
 			builder.append(getterAndSetterBuilder.toString());
 			builder.appendLn("}");
@@ -75,11 +76,6 @@ public class ClassGenerator extends Task{
 				generateClasses(childElement);
 			}
 		}
-		
-		/*
-		//Generamos el file de propiedades
-		propertyHelper.impactPropertiesOnFile(CommonPathFix
-				.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath());*/
 	}
 	
 	private void initializeCustomStringBuilders(){
@@ -110,6 +106,15 @@ public class ClassGenerator extends Task{
 				
 				generateGetterAndSettersOfAttributes(attr);
 			}
+			generateAttributeProperties(element, attr);
+		}
+	}
+	
+	private void generateAttributeProperties(Element element, Attribute attr){
+		if (attr.getGroup() == null || attr.getGroup().equals("")){
+			attributePropertiesBuilder.appendLn(element.getPrettyName()+"."+attr.getPrettyName()+".Group=Default");
+		}else if (attr.getGroup() != null){
+			attributePropertiesBuilder.appendLn(element.getPrettyName()+"."+attr.getPrettyName()+".Group="+attr.getGroup());
 		}
 	}
 	
@@ -262,9 +267,18 @@ public class ClassGenerator extends Task{
 		ntgen.execute();
 	}
 	
-	
 	private void generatePatternInstanceClass(){
 		PatternInstanceParserGenerator pipgen = new PatternInstanceParserGenerator(this.patterninstanceElement);
 		pipgen.execute();
+	}
+	
+	private void generatePropertyFile(){
+		//Generamos el file de propiedades
+		PropertyHelper propertyHelper = new PropertyHelper(); 
+		
+		String propertieFilePath = CommonPathFix
+				.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath();
+		
+		propertyHelper.impactPropertiesOnFile(propertieFilePath, attributePropertiesBuilder.toString());
 	}
 }

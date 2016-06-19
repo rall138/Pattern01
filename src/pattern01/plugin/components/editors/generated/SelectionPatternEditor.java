@@ -1,13 +1,14 @@
+
 package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 22:44:39 UYT 2016
+	* Creation date: Sun Jun 19 20:44:02 UYT 2016
 	* Creator: rlomez
 	**/
 public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 
-	public static final String ID = "pattern01.plugin.components.editors.generated.SelectionEditorPart";
+	public static final String ID = "pattern01.plugin.components.editors.generated.SelectionPatternEditor";
 	private boolean dirty = false;
 	public org.eclipse.swt.widgets.Label label_name = null;
 	private org.eclipse.swt.widgets.Text name = null;
@@ -17,30 +18,64 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 	private org.eclipse.swt.widgets.Text reference = null;
 	public org.eclipse.swt.widgets.Label label_image = null;
 	private org.eclipse.swt.widgets.Text image = null;
+	public org.eclipse.swt.widgets.Label label_insert = null;
+	private org.eclipse.swt.widgets.Text insert = null;
+	public org.eclipse.swt.widgets.Label label_update = null;
+	private org.eclipse.swt.widgets.Text update = null;
+	public org.eclipse.swt.widgets.Label label_delete = null;
+	private org.eclipse.swt.widgets.Text delete = null;
+	public org.eclipse.swt.widgets.Label label_display = null;
+	private org.eclipse.swt.widgets.Text display = null;
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
 
-		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
-		layout.numColumns = 2;
+		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout(2, false);
+		org.eclipse.swt.layout.GridData controlLayout = new org.eclipse.swt.layout.GridData();
+		controlLayout.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL_HORIZONTAL;
 		layout.horizontalSpacing = 8;
+		layout.verticalSpacing = 5;
 		parent.setLayout(layout);
 		this.label_name = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_name.setText("Name");
+		this.name = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
+		this.name.setText("");
+		this.name.setLayoutData(controlLayout);
 		this.label_description = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_description.setText("Description");
+		this.description = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
+		this.description.setText("");
+		this.description.setLayoutData(controlLayout);
 		this.label_reference = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_reference.setText("Reference");
+		this.reference = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
+		this.reference.setText("");
+		this.reference.setLayoutData(controlLayout);
 		this.label_image = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_image.setText("Image");
-		this.name = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
-		this.name.setText("null");
-		this.description = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
-		this.description.setText("null");
-		this.reference = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
-		this.reference.setText("null");
 		this.image = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
 		this.image.setText("ww.png");
+		this.image.setLayoutData(controlLayout);
+		this.label_insert = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
+		this.label_insert.setText("Insert");
+		this.insert = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
+		this.insert.setText(true);
+		this.insert.setLayoutData(controlLayout);
+		this.label_update = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
+		this.label_update.setText("Update");
+		this.update = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
+		this.update.setText(true);
+		this.update.setLayoutData(controlLayout);
+		this.label_delete = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
+		this.label_delete.setText("Delete");
+		this.delete = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
+		this.delete.setText(true);
+		this.delete.setLayoutData(controlLayout);
+		this.label_display = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
+		this.label_display.setText("Display");
+		this.display = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
+		this.display.setText(true);
+		this.display.setLayoutData(controlLayout);
 		addListeners();
 		initializeCombos();
 	}
@@ -108,6 +143,38 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
+		
+		this.insert.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
+				dirty = true;
+				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
+			}
+		});
+		
+		this.update.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
+				dirty = true;
+				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
+			}
+		});
+		
+		this.delete.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
+				dirty = true;
+				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
+			}
+		});
+		
+		this.display.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
+				dirty = true;
+				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
+			}
+		});
 	}
 
 	private void initializeCombos(){
@@ -127,5 +194,21 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	public java.lang.String getLabel_ImageText(){
 		return this.image.getText();
+	}
+
+	public java.lang.Boolean getLabel_InsertText(){
+		return java.lang.Boolean.valueOf(this.insert.getText());
+	}
+
+	public java.lang.Boolean getLabel_UpdateText(){
+		return java.lang.Boolean.valueOf(this.update.getText());
+	}
+
+	public java.lang.Boolean getLabel_DeleteText(){
+		return java.lang.Boolean.valueOf(this.delete.getText());
+	}
+
+	public java.lang.Boolean getLabel_DisplayText(){
+		return java.lang.Boolean.valueOf(this.display.getText());
 	}
 }

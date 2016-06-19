@@ -1,12 +1,13 @@
+
 package pattern01.helpers.generated;
 
 	/**
 	* Generated enum class via ClassGenerator.xml
-	* Creation date: Wed Jun 15 22:44:39 UYT 2016
+	* Creation date: Sun Jun 19 20:44:01 UYT 2016
 	* Creator: rlomez
 	**/
-public enum Generator {
-UNDEFINED,	WEB,	MOBILE;
+public enum Generator {UNDEFINED,	WEB,	MOBILE;
+
 	public static java.lang.String getValueDescription(Generator description){
 		switch(description){
 			case WEB:
@@ -16,6 +17,10 @@ UNDEFINED,	WEB,	MOBILE;
 			default:
 				return "";
 		}
+	}
+
+	public static boolean fullyQualifiedComparer(String fullyQualifiedValue, String simpleValue){
+		return fullyQualifiedValue.replace("pattern01.helpers.generated","").replace("Generator","").replace(".","").equalsIgnoreCase(simpleValue);
 	}
 
 	public static java.util.List<java.lang.String> getOptionCollection(){

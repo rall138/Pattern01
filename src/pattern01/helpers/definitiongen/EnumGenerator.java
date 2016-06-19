@@ -29,6 +29,7 @@ public class EnumGenerator extends Task{
 			+tabspace+"**/";
 	
 	private BuildFileRule bfr = new BuildFileRule();
+	private CustomStringBuilder builder = null;
 	private List<Element> collected_elements = new ArrayList<>();
 	
 	public void execute(){
@@ -43,30 +44,30 @@ public class EnumGenerator extends Task{
 		CustomValuesDefinitionParser parser = new CustomValuesDefinitionParser();
 		collected_elements = parser.parseDefinition();
 
-		CustomStringBuilder builder = new CustomStringBuilder();
-		EnumElement el = null;
+		builder = new CustomStringBuilder();
+		EnumElement enumElement = null;
 		int hindex = 0;
 		for(int index = 0; index < collected_elements.size(); index++){
-			el = (EnumElement)collected_elements.get(index);
-			builder.appendLn("package pattern01.helpers.generated;");
-			builder.appendLn("");
+			enumElement = (EnumElement)collected_elements.get(index);
+			builder.appendLn("package "+Element.classPackage+";");
+			builder.clrlf();
 			builder.appendLn(classHeaderComment);
-			builder.appendLn("public enum "+el.getPrettyName()+" {" );
+			builder.appendLn("public enum "+enumElement.getPrettyName()+" {" );
 			hindex = 1;
 			builder.append("UNDEFINED,");
-			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
-				if(hindex <  el.getValue_list().size()){
+			for(Map.Entry<String, String> entry : enumElement.getValue_list().entrySet()){
+				if(hindex <  enumElement.getValue_list().size()){
 					builder.append(tabGen(1)+entry.getKey().toUpperCase()+",");
 				}else{
 					builder.append(tabGen(1)+entry.getKey().toUpperCase()+";");					
 				}
 				hindex++;
 			}
-			builder.appendLn("");
+			builder.clrlf();
 			builder.appendLn(tabGen(1)+"public static java.lang.String getValueDescription("+
-					el.getPrettyName()+" description){");
+					enumElement.getPrettyName()+" description){");
 			builder.appendLn(tabGen(2)+"switch(description){");
-			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
+			for(Map.Entry<String, String> entry : enumElement.getValue_list().entrySet()){
 				builder.appendLn(tabGen(3)+"case "+entry.getKey().toUpperCase()+":");
 				builder.appendLn(tabGen(4)+"return "+quotscape+entry.getValue().toUpperCase()+quotscape+";");
 			}
@@ -75,10 +76,12 @@ public class EnumGenerator extends Task{
 			builder.appendLn(tabGen(2)+"}");
 			builder.appendLn(tabGen(1)+"}");
 			
-			builder.appendLn("");
+			generateFullyQualifiedValueComparator(enumElement);
+			
+			builder.clrlf();
 			builder.appendLn(tabGen(1)+"public static java.util.List<java.lang.String> getOptionCollection(){");
 			builder.appendLn(tabGen(2)+"java.util.List<java.lang.String> optionCollection = new java.util.ArrayList<>();");
-			for(Map.Entry<String, String> entry : el.getValue_list().entrySet()){
+			for(Map.Entry<String, String> entry : enumElement.getValue_list().entrySet()){
 				builder.appendLn(tabGen(2)+"optionCollection.add("+quotscape+entry.getValue().toUpperCase()+quotscape+");");
 			}
 			builder.appendLn(tabGen(2)+"return optionCollection;");
@@ -87,8 +90,18 @@ public class EnumGenerator extends Task{
 			builder.appendLn("}");
 			
 			//Generamos las clases
-			generateClasses(el.getPrettyName(), builder.toString());
+			generateClasses(enumElement.getPrettyName(), builder.toString());
 		}
+	}
+	
+	private void generateFullyQualifiedValueComparator(EnumElement element){
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"public static boolean fullyQualifiedComparer(String fullyQualifiedValue, String simpleValue){");
+		builder.appendLn(tabGen(2)+"return fullyQualifiedValue.replace("+quotscape+Element.classPackage+quotscape+","+quotscape+quotscape+")");
+		builder.append(".replace("+quotscape+element.getPrettyName()+quotscape+","+quotscape+quotscape+")");
+		builder.append(".replace("+quotscape+"."+quotscape+","+quotscape+quotscape+")");
+		builder.append(".equalsIgnoreCase(simpleValue);");
+		builder.appendLn(tabGen(1)+"}");
 	}
 
 	private String tabGen(int quantity){
