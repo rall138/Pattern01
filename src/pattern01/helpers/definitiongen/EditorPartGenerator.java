@@ -1,6 +1,8 @@
 package pattern01.helpers.definitiongen;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -95,10 +97,19 @@ public class EditorPartGenerator extends Task{
 	//TODO terminar de agrupar los elementos
 	private void generateGroupControls(Element element){
 		PropertyHelper phelper = new PropertyHelper();
+		List<String> groupCollection = new ArrayList<>();
 		String groupName = "";
 		for(Attribute attr : element.getAttribute_collection()){
 			groupName = phelper.getProperty(CommonPathFix.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath(), 
 					element.getPrettyName()+"."+attr.getPrettyName()+".Group");
+		}
+	}
+	
+	private boolean isGroupExistent(List<String> groupCollection, String group){
+		int index = 0;
+		boolean isItemFound = false;
+		while (index < groupCollection.size() && !isItemFound){
+			
 		}
 	}
 	
