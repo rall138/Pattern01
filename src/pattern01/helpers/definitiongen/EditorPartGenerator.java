@@ -1,8 +1,6 @@
 package pattern01.helpers.definitiongen;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -11,7 +9,8 @@ import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.DataTypeConversion;
-import pattern01.helpers.PropertyHelper;
+import pattern01.helpers.definitiongen.groups.GroupGenerator;
+import pattern01.helpers.definitiongen.groups.Pair;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
 
@@ -33,6 +32,7 @@ public class EditorPartGenerator extends Task{
 	private CustomStringBuilder getterAndSetterBuilder = null;
 	private CustomStringBuilder comboInitializerBuilder = null;
 	private CustomStringBuilder comboInitializerBodyBuilder = null;
+	private CustomStringBuilder groupInitializarBuilder = null;
 	private boolean hasCustomValueDefined = false;
 	
 	public EditorPartGenerator(Element patternInstanceElement){
@@ -80,6 +80,7 @@ public class EditorPartGenerator extends Task{
 		getterAndSetterBuilder = new CustomStringBuilder();
 		comboInitializerBuilder = new CustomStringBuilder();
 		comboInitializerBodyBuilder = new CustomStringBuilder();
+		groupInitializarBuilder = new CustomStringBuilder();
 	}
 	
 	private void generateClassHeader(Element element){
@@ -94,36 +95,45 @@ public class EditorPartGenerator extends Task{
 				quotscape+Element.editorPackage+"."+element.getPrettyName()+Element.postFix+quotscape+";");
 	}
 	
-	//TODO terminar de agrupar los elementos
-	private void generateGroupControls(Element element){
-		PropertyHelper phelper = new PropertyHelper();
-		List<String> groupCollection = new ArrayList<>();
-		String groupName = "";
-		for(Attribute attr : element.getAttribute_collection()){
-			groupName = phelper.getProperty(CommonPathFix.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath(), 
-					element.getPrettyName()+"."+attr.getPrettyName()+".Group");
-		}
-	}
 	
-	private boolean isGroupExistent(List<String> groupCollection, String group){
-		int index = 0;
-		boolean isItemFound = false;
-		while (index < groupCollection.size() && !isItemFound){
-			
+	//TODO terminar de agrupar los elementos
+	private void generateGroupControls(Element element, boolean attributeGeneration){
+		GroupGenerator gGenerator = new GroupGenerator(element, element.getAttribute_collection());
+		String group = "";
+		for (Pair pair : gGenerator.getPairCollection()){
+			if (!group.equalsIgnoreCase(pair.getValue().toString())){
+				group = pair.getValue().toString();
+				if (attributeGeneration){
+					attributeBuilder.appendLn(tabGen(1)+"private org.eclipse.swt.widgets.Group group_"+group);
+					attributeBuilder.append(" = null;");
+				}else{
+					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group+" ");
+					groupInitializarBuilder.append("= new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);");
+					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group+".setText(");
+					groupInitializarBuilder.append(quotscape+pair.getValue().toString()+quotscape+");");
+				}
+			}
 		}
 	}
 	
 	private void generateAttributes(Element element){
 		attributeBuilder.appendLn(tabGen(1)+"private boolean dirty = false;");
+		generateGroupControls(element, true);		
 		for(Attribute attr : element.getAttribute_collection()){
-			attributeBuilder.appendLn(tabGen(1)+"public org.eclipse.swt.widgets.Label label_"+attr.getName()+" = null;");
+			attributeBuilder.appendLn(tabGen(1)+"private org.eclipse.swt.widgets.Label label_"+attr.getName()+" = null;");
 			if (attr.getType().contains("#{")){
 				attributeBuilder.appendLn(tabGen(1)+
 						"private org.eclipse.swt.widgets.Combo "+attr.getName()+" = null;");
 				hasCustomValueDefined = true;
 			}else{
-				attributeBuilder.appendLn(tabGen(1)+
-						"private org.eclipse.swt.widgets.Text "+attr.getName()+" = null;");
+				if (attr.getType().equalsIgnoreCase("java.lang.Boolean")){
+					attributeBuilder.appendLn(tabGen(1)+
+							"private org.eclipse.swt.widgets.Button "+attr.getName()+" = null;");
+					
+				}else{
+					attributeBuilder.appendLn(tabGen(1)+
+							"private org.eclipse.swt.widgets.Text "+attr.getName()+" = null;");
+				}
 				//Generate getters and setters
 				generateGetterAndSettersOfAttributes(attr);
 			}
@@ -155,6 +165,7 @@ public class EditorPartGenerator extends Task{
 		builder.appendLn(tabGen(2)+"layout.horizontalSpacing = 8;");
 		builder.appendLn(tabGen(2)+"layout.verticalSpacing = 5;");
 		builder.appendLn(tabGen(2)+"parent.setLayout(layout);");
+		generateGroupControls(element, false);
 		generateControlInitilizerOnConstruct(element);
 		generateCustomBodyMethodInitializer(element);
 		builder.appendLn(tabGen(2)+"addListeners();");
@@ -173,15 +184,24 @@ public class EditorPartGenerator extends Task{
 	}
 	
 	private void generateControlInitilizerOnConstruct(Element element){
+		//Group control initializer
+		builder.append(groupInitializarBuilder.toString());
 		for(Attribute attr : element.getAttribute_collection()){
 			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+" = new org.eclipse.swt.widgets.Label(parent, "+
 					"org.eclipse.swt.SWT.NONE);");
 			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+".setText("+quotscape+attr.getPrettyName()+quotscape+");");
 			if (!attr.getType().contains("#{")){
-				builder.appendLn(tabGen(2)+"this."+attr.getName()+
-						" = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);");
-				builder.appendLn(tabGen(2)+"this."+attr.getName()+
-						".setText("+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
+				if (attr.getType().equalsIgnoreCase("java.lang.Boolean")){
+					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+							" = new org.eclipse.swt.widgets.Button(parent, org.eclipse.swt.SWT.CHECK);");
+					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+							".setSelection("+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
+				}else{
+					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+							" = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);");
+					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+							".setText("+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
+				}
 			}else{
 				builder.appendLn(tabGen(2)+"this."+attr.getName()+
 						" = new org.eclipse.swt.widgets.Combo(parent, org.eclipse.swt.SWT.NONE);");

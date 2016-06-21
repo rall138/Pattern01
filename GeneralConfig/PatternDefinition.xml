@@ -34,10 +34,10 @@
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" requiered="true" />
 		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="ww.png" />		
-		<AttributeElement name="insert" prettyName="Insert" type="java.lang.Boolean" requiered="true" default="true" />
-		<AttributeElement name="update" prettyName="Update" type="java.lang.Boolean" requiered="true" default="true" />
-		<AttributeElement name="delete" prettyName="Delete" type="java.lang.Boolean" requiered="true" default="true" />
-		<AttributeElement name="display" prettyName="Display" type="java.lang.Boolean" requiered="true" default="true"/>
+		<AttributeElement name="insert" prettyName="Insert" type="java.lang.Boolean" requiered="true" default="true" group="Mode"/>
+		<AttributeElement name="update" prettyName="Update" type="java.lang.Boolean" requiered="true" default="true" group="Mode"/>
+		<AttributeElement name="delete" prettyName="Delete" type="java.lang.Boolean" requiered="true" default="true" group="Mode"/>
+		<AttributeElement name="display" prettyName="Display" type="java.lang.Boolean" requiered="true" default="true" group="Mode"/>
 	</Element>
 	
 	<Element name="register" prettyName="Register">

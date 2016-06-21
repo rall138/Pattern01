@@ -3,20 +3,21 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sun Jun 19 20:44:02 UYT 2016
+	* Creation date: Tue Jun 21 17:43:32 GFT 2016
 	* Creator: rlomez
 	**/
 public class DialogPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	public static final String ID = "pattern01.plugin.components.editors.generated.DialogPatternEditor";
 	private boolean dirty = false;
-	public org.eclipse.swt.widgets.Label label_name = null;
+	private org.eclipse.swt.widgets.Group group_Default = null;
+	private org.eclipse.swt.widgets.Label label_name = null;
 	private org.eclipse.swt.widgets.Text name = null;
-	public org.eclipse.swt.widgets.Label label_description = null;
+	private org.eclipse.swt.widgets.Label label_description = null;
 	private org.eclipse.swt.widgets.Text description = null;
-	public org.eclipse.swt.widgets.Label label_reference = null;
+	private org.eclipse.swt.widgets.Label label_reference = null;
 	private org.eclipse.swt.widgets.Text reference = null;
-	public org.eclipse.swt.widgets.Label label_image = null;
+	private org.eclipse.swt.widgets.Label label_image = null;
 	private org.eclipse.swt.widgets.Text image = null;
 
 	@Override
@@ -28,6 +29,8 @@ public class DialogPatternEditor extends org.eclipse.ui.part.EditorPart{
 		layout.horizontalSpacing = 8;
 		layout.verticalSpacing = 5;
 		parent.setLayout(layout);
+		this.group_Default = new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);
+		this.group_Default.setText("Default");
 		this.label_name = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_name.setText("Name");
 		this.name = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);

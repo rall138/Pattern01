@@ -3,29 +3,31 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sun Jun 19 20:44:02 UYT 2016
+	* Creation date: Tue Jun 21 17:43:32 GFT 2016
 	* Creator: rlomez
 	**/
 public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	public static final String ID = "pattern01.plugin.components.editors.generated.SelectionPatternEditor";
 	private boolean dirty = false;
-	public org.eclipse.swt.widgets.Label label_name = null;
+	private org.eclipse.swt.widgets.Group group_Default = null;
+	private org.eclipse.swt.widgets.Group group_Mode = null;
+	private org.eclipse.swt.widgets.Label label_name = null;
 	private org.eclipse.swt.widgets.Text name = null;
-	public org.eclipse.swt.widgets.Label label_description = null;
+	private org.eclipse.swt.widgets.Label label_description = null;
 	private org.eclipse.swt.widgets.Text description = null;
-	public org.eclipse.swt.widgets.Label label_reference = null;
+	private org.eclipse.swt.widgets.Label label_reference = null;
 	private org.eclipse.swt.widgets.Text reference = null;
-	public org.eclipse.swt.widgets.Label label_image = null;
+	private org.eclipse.swt.widgets.Label label_image = null;
 	private org.eclipse.swt.widgets.Text image = null;
-	public org.eclipse.swt.widgets.Label label_insert = null;
-	private org.eclipse.swt.widgets.Text insert = null;
-	public org.eclipse.swt.widgets.Label label_update = null;
-	private org.eclipse.swt.widgets.Text update = null;
-	public org.eclipse.swt.widgets.Label label_delete = null;
-	private org.eclipse.swt.widgets.Text delete = null;
-	public org.eclipse.swt.widgets.Label label_display = null;
-	private org.eclipse.swt.widgets.Text display = null;
+	private org.eclipse.swt.widgets.Label label_insert = null;
+	private org.eclipse.swt.widgets.Button insert = null;
+	private org.eclipse.swt.widgets.Label label_update = null;
+	private org.eclipse.swt.widgets.Button update = null;
+	private org.eclipse.swt.widgets.Label label_delete = null;
+	private org.eclipse.swt.widgets.Button delete = null;
+	private org.eclipse.swt.widgets.Label label_display = null;
+	private org.eclipse.swt.widgets.Button display = null;
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
@@ -36,6 +38,10 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 		layout.horizontalSpacing = 8;
 		layout.verticalSpacing = 5;
 		parent.setLayout(layout);
+		this.group_Default = new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);
+		this.group_Default.setText("Default");
+		this.group_Mode = new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);
+		this.group_Mode.setText("Mode");
 		this.label_name = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_name.setText("Name");
 		this.name = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
@@ -58,23 +64,23 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 		this.image.setLayoutData(controlLayout);
 		this.label_insert = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_insert.setText("Insert");
-		this.insert = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
-		this.insert.setText(true);
+		this.insert = new org.eclipse.swt.widgets.Button(parent, org.eclipse.swt.SWT.CHECK);
+		this.insert.setSelection(true);
 		this.insert.setLayoutData(controlLayout);
 		this.label_update = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_update.setText("Update");
-		this.update = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
-		this.update.setText(true);
+		this.update = new org.eclipse.swt.widgets.Button(parent, org.eclipse.swt.SWT.CHECK);
+		this.update.setSelection(true);
 		this.update.setLayoutData(controlLayout);
 		this.label_delete = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_delete.setText("Delete");
-		this.delete = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
-		this.delete.setText(true);
+		this.delete = new org.eclipse.swt.widgets.Button(parent, org.eclipse.swt.SWT.CHECK);
+		this.delete.setSelection(true);
 		this.delete.setLayoutData(controlLayout);
 		this.label_display = new org.eclipse.swt.widgets.Label(parent, org.eclipse.swt.SWT.NONE);
 		this.label_display.setText("Display");
-		this.display = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);
-		this.display.setText(true);
+		this.display = new org.eclipse.swt.widgets.Button(parent, org.eclipse.swt.SWT.CHECK);
+		this.display.setSelection(true);
 		this.display.setLayoutData(controlLayout);
 		addListeners();
 		initializeCombos();

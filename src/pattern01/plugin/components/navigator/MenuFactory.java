@@ -18,7 +18,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import pattern01.helpers.generated.RelatedFile;
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.generated.DialogPatternEditor;
 import pattern01.plugin.components.editors.generated.PatternInstancePatternEditor;

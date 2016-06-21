@@ -70,27 +70,10 @@ public class PatternInstanceParser {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sun Jun 19 20:44:05 UYT 2016
+	* Creation date: Tue Jun 21 17:43:42 GFT 2016
 	* Creator: rlomez
 	**/
 	private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){
@@ -219,16 +202,6 @@ public class PatternInstanceParser {
 		}
 	}
 /* [End] Auto-generated code for pattern instance parser do not remove */
-
-
-
-
-
-
-
-
-
-
 
 	public TreeItem getInstance(){
 		return this.instance;
