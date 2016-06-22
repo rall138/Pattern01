@@ -27,9 +27,9 @@ public class PropertyHelper {
 	
 	public String getProperty(String propertyFilePath, String propertyName){
 		try {
-			URI uri = new URI(propertyFilePath);
-			prop.load(new FileInputStream(uri.getPath()));
-		} catch (IOException | URISyntaxException e) {
+			java.io.FileInputStream input = new java.io.FileInputStream(propertyFilePath);
+			prop.load(input);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return prop.getProperty(propertyName);

@@ -1,7 +1,7 @@
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jun 21 17:43:42 GFT 2016
+	* Creation date: Wed Jun 22 00:39:49 UYT 2016
 	* Creator: rlomez
 	**/
 package pattern01.plugin.components.navigator;

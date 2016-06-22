@@ -34,6 +34,7 @@ public class EditorPartGenerator extends Task{
 	private CustomStringBuilder comboInitializerBodyBuilder = null;
 	private CustomStringBuilder groupInitializarBuilder = null;
 	private boolean hasCustomValueDefined = false;
+	private GroupGenerator gGenerator = null;
 	
 	public EditorPartGenerator(Element patternInstanceElement){
 		this.patternInstanceElement = patternInstanceElement;
@@ -98,7 +99,7 @@ public class EditorPartGenerator extends Task{
 	
 	//TODO terminar de agrupar los elementos
 	private void generateGroupControls(Element element, boolean attributeGeneration){
-		GroupGenerator gGenerator = new GroupGenerator(element, element.getAttribute_collection());
+		gGenerator = new GroupGenerator(element, element.getAttribute_collection());
 		String group = "";
 		for (Pair pair : gGenerator.getPairCollection()){
 			if (!group.equalsIgnoreCase(pair.getValue().toString())){
@@ -109,6 +110,8 @@ public class EditorPartGenerator extends Task{
 				}else{
 					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group+" ");
 					groupInitializarBuilder.append("= new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);");
+					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group);
+					groupInitializarBuilder.append(".setLayout(new org.eclipse.swt.layout.GridLayout(2, false));");
 					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group+".setText(");
 					groupInitializarBuilder.append(quotscape+pair.getValue().toString()+quotscape+");");
 				}
@@ -116,10 +119,30 @@ public class EditorPartGenerator extends Task{
 		}
 	}
 	
+	private String getElementGroup(Element element, Attribute attr){
+		String groupName = "";
+		int index = 0;
+		boolean isItemFound = false;
+		while (index < gGenerator.getPairCollection().size() && !isItemFound){
+			if (gGenerator.getPairCollection().get(index).getName().toString()
+					.equalsIgnoreCase(attr.getPrettyName())){
+				groupName = gGenerator.getPairCollection().get(index).getValue().toString();
+				isItemFound = true;
+			}else{
+				index++;
+			}
+		}
+		return groupName;
+	}
+	
 	private void generateAttributes(Element element){
 		attributeBuilder.appendLn(tabGen(1)+"private boolean dirty = false;");
-		generateGroupControls(element, true);		
+		
+		//Group control generator
+		this.generateGroupControls(element, true);		
+		
 		for(Attribute attr : element.getAttribute_collection()){
+			
 			attributeBuilder.appendLn(tabGen(1)+"private org.eclipse.swt.widgets.Label label_"+attr.getName()+" = null;");
 			if (attr.getType().contains("#{")){
 				attributeBuilder.appendLn(tabGen(1)+
@@ -159,11 +182,10 @@ public class EditorPartGenerator extends Task{
 		builder.appendLn(tabGen(1)+"@Override");
 		builder.appendLn(tabGen(1)+"public void createPartControl(org.eclipse.swt.widgets.Composite parent) {");
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout(2, false);");
+		builder.appendLn(tabGen(2)+"org.eclipse.swt.layout.FillLayout layout = new org.eclipse.swt.layout.FillLayout();");
 		builder.appendLn(tabGen(2)+"org.eclipse.swt.layout.GridData controlLayout = new org.eclipse.swt.layout.GridData();");
 		builder.appendLn(tabGen(2)+"controlLayout.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL_HORIZONTAL;");
-		builder.appendLn(tabGen(2)+"layout.horizontalSpacing = 8;");
-		builder.appendLn(tabGen(2)+"layout.verticalSpacing = 5;");
+		builder.appendLn(tabGen(2)+"layout.type = org.eclipse.swt.SWT.VERTICAL;");
 		builder.appendLn(tabGen(2)+"parent.setLayout(layout);");
 		generateGroupControls(element, false);
 		generateControlInitilizerOnConstruct(element);
@@ -187,24 +209,29 @@ public class EditorPartGenerator extends Task{
 		//Group control initializer
 		builder.append(groupInitializarBuilder.toString());
 		for(Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+" = new org.eclipse.swt.widgets.Label(parent, "+
+			
+			// We get the group name for the current attribute, so we attach the new swt control to it.
+			String groupName = this.getElementGroup(element, attr);
+			groupName = "this.group_"+groupName;
+			
+			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+" = new org.eclipse.swt.widgets.Label("+groupName+", "+
 					"org.eclipse.swt.SWT.NONE);");
 			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+".setText("+quotscape+attr.getPrettyName()+quotscape+");");
 			if (!attr.getType().contains("#{")){
 				if (attr.getType().equalsIgnoreCase("java.lang.Boolean")){
 					builder.appendLn(tabGen(2)+"this."+attr.getName()+
-							" = new org.eclipse.swt.widgets.Button(parent, org.eclipse.swt.SWT.CHECK);");
+							" = new org.eclipse.swt.widgets.Button("+groupName+", org.eclipse.swt.SWT.CHECK);");
 					builder.appendLn(tabGen(2)+"this."+attr.getName()+
 							".setSelection("+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
 				}else{
 					builder.appendLn(tabGen(2)+"this."+attr.getName()+
-							" = new org.eclipse.swt.widgets.Text(parent, org.eclipse.swt.SWT.NONE);");
+							" = new org.eclipse.swt.widgets.Text("+groupName+", org.eclipse.swt.SWT.NONE);");
 					builder.appendLn(tabGen(2)+"this."+attr.getName()+
 							".setText("+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
 				}
 			}else{
 				builder.appendLn(tabGen(2)+"this."+attr.getName()+
-						" = new org.eclipse.swt.widgets.Combo(parent, org.eclipse.swt.SWT.NONE);");
+						" = new org.eclipse.swt.widgets.Combo("+groupName+", org.eclipse.swt.SWT.NONE);");
 			}
 			builder.appendLn(tabGen(2)+"this."+attr.getName()+".setLayoutData(controlLayout);");
 		}

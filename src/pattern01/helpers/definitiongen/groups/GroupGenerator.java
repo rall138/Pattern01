@@ -25,12 +25,12 @@ public class GroupGenerator {
 	}
 	
 	private void generatePairCollection(){
-		String group = "";
+		String group = "", processedName = "", input = "";
 		PropertyHelper phelper = new PropertyHelper();
 		for(Attribute attr : this.attributeCollection){
-			group = phelper.getProperty(CommonPathFix.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath(), 
-					element.getPrettyName()+"."+attr.getPrettyName()+".Group");
-
+			processedName = element.getPrettyName()+"."+attr.getPrettyName()+".Group";
+			input = CommonPathFix.getHardCodedPath(PATH_NAME.CUSTOMPROPERTIES_PROPERTIES).getPath();
+			group = phelper.getProperty(input, processedName);
 			this.pairCollection.add(new Pair(attr.getPrettyName(), group));
 		}
 	}
