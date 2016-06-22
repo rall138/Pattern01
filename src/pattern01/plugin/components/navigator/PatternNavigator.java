@@ -135,13 +135,13 @@ public class PatternNavigator extends ViewPart {
 				TreeItem aux_item = (TreeItem )event.item;
 				NodeType aux_nodeType = aux_item.getData("type") != null ? 
 					(NodeType)aux_item.getData("type"): NodeType.UNDEFINED;
-					System.err.println("Tipo de nodo:"+NodeType.toString(aux_nodeType));
 				if (aux_nodeType != NodeType.UNDEFINED){
 					mfact.generateDisplayableOptions(aux_nodeType, instanceTree);
 				}
 			}
 		});
 		
+		//TODO Borrado particular de un elemento
 		instanceTree.addKeyListener(new KeyListener() {
 			@Override
 			public void keyReleased(KeyEvent e) {}

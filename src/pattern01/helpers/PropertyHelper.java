@@ -1,9 +1,6 @@
 package pattern01.helpers;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Properties;
 
 import org.apache.tools.ant.BuildFileRule;

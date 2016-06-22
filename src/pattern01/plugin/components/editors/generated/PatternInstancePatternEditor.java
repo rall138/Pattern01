@@ -3,7 +3,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 22 00:39:46 UYT 2016
+	* Creation date: Wed Jun 22 12:49:30 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart{
