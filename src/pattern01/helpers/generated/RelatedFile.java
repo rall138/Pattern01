@@ -3,14 +3,14 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 22 12:49:29 GFT 2016
+	* Creation date: Thu Jun 23 21:05:06 UYT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFile{
 	private java.lang.String name;
 	private java.lang.String description;
 	private java.lang.String reference;
-	private java.lang.String image = "ww.png";
+	private java.lang.String image = "generic.jpg";
 
 	public java.lang.String getName(){
 		return this.name;

@@ -42,10 +42,15 @@ public class ClassGenerator extends Task{
 	public void execute(){
 		parsePatternDefinition();
 		generateClasses(this.patterninstanceElement);
-		generatePatternEditorClasses();
+		log.writeSingleMessage(" ============================================================== ");
 		generateNodeTypeClass();
-		generatePatternInstanceClass();
+		log.writeSingleMessage(" ============================================================== ");
 		generatePropertyFile();
+		log.writeSingleMessage(" ============================================================== ");
+		generatePatternEditorClasses();
+		log.writeSingleMessage(" ============================================================== ");
+		generatePatternInstanceClass();
+		log.writeSingleMessage(" ============================================================== ");
 	}
 	
 	private void parsePatternDefinition(){
@@ -85,7 +90,7 @@ public class ClassGenerator extends Task{
 	}
 	
 	private void generateClassHeader(Element element){
-		log.writeSingleMessage("Generating class: "+element.getPrettyName());
+		log.writeSingleMessage("<<< Generating class "+element.getPrettyName()+" >>>");
 		builder = new CustomStringBuilder();
 		builder.appendLn("package pattern01.helpers.generated;");
 		builder.clrlf();

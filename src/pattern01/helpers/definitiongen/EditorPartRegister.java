@@ -24,7 +24,7 @@ public class EditorPartRegister {
 			 "(class=\\\""+sustitution_token+"\\\")"+
 			 "(\\s*\\S*\\.*)*(</extension>)";
 	
-	private static final LoggerThread logger = new LoggerThread();
+	private static final LoggerThread log = new LoggerThread();
 	
 	private static final String editorDeclaration = tabGen(1)+"<extension"+System.lineSeparator()
          +tabGen(2)+"point="+quotscape+"org.eclipse.ui.editors"+quotscape+">"+System.lineSeparator()
@@ -41,7 +41,8 @@ public class EditorPartRegister {
 		String processedRegEx = regularExpression
 				.replace(sustitution_token,Element.editorPackage+"."+element.getPrettyName()+Element.postFix);
 		
-		logger.writeSingleMessage("Registration of: "+Element.editorPackage+"."+element.getPrettyName()+Element.postFix);
+		log.writeSingleMessage(tabGen(1)+"+ <<< Registrating "+Element.editorPackage+"."+element.getPrettyName()+Element.postFix
+				+" on plugin.xml >>>");
 		Pattern pattern = Pattern.compile(processedRegEx);
 		Matcher matcher = pattern.matcher(pluginCode);
 		if (!matcher.find()){

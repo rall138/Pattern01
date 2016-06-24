@@ -15,7 +15,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
-import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Element;
 import pattern01.helpers.temporal_containers.EnumElement;
 
@@ -31,7 +30,6 @@ public class CustomValuesDefinitionParser {
 			SAXParser parser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler(){
 
-				private LoggerThread log = new LoggerThread();
 				Element customValueElement = new EnumElement();
 				String valueName = "";
 				
@@ -44,7 +42,6 @@ public class CustomValuesDefinitionParser {
 						addElementIfnotExists(customValueElement);
 					}else if(qName.equalsIgnoreCase("value")){ //Valores dentro de la defincion de opciones
 						valueName = getValue(attributes, "name");
-						log.writeSingleMessage("Parsed value: "+valueName);
 					}
 				}
 				

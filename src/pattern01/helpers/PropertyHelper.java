@@ -1,5 +1,6 @@
 package pattern01.helpers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -14,7 +15,7 @@ public class PropertyHelper {
 	private LoggerThread log = new LoggerThread();
 	
 	public void impactPropertiesOnFile(String propertyFilePath, String properties){
-		log.writeSingleMessage("Generating property file");
+		log.writeSingleMessage("<<< Generating property file (Custom.properties) >>>");
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		bfr.getProject().setNewProperty("filename", propertyFilePath);
@@ -24,7 +25,11 @@ public class PropertyHelper {
 	
 	public String getProperty(String propertyFilePath, String propertyName){
 		try {
-			java.io.FileInputStream input = new java.io.FileInputStream(propertyFilePath);
+			File file = new File(propertyFilePath);
+			if (!file.exists()){
+				file.createNewFile();
+			}
+			java.io.FileInputStream input = new java.io.FileInputStream(file.getAbsolutePath());
 			prop.load(input);
 		} catch (IOException e) {
 			e.printStackTrace();

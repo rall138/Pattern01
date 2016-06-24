@@ -39,7 +39,7 @@ public class NodeTypeEnumGenerator extends Task{
 	
 	private void generateClasses(Element element){
 		LoggerThread log = new LoggerThread();
-		log.writeSingleMessage("Generating NodeType");
+		log.writeSingleMessage("<<< Generating Enum class NodeType >>>");
 		if (element != null){
 			builder = new CustomStringBuilder();
 			elementListBuilder = new CustomStringBuilder();

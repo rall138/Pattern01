@@ -3,14 +3,14 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 22 12:49:29 GFT 2016
+	* Creation date: Thu Jun 23 21:05:06 UYT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance{
 	private Generator generator=pattern01.helpers.generated.Generator.WEB;
 	private java.lang.String name;
 	private java.lang.String description;
-	private java.lang.String image = "ww.png";
+	private java.lang.String image = "generic.jpg";
 	private RelatedFiles relatedFiles;
 	private java.util.List<Faces> collection_Faces = new java.util.ArrayList<>();
 	public Generator getGenerator(){

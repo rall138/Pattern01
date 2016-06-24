@@ -3,13 +3,16 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 22 12:49:30 GFT 2016
+	* Creation date: Thu Jun 23 21:05:07 UYT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFilesPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	public static final String ID = "pattern01.plugin.components.editors.generated.RelatedFilesPatternEditor";
 	private boolean dirty = false;
+	private org.eclipse.swt.widgets.Group group_Default = null;
+	private org.eclipse.swt.widgets.Label label_image = null;
+	private org.eclipse.swt.widgets.Text image = null;
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
@@ -19,6 +22,14 @@ public class RelatedFilesPatternEditor extends org.eclipse.ui.part.EditorPart{
 		controlLayout.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL_HORIZONTAL;
 		layout.type = org.eclipse.swt.SWT.VERTICAL;
 		parent.setLayout(layout);
+		this.group_Default = new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);
+		this.group_Default.setLayout(new org.eclipse.swt.layout.GridLayout(2, false));
+		this.group_Default.setText("Default");
+		this.label_image = new org.eclipse.swt.widgets.Label(this.group_Default, org.eclipse.swt.SWT.NONE);
+		this.label_image.setText("Image");
+		this.image = new org.eclipse.swt.widgets.Text(this.group_Default, org.eclipse.swt.SWT.NONE);
+		this.image.setText("generic.jpg");
+		this.image.setLayoutData(controlLayout);
 		addListeners();
 		initializeCombos();
 	}
@@ -54,8 +65,20 @@ public class RelatedFilesPatternEditor extends org.eclipse.ui.part.EditorPart{
 	}
 
 	private void addListeners() {
+		
+		this.image.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
+				dirty = true;
+				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
+			}
+		});
 	}
 
 	private void initializeCombos(){
+	}
+
+	public java.lang.String getLabel_ImageText(){
+		return this.image.getText();
 	}
 }

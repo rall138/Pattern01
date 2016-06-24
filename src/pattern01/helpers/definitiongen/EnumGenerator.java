@@ -10,6 +10,7 @@ import org.apache.tools.ant.Task;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CustomStringBuilder;
+import pattern01.helpers.LoggerThread;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
 import pattern01.helpers.temporal_containers.Element;
@@ -31,6 +32,7 @@ public class EnumGenerator extends Task{
 	private BuildFileRule bfr = new BuildFileRule();
 	private CustomStringBuilder builder = null;
 	private List<Element> collected_elements = new ArrayList<>();
+	private LoggerThread log = new LoggerThread();
 	
 	public void execute(){
 		parseCustomValuesDefinition();
@@ -49,6 +51,7 @@ public class EnumGenerator extends Task{
 		int hindex = 0;
 		for(int index = 0; index < collected_elements.size(); index++){
 			enumElement = (EnumElement)collected_elements.get(index);
+			log.writeSingleMessage("<<< Generating enum class "+enumElement.getPrettyName()+" >>>");
 			builder.appendLn("package "+Element.classPackage+";");
 			builder.clrlf();
 			builder.appendLn(classHeaderComment);

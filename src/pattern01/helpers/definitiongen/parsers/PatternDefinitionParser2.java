@@ -14,20 +14,16 @@ import org.xml.sax.InputSource;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
-import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
 
 public class PatternDefinitionParser2 {
 
-	private LoggerThread log = new LoggerThread();
 	private XPath xpath = XPathFactory.newInstance().newXPath();
 	private String expression = "";
 	
-	public PatternDefinitionParser2(){
-		
-	}
+	public PatternDefinitionParser2(){}
 	
 	/***
 	 * Convert from definition file to auxiliar structures [PatternDefinition.xml --> Element.class]
@@ -62,7 +58,6 @@ public class PatternDefinitionParser2 {
 	 */
 	private void recursiveParseing(CommonElement parentElement, Node actualNode, InputSource is) throws XPathExpressionException{
 		NodeList childNodes = actualNode.getChildNodes();
-		log.writeSingleMessage("Analizing element: "+actualNode.getAttributes().getNamedItem("prettyName").getNodeValue());
 		if (actualNode.hasChildNodes()){
 			for (int index = 0; index < childNodes.getLength(); index++){
 				if (childNodes.item(index).getNodeName().equalsIgnoreCase("attributeelement")){

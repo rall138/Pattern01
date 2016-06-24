@@ -3,11 +3,20 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Jun 22 12:49:29 GFT 2016
+	* Creation date: Thu Jun 23 21:05:06 UYT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFiles{
+	private java.lang.String image = "generic.jpg";
 	private java.util.List<RelatedFile> collection_RelatedFile = new java.util.ArrayList<>();
+
+	public java.lang.String getImage(){
+		return this.image;
+	}
+
+	public void setImage(java.lang.String image){
+		this.image = image;
+	}
 	public void setCollection_RelatedFile(java.util.List<RelatedFile> collection_RelatedFile){
 		this.collection_RelatedFile = collection_RelatedFile;
 	}
@@ -29,6 +38,7 @@ public class RelatedFiles{
 
 	public java.lang.String toXml(){
 		java.lang.String xml ="<RelatedFiles "
+		+ "image='"+this.image+"'"
 		+ ">";
 			for(int index = 0; index < collection_RelatedFile.size(); index++){
 				xml+=collection_RelatedFile.get(index).toXml();

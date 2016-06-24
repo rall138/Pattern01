@@ -51,7 +51,7 @@ public class PatternInstanceParserGenerator extends Task{
 	
 	
 	private void generateClasses(Element element){
-		log.writeSingleMessage("Generating PatternInstanceSaver code-sustituttion");
+		log.writeSingleMessage("<<< Generating PatternInstanceSaver's code-replacement >>>");
 		builder = new CustomStringBuilder();
 		builder.appendLn(beginTag);
 		builder.appendLn(classHeaderComment);
@@ -110,6 +110,9 @@ public class PatternInstanceParserGenerator extends Task{
 		
 		generatePropertiesAssignment(element);
 
+		//Image assignment
+		builder.appendLn(tabGen(3)+"item.setImage(pattern01.helpers.ImageHelper.getImage("+quotscape+getDefaultImageValue(element)+quotscape+"));");
+		
 		//Element instance assignment in treeviewItem Data
 		builder.appendLn(tabGen(3)+"item.setData("+quotscape+"class_instance"+quotscape+","+element.getName()+");");
 
@@ -123,6 +126,18 @@ public class PatternInstanceParserGenerator extends Task{
 	private void generateElementStrategyFooter(){
 		builder.appendLn(tabGen(2)+"}");
 		builder.appendLn(tabGen(1)+"}");
+	}
+	
+	
+	private String getDefaultImageValue(Element element){
+		String imageValue = "";
+		for(Attribute attr : element.getAttribute_collection()){
+			if (attr.getPrettyName().equalsIgnoreCase("image")){
+				imageValue = attr.getDefault_value();
+				break;
+			}
+		}
+		return imageValue;
 	}
 	
 	private void generatePropertiesAssignment(Element element){

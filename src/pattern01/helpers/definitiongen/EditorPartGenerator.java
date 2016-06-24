@@ -9,6 +9,7 @@ import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.DataTypeConversion;
+import pattern01.helpers.LoggerThread;
 import pattern01.helpers.definitiongen.groups.GroupGenerator;
 import pattern01.helpers.definitiongen.groups.Pair;
 import pattern01.helpers.temporal_containers.Attribute;
@@ -35,6 +36,7 @@ public class EditorPartGenerator extends Task{
 	private CustomStringBuilder groupInitializarBuilder = null;
 	private boolean hasCustomValueDefined = false;
 	private GroupGenerator gGenerator = null;
+	private LoggerThread log = new LoggerThread();
 	
 	public EditorPartGenerator(Element patternInstanceElement){
 		this.patternInstanceElement = patternInstanceElement;
@@ -85,6 +87,7 @@ public class EditorPartGenerator extends Task{
 	}
 	
 	private void generateClassHeader(Element element){
+		log.writeSingleMessage("<<< Generating Editor: "+element.getPrettyName()+"PatternEditor >>>");
 		builder.appendLn("package pattern01.plugin.components.editors.generated;");
 		builder.appendLn("");
 		builder.appendLn(classHeaderComment);

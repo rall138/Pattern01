@@ -7,12 +7,13 @@
 		<AttributeElement name="generator" prettyName="Generator" type="#{Generator}" requiered="true" default="#{Generator.WEB}" />
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" requiered="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
-		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="ww.png" />		
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="generic.jpg" />		
 		<ChildElement ref="relatedFiles" unique="true" />
 		<ChildElement ref="faces" unique="true" />		
 	</Element>
 	
 	<Element name="relatedFiles" prettyName="RelatedFiles" unique="true">
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="generic.jpg" />		
 		<ChildElement ref="relatedFile" unique="false" />
 	</Element>
 	
@@ -20,10 +21,11 @@
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" requiered="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" requiered="true" />
-		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="ww.png" />		
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="generic.jpg" />		
 	</Element>
 
 	<Element name="faces" prettyName="Faces" >
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="generic.jpg" />		
 		<childElement ref="selection" unique="true" />
 		<childElement ref="register" unique="true" />
 		<childElement ref="dialog" unique="false" />
@@ -33,7 +35,7 @@
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" requiered="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" requiered="true" />
-		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="ww.png" />		
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="generic.jpg" />		
 		<AttributeElement name="insert" prettyName="Insert" type="java.lang.Boolean" requiered="true" default="true" group="Mode"/>
 		<AttributeElement name="update" prettyName="Update" type="java.lang.Boolean" requiered="true" default="true" group="Mode"/>
 		<AttributeElement name="delete" prettyName="Delete" type="java.lang.Boolean" requiered="true" default="true" group="Mode"/>
@@ -44,14 +46,14 @@
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" requiered="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" requiered="true" />
-		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="ww.png" />		
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="generic.jpg" />		
 	</Element>
 	
 	<Element name="dialog" prettyName="Dialog">
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" requiered="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" requiered="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" requiered="true" />
-		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="ww.png" />		
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" requiered="true" default="generic.jpg" />		
 	</Element>
 	
 </PatternDefinition>
