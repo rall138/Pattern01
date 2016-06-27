@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Jun 23 21:05:06 UYT 2016
+	* Creation date: Sat Jun 25 21:23:02 UYT 2016
 	* Creator: rlomez
 	**/
 public class Faces{

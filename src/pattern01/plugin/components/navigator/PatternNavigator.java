@@ -1,8 +1,6 @@
 package pattern01.plugin.components.navigator;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -42,69 +40,86 @@ public class PatternNavigator extends ViewPart {
 	
 	private void generateTree(Composite parent){
 		this.instanceTree = new Tree(parent,0);
-		generateItems(this.instanceTree);
+		generateProjectNodeFromWorkspace();
 	}
-	
-	private void generateItems(Tree tree){
-		try {
-			TreeItem projectItem = null;
-			URI uri = new URI("file:///"+LocationHelper.getActiveWorkSpace());
-			File workspaceFolder = new File(uri);
-			File projectFolder = null;
-			for(int index = 0; index < workspaceFolder.listFiles().length; index++){
-				if(workspaceFolder.listFiles()[index].isDirectory()){
-					projectItem = new TreeItem(tree, 0);
-					projectItem.setText(workspaceFolder.listFiles()[index].getName());
-					projectItem.setImage(ImageHelper.getImage("prj_obj.png"));
-					projectFolder = workspaceFolder.listFiles()[index];
-					int hindex = 0;
-					boolean itemFound = false;
-					while (hindex < projectFolder.listFiles().length && !itemFound){
-						if (projectFolder.listFiles()[hindex].isDirectory() &&
-								projectFolder.listFiles()[hindex].getName().equalsIgnoreCase("patternfolder")){
-							itemFound = true;
-						}else{
-							hindex++;
-						}
-					}
-					if (itemFound){
-						uri = projectFolder.listFiles()[hindex].toURI();
-						generateTreeItemInstances(projectItem, uri);
+		
+	// Java projects contains .project named file that is an xml file 
+	private void generateProjectNodeFromWorkspace(){
+		File activeWorkspace = new File(LocationHelper.getActiveWorkSpace());
+		for (File potencialProjectFolder : activeWorkspace.listFiles()){ // first level project folder
+			if (potencialProjectFolder.isDirectory()){
+				for (File insideFile : potencialProjectFolder.listFiles()){ // second level must be the .project file
+					if (!insideFile.isDirectory() && insideFile.getName().equalsIgnoreCase(".project")){
+						TreeItem projectParentItem = new TreeItem(this.instanceTree, 0);
+						projectParentItem.setText(potencialProjectFolder.getName());
+						projectParentItem.setImage(ImageHelper.getImage("prj_obj.png"));
+						generateLeafs(projectParentItem, potencialProjectFolder.getPath());
+						break;
 					}
 				}
 			}
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
 		}
 	}
 	
-	private void generateTreeItemInstances(TreeItem parent, URI patternFolderURI){
-		
-		//Archivo que contiene las instancias generadas
-		URI classInstancexml_uri = null;
-		try {
-			
-			classInstancexml_uri = new URI("file://"+patternFolderURI.getPath()+"ClassInstances.xml");
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
+	private String getPatternFolderPath(String projectFolderPath){
+		String patternFolderPath = "";
+		File projectFolder = new File(projectFolderPath);
+		int index = 0;
+		boolean itemFound = false;
+		while (index < projectFolder.listFiles().length && !itemFound){
+			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("patternfolder")){
+				patternFolderPath = projectFolder.listFiles()[index].getAbsolutePath();
+				itemFound = true;
+			}else{
+				index++;
+			}
 		}
-		
-		XPath xpath = XPathFactory.newInstance().newXPath();
-		String expression = "/Classes/Class";
-		NodeList classNodeList;
+		return patternFolderPath;
+	}
+	
+	private String getClassInstancesFile(String projectFolderPath){
+		String classInsancesURItoString = "";
+		File projectFolder = new File(projectFolderPath);
+		int index = 0;
+		boolean itemFound = false;
+		while (index < projectFolder.listFiles().length && !itemFound){
+			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("classinstances.xml")){
+				classInsancesURItoString = projectFolder.listFiles()[index].getAbsolutePath();
+				itemFound = true;
+			}else{
+				index++;
+			}
+		}
+		return classInsancesURItoString;
+	}
+	
+	//TODO Generar nodos packages
+	private void generateLeafs(TreeItem parent, String projectFolderPath){
 		try {
+			String classInstancesXml = "", patternFolder = "";
 			
-			classNodeList = (NodeList) xpath.evaluate
-					(expression, new InputSource(classInstancexml_uri.getPath()), 
-					XPathConstants.NODESET);
+			// Only for projects wich has PatternFolder created
+			patternFolder = this.getPatternFolderPath(projectFolderPath);
+			if (patternFolder.equals("")){
+				return;
+			}
+			
+			classInstancesXml = this.getClassInstancesFile(patternFolder);
+			if (classInstancesXml.equals("")){
+				return;
+			}
+
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			String expression = "/Classes/Class";
+
+			NodeList classNodeList = (NodeList) xpath.evaluate 
+					(expression, new InputSource(classInstancesXml), XPathConstants.NODESET);
 			
 			if(classNodeList != null && classNodeList.getLength() > 0){
-				TreeItem classInstance = null;
+				TreeItem classInstance = null, packageNode = null;
 				for(int index = 0; index < classNodeList.getLength(); index++){
-					
 					if(classNodeList.item(index).getNodeType() == Node.ELEMENT_NODE){
 						
-						//Nombre de lo clase 
 						String className = classNodeList.item(index)
 								.getAttributes().getNamedItem("name").getNodeValue();
 						
@@ -116,7 +131,7 @@ public class PatternNavigator extends ViewPart {
 						
 						//Se generan los demas elementos debajo del nodo clase por intermedio de parseing del xml correspondiente.
 						PatternInstanceParser instanceParser = new PatternInstanceParser(classInstance);
-						instanceParser.generateTreeFromDefinition(className, patternFolderURI.getPath());
+						instanceParser.generateTreeFromDefinition(className, patternFolder);
 						classInstance = instanceParser.getInstance();
 					}
 				}

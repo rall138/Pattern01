@@ -3,7 +3,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Jun 23 21:05:07 UYT 2016
+	* Creation date: Sat Jun 25 21:23:02 UYT 2016
 	* Creator: rlomez
 	**/
 public class DialogPatternEditor extends org.eclipse.ui.part.EditorPart{
@@ -63,6 +63,14 @@ public class DialogPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {
+		String xml_definition ="";
+		pattern01.plugin.components.navigator.DefaultEditorInput defaultEditorInput = (pattern01.plugin.components.navigator.DefaultEditorInput)this.getEditorInput();
+		org.eclipse.swt.widgets.TreeItem parentItem = defaultEditorInput.getInstanceTree().getItem(0);
+		java.util.List<pattern01.helpers.generated.PatternInstance> patternInstanceCollection = getPatternInstanceCollection(parentItem, 0, new java.util.ArrayList<pattern01.helpers.generated.PatternInstance>());
+		((pattern01.helpers.generated.Dialog)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setName(this.getNameValue());
+		((pattern01.helpers.generated.Dialog)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setDescription(this.getDescriptionValue());
+		((pattern01.helpers.generated.Dialog)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setReference(this.getReferenceValue());
+		((pattern01.helpers.generated.Dialog)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setImage(this.getImageValue());
 		this.dirty = false;
 	}
 
@@ -83,6 +91,20 @@ public class DialogPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void setFocus() {
+	}
+
+	private java.util.List<pattern01.helpers.generated.PatternInstance> getPatternInstanceCollection(org.eclipse.swt.widgets.TreeItem parentItem, int level, java.util.List<pattern01.helpers.generated.PatternInstance> patternInstanceCollection){
+		if (level != 1){ //PatternInstance Nodes are located at secondLevel {1}
+			level++;
+			patternInstanceCollection.addAll(getPatternInstanceCollection(parentItem.getItems()[0],level, patternInstanceCollection));
+		}else{
+			for (org.eclipse.swt.widgets.TreeItem item : parentItem.getItems()){
+				if (item.getText().equalsIgnoreCase("patterninstance")){
+					patternInstanceCollection.add((pattern01.helpers.generated.PatternInstance)item.getData("class_instance"));
+				}
+			}
+		}
+		return patternInstanceCollection;
 	}
 
 	private void addListeners() {
@@ -123,19 +145,19 @@ public class DialogPatternEditor extends org.eclipse.ui.part.EditorPart{
 	private void initializeCombos(){
 	}
 
-	public java.lang.String getLabel_NameText(){
+	public java.lang.String getNameValue(){
 		return this.name.getText();
 	}
 
-	public java.lang.String getLabel_DescriptionText(){
+	public java.lang.String getDescriptionValue(){
 		return this.description.getText();
 	}
 
-	public java.lang.String getLabel_ReferenceText(){
+	public java.lang.String getReferenceValue(){
 		return this.reference.getText();
 	}
 
-	public java.lang.String getLabel_ImageText(){
+	public java.lang.String getImageValue(){
 		return this.image.getText();
 	}
 }

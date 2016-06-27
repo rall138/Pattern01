@@ -52,9 +52,10 @@ public class PatternInstanceParser {
 		String expression = "/PatternInstance";
 		lgt.writeSingleMessage("Reading instances from: "+className);
 		try {
-			File file = new File(patternfolderPath+className+"Instance.xml");
+			URI classInstanceXml_uri = new URI("file://"+patternfolderPath+"/"+className+"Instance.xml");
+			File file = new File(classInstanceXml_uri);
+			lgt.writeSingleMessage("Path: "+file.getAbsolutePath());
 			if (file.exists()){
-				URI classInstanceXml_uri = new URI("file://"+patternfolderPath+className+"Instance.xml");
 				InputSource is = new InputSource(classInstanceXml_uri.getPath());
 				
 				//Obtenemos el nodo padre (Siempre es patterninstance)
@@ -70,11 +71,10 @@ public class PatternInstanceParser {
 		}
 	}
 
-
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Jun 23 21:05:09 UYT 2016
+	* Creation date: Sat Jun 25 21:23:05 UYT 2016
 	* Creator: rlomez
 	**/
 	private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){

@@ -55,7 +55,7 @@ public class EditorPartGenerator extends Task{
 			generateClassHeader(element);
 			generateAttributes(element);
 			generateConstructor(element);
-			generateEditorOverrides();
+			generateEditorOverrides(element);
 			generateListeners(element);
 			if(hasCustomValueDefined){
 				generateComboInitializerMethod(element);
@@ -160,20 +160,24 @@ public class EditorPartGenerator extends Task{
 					attributeBuilder.appendLn(tabGen(1)+
 							"private org.eclipse.swt.widgets.Text "+attr.getName()+" = null;");
 				}
-				//Generate getters and setters
-				generateGetterAndSettersOfAttributes(attr);
 			}
+			//Generate getters and setters
+			generateGetterAndSettersOfAttributes(attr);
 		}
 		builder.append(attributeBuilder.toString());
 	}
 
 	private void generateGetterAndSettersOfAttributes(Attribute attr){
-		getterAndSetterBuilder.appendLn("");
-		getterAndSetterBuilder.appendLn(tabGen(1)+"public "+attr.getType()+
-				" getLabel_"+attr.getPrettyName()+"Text(){");
+		getterAndSetterBuilder.clrlf();
+		if (attr.getType().contains("#{")){
+			getterAndSetterBuilder.appendLn(tabGen(1)+"public java.lang.String");
+		}else{
+			getterAndSetterBuilder.appendLn(tabGen(1)+"public "+attr.getType());
+		}
+		getterAndSetterBuilder.append(" get"+attr.getPrettyName()+"Value(){");
 		if (attr.getType().equalsIgnoreCase("java.lang.Boolean")){
-			getterAndSetterBuilder.appendLn(tabGen(2)+
-					"return java.lang.Boolean.valueOf(this."+attr.getName()+".getText());");
+			getterAndSetterBuilder.appendLn(tabGen(2)+"return java.lang.Boolean.valueOf(this.");
+			getterAndSetterBuilder.append(attr.getName()+".getText());");
 		}else{
 			getterAndSetterBuilder.appendLn(tabGen(2)+"return this."+attr.getName()+".getText();");
 		}
@@ -291,7 +295,7 @@ public class EditorPartGenerator extends Task{
 		builder.appendLn(tabGen(1)+"}");
 	}
 	
-	private void generateEditorOverrides(){
+	private void generateEditorOverrides(Element element){
 		builder.clrlf();
 		builder.appendLn(tabGen(1)+"@Override");
 		builder.appendLn(tabGen(1)+"public void init(org.eclipse.ui.IEditorSite site, org.eclipse.ui.IEditorInput input) {");
@@ -302,6 +306,7 @@ public class EditorPartGenerator extends Task{
 		builder.clrlf();
 		builder.appendLn(tabGen(1)+"@Override");
 		builder.appendLn(tabGen(1)+"public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {");
+		this.generateSaveBodyMethod(element);
 		builder.appendLn(tabGen(2)+"this.dirty = false;");
 		builder.appendLn(tabGen(1)+"}");
 
@@ -326,6 +331,54 @@ public class EditorPartGenerator extends Task{
 		builder.clrlf();
 		builder.appendLn(tabGen(1)+"@Override");
 		builder.appendLn(tabGen(1)+"public void setFocus() {");
+		builder.appendLn(tabGen(1)+"}");
+		
+		this.generateRecursivePatternInstanceGetter();
+	}
+	
+	private void generateSaveBodyMethod(Element element){
+		String navigatorPackage = "pattern01.plugin.components.navigator";
+		builder.appendLn(tabGen(2)+"String xml_definition ="+quotscape+quotscape+";");
+		builder.appendLn(tabGen(2)+navigatorPackage+".DefaultEditorInput defaultEditorInput = ");
+		builder.append("("+navigatorPackage+".DefaultEditorInput)this.getEditorInput();");
+		builder.appendLn(tabGen(2)+"org.eclipse.swt.widgets.TreeItem parentItem = ");
+		builder.append("defaultEditorInput.getInstanceTree().getItem(0);");
+		builder.appendLn(tabGen(2)+"java.util.List<"+Element.classPackage+".PatternInstance> patternInstanceCollection = ");
+		builder.append("getPatternInstanceCollection(parentItem, 0, new java.util.ArrayList<"+Element.classPackage+".PatternInstance>());");
+		for (Attribute attr : element.getAttribute_collection()){
+			builder.appendLn(tabGen(2)+"(("+Element.classPackage+"."+element.getPrettyName()+")");
+			builder.append("defaultEditorInput.getInstanceTree()");
+			builder.append(".getSelection()[0].getData("+quotscape+"class_instance"+quotscape+")).set");
+			if (attr.getType().contains("#{")){
+				builder.append(attr.getPrettyName()+"(");
+				builder.append(Element.classPackage+"."+DataTypeConversion
+						.getProcessedType(attr.getType())+".valueOf(");
+				builder.append("this.get"+attr.getPrettyName()+"Value()));");
+			}else{
+				builder.append(attr.getPrettyName()+"(this.get"+attr.getPrettyName()+"Value());");
+			}
+		}
+	}
+	
+	private void generateRecursivePatternInstanceGetter(){
+		builder.clrlf();
+		builder.appendLn(tabGen(1)+"private java.util.List<");
+		builder.append(Element.classPackage+".PatternInstance> getPatternInstanceCollection(");
+		builder.append("org.eclipse.swt.widgets.TreeItem parentItem, int level, java.util.List<"+Element.classPackage+".PatternInstance> ");
+		builder.append("patternInstanceCollection){");
+		builder.appendLn(tabGen(2)+"if (level != 1){ //PatternInstance Nodes are located at secondLevel {1}");
+		builder.appendLn(tabGen(3)+"level++;");
+		builder.appendLn(tabGen(3)+"patternInstanceCollection.addAll(getPatternInstanceCollection(parentItem.getItems()[0],"); 
+		builder.append("level, patternInstanceCollection));");
+		builder.appendLn(tabGen(2)+"}else{");
+		builder.appendLn(tabGen(3)+"for (org.eclipse.swt.widgets.TreeItem item : parentItem.getItems()){");
+		builder.appendLn(tabGen(4)+"if (item.getText().equalsIgnoreCase("+quotscape+"patterninstance"+quotscape+")){");
+		builder.appendLn(tabGen(5)+"patternInstanceCollection.add(("+Element.classPackage+".PatternInstance)");
+		builder.append("item.getData("+quotscape+"class_instance"+quotscape+"));");
+		builder.appendLn(tabGen(4)+"}");
+		builder.appendLn(tabGen(3)+"}");	
+		builder.appendLn(tabGen(2)+"}");
+		builder.appendLn(tabGen(2)+"return patternInstanceCollection;");
 		builder.appendLn(tabGen(1)+"}");
 	}
 	

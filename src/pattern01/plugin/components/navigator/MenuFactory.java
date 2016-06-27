@@ -70,19 +70,6 @@ public class MenuFactory {
 			@Override
 			public void handleEvent(Event event) {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-//				Class editorPart = Class.forName("pattern01.plugin.components.editors.generated."+
-//						parent.getSelection()[0].getText()+"EditorPart");
-//				
-//				if (editorPart != null){
-//					
-//					Method createParentControl = 
-//							editorPart.getMethod("createParentControl", new Class[]{org.eclipse.swt.widgets.Composite.class}); 
-//					
-//					createParentControl.invoke(this, new Object(){});
-//					page.openEditor(editorPart.newInstance(), editorId)
-//					
-//				}
-
 				//TODO Flexibilizar esta logica				
 				if(parent.getSelection()[0].getData("type") != null){
 						try{

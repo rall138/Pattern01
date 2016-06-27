@@ -42,7 +42,8 @@ public class PatternInstanceSaver {
 	private static void generateFile(File patternFolder, PatternInstance patternInstance){
 		File instance_xml;
 		try {
-			instance_xml = new File(new URI("file:///"+patternFolder.toURI()+"/"+patternInstance.getName()+".xml"));
+			instance_xml = new File(new URI("file:///"+patternFolder.toURI()+"/"+
+					patternInstance.getName()+".xml"));
 			OutputStreamWriter fos = new OutputStreamWriter(new FileOutputStream(instance_xml));
 			fos.write(patternInstance.toXml());
 			fos.flush();
