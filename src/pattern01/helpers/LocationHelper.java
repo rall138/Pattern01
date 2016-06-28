@@ -50,5 +50,46 @@ public class LocationHelper {
 	public static URI fromFileToURI(File fileinstance){
 		return fileinstance.toURI();
 	}
+	
+	/* Necesary class and folders on active project */
+	
+	public static String searchPatternFolderPath(String projectFolderPath){
+		String patternFolderPath = "";
+		File projectFolder = new File(projectFolderPath);
+		int index = 0;
+		boolean itemFound = false;
+		while (index < projectFolder.listFiles().length && !itemFound){
+			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("patternfolder")){
+				patternFolderPath = projectFolder.listFiles()[index].getAbsolutePath();
+				itemFound = true;
+			}else{
+				index++;
+			}
+		}
+		return patternFolderPath;
+	}
+	
+	public static String searchClassInstancesFile(String patternFolderPath){
+		String classInsancesURItoString = "";
+		File projectFolder = new File(patternFolderPath);
+		int index = 0;
+		boolean itemFound = false;
+		while (index < projectFolder.listFiles().length && !itemFound){
+			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("classinstances.xml") && 
+					!projectFolder.listFiles()[index].isDirectory()){
+				classInsancesURItoString = projectFolder.listFiles()[index].getAbsolutePath();
+				System.err.println(classInsancesURItoString);
+				itemFound = true;
+			}else{
+				index++;
+			}
+		}
+		return classInsancesURItoString;
+	}
+	
+	
+	
+	/* Necesary class and folders on active project */
+	
 
 }

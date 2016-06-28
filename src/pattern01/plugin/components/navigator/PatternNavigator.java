@@ -53,7 +53,11 @@ public class PatternNavigator extends ViewPart {
 						TreeItem projectParentItem = new TreeItem(this.instanceTree, 0);
 						projectParentItem.setText(potencialProjectFolder.getName());
 						projectParentItem.setImage(ImageHelper.getImage("prj_obj.png"));
-						generateLeafs(projectParentItem, potencialProjectFolder.getPath());
+						try{
+							generateLeafs(projectParentItem, potencialProjectFolder.getPath());
+						}catch(XPathExpressionException e){
+							//System.err.println(e.getMessage());
+						}
 						break;
 					}
 				}
@@ -62,82 +66,71 @@ public class PatternNavigator extends ViewPart {
 	}
 	
 	private String getPatternFolderPath(String projectFolderPath){
-		String patternFolderPath = "";
-		File projectFolder = new File(projectFolderPath);
-		int index = 0;
-		boolean itemFound = false;
-		while (index < projectFolder.listFiles().length && !itemFound){
-			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("patternfolder")){
-				patternFolderPath = projectFolder.listFiles()[index].getAbsolutePath();
-				itemFound = true;
-			}else{
-				index++;
-			}
-		}
-		return patternFolderPath;
+		return LocationHelper.searchPatternFolderPath(projectFolderPath);
+	}	
+	
+	private String getClassInstanceFile(String projectFolderPath) throws NullPointerException{
+		return LocationHelper.searchClassInstancesFile(LocationHelper.searchPatternFolderPath(projectFolderPath));
 	}
 	
-	private String getClassInstancesFile(String projectFolderPath){
-		String classInsancesURItoString = "";
-		File projectFolder = new File(projectFolderPath);
-		int index = 0;
-		boolean itemFound = false;
-		while (index < projectFolder.listFiles().length && !itemFound){
-			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("classinstances.xml")){
-				classInsancesURItoString = projectFolder.listFiles()[index].getAbsolutePath();
-				itemFound = true;
-			}else{
-				index++;
-			}
+	private NodeList getPackagesDeclared(String projectFolderPath) throws XPathExpressionException {
+		NodeList classNodeList = null;
+		String classInstancesXml = this.getClassInstanceFile(projectFolderPath), expression = "";
+		
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		expression = "/Packages/Package";
+		try{
+			classNodeList = (NodeList) xpath.evaluate (expression, 
+					new InputSource(classInstancesXml), XPathConstants.NODESET);
+			System.err.println("Cantidad de packages: "+classNodeList.getLength());
+		}catch(XPathExpressionException e){
+			throw new XPathExpressionException("No packages defined at classinstances.xml file");			
 		}
-		return classInsancesURItoString;
+		return classNodeList;
+	}
+	
+	private NodeList getClassesDeclared(String projectFolderPath, String packageName) throws XPathExpressionException{
+		NodeList classNodeList = null;
+		String classInstancesXml = this.getClassInstanceFile(projectFolderPath), expression = "";
+		
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		expression = "/Packages/Package[@name='"+packageName+"']/Class";
+		try{
+			classNodeList = (NodeList) xpath.evaluate (expression, 
+					new InputSource(classInstancesXml), XPathConstants.NODESET);
+		}catch(XPathExpressionException e){
+			throw new XPathExpressionException("No classes defined for package "+packageName);			
+		}
+		return classNodeList;
 	}
 	
 	//TODO Generar nodos packages
-	private void generateLeafs(TreeItem parent, String projectFolderPath){
-		try {
-			String classInstancesXml = "", patternFolder = "";
-			
-			// Only for projects wich has PatternFolder created
-			patternFolder = this.getPatternFolderPath(projectFolderPath);
-			if (patternFolder.equals("")){
-				return;
-			}
-			
-			classInstancesXml = this.getClassInstancesFile(patternFolder);
-			if (classInstancesXml.equals("")){
-				return;
-			}
-
-			XPath xpath = XPathFactory.newInstance().newXPath();
-			String expression = "/Classes/Class";
-
-			NodeList classNodeList = (NodeList) xpath.evaluate 
-					(expression, new InputSource(classInstancesXml), XPathConstants.NODESET);
-			
-			if(classNodeList != null && classNodeList.getLength() > 0){
-				TreeItem classInstance = null, packageNode = null;
-				for(int index = 0; index < classNodeList.getLength(); index++){
-					if(classNodeList.item(index).getNodeType() == Node.ELEMENT_NODE){
-						
-						String className = classNodeList.item(index)
-								.getAttributes().getNamedItem("name").getNodeValue();
-						
-						//Genera el item [class] como nodo "raiz"
-						classInstance = new TreeItem(parent, 0);
-						classInstance.setText(className);
-						classInstance.setData("type", NodeType.valueOf(classNodeList.item(index).getNodeName().toUpperCase()));
-						classInstance.setImage(ImageHelper.getImage("class_obj.png"));
-						
-						//Se generan los demas elementos debajo del nodo clase por intermedio de parseing del xml correspondiente.
-						PatternInstanceParser instanceParser = new PatternInstanceParser(classInstance);
-						instanceParser.generateTreeFromDefinition(className, patternFolder);
-						classInstance = instanceParser.getInstance();
+	private void generateLeafs(TreeItem parent, String projectFolderPath) throws XPathExpressionException{
+		TreeItem packageItem = null, classItem = null;
+		String packageName = "", className = "";
+		NodeList packageList = this.getPackagesDeclared(projectFolderPath), classList = null;
+		
+		for(int index = 0; index < packageList.getLength(); index++){ //Packages
+			if(packageList.item(index).getNodeType() == Node.ELEMENT_NODE){				
+				packageName = packageList.item(index).getAttributes().getNamedItem("name").getNodeValue();
+				packageItem = new TreeItem(parent, 0);
+				packageItem.setText(packageName);
+				packageItem.setImage(ImageHelper.getImage("package_obj.png"));
+				classList = this.getClassesDeclared(projectFolderPath, packageName);
+				for (int hindex = 0; hindex < classList.getLength(); hindex++){ //Classes
+					if(classList.item(hindex).getNodeType() == Node.ELEMENT_NODE){						
+						className = classList.item(hindex).getAttributes().getNamedItem("name").getNodeValue();
+						classItem = new TreeItem(packageItem, 0);
+						classItem.setText(className);
+						classItem.setImage(ImageHelper.getImage("class_obj.png"));
+						PatternInstanceParser instanceParser = new PatternInstanceParser(classItem);
+						instanceParser.generateTreeFromDefinition(className, this.getPatternFolderPath(projectFolderPath));
+						if (instanceParser.getInstance()!= null){
+							classItem = instanceParser.getInstance();
+						}
 					}
 				}
 			}
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
 		}
 	}
 	

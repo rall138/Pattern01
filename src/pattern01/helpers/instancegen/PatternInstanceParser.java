@@ -1,6 +1,8 @@
 package pattern01.helpers.instancegen;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -15,6 +17,7 @@ import org.xml.sax.InputSource;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
+import pattern01.helpers.LocationHelper;
 import pattern01.helpers.LoggerThread;
 import pattern01.plugin.components.navigator.NodeType;
 
@@ -52,21 +55,22 @@ public class PatternInstanceParser {
 		String expression = "/PatternInstance";
 		lgt.writeSingleMessage("Reading instances from: "+className);
 		try {
-			URI classInstanceXml_uri = new URI("file://"+patternfolderPath+"/"+className+"Instance.xml");
-			File file = new File(classInstanceXml_uri);
-			lgt.writeSingleMessage("Path: "+file.getAbsolutePath());
+			//String classInstanceXml_Path = LocationHelper.searchClassInstancesFile(patternfolderPath);
+			File file = new File(patternfolderPath+System.getProperty("file.separator")+className+"Instance.xml");
+			System.err.println(file.getAbsolutePath());
 			if (file.exists()){
-				InputSource is = new InputSource(classInstanceXml_uri.getPath());
+				InputSource is = new InputSource(new FileReader(file));
 				
 				//Obtenemos el nodo padre (Siempre es patterninstance)
 				Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 				if (parentNode != null){
+					System.err.println("Parent node no es null");
 					recursiveParseing(parentNode, this.parentItem);
 				}
 			}else{
 				lgt.writeSingleMessage("Warning no definition found for: "+className);
 			}
-		} catch (XPathExpressionException | IllegalStateException | URISyntaxException e) {
+		} catch (XPathExpressionException | IllegalStateException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
