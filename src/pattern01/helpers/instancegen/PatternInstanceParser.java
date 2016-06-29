@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -50,21 +49,19 @@ public class PatternInstanceParser {
 		}
 	}
 	
-	public void generateTreeFromDefinition(String className, String patternfolderPath){
+	public void generateTreeFromDefinition(String className, String projectFolderPath){
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		String expression = "/PatternInstance";
 		lgt.writeSingleMessage("Reading instances from: "+className);
 		try {
 			//String classInstanceXml_Path = LocationHelper.searchClassInstancesFile(patternfolderPath);
-			File file = new File(patternfolderPath+System.getProperty("file.separator")+className+"Instance.xml");
-			System.err.println(file.getAbsolutePath());
+			File file = new File(LocationHelper.searchClassPatternInstanceByClassName(className, projectFolderPath));
 			if (file.exists()){
 				InputSource is = new InputSource(new FileReader(file));
 				
 				//Obtenemos el nodo padre (Siempre es patterninstance)
 				Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 				if (parentNode != null){
-					System.err.println("Parent node no es null");
 					recursiveParseing(parentNode, this.parentItem);
 				}
 			}else{

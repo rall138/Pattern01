@@ -87,7 +87,16 @@ public class LocationHelper {
 		return classInsancesURItoString;
 	}
 	
-	
+	public static String searchClassPatternInstanceByClassName(String className, String projectFolderPath){
+		File classPatternInstance = null;
+		File patternFolder = new File(searchPatternFolderPath(projectFolderPath));
+		if (patternFolder.exists()){
+			classPatternInstance = new File(patternFolder.getAbsolutePath()+
+					System.getProperty("file.separator")+
+					className+"Instance.xml"); 
+		}
+		return classPatternInstance == null ? "" : classPatternInstance.getAbsolutePath();
+	}
 	
 	/* Necesary class and folders on active project */
 	

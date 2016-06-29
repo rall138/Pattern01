@@ -56,7 +56,7 @@ public class PatternNavigator extends ViewPart {
 						try{
 							generateLeafs(projectParentItem, potencialProjectFolder.getPath());
 						}catch(XPathExpressionException e){
-							//System.err.println(e.getMessage());
+							System.err.println(e.getMessage());
 						}
 						break;
 					}
@@ -64,10 +64,6 @@ public class PatternNavigator extends ViewPart {
 			}
 		}
 	}
-	
-	private String getPatternFolderPath(String projectFolderPath){
-		return LocationHelper.searchPatternFolderPath(projectFolderPath);
-	}	
 	
 	private String getClassInstanceFile(String projectFolderPath) throws NullPointerException{
 		return LocationHelper.searchClassInstancesFile(LocationHelper.searchPatternFolderPath(projectFolderPath));
@@ -82,7 +78,6 @@ public class PatternNavigator extends ViewPart {
 		try{
 			classNodeList = (NodeList) xpath.evaluate (expression, 
 					new InputSource(classInstancesXml), XPathConstants.NODESET);
-			System.err.println("Cantidad de packages: "+classNodeList.getLength());
 		}catch(XPathExpressionException e){
 			throw new XPathExpressionException("No packages defined at classinstances.xml file");			
 		}
@@ -104,7 +99,6 @@ public class PatternNavigator extends ViewPart {
 		return classNodeList;
 	}
 	
-	//TODO Generar nodos packages
 	private void generateLeafs(TreeItem parent, String projectFolderPath) throws XPathExpressionException{
 		TreeItem packageItem = null, classItem = null;
 		String packageName = "", className = "";
@@ -124,7 +118,7 @@ public class PatternNavigator extends ViewPart {
 						classItem.setText(className);
 						classItem.setImage(ImageHelper.getImage("class_obj.png"));
 						PatternInstanceParser instanceParser = new PatternInstanceParser(classItem);
-						instanceParser.generateTreeFromDefinition(className, this.getPatternFolderPath(projectFolderPath));
+						instanceParser.generateTreeFromDefinition(className, projectFolderPath);
 						if (instanceParser.getInstance()!= null){
 							classItem = instanceParser.getInstance();
 						}
@@ -149,27 +143,29 @@ public class PatternNavigator extends ViewPart {
 			}
 		});
 		
-		//TODO Borrado particular de un elemento
 		instanceTree.addKeyListener(new KeyListener() {
 			@Override
-			public void keyReleased(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+				
+			}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.character == SWT.DEL){
-					TreeItem item_to_delete = instanceTree.getSelection()[0];
-					item_to_delete = null;
+					instanceTree.getSelection()[0].dispose();
 				}
 			}
 		});
 	}
 	
 	private void defineActionBarActions(){
+		
 		searchPatternAction = new Action("Search class") {
 			public void run(){
 				//Aca va el codigo de la accion
 			}
 		};
+		
 		searchPatternAction.setImageDescriptor(ImageHelper
 				.getImageDescriptor("lupa.png"));
 		
@@ -178,6 +174,7 @@ public class PatternNavigator extends ViewPart {
 				
 			}
 		};
+		
 		savePatternAction.setImageDescriptor(ImageHelper
 				.getImageDescriptor("save.png"));
 		createActionBar();

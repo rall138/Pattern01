@@ -65,6 +65,17 @@ public class MenuFactory {
 		propertiesListener(auxiliarMenuItem);
 	}
 	
+	private void generateAddMenuOptions(NodeType nodeType, Menu menu){
+		MenuItem menuItem = new MenuItem(menu, SWT.CASCADE);
+		menuItem.setText("Add");
+		switch (nodeType){
+			case PATTERNINSTANCE:
+				menuItem = new MenuItem(menu, SWT.PUSH);
+				menuItem.setText("RelatedFiles");
+				
+		}
+	}
+	
 	private void propertiesListener(MenuItem menu_item){
 		menu_item.addListener(SWT.Selection, new Listener() {
 			@Override
