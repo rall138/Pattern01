@@ -3,10 +3,10 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sat Jun 25 21:23:02 UYT 2016
+	* Creation date: Fri Jul 01 17:42:06 GFT 2016
 	* Creator: rlomez
 	**/
-public class Selection{
+public class Selection implements IPatternElement{
 	private java.lang.String name;
 	private java.lang.String description;
 	private java.lang.String reference;
@@ -91,6 +91,7 @@ public class Selection{
 		return properties.getProperty(propertyName);
 	}
 
+	@Overrides
 	public java.lang.String toXml(){
 		java.lang.String xml ="<Selection "
 		+ "name='"+this.name+"'"
@@ -102,6 +103,19 @@ public class Selection{
 		+ "delete='"+this.delete+"'"
 		+ "display='"+this.display+"'"
 		+ ">";
+
+	@Overrides
+	public IPatternElement fromXml(java.lang.String xmlDocument){
+		String expression = this."/Selection"
+		java.lang.String xml ="<Selection "
+		+ "name='"+this.name+"'"
+		+ "description='"+this.description+"'"
+		+ "reference='"+this.reference+"'"
+		+ "image='"+this.image+"'"
+		+ "insert='"+this.insert+"'"
+		+ "update='"+this.update+"'"
+		+ "delete='"+this.delete+"'"
+		+ "display='"+this.display+"'"
 		xml+="</Selection>";
 		return xml;
 	}

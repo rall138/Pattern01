@@ -3,10 +3,10 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sat Jun 25 21:23:02 UYT 2016
+	* Creation date: Fri Jul 01 17:42:06 GFT 2016
 	* Creator: rlomez
 	**/
-public class Faces{
+public class Faces implements IPatternElement{
 	private java.lang.String image = "generic.jpg";
 	private java.util.List<Selection> collection_Selection = new java.util.ArrayList<>();
 	private java.util.List<Register> collection_Register = new java.util.ArrayList<>();
@@ -52,10 +52,17 @@ public class Faces{
 		return properties.getProperty(propertyName);
 	}
 
+	@Overrides
 	public java.lang.String toXml(){
 		java.lang.String xml ="<Faces "
 		+ "image='"+this.image+"'"
 		+ ">";
+
+	@Overrides
+	public IPatternElement fromXml(java.lang.String xmlDocument){
+		String expression = this."/Faces"
+		java.lang.String xml ="<Faces "
+		+ "image='"+this.image+"'"
 			for(int index = 0; index < collection_Selection.size(); index++){
 				xml+=collection_Selection.get(index).toXml();
 			}

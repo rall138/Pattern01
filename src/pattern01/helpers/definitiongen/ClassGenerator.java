@@ -38,6 +38,7 @@ public class ClassGenerator extends Task{
 	private CustomStringBuilder attributeBuilder = null;
 	private CustomStringBuilder getterAndSetterBuilder = null;
 	private CustomStringBuilder attributePropertiesBuilder = new CustomStringBuilder();
+	private String xpathuri = "";
 	
 	public void execute(){
 		parsePatternDefinition();
@@ -65,6 +66,7 @@ public class ClassGenerator extends Task{
 	private void generateClasses(Element element){
 		if (element != null){
 			initializeCustomStringBuilders();
+			generateXPathURL(element);
 			generateClassHeader(element);
 			generateAttributes(element);
 			generateGettersAndSettersOfReferences(element);
@@ -83,6 +85,12 @@ public class ClassGenerator extends Task{
 		}
 	}
 	
+	private void generateXPathURL(Element element){
+		log.writeSingleMessage("Element: "+element.getPrettyName());
+		this.xpathuri += "/"+element.getPrettyName();
+		log.writeSingleMessage("XPath: "+this.xpathuri);
+	}
+	
 	private void initializeCustomStringBuilders(){
 		this.builder = new CustomStringBuilder();
 		this.attributeBuilder = new CustomStringBuilder();
@@ -95,7 +103,7 @@ public class ClassGenerator extends Task{
 		builder.appendLn("package pattern01.helpers.generated;");
 		builder.clrlf();
 		builder.appendLn(classHeaderComment);
-		builder.appendLn("public class "+element.getPrettyName()+"{");
+		builder.appendLn("public class "+element.getPrettyName()+" implements IPatternElement{");
 	}
 	
 	private void generateAttributes(Element element){
@@ -219,6 +227,7 @@ public class ClassGenerator extends Task{
 	
 	private void marshallerHeader(Element element){
 		getterAndSetterBuilder.clrlf();
+		getterAndSetterBuilder.appendLn(tabGen(1)+"@Overrides");
 		getterAndSetterBuilder.appendLn(tabGen(1)+"public java.lang.String toXml(){");
 		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml ="+quotscape+"<"+element.getPrettyName()+" "+quotscape);
 		for(Attribute attr : element.getAttribute_collection()){
@@ -226,6 +235,22 @@ public class ClassGenerator extends Task{
 					+quotscape+"\'"+quotscape+"");
 		}
 		getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+">"+quotscape+";");
+		
+		getterAndSetterBuilder.clrlf();
+		getterAndSetterBuilder.appendLn(tabGen(1)+"@Overrides");
+		getterAndSetterBuilder.appendLn(tabGen(1)+"public IPatternElement fromXml(java.lang.String xmlDocument){");
+		if (element.getName().equalsIgnoreCase("patterninstance")){
+			getterAndSetterBuilder.appendLn(tabGen(2)+"String expression = "+quotscape+"//PatternInstance"+quotscape);
+		}else{
+			getterAndSetterBuilder.appendLn(tabGen(2)+"String expression = ");
+			getterAndSetterBuilder.append("this."+quotscape+"/"+element.getPrettyName()+quotscape);
+		}
+		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml ="+quotscape+"<"+element.getPrettyName()+" "+quotscape);
+		for(Attribute attr : element.getAttribute_collection()){
+			getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName()+"+"
+					+quotscape+"\'"+quotscape+"");
+		}
+		
 	}
 	
 	private void marshallerBuilder(Element element){

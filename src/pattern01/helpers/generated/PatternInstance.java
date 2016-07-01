@@ -3,10 +3,10 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sat Jun 25 21:23:02 UYT 2016
+	* Creation date: Fri Jul 01 17:42:06 GFT 2016
 	* Creator: rlomez
 	**/
-public class PatternInstance{
+public class PatternInstance implements IPatternElement{
 	private Generator generator=pattern01.helpers.generated.Generator.WEB;
 	private java.lang.String name;
 	private java.lang.String description;
@@ -71,6 +71,7 @@ public class PatternInstance{
 		return properties.getProperty(propertyName);
 	}
 
+	@Overrides
 	public java.lang.String toXml(){
 		java.lang.String xml ="<PatternInstance "
 		+ "generator='"+this.generator+"'"
@@ -78,6 +79,15 @@ public class PatternInstance{
 		+ "description='"+this.description+"'"
 		+ "image='"+this.image+"'"
 		+ ">";
+
+	@Overrides
+	public IPatternElement fromXml(java.lang.String xmlDocument){
+		String expression = "//PatternInstance"
+		java.lang.String xml ="<PatternInstance "
+		+ "generator='"+this.generator+"'"
+		+ "name='"+this.name+"'"
+		+ "description='"+this.description+"'"
+		+ "image='"+this.image+"'"
 			xml+=this.relatedFiles.toXml();
 			for(int index = 0; index < collection_Faces.size(); index++){
 				xml+=collection_Faces.get(index).toXml();

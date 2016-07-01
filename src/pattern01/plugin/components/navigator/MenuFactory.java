@@ -73,6 +73,15 @@ public class MenuFactory {
 				menuItem = new MenuItem(menu, SWT.PUSH);
 				menuItem.setText("RelatedFiles");
 				
+				
+		}
+	}
+	
+	private void addElement(NodeType nodeType){
+		TreeItem treeItem = new TreeItem(this.parent.getSelection()[0], 0);
+		switch (nodeType){
+			case RELATEDFILES:
+				
 		}
 	}
 	
