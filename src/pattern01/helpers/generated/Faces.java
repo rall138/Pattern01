@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Fri Jul 01 17:42:06 GFT 2016
+	* Creation date: Tue Jul 05 08:25:51 UYT 2016
 	* Creator: rlomez
 	**/
 public class Faces implements IPatternElement{
@@ -52,26 +52,19 @@ public class Faces implements IPatternElement{
 		return properties.getProperty(propertyName);
 	}
 
-	@Overrides
+	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml ="<Faces "
-		+ "image='"+this.image+"'"
-		+ ">";
-
-	@Overrides
-	public IPatternElement fromXml(java.lang.String xmlDocument){
-		String expression = this."/Faces"
-		java.lang.String xml ="<Faces "
-		+ "image='"+this.image+"'"
-			for(int index = 0; index < collection_Selection.size(); index++){
-				xml+=collection_Selection.get(index).toXml();
-			}
-			for(int index = 0; index < collection_Register.size(); index++){
-				xml+=collection_Register.get(index).toXml();
-			}
-			for(int index = 0; index < collection_Dialog.size(); index++){
-				xml+=collection_Dialog.get(index).toXml();
-			}
+		+ "image='"+this.image+"'";
+		for(int index = 0; index < collection_Selection.size(); index++){
+			xml+=collection_Selection.get(index).toXml();
+		}
+		for(int index = 0; index < collection_Register.size(); index++){
+			xml+=collection_Register.get(index).toXml();
+		}
+		for(int index = 0; index < collection_Dialog.size(); index++){
+			xml+=collection_Dialog.get(index).toXml();
+		}
 		xml+="</Faces>";
 		return xml;
 	}

@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Fri Jul 01 17:42:06 GFT 2016
+	* Creation date: Tue Jul 05 08:25:51 UYT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance implements IPatternElement{
@@ -71,27 +71,17 @@ public class PatternInstance implements IPatternElement{
 		return properties.getProperty(propertyName);
 	}
 
-	@Overrides
+	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml ="<PatternInstance "
 		+ "generator='"+this.generator+"'"
 		+ "name='"+this.name+"'"
 		+ "description='"+this.description+"'"
-		+ "image='"+this.image+"'"
-		+ ">";
-
-	@Overrides
-	public IPatternElement fromXml(java.lang.String xmlDocument){
-		String expression = "//PatternInstance"
-		java.lang.String xml ="<PatternInstance "
-		+ "generator='"+this.generator+"'"
-		+ "name='"+this.name+"'"
-		+ "description='"+this.description+"'"
-		+ "image='"+this.image+"'"
-			xml+=this.relatedFiles.toXml();
-			for(int index = 0; index < collection_Faces.size(); index++){
-				xml+=collection_Faces.get(index).toXml();
-			}
+		+ "image='"+this.image+"'";
+		xml+=this.relatedFiles.toXml();
+		for(int index = 0; index < collection_Faces.size(); index++){
+			xml+=collection_Faces.get(index).toXml();
+		}
 		xml+="</PatternInstance>";
 		return xml;
 	}

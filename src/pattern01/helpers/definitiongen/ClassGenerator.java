@@ -15,6 +15,7 @@ import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
 import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser2;
 import pattern01.helpers.temporal_containers.Attribute;
+import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
 
 public class ClassGenerator extends Task{
@@ -62,11 +63,9 @@ public class ClassGenerator extends Task{
 		patterninstanceElement = parser.parseDefinition();
 	}
 	
-	
 	private void generateClasses(Element element){
 		if (element != null){
 			initializeCustomStringBuilders();
-			generateXPathURL(element);
 			generateClassHeader(element);
 			generateAttributes(element);
 			generateGettersAndSettersOfReferences(element);
@@ -80,15 +79,25 @@ public class ClassGenerator extends Task{
 			generateClasses(element.getPrettyName(), builder.toString());
 			
 			for (Element childElement : element.getChildElements_collection()){
+				generateXPathURL(childElement);
 				generateClasses(childElement);
 			}
 		}
 	}
 	
 	private void generateXPathURL(Element element){
-		log.writeSingleMessage("Element: "+element.getPrettyName());
-		this.xpathuri += "/"+element.getPrettyName();
+		this.xpathuri = xpathUriBuilder(element, this.xpathuri);
 		log.writeSingleMessage("XPath: "+this.xpathuri);
+	}
+	
+	private String xpathUriBuilder(Element element, String xpathuri){
+		if (((CommonElement)element).getParentElement() == null){
+			xpathuri = "//"+element.getPrettyName()+xpathuri;
+			return xpathuri;
+		}else{
+			xpathuri = "/"+element.getPrettyName()+xpathuri;
+			return xpathUriBuilder(((CommonElement)element).getParentElement(), xpathuri);
+		}
 	}
 	
 	private void initializeCustomStringBuilders(){
@@ -227,42 +236,43 @@ public class ClassGenerator extends Task{
 	
 	private void marshallerHeader(Element element){
 		getterAndSetterBuilder.clrlf();
-		getterAndSetterBuilder.appendLn(tabGen(1)+"@Overrides");
+		getterAndSetterBuilder.appendLn(tabGen(1)+"@Override");
 		getterAndSetterBuilder.appendLn(tabGen(1)+"public java.lang.String toXml(){");
 		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml ="+quotscape+"<"+element.getPrettyName()+" "+quotscape);
 		for(Attribute attr : element.getAttribute_collection()){
 			getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName()+"+"
 					+quotscape+"\'"+quotscape+"");
 		}
-		getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+">"+quotscape+";");
+		getterAndSetterBuilder.append(";");
 		
-		getterAndSetterBuilder.clrlf();
-		getterAndSetterBuilder.appendLn(tabGen(1)+"@Overrides");
-		getterAndSetterBuilder.appendLn(tabGen(1)+"public IPatternElement fromXml(java.lang.String xmlDocument){");
-		if (element.getName().equalsIgnoreCase("patterninstance")){
-			getterAndSetterBuilder.appendLn(tabGen(2)+"String expression = "+quotscape+"//PatternInstance"+quotscape);
-		}else{
-			getterAndSetterBuilder.appendLn(tabGen(2)+"String expression = ");
-			getterAndSetterBuilder.append("this."+quotscape+"/"+element.getPrettyName()+quotscape);
-		}
-		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml ="+quotscape+"<"+element.getPrettyName()+" "+quotscape);
-		for(Attribute attr : element.getAttribute_collection()){
-			getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName()+"+"
-					+quotscape+"\'"+quotscape+"");
-		}
-		
+//		getterAndSetterBuilder.clrlf();
+//		getterAndSetterBuilder.appendLn(tabGen(1)+"@Override");
+//		getterAndSetterBuilder.appendLn(tabGen(1)+"public IPatternElement fromXml(java.lang.String xmlDocument){");
+//		if (element.getName().equalsIgnoreCase("patterninstance")){
+//			getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String expression = "+quotscape+"//PatternInstance"+quotscape);
+//		}else{
+//			getterAndSetterBuilder.appendLn(tabGen(2)+"String expression = ");
+//			getterAndSetterBuilder.append("this."+quotscape+"/"+element.getPrettyName()+quotscape);
+//		}
+//		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml ="+quotscape+"<"+element.getPrettyName()+" "+quotscape);
+//		for(Attribute attr : element.getAttribute_collection()){
+//			getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName()+"+"
+//					+quotscape+"\'"+quotscape+"");
+//		}
+//		getterAndSetterBuilder.appendLn(tabGen(2)+"return null;");
+//		getterAndSetterBuilder.appendLn(tabGen(1)+"}");
 	}
 	
 	private void marshallerBuilder(Element element){
 		for(Element childElement : element.getChildElements_collection()){
 			if(childElement.isUnique()){
-				getterAndSetterBuilder.appendLn(tabGen(3)+"xml+=this."+childElement.getName()+".toXml();");
+				getterAndSetterBuilder.appendLn(tabGen(2)+"xml+=this."+childElement.getName()+".toXml();");
 			}else{
-				getterAndSetterBuilder.appendLn(tabGen(3)+"for(int index = 0; index < "+collectionPrefix+
+				getterAndSetterBuilder.appendLn(tabGen(2)+"for(int index = 0; index < "+collectionPrefix+
 						childElement.getPrettyName()+".size(); index++){");
-				getterAndSetterBuilder.appendLn(tabGen(4)+"xml+="+collectionPrefix+
+				getterAndSetterBuilder.appendLn(tabGen(3)+"xml+="+collectionPrefix+
 						childElement.getPrettyName()+".get(index).toXml();");
-				getterAndSetterBuilder.appendLn(tabGen(3)+"}");
+				getterAndSetterBuilder.appendLn(tabGen(2)+"}");
 			}
 		}
 	}
