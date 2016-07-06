@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 08:25:51 UYT 2016
+	* Creation date: Tue Jul 05 16:37:50 GFT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFile implements IPatternElement{
@@ -61,8 +61,15 @@ public class RelatedFile implements IPatternElement{
 		+ "name='"+this.name+"'"
 		+ "description='"+this.description+"'"
 		+ "reference='"+this.reference+"'"
-		+ "image='"+this.image+"'";
-		xml+="</RelatedFile>";
+		+ "image='"+this.image+"'"
+		+ ">"
+		+ "</RelatedFile>";;
 		return xml;
+	}
+
+	@Override
+	public IPatternElement fromXml(java.lang.String xmlDocument){
+		java.lang.String xpathuri = "null";
+		return null;
 	}
 }

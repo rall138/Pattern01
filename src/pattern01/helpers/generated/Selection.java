@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 08:25:51 UYT 2016
+	* Creation date: Tue Jul 05 16:37:50 GFT 2016
 	* Creator: rlomez
 	**/
 public class Selection implements IPatternElement{
@@ -101,8 +101,15 @@ public class Selection implements IPatternElement{
 		+ "insert='"+this.insert+"'"
 		+ "update='"+this.update+"'"
 		+ "delete='"+this.delete+"'"
-		+ "display='"+this.display+"'";
-		xml+="</Selection>";
+		+ "display='"+this.display+"'"
+		+ ">"
+		+ "</Selection>";;
 		return xml;
+	}
+
+	@Override
+	public IPatternElement fromXml(java.lang.String xmlDocument){
+		java.lang.String xpathuri = "null";
+		return null;
 	}
 }

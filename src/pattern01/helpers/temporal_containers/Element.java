@@ -15,39 +15,53 @@ public class Element {
 	protected boolean unique;
 	protected String name;
 	protected String prettyName;
+	protected String xpathURI;
 	
 	public List<Attribute> getAttribute_collection() {
 		return attribute_collection;
 	}
+	
 	public void setAttribute_collection(List<Attribute> attribute_collection) {
 		this.attribute_collection = attribute_collection;
 	}
+	
 	public List<CommonElement> getChildElements_collection() {
 		return childElements_collection;
 	}
+	
 	public void setChildElements_collection(List<CommonElement> childElements_collection) {
 		this.childElements_collection = childElements_collection;
 	}
+	
 	public boolean isUnique() {
 		return unique;
 	}
+	
 	public void setUnique(boolean unique) {
 		this.unique = unique;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getPrettyName() {
 		return prettyName;
 	}
+
 	public void setPrettyName(String prettyName) {
 		this.prettyName = prettyName;
 	}
 
+	public void setXpathURI(String xpathURI){
+		this.xpathURI = xpathURI;
+	}
 	
-	
-	
+	public String getXPathURI(){
+		return this.xpathURI;
+	}
 }

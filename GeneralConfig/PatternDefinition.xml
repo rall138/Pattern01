@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PatternDefinition 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="PatternDefinition.xsd">
+	xsi:schemaLocation="PatternSchemaDefinition.xsd">
 	
 	<Element name="patterninstance" prettyName="PatternInstance" >
 		<AttributeElement name="generator" prettyName="Generator" type="#{Generator}" requiered="true" default="#{Generator.WEB}" />
