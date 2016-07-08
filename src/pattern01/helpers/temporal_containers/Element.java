@@ -15,6 +15,7 @@ public class Element {
 	protected boolean unique;
 	protected String name;
 	protected String prettyName;
+	protected String image;
 	protected String xpathURI;
 	
 	public List<Attribute> getAttribute_collection() {
@@ -55,6 +56,14 @@ public class Element {
 
 	public void setPrettyName(String prettyName) {
 		this.prettyName = prettyName;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public void setXpathURI(String xpathURI){

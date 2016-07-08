@@ -3,22 +3,13 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 16:37:50 GFT 2016
+	* Creation date: Fri Jul 08 17:16:01 GFT 2016
 	* Creator: rlomez
 	**/
 public class Faces implements IPatternElement{
-	private java.lang.String image = "generic.jpg";
 	private java.util.List<Selection> collection_Selection = new java.util.ArrayList<>();
 	private java.util.List<Register> collection_Register = new java.util.ArrayList<>();
 	private java.util.List<Dialog> collection_Dialog = new java.util.ArrayList<>();
-
-	public java.lang.String getImage(){
-		return this.image;
-	}
-
-	public void setImage(java.lang.String image){
-		this.image = image;
-	}
 	public void setCollection_Selection(java.util.List<Selection> collection_Selection){
 		this.collection_Selection = collection_Selection;
 	}
@@ -54,8 +45,7 @@ public class Faces implements IPatternElement{
 
 	@Override
 	public java.lang.String toXml(){
-		java.lang.String xml ="<Faces "
-		+ "image='"+this.image+"'"
+		java.lang.String xml="<Faces ";
 		for(int index = 0; index < collection_Selection.size(); index++){
 			xml+=collection_Selection.get(index).toXml();
 		}
@@ -65,8 +55,8 @@ public class Faces implements IPatternElement{
 		for(int index = 0; index < collection_Dialog.size(); index++){
 			xml+=collection_Dialog.get(index).toXml();
 		}
-		+ ">"
-		+ "</Faces>";;
+		xml+=">";
+		xml+="</Faces>";
 		return xml;
 	}
 

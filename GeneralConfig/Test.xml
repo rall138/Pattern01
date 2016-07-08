@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="qualified file:///E:/EclipseWorkspace/Pattern01/GeneralConfig/PatternSchemaDefinition.xsd">
-
-
-</xs:schema>
+<PatternDefinition xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
+	<Element name="" type="" prettyname="" unique="true" image="sdf">
+		<Attribute name="" type="" prettyname=""/>
+		<ChildElement references="" unique="true"/>
+	</Element>
+</PatternDefinition>

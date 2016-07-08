@@ -15,7 +15,6 @@ import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
 import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser2;
 import pattern01.helpers.temporal_containers.Attribute;
-import pattern01.helpers.temporal_containers.CommonElement;
 import pattern01.helpers.temporal_containers.Element;
 
 public class ClassGenerator extends Task{
@@ -39,7 +38,6 @@ public class ClassGenerator extends Task{
 	private CustomStringBuilder attributeBuilder = null;
 	private CustomStringBuilder getterAndSetterBuilder = null;
 	private CustomStringBuilder attributePropertiesBuilder = new CustomStringBuilder();
-	private String xpathuri = "";
 	
 	public void execute(){
 		parsePatternDefinition();
@@ -225,10 +223,10 @@ public class ClassGenerator extends Task{
 		getterAndSetterBuilder.clrlf();
 		getterAndSetterBuilder.appendLn(tabGen(1)+"@Override");
 		getterAndSetterBuilder.appendLn(tabGen(1)+"public java.lang.String toXml(){");
-		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml ="+quotscape+"<"+element.getPrettyName()+" "+quotscape);
+		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml="+quotscape+"<"+element.getPrettyName()+" "+quotscape+";");
 		for(Attribute attr : element.getAttribute_collection()){
-			getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName()+"+"
-					+quotscape+"\'"+quotscape+"");
+			getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName());
+			getterAndSetterBuilder.append("+"+quotscape+"\'"+quotscape+";");
 		}
 	}
 	
@@ -244,11 +242,12 @@ public class ClassGenerator extends Task{
 				getterAndSetterBuilder.appendLn(tabGen(2)+"}");
 			}
 		}
-		getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+">"+quotscape);
+		getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+">"+quotscape);
+		getterAndSetterBuilder.append(";");
 	}
 	
 	private void marshallerFooter(Element element){
-		getterAndSetterBuilder.appendLn(tabGen(2)+"+ "+quotscape+"</"+element.getPrettyName()+">"+quotscape);
+		getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+"</"+element.getPrettyName()+">"+quotscape);
 		getterAndSetterBuilder.append(";");
 		getterAndSetterBuilder.appendLn(tabGen(2)+"return xml;");		
 		getterAndSetterBuilder.appendLn(tabGen(1)+"}");

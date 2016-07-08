@@ -64,7 +64,7 @@ public class PatternDefinitionParser2 {
 					attributeAttacher(parentElement, childNodes.item(index).getAttributes());
 				}else if (childNodes.item(index).getNodeName().equalsIgnoreCase("childelement")){
 					expression = "/PatternDefinition/Element[@name='"+
-							childNodes.item(index).getAttributes().getNamedItem("ref").getNodeValue()+"']";
+							childNodes.item(index).getAttributes().getNamedItem("references").getNodeValue()+"']";
 					Node auxililarNode = (Node)xpath.evaluate(expression, is, XPathConstants.NODE);
 					if (auxililarNode != null){
 						CommonElement childElement = new CommonElement(parentElement);
@@ -78,7 +78,6 @@ public class PatternDefinitionParser2 {
 		}
 	}
 	
-	//TODO Crear xmlns documento de declaración de espacio de nombres
 	private void initializeCommonElement(CommonElement commonElement, Node nodeElement){
 		commonElement.setXpathURI(nodeElement.getNamespaceURI());
 		for (int hindex = 0; hindex < nodeElement.getAttributes().getLength(); hindex++){
@@ -89,6 +88,8 @@ public class PatternDefinitionParser2 {
 				commonElement.setPrettyName(attributeNode.getNodeValue());
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
 				commonElement.setUnique(Boolean.valueOf(attributeNode.getNodeValue()));
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
+				commonElement.setImage(attributeNode.getNodeValue());
 			}
 		}
 	}

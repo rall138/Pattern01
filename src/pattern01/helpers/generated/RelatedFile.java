@@ -3,14 +3,13 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 16:37:50 GFT 2016
+	* Creation date: Fri Jul 08 17:16:01 GFT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFile implements IPatternElement{
 	private java.lang.String name;
 	private java.lang.String description;
 	private java.lang.String reference;
-	private java.lang.String image = "generic.jpg";
 
 	public java.lang.String getName(){
 		return this.name;
@@ -36,14 +35,6 @@ public class RelatedFile implements IPatternElement{
 		this.reference = reference;
 	}
 
-	public java.lang.String getImage(){
-		return this.image;
-	}
-
-	public void setImage(java.lang.String image){
-		this.image = image;
-	}
-
 	public java.lang.String getProperty(java.lang.String propertyName){
 		java.util.Properties properties = new java.util.Properties();
 		try{
@@ -57,13 +48,12 @@ public class RelatedFile implements IPatternElement{
 
 	@Override
 	public java.lang.String toXml(){
-		java.lang.String xml ="<RelatedFile "
-		+ "name='"+this.name+"'"
-		+ "description='"+this.description+"'"
-		+ "reference='"+this.reference+"'"
-		+ "image='"+this.image+"'"
-		+ ">"
-		+ "</RelatedFile>";;
+		java.lang.String xml="<RelatedFile ";
+		xml+="name='"+this.name+"'";
+		xml+="description='"+this.description+"'";
+		xml+="reference='"+this.reference+"'";
+		xml+=">";
+		xml+="</RelatedFile>";
 		return xml;
 	}
 

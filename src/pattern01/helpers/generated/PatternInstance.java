@@ -3,14 +3,13 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 16:37:50 GFT 2016
+	* Creation date: Fri Jul 08 17:16:01 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance implements IPatternElement{
 	private Generator generator=pattern01.helpers.generated.Generator.WEB;
 	private java.lang.String name;
 	private java.lang.String description;
-	private java.lang.String image = "generic.jpg";
 	private RelatedFiles relatedFiles;
 	private java.util.List<Faces> collection_Faces = new java.util.ArrayList<>();
 	public Generator getGenerator(){
@@ -35,14 +34,6 @@ public class PatternInstance implements IPatternElement{
 
 	public void setDescription(java.lang.String description){
 		this.description = description;
-	}
-
-	public java.lang.String getImage(){
-		return this.image;
-	}
-
-	public void setImage(java.lang.String image){
-		this.image = image;
 	}
 
 	public RelatedFiles getrelatedFiles(){
@@ -73,17 +64,16 @@ public class PatternInstance implements IPatternElement{
 
 	@Override
 	public java.lang.String toXml(){
-		java.lang.String xml ="<PatternInstance "
-		+ "generator='"+this.generator+"'"
-		+ "name='"+this.name+"'"
-		+ "description='"+this.description+"'"
-		+ "image='"+this.image+"'"
+		java.lang.String xml="<PatternInstance ";
+		xml+="generator='"+this.generator+"'";
+		xml+="name='"+this.name+"'";
+		xml+="description='"+this.description+"'";
 		xml+=this.relatedFiles.toXml();
 		for(int index = 0; index < collection_Faces.size(); index++){
 			xml+=collection_Faces.get(index).toXml();
 		}
-		+ ">"
-		+ "</PatternInstance>";;
+		xml+=">";
+		xml+="</PatternInstance>";
 		return xml;
 	}
 

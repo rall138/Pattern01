@@ -95,10 +95,15 @@ public class PatternInstanceParser {
 
 
 
+
+
+
+
+
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 16:38:00 GFT 2016
+	* Creation date: Fri Jul 08 17:16:12 GFT 2016
 	* Creator: rlomez
 	**/
 	private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){
@@ -136,17 +141,14 @@ public class PatternInstanceParser {
 			if("description" == actualNode.getNodeName()){
 				patterninstance.setDescription(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
 			}
-			if("image" == actualNode.getNodeName()){
-				patterninstance.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
-			}
-			item.setImage(pattern01.helpers.ImageHelper.getImage("generic.jpg"));
+			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",patterninstance);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFiles")){
 			pattern01.helpers.generated.RelatedFiles relatedFiles = new pattern01.helpers.generated.RelatedFiles();
 			if("image" == actualNode.getNodeName()){
 				relatedFiles.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
 			}
-			item.setImage(pattern01.helpers.ImageHelper.getImage("generic.jpg"));
+			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",relatedFiles);
 			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).setRelatedFiles(relatedFiles);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFile")){
@@ -160,18 +162,12 @@ public class PatternInstanceParser {
 			if("reference" == actualNode.getNodeName()){
 				relatedFile.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
 			}
-			if("image" == actualNode.getNodeName()){
-				relatedFile.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
-			}
-			item.setImage(pattern01.helpers.ImageHelper.getImage("generic.jpg"));
+			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",relatedFile);
 			((pattern01.helpers.generated.RelatedFiles)item.getParentItem().getData("class_instance")).getCollection_RelatedFile().add(relatedFile);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("faces")){
 			pattern01.helpers.generated.Faces faces = new pattern01.helpers.generated.Faces();
-			if("image" == actualNode.getNodeName()){
-				faces.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
-			}
-			item.setImage(pattern01.helpers.ImageHelper.getImage("generic.jpg"));
+			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",faces);
 			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).getCollection_Faces().add(faces);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("selection")){
@@ -185,9 +181,6 @@ public class PatternInstanceParser {
 			if("reference" == actualNode.getNodeName()){
 				selection.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
 			}
-			if("image" == actualNode.getNodeName()){
-				selection.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
-			}
 			if("insert" == actualNode.getNodeName()){
 				selection.setInsert(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
 			}
@@ -200,7 +193,7 @@ public class PatternInstanceParser {
 			if("display" == actualNode.getNodeName()){
 				selection.setDisplay(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
 			}
-			item.setImage(pattern01.helpers.ImageHelper.getImage("generic.jpg"));
+			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",selection);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Selection().add(selection);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("register")){
@@ -214,10 +207,7 @@ public class PatternInstanceParser {
 			if("reference" == actualNode.getNodeName()){
 				register.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
 			}
-			if("image" == actualNode.getNodeName()){
-				register.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
-			}
-			item.setImage(pattern01.helpers.ImageHelper.getImage("generic.jpg"));
+			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",register);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Register().add(register);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("dialog")){
@@ -231,10 +221,7 @@ public class PatternInstanceParser {
 			if("reference" == actualNode.getNodeName()){
 				dialog.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
 			}
-			if("image" == actualNode.getNodeName()){
-				dialog.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
-			}
-			item.setImage(pattern01.helpers.ImageHelper.getImage("generic.jpg"));
+			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",dialog);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Dialog().add(dialog);
 		}
