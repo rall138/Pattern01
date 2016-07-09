@@ -128,16 +128,8 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(1)+"}");
 	}
 	
-	
 	private String getDefaultImageValue(Element element){
-		String imageValue = "";
-		for(Attribute attr : element.getAttribute_collection()){
-			if (attr.getPrettyName().equalsIgnoreCase("image")){
-				imageValue = attr.getDefault_value();
-				break;
-			}
-		}
-		return imageValue;
+		return element.getImage() == null? "": element.getImage();
 	}
 	
 	private void generatePropertiesAssignment(Element element){

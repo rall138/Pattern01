@@ -3,14 +3,13 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 08:25:51 UYT 2016
+	* Creation date: Fri Jul 08 17:16:01 GFT 2016
 	* Creator: rlomez
 	**/
 public class Selection implements IPatternElement{
 	private java.lang.String name;
 	private java.lang.String description;
 	private java.lang.String reference;
-	private java.lang.String image = "generic.jpg";
 	private java.lang.Boolean insert = true;
 	private java.lang.Boolean update = true;
 	private java.lang.Boolean delete = true;
@@ -38,14 +37,6 @@ public class Selection implements IPatternElement{
 
 	public void setReference(java.lang.String reference){
 		this.reference = reference;
-	}
-
-	public java.lang.String getImage(){
-		return this.image;
-	}
-
-	public void setImage(java.lang.String image){
-		this.image = image;
 	}
 
 	public java.lang.Boolean getInsert(){
@@ -93,16 +84,22 @@ public class Selection implements IPatternElement{
 
 	@Override
 	public java.lang.String toXml(){
-		java.lang.String xml ="<Selection "
-		+ "name='"+this.name+"'"
-		+ "description='"+this.description+"'"
-		+ "reference='"+this.reference+"'"
-		+ "image='"+this.image+"'"
-		+ "insert='"+this.insert+"'"
-		+ "update='"+this.update+"'"
-		+ "delete='"+this.delete+"'"
-		+ "display='"+this.display+"'";
+		java.lang.String xml="<Selection ";
+		xml+="name='"+this.name+"'";
+		xml+="description='"+this.description+"'";
+		xml+="reference='"+this.reference+"'";
+		xml+="insert='"+this.insert+"'";
+		xml+="update='"+this.update+"'";
+		xml+="delete='"+this.delete+"'";
+		xml+="display='"+this.display+"'";
+		xml+=">";
 		xml+="</Selection>";
 		return xml;
+	}
+
+	@Override
+	public IPatternElement fromXml(java.lang.String xmlDocument){
+		java.lang.String xpathuri = "null";
+		return null;
 	}
 }

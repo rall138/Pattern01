@@ -46,6 +46,8 @@ public class PatternDefinitionParser {
 					//Generacion de elementos padres
 					if(qName.equalsIgnoreCase("element")){
 						element = new CommonElement();
+						log.writeSingleMessage("DBG:"+uri+" "+localName+" "+qName);
+						element.setXpathURI(uri);
 						for (int index = 0; index < attributes.getLength(); index++){
 							if (attributes.getQName(index).equalsIgnoreCase("name")){
 								element.setName(attributes.getValue(index));
@@ -59,6 +61,8 @@ public class PatternDefinitionParser {
 					}else if(qName.equalsIgnoreCase("childelement")){
 						//Asignamos solamente el nombre porque tenemos nada mas que la referencia.
 						CommonElement childElement = new CommonElement(element);
+						log.writeSingleMessage("DBG:"+uri+" "+localName+" "+qName);
+						childElement.setXpathURI(uri);
 						for (int index = 0; index < attributes.getLength(); index++){
 							if (attributes.getQName(index).equalsIgnoreCase("ref")){
 								childElement.setName(attributes.getValue(index));

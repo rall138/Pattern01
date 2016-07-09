@@ -3,7 +3,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 08:25:52 UYT 2016
+	* Creation date: Fri Jul 08 17:16:02 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart{
@@ -17,8 +17,6 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 	private org.eclipse.swt.widgets.Text name = null;
 	private org.eclipse.swt.widgets.Label label_description = null;
 	private org.eclipse.swt.widgets.Text description = null;
-	private org.eclipse.swt.widgets.Label label_image = null;
-	private org.eclipse.swt.widgets.Text image = null;
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
@@ -45,11 +43,6 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 		this.description = new org.eclipse.swt.widgets.Text(this.group_Default, org.eclipse.swt.SWT.NONE);
 		this.description.setText("");
 		this.description.setLayoutData(controlLayout);
-		this.label_image = new org.eclipse.swt.widgets.Label(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.label_image.setText("Image");
-		this.image = new org.eclipse.swt.widgets.Text(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.image.setText("generic.jpg");
-		this.image.setLayoutData(controlLayout);
 		addListeners();
 		initializeCombos();
 	}
@@ -69,7 +62,6 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 		((pattern01.helpers.generated.PatternInstance)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setGenerator(pattern01.helpers.generated.Generator.valueOf(this.getGeneratorValue()));
 		((pattern01.helpers.generated.PatternInstance)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setName(this.getNameValue());
 		((pattern01.helpers.generated.PatternInstance)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setDescription(this.getDescriptionValue());
-		((pattern01.helpers.generated.PatternInstance)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setImage(this.getImageValue());
 		this.dirty = false;
 	}
 
@@ -131,14 +123,6 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
 			}
 		});
-		
-		this.image.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
-			@Override
-			public void handleEvent(org.eclipse.swt.widgets.Event event) {
-				dirty = true;
-				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
-			}
-		});
 	}
 
 	private void initializeCombos(){
@@ -162,9 +146,5 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 
 	public java.lang.String getDescriptionValue(){
 		return this.description.getText();
-	}
-
-	public java.lang.String getImageValue(){
-		return this.image.getText();
 	}
 }

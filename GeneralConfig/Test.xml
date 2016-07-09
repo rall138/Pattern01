@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PatternDefinition xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
+	<Element name="" type="" prettyname="" unique="true" image="sdf">
+		<Attribute name="" type="" prettyname=""/>
+		<ChildElement references="" unique="true"/>
+	</Element>
+</PatternDefinition>

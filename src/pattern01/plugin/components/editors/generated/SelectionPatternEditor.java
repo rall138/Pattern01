@@ -3,7 +3,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 08:25:52 UYT 2016
+	* Creation date: Fri Jul 08 17:16:02 GFT 2016
 	* Creator: rlomez
 	**/
 public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
@@ -18,8 +18,6 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 	private org.eclipse.swt.widgets.Text description = null;
 	private org.eclipse.swt.widgets.Label label_reference = null;
 	private org.eclipse.swt.widgets.Text reference = null;
-	private org.eclipse.swt.widgets.Label label_image = null;
-	private org.eclipse.swt.widgets.Text image = null;
 	private org.eclipse.swt.widgets.Label label_insert = null;
 	private org.eclipse.swt.widgets.Button insert = null;
 	private org.eclipse.swt.widgets.Label label_update = null;
@@ -58,11 +56,6 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 		this.reference = new org.eclipse.swt.widgets.Text(this.group_Default, org.eclipse.swt.SWT.NONE);
 		this.reference.setText("");
 		this.reference.setLayoutData(controlLayout);
-		this.label_image = new org.eclipse.swt.widgets.Label(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.label_image.setText("Image");
-		this.image = new org.eclipse.swt.widgets.Text(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.image.setText("generic.jpg");
-		this.image.setLayoutData(controlLayout);
 		this.label_insert = new org.eclipse.swt.widgets.Label(this.group_Mode, org.eclipse.swt.SWT.NONE);
 		this.label_insert.setText("Insert");
 		this.insert = new org.eclipse.swt.widgets.Button(this.group_Mode, org.eclipse.swt.SWT.CHECK);
@@ -102,7 +95,6 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 		((pattern01.helpers.generated.Selection)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setName(this.getNameValue());
 		((pattern01.helpers.generated.Selection)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setDescription(this.getDescriptionValue());
 		((pattern01.helpers.generated.Selection)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setReference(this.getReferenceValue());
-		((pattern01.helpers.generated.Selection)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setImage(this.getImageValue());
 		((pattern01.helpers.generated.Selection)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setInsert(this.getInsertValue());
 		((pattern01.helpers.generated.Selection)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setUpdate(this.getUpdateValue());
 		((pattern01.helpers.generated.Selection)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance")).setDelete(this.getDeleteValue());
@@ -169,14 +161,6 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 			}
 		});
 		
-		this.image.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
-			@Override
-			public void handleEvent(org.eclipse.swt.widgets.Event event) {
-				dirty = true;
-				firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);
-			}
-		});
-		
 		this.insert.addListener(org.eclipse.swt.SWT.KeyDown, new org.eclipse.swt.widgets.Listener() {
 			@Override
 			public void handleEvent(org.eclipse.swt.widgets.Event event) {
@@ -223,10 +207,6 @@ public class SelectionPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	public java.lang.String getReferenceValue(){
 		return this.reference.getText();
-	}
-
-	public java.lang.String getImageValue(){
-		return this.image.getText();
 	}
 
 	public java.lang.Boolean getInsertValue(){

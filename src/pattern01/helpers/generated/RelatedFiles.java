@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Jul 05 08:25:51 UYT 2016
+	* Creation date: Fri Jul 08 17:16:01 GFT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFiles implements IPatternElement{
@@ -38,12 +38,19 @@ public class RelatedFiles implements IPatternElement{
 
 	@Override
 	public java.lang.String toXml(){
-		java.lang.String xml ="<RelatedFiles "
-		+ "image='"+this.image+"'";
+		java.lang.String xml="<RelatedFiles ";
+		xml+="image='"+this.image+"'";
 		for(int index = 0; index < collection_RelatedFile.size(); index++){
 			xml+=collection_RelatedFile.get(index).toXml();
 		}
+		xml+=">";
 		xml+="</RelatedFiles>";
 		return xml;
+	}
+
+	@Override
+	public IPatternElement fromXml(java.lang.String xmlDocument){
+		java.lang.String xpathuri = "null";
+		return null;
 	}
 }

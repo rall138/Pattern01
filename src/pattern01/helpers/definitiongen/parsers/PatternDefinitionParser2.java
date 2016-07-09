@@ -40,7 +40,7 @@ public class PatternDefinitionParser2 {
 			Node firstNodeElement = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 			if (firstNodeElement != null){
 				parentElement = new CommonElement();
-				initializeCommonElement(parentElement, firstNodeElement.getAttributes());
+				initializeCommonElement(parentElement, firstNodeElement);
 				recursiveParseing(parentElement, firstNodeElement, is);
 			}
 		} catch (XPathExpressionException | IllegalStateException e) {
@@ -64,11 +64,12 @@ public class PatternDefinitionParser2 {
 					attributeAttacher(parentElement, childNodes.item(index).getAttributes());
 				}else if (childNodes.item(index).getNodeName().equalsIgnoreCase("childelement")){
 					expression = "/PatternDefinition/Element[@name='"+
-							childNodes.item(index).getAttributes().getNamedItem("ref").getNodeValue()+"']";
+							childNodes.item(index).getAttributes().getNamedItem("references").getNodeValue()+"']";
 					Node auxililarNode = (Node)xpath.evaluate(expression, is, XPathConstants.NODE);
 					if (auxililarNode != null){
 						CommonElement childElement = new CommonElement(parentElement);
-						initializeCommonElement(childElement, auxililarNode.getAttributes());
+						childElement.setXpathURI(auxililarNode.getNamespaceURI());
+						initializeCommonElement(childElement, auxililarNode);
 						parentElement.getChildElements_collection().add(childElement);
 						recursiveParseing(childElement, auxililarNode, is);
 					}
@@ -77,15 +78,18 @@ public class PatternDefinitionParser2 {
 		}
 	}
 	
-	private void initializeCommonElement(CommonElement commonElement, NamedNodeMap attribute_node_collection){
-		for (int hindex = 0; hindex < attribute_node_collection.getLength(); hindex++){
-			Node attributeNode = attribute_node_collection.item(hindex);
+	private void initializeCommonElement(CommonElement commonElement, Node nodeElement){
+		commonElement.setXpathURI(nodeElement.getNamespaceURI());
+		for (int hindex = 0; hindex < nodeElement.getAttributes().getLength(); hindex++){
+			Node attributeNode = nodeElement.getAttributes().item(hindex);
 			if (attributeNode.getNodeName().equalsIgnoreCase("name")){
 				commonElement.setName(attributeNode.getNodeValue());
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("prettyname")){
 				commonElement.setPrettyName(attributeNode.getNodeValue());
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
 				commonElement.setUnique(Boolean.valueOf(attributeNode.getNodeValue()));
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
+				commonElement.setImage(attributeNode.getNodeValue());
 			}
 		}
 	}
