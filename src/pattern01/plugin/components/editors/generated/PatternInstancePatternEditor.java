@@ -1,7 +1,22 @@
 
 package pattern01.plugin.components.editors.generated;
 
-	/**
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.CellLabelProvider;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ComboBoxCellEditor;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.jface.viewers.ViewerCell;
+
+import pattern01.helpers.generated.PatternInstance;
+
+/**
 	* Generated class via ClassGenerator.xml
 	* Creation date: Fri Jul 08 17:16:02 GFT 2016
 	* Creator: rlomez
@@ -21,30 +36,49 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
 
-		org.eclipse.swt.layout.FillLayout layout = new org.eclipse.swt.layout.FillLayout();
-		org.eclipse.swt.layout.GridData controlLayout = new org.eclipse.swt.layout.GridData();
-		controlLayout.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL_HORIZONTAL;
-		layout.type = org.eclipse.swt.SWT.VERTICAL;
-		parent.setLayout(layout);
-		this.group_Default = new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);
-		this.group_Default.setLayout(new org.eclipse.swt.layout.GridLayout(2, false));
-		this.group_Default.setText("Default");
-		this.label_generator = new org.eclipse.swt.widgets.Label(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.label_generator.setText("Generator");
-		this.generator = new org.eclipse.swt.widgets.Combo(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.generator.setLayoutData(controlLayout);
-		this.label_name = new org.eclipse.swt.widgets.Label(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.label_name.setText("Name");
-		this.name = new org.eclipse.swt.widgets.Text(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.name.setText("");
-		this.name.setLayoutData(controlLayout);
-		this.label_description = new org.eclipse.swt.widgets.Label(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.label_description.setText("Description");
-		this.description = new org.eclipse.swt.widgets.Text(this.group_Default, org.eclipse.swt.SWT.NONE);
-		this.description.setText("");
-		this.description.setLayoutData(controlLayout);
-		addListeners();
-		initializeCombos();
+		TableViewer tviewer = new TableViewer(parent);
+		
+		//Visualización de líneas
+		tviewer.getTable().setLinesVisible(true);
+		
+		//Visualización de cabezal
+		tviewer.getTable().setHeaderVisible(true);
+		
+		tviewer.setContentProvider(ArrayContentProvider.getInstance());
+
+		TableViewerColumn tvColumn = new TableViewerColumn(tviewer, 0);
+		tvColumn.getColumn().setWidth(200);
+		tvColumn.getColumn().setText("Columna 1");
+		tvColumn.setLabelProvider(new ColumnLabelProvider(){
+
+			@Override
+			public String getText(Object element) {
+				PatternInstance patterninstance = (PatternInstance) element;
+				return patterninstance.getName();
+				
+			}
+		
+			
+			
+		});
+		
+		
+		
+		List<PatternInstance> array = new ArrayList<>();
+		pattern01.plugin.components.navigator.DefaultEditorInput defaultEditorInput = (pattern01.plugin.components.navigator.DefaultEditorInput)this.getEditorInput();
+		org.eclipse.swt.widgets.TreeItem parentItem = defaultEditorInput.getInstanceTree().getItem(0);
+		
+		PatternInstance patternInstance = (pattern01.helpers.generated.PatternInstance)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance");
+		patternInstance.setName("Instancia de prueba");
+		array.add(patternInstance);
+		
+		tviewer.setInput(array);
+
+		
+		CellEditor[] cellEditor = new CellEditor[1];
+		cellEditor[0] = new TextCellEditor(tviewer.getTable());
+		tviewer.setCellEditors(cellEditor);
+		
 	}
 
 	@Override
