@@ -4,17 +4,22 @@ package pattern01.plugin.components.editors.generated;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tools.ant.PropertyHelper;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
+import org.eclipse.jface.viewers.ICellModifier;
+import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 
 import pattern01.helpers.generated.PatternInstance;
+import pattern01.helpers.temporal_containers.Attribute;
 
 /**
 	* Generated class via ClassGenerator.xml
@@ -35,50 +40,96 @@ public class PatternInstancePatternEditor extends org.eclipse.ui.part.EditorPart
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
+		final TableViewer tviewer = new TableViewer(parent);
+		tviewer.setContentProvider(ArrayContentProvider.getInstance());
+		this.createColumns(tviewer);
+		this.createEditors(tviewer);
+		tviewer.setCellModifier(new ICellModifier() {
+			
+			@Override
+			public void modify(Object element, String property, Object value) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public Object getValue(Object element, String property) {
+				if (property.equalsIgnoreCase("property")){
+					return ((Attribute)element).getName();
+				}else if (property.equalsIgnoreCase("value")){
+					return ((Attribute)element).getDefault_value();
+				}
+				return "";
+			}
+			
+			@Override
+			public boolean canModify(Object element, String property) {
+				// TODO Auto-generated method stub
+				return true;
+			}
+			
+			
+		});
 
-		TableViewer tviewer = new TableViewer(parent);
-		
 		//Visualización de líneas
 		tviewer.getTable().setLinesVisible(true);
 		
 		//Visualización de cabezal
 		tviewer.getTable().setHeaderVisible(true);
 		
-		tviewer.setContentProvider(ArrayContentProvider.getInstance());
-
-		TableViewerColumn tvColumn = new TableViewerColumn(tviewer, 0);
-		tvColumn.getColumn().setWidth(200);
-		tvColumn.getColumn().setText("Columna 1");
-		tvColumn.setLabelProvider(new ColumnLabelProvider(){
+		this.setModelProvider(tviewer);
+	}
+	
+	private void createColumns(TableViewer tviewer){
+		final TableViewerColumn col = new TableViewerColumn(tviewer, 0);
+		col.getColumn().setText("Property");
+		col.getColumn().setWidth(200);
+		col.setLabelProvider(new ColumnLabelProvider(){
 
 			@Override
 			public String getText(Object element) {
-				PatternInstance patterninstance = (PatternInstance) element;
-				return patterninstance.getName();
-				
+				return ((Attribute)element).getName();
 			}
-		
-			
 			
 		});
 		
-		
-		
-		List<PatternInstance> array = new ArrayList<>();
-		pattern01.plugin.components.navigator.DefaultEditorInput defaultEditorInput = (pattern01.plugin.components.navigator.DefaultEditorInput)this.getEditorInput();
-		org.eclipse.swt.widgets.TreeItem parentItem = defaultEditorInput.getInstanceTree().getItem(0);
-		
-		PatternInstance patternInstance = (pattern01.helpers.generated.PatternInstance)defaultEditorInput.getInstanceTree().getSelection()[0].getData("class_instance");
-		patternInstance.setName("Instancia de prueba");
-		array.add(patternInstance);
-		
-		tviewer.setInput(array);
+		final TableViewerColumn col2 = new TableViewerColumn(tviewer, 0);
+		col2.getColumn().setText("Value");
+		col2.getColumn().setWidth(200);		
+		col2.setLabelProvider(new ColumnLabelProvider(){
 
-		
-		CellEditor[] cellEditor = new CellEditor[1];
-		cellEditor[0] = new TextCellEditor(tviewer.getTable());
-		tviewer.setCellEditors(cellEditor);
-		
+			@Override
+			public String getText(Object element) {
+				return ((Attribute)element).getDefault_value();
+			}
+			
+		});
+	}
+	
+	private void createEditors(TableViewer tviewer){
+		CellEditor[] editors = new CellEditor[2];
+		TextCellEditor ed1 = new TextCellEditor(tviewer.getTable());
+		editors[0] = ed1;
+		TextCellEditor ed2 = new TextCellEditor(tviewer.getTable());
+		editors[1] = ed2;
+		tviewer.setCellEditors(editors);
+	}
+	
+	private void setModelProvider(TableViewer tviewer){
+		List<Attribute> attrList = new ArrayList<>();
+		Attribute attr = new Attribute();
+		attr.setName("Name");
+		attr.setDefault_value("Nombre de instancia por defecto");
+		attrList.add(attr);
+		attr = new Attribute();
+		attr.setName("Generator");
+		attr.setDefault_value("Valor de generador");
+		attrList.add(attr);
+		attr = new Attribute();
+		attr.setName("Description");
+		attr.setDefault_value("Valor de descripcion");
+		attrList.add(attr);
+		tviewer.setInput(attrList);
 	}
 
 	@Override
