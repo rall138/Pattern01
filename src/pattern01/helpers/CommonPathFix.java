@@ -13,7 +13,8 @@ public class CommonPathFix {
 	public enum PATH_NAME{CLASSGENERATOR_XML, WORKSPACE_LOC, 
 		PATTERNDEFINITION_XML, BINFOLDER, 
 		CUSTOMPROPERTIES_PROPERTIES, ICONFOLDER,
-		CUSTOMVALUESDEFINITION, DEFAULTWWDEFINITION, MANIFEST_XML};
+		CUSTOMVALUESDEFINITION, DEFAULTWWDEFINITION, MANIFEST_XML, 
+		JFACEDIALOG_TEMPLATE};
 	
 	public static URI getHardCodedPath(PATH_NAME path_name){
 		File file = null;
@@ -25,7 +26,7 @@ public class CommonPathFix {
 				break;
 			case PATTERNDEFINITION_XML:
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+				
-					barFix(os, "/GeneralConfig/PatternDefinition.xml"));
+					barFix(os, "/generalconfig/PatternDefinition.xml"));
 			break;
 			case CLASSGENERATOR_XML:
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
@@ -48,15 +49,18 @@ public class CommonPathFix {
 				break;
 			case CUSTOMVALUESDEFINITION:
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
-						barFix(os, "/GeneralConfig/CustomValuesDefinition.xml"));
+						barFix(os, "/generalconfig/CustomValuesDefinition.xml"));
 				break;
 			case DEFAULTWWDEFINITION:
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
-						barFix(os, "/GeneralConfig/DefaultPatternDefinition.xml"));
+						barFix(os, "/generalconfig/DefaultPatternDefinition.xml"));
 				break;
 			case MANIFEST_XML:
 				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
 						barFix(os, "/plugin.xml"));
+			case JFACEDIALOG_TEMPLATE:
+				file = new File(getHardCodedPath(PATH_NAME.WORKSPACE_LOC).getPath()+
+						barFix(os, "/generalconfig/templates/JFaceDialog.txt"));
 		} 
 		return file.toURI();
 	}
