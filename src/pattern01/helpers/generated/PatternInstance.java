@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Fri Jul 08 17:16:01 GFT 2016
+	* Creation date: Wed Aug 31 16:08:45 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance implements IPatternElement{

@@ -95,7 +95,7 @@ public class EditorPartGenerator extends Task{
 				" extends org.eclipse.ui.part.EditorPart{");
 		
 		builder.appendLn("");
-		builder.appendLn(tabGen(1)+"public static final String ID = "+
+		builder.appendLn(1,"public static final String ID = "+
 				quotscape+Element.editorPackage+"."+element.getPrettyName()+Element.postFix+quotscape+";");
 	}
 	
@@ -108,20 +108,21 @@ public class EditorPartGenerator extends Task{
 			if (!group.equalsIgnoreCase(pair.getValue().toString())){
 				group = pair.getValue().toString();
 				if (attributeGeneration){
-					attributeBuilder.appendLn(tabGen(1)+"private org.eclipse.swt.widgets.Group group_"+group);
+					attributeBuilder.appendLn(1,"private org.eclipse.swt.widgets.Group group_"+group);
 					attributeBuilder.append(" = null;");
 				}else{
-					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group+" ");
+					groupInitializarBuilder.appendLn(2,"this.group_"+group+" ");
 					groupInitializarBuilder.append("= new org.eclipse.swt.widgets.Group(parent, org.eclipse.swt.SWT.NONE);");
-					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group);
+					groupInitializarBuilder.appendLn(2,"this.group_"+group);
 					groupInitializarBuilder.append(".setLayout(new org.eclipse.swt.layout.GridLayout(2, false));");
-					groupInitializarBuilder.appendLn(tabGen(2)+"this.group_"+group+".setText(");
+					groupInitializarBuilder.appendLn(2,"this.group_"+group+".setText(");
 					groupInitializarBuilder.append(quotscape+pair.getValue().toString()+quotscape+");");
 				}
 			}
 		}
 	}
 	
+	/*
 	private String getElementGroup(Element element, Attribute attr){
 		String groupName = "";
 		int index = 0;
@@ -137,27 +138,28 @@ public class EditorPartGenerator extends Task{
 		}
 		return groupName;
 	}
+	*/
 	
 	private void generateAttributes(Element element){
-		attributeBuilder.appendLn(tabGen(1)+"private boolean dirty = false;");
+		attributeBuilder.appendLn(1,"private boolean dirty = false;");
 		
 		//Group control generator
 		this.generateGroupControls(element, true);		
 		
 		for(Attribute attr : element.getAttribute_collection()){
 			
-			attributeBuilder.appendLn(tabGen(1)+"private org.eclipse.swt.widgets.Label label_"+attr.getName()+" = null;");
+			attributeBuilder.appendLn(1,"private org.eclipse.swt.widgets.Label label_"+attr.getName()+" = null;");
 			if (attr.getType().contains("#{")){
-				attributeBuilder.appendLn(tabGen(1)+
+				attributeBuilder.appendLn(1,
 						"private org.eclipse.swt.widgets.Combo "+attr.getName()+" = null;");
 				hasCustomValueDefined = true;
 			}else{
 				if (attr.getType().equalsIgnoreCase("java.lang.Boolean")){
-					attributeBuilder.appendLn(tabGen(1)+
+					attributeBuilder.appendLn(1,
 							"private org.eclipse.swt.widgets.Button "+attr.getName()+" = null;");
 					
 				}else{
-					attributeBuilder.appendLn(tabGen(1)+
+					attributeBuilder.appendLn(1,
 							"private org.eclipse.swt.widgets.Text "+attr.getName()+" = null;");
 				}
 			}
@@ -170,144 +172,146 @@ public class EditorPartGenerator extends Task{
 	private void generateGetterAndSettersOfAttributes(Attribute attr){
 		getterAndSetterBuilder.clrlf();
 		if (attr.getType().contains("#{")){
-			getterAndSetterBuilder.appendLn(tabGen(1)+"public java.lang.String");
+			getterAndSetterBuilder.appendLn(1,"public java.lang.String");
 		}else{
-			getterAndSetterBuilder.appendLn(tabGen(1)+"public "+attr.getType());
+			getterAndSetterBuilder.appendLn(1,"public "+attr.getType());
 		}
 		getterAndSetterBuilder.append(" get"+attr.getPrettyName()+"Value(){");
 		if (attr.getType().equalsIgnoreCase("java.lang.Boolean")){
-			getterAndSetterBuilder.appendLn(tabGen(2)+"return java.lang.Boolean.valueOf(this.");
+			getterAndSetterBuilder.appendLn(2,"return java.lang.Boolean.valueOf(this.");
 			getterAndSetterBuilder.append(attr.getName()+".getText());");
 		}else{
-			getterAndSetterBuilder.appendLn(tabGen(2)+"return this."+attr.getName()+".getText();");
+			getterAndSetterBuilder.appendLn(2,"return this."+attr.getName()+".getText();");
 		}
-		getterAndSetterBuilder.appendLn(tabGen(1)+"}");
+		getterAndSetterBuilder.appendLn(1,"}");
 	}
 	
 	private void generateConstructor(Element element){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"@Override");
-		builder.appendLn(tabGen(1)+"public void createPartControl(org.eclipse.swt.widgets.Composite parent) {");
-		builder.appendLn(tabGen(2)+"org.eclipse.jface.viewers.TableViewer tviewer = new ");
+		builder.appendLn(1,"@Override");
+		builder.appendLn(1,"public void createPartControl(org.eclipse.swt.widgets.Composite parent) {");
+		builder.appendLn(2,"org.eclipse.jface.viewers.TableViewer tviewer = new ");
 		builder.append("org.eclipse.jface.viewers.TableViewer(parent);");
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"// Grid lines visible");
-		builder.appendLn(tabGen(2)+"tviewer.getTable().setLinesVisible(true);");
-		builder.appendLn(tabGen(2)+"// Column titles visible");
-		builder.appendLn(tabGen(2)+"tviewer.getTable().setHeaderVisible(true);");
+		builder.appendLn(2,"// Grid lines visible");
+		builder.appendLn(2,"tviewer.getTable().setLinesVisible(true);");
+		builder.appendLn(2,"// Column titles visible");
+		builder.appendLn(2,"tviewer.getTable().setHeaderVisible(true);");
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"tviewer.setContentProvider");
+		builder.appendLn(2,"tviewer.setContentProvider");
 		builder.append("(org.eclipse.jface.viewers.ArrayContentProvider.getInstance());");
-		builder.appendLn(tabGen(2)+"tviewer.setColumnProperties(new String[]{"+quotscape+"Property"+quotscape+",");
+		builder.appendLn(2,"tviewer.setColumnProperties(new String[]{"+quotscape+"Property"+quotscape+",");
 		builder.append(quotscape+"Value"+quotscape+"});");
-		builder.appendLn(tabGen(2)+"this.createTableViewerColumns(tviewer);");
-		builder.appendLn(tabGen(2)+"this.createTableViewerColumns(tviewer);");
-		builder.appendLn(tabGen(2)+"this.bindCellEditores(tviewer);");
-		builder.appendLn(tabGen(2)+"this.bindModelData(tviewer);");
-		builder.appendLn(tabGen(1)+"}");
-		this.generateTableViewerColumnCreator();
-		this.generateCellEditors(element);
-		this.generateModelData(element);
-		this.generateEditorBinding();
+//		builder.appendLn(2,"this.createTableViewerColumns(tviewer);");
+//		builder.appendLn(2,"this.createTableViewerColumns(tviewer);");
+//		builder.appendLn(2,"this.bindCellEditores(tviewer);");
+//		builder.appendLn(2,"this.bindModelData(tviewer);");
+		builder.appendLn(1,"}");
+		//this.generateTableViewerColumnCreator();
+		//this.generateCellEditors(element);
+		//this.generateModelData(element);
+		//this.generateEditorBinding();
 	}
 	
 	private void generateTableViewerColumnCreator(){
-		builder.appendLn(tabGen(1)+"private void createTableViewerColumns(org.eclipse.jface.viewers.TableViewer tviewer){");
-		builder.appendLn(tabGen(2)+"final org.eclipse.jface.viewers.TableViewerColumn firstColumn = new ");
+		builder.appendLn(1,"private void createTableViewerColumns(org.eclipse.jface.viewers.TableViewer tviewer){");
+		builder.appendLn(2,"final org.eclipse.jface.viewers.TableViewerColumn firstColumn = new ");
 		builder.append("org.eclipse.jface.viewers.TableViewerColumn(tviewer, SWT.NONE);");
-		builder.appendLn(tabGen(2)+"final org.eclipse.jface.viewers.TableViewerColumn secondColumn = new ");
-		builder.append("org.eclipse.jface.viewers.TableViewerColumn(tviewer, SWT.NONE);");
-		builder.clrlf();
-		builder.appendLn(tabGen(2)+"//Column title");
-		builder.appendLn(tabGen(2)+"firstColumn.getColumn().setText("+quotscape+"Property"+quotscape+");");
+		builder.appendLn(2,"final org.eclipse.jface.viewers.TableViewerColumn secondColumn = new ");
 		builder.append("org.eclipse.jface.viewers.TableViewerColumn(tviewer, SWT.NONE);");
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"//Column title");
-		builder.appendLn(tabGen(2)+"secondColumn.getColumn().setText("+quotscape+"Value"+quotscape+");");
+		builder.appendLn(2,"//Column title");
+		builder.appendLn(2,"firstColumn.getColumn().setText("+quotscape+"Property"+quotscape+");");
 		builder.append("org.eclipse.jface.viewers.TableViewerColumn(tviewer, SWT.NONE);");
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"//Column width");
-		builder.appendLn(tabGen(2)+"firstColumn.getColumn().setWidth(200);");
+		builder.appendLn(2,"//Column title");
+		builder.appendLn(2,"secondColumn.getColumn().setText("+quotscape+"Value"+quotscape+");");
+		builder.append("org.eclipse.jface.viewers.TableViewerColumn(tviewer, SWT.NONE);");
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"//Column width");
-		builder.appendLn(tabGen(2)+"secondColumn.getColumn().setWidth(200);");
+		builder.appendLn(2,"//Column width");
+		builder.appendLn(2,"firstColumn.getColumn().setWidth(200);");
+		builder.clrlf();
+		builder.appendLn(2,"//Column width");
+		builder.appendLn(2,"secondColumn.getColumn().setWidth(200);");
 		this.generateColumnLabelProvider();
 	}
 	
 	private void generateColumnLabelProvider(){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"firstColumn.setLabelProvider(new org.eclipse.jface.viewers.ColumnLabelProvider(){");
-		builder.appendLn(tabGen(2)+"@Override");
-		builder.appendLn(tabGen(2)+"public String getText(Object element){");
-		builder.appendLn(tabGen(3)+"return ((pattern01.helpers.temporal_containers.Attribute)element).getName();");
-		builder.appendLn(tabGen(2)+"}");
-		builder.appendLn(tabGen(1)+"});");
+		builder.appendLn(1,"firstColumn.setLabelProvider(new org.eclipse.jface.viewers.ColumnLabelProvider(){");
+		builder.appendLn(2,"@Override");
+		builder.appendLn(2,"public String getText(Object element){");
+		builder.appendLn(3,"return ((pattern01.helpers.temporal_containers.Attribute)element).getName();");
+		builder.appendLn(2,"}");
+		builder.appendLn(1,"});");
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"secondColumn.setLabelProvider(new org.eclipse.jface.viewers.ColumnLabelProvider(){");
-		builder.appendLn(tabGen(2)+"@Override");
-		builder.appendLn(tabGen(2)+"public String getText(Object element){");
-		builder.appendLn(tabGen(3)+"return ((pattern01.helpers.temporal_containers.Attribute)element).getValue();");
-		builder.appendLn(tabGen(2)+"}");
-		builder.appendLn(tabGen(1)+"});");
+		builder.appendLn(1,"secondColumn.setLabelProvider(new org.eclipse.jface.viewers.ColumnLabelProvider(){");
+		builder.appendLn(2,"@Override");
+		builder.appendLn(2,"public String getText(Object element){");
+		builder.appendLn(3,"return ((pattern01.helpers.temporal_containers.Attribute)element).getValue();");
+		builder.appendLn(2,"}");
+		builder.appendLn(1,"});");
 	}
 	
+	/*
 	private void generateEditorBinding(){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"private void bindCellModifiers(org.eclipse.jface.viewers.TableViewer tviewer){");
-		builder.appendLn(tabGen(2)+"tviewer.setCellModifier(new org.eclipse.jface.viewers.ICellModifier(){");
-		builder.appendLn(tabGen(3)+"@Override");
-		builder.appendLn(tabGen(3)+"public void modify(Object element, String property, Object value) {");
-		builder.appendLn(tabGen(3)+"}");
+		builder.appendLn(1,"private void bindCellModifiers(org.eclipse.jface.viewers.TableViewer tviewer){");
+		builder.appendLn(2,"tviewer.setCellModifier(new org.eclipse.jface.viewers.ICellModifier(){");
+		builder.appendLn(3,"@Override");
+		builder.appendLn(3,"public void modify(Object element, String property, Object value) {");
+		builder.appendLn(3,"}");
 		builder.clrlf();
-		builder.appendLn(tabGen(3)+"@Override");
-		builder.appendLn(tabGen(3)+"public boolean canModify(Object element, String property) {");
-		builder.appendLn(tabGen(4)+"return true;");
-		builder.appendLn(tabGen(3)+"}");
+		builder.appendLn(3,"@Override");
+		builder.appendLn(3,"public boolean canModify(Object element, String property) {");
+		builder.appendLn(4,"return true;");
+		builder.appendLn(3,"}");
 		builder.clrlf();
-		builder.appendLn(tabGen(3)+"@Override");
-		builder.appendLn(tabGen(3)+"public Object getValue(Object element, String property) {");
-		builder.appendLn(tabGen(4)+"if (property.equalsIgnoreCase("+quotscape+"property"+quotscape+")){");
-		builder.appendLn(tabGen(5)+"return ((pattern01.helpers.temporal_containers.Attribute)element).getName();");
-		builder.appendLn(tabGen(4)+"} else if (property.equalsIgnoreCase("+quotscape+"value"+quotscape+")){");
-		builder.appendLn(tabGen(5)+"return ((pattern01.helpers.temporal_containers.Attribute)element).getValue();");
-		builder.appendLn(tabGen(4)+"}");
-		builder.appendLn(tabGen(2)+"});");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(3,"@Override");
+		builder.appendLn(3,"public Object getValue(Object element, String property) {");
+		builder.appendLn(4,"if (property.equalsIgnoreCase("+quotscape+"property"+quotscape+")){");
+		builder.appendLn(5,"return ((pattern01.helpers.temporal_containers.Attribute)element).getName();");
+		builder.appendLn(4,"} else if (property.equalsIgnoreCase("+quotscape+"value"+quotscape+")){");
+		builder.appendLn(5,"return ((pattern01.helpers.temporal_containers.Attribute)element).getValue();");
+		builder.appendLn(4,"}");
+		builder.appendLn(2,"});");
+		builder.appendLn(1,"}");
 	}
 	
 	private void generateCellEditors(Element element){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"private void bindCellEditors(org.eclipse.jface.viewers.TableViewer tviewer){");
-		builder.appendLn(tabGen(2)+"org.eclipse.jface.viewers.CellEditor[] editors = new ");
+		builder.appendLn(1,"private void bindCellEditors(org.eclipse.jface.viewers.TableViewer tviewer){");
+		builder.appendLn(2,"org.eclipse.jface.viewers.CellEditor[] editors = new ");
 		builder.append("org.eclipse.jface.viewers.CellEditor[2];");
-		builder.appendLn(tabGen(2)+"editors[0] = new org.eclipse.jface.viewers.TextCellEditor(tviewer.getTable());");
-		builder.appendLn(tabGen(2)+"editors[1] = new org.eclipse.jface.viewers.TextCellEditor(tviewer.getTable());");
-		builder.appendLn(tabGen(2)+"tviewer.setCellEditors(editors);");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(2,"editors[0] = new org.eclipse.jface.viewers.TextCellEditor(tviewer.getTable());");
+		builder.appendLn(2,"editors[1] = new org.eclipse.jface.viewers.TextCellEditor(tviewer.getTable());");
+		builder.appendLn(2,"tviewer.setCellEditors(editors);");
+		builder.appendLn(1,"}");
 	}
 	
 	private void generateModelData(Element element){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"private void bindModelData(org.eclipse.jface.viewers.TableViewer tviewer){");
-		builder.appendLn(tabGen(2)+"java.util.List<pattern01.helpers.temporal_containers.Attibute> attributeCollection = ");
+		builder.appendLn(1,"private void bindModelData(org.eclipse.jface.viewers.TableViewer tviewer){");
+		builder.appendLn(2,"java.util.List<pattern01.helpers.temporal_containers.Attibute> attributeCollection = ");
 		builder.append("new java.util.ArrayList<>();");
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(tabGen(2)+"attributeCollection.add((new pattern01.helpers.temporal_containers.Attibute())");
+			builder.appendLn(2,"attributeCollection.add((new pattern01.helpers.temporal_containers.Attibute())");
 			builder.append(".setName("+quotscape+attr.getName()+")");
 			builder.append(".setValue("+DataTypeConversion.getProcessedType(attr.getDefault_value())+"));");
 		}
-		builder.appendLn(tabGen(2)+"tviewer.setInput(attributeCollection);");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(2,"tviewer.setInput(attributeCollection);");
+		builder.appendLn(1,"}");
 	}
-	
+	*/
 	private void generateComboInitializerMethod(Element element){
 		comboInitializerBuilder.appendLn("");
-		comboInitializerBuilder.appendLn(tabGen(1)+"private void initializeCombos(){");
+		comboInitializerBuilder.appendLn(1,"private void initializeCombos(){");
 		comboInitializerBuilder.append(comboInitializerBodyBuilder.toString());
-		comboInitializerBuilder.appendLn(tabGen(1)+"}");
+		comboInitializerBuilder.appendLn(1,"}");
 		builder.append(comboInitializerBuilder.toString());
 	}
 	
+	/*
 	private void generateControlInitilizerOnConstruct(Element element){
 		//Group control initializer
 		builder.append(groupInitializarBuilder.toString());
@@ -317,26 +321,26 @@ public class EditorPartGenerator extends Task{
 			String groupName = this.getElementGroup(element, attr);
 			groupName = "this.group_"+groupName;
 			
-			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+" = new org.eclipse.swt.widgets.Label("+groupName+", "+
+			builder.appendLn(2,"this.label_"+attr.getName()+" = new org.eclipse.swt.widgets.Label("+groupName+", "+
 					"org.eclipse.swt.SWT.NONE);");
-			builder.appendLn(tabGen(2)+"this.label_"+attr.getName()+".setText("+quotscape+attr.getPrettyName()+quotscape+");");
+			builder.appendLn(2,"this.label_"+attr.getName()+".setText("+quotscape+attr.getPrettyName()+quotscape+");");
 			if (!attr.getType().contains("#{")){
 				if (attr.getType().equalsIgnoreCase("java.lang.Boolean")){
-					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+					builder.appendLn(2,"this."+attr.getName()+
 							" = new org.eclipse.swt.widgets.Button("+groupName+", org.eclipse.swt.SWT.CHECK);");
-					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+					builder.appendLn(2,"this."+attr.getName()+
 							".setSelection("+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
 				}else{
-					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+					builder.appendLn(2,"this."+attr.getName()+
 							" = new org.eclipse.swt.widgets.Text("+groupName+", org.eclipse.swt.SWT.NONE);");
-					builder.appendLn(tabGen(2)+"this."+attr.getName()+
+					builder.appendLn(2,"this."+attr.getName()+
 							".setText("+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
 				}
 			}else{
-				builder.appendLn(tabGen(2)+"this."+attr.getName()+
+				builder.appendLn(2,"this."+attr.getName()+
 						" = new org.eclipse.swt.widgets.Combo("+groupName+", org.eclipse.swt.SWT.NONE);");
 			}
-			builder.appendLn(tabGen(2)+"this."+attr.getName()+".setLayoutData(controlLayout);");
+			builder.appendLn(2,"this."+attr.getName()+".setLayoutData(controlLayout);");
 		}
 	}
 
@@ -347,19 +351,19 @@ public class EditorPartGenerator extends Task{
 				try {
 					String processedType = DataTypeConversion.getProcessedType(attr.getType());
 					String processedDefaultValue = DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value());
-					comboInitializerBodyBuilder.appendLn(tabGen(2)+"java.lang.String selectedValue ="+quotscape+quotscape+";");
-					comboInitializerBodyBuilder.appendLn(tabGen(2)+"for(int index = 0; index < pattern01.helpers.generated.");
+					comboInitializerBodyBuilder.appendLn(2,"java.lang.String selectedValue ="+quotscape+quotscape+";");
+					comboInitializerBodyBuilder.appendLn(2,"for(int index = 0; index < pattern01.helpers.generated.");
 					comboInitializerBodyBuilder.append(processedType+".getOptionCollection().size(); index++){");
-					comboInitializerBodyBuilder.appendLn(tabGen(3)+"this."+attr.getName()+".add(");
+					comboInitializerBodyBuilder.appendLn(3,"this."+attr.getName()+".add(");
 					comboInitializerBodyBuilder.append(Element.classPackage+"."+processedType+".getOptionCollection().get(index));");
-					comboInitializerBodyBuilder.appendLn(tabGen(3)+"if ("+Element.classPackage+"."+processedType);
+					comboInitializerBodyBuilder.appendLn(3,"if ("+Element.classPackage+"."+processedType);
 					comboInitializerBodyBuilder.append(".fullyQualifiedComparer("+quotscape+processedDefaultValue+quotscape+",");
 					comboInitializerBodyBuilder.append(Element.classPackage+"."+processedType+".getOptionCollection().get(index))){");
-					comboInitializerBodyBuilder.appendLn(tabGen(4)+"selectedValue = ");
+					comboInitializerBodyBuilder.appendLn(4,"selectedValue = ");
 					comboInitializerBodyBuilder.append(Element.classPackage+"."+processedType+".getOptionCollection().get(index);");
-					comboInitializerBodyBuilder.appendLn(tabGen(3)+"}"); // end-if
-					comboInitializerBodyBuilder.appendLn(tabGen(2)+"}"); // end-for
-					comboInitializerBodyBuilder.appendLn(tabGen(2)+"this."+attr.getName()+".select(");
+					comboInitializerBodyBuilder.appendLn(3,"}"); // end-if
+					comboInitializerBodyBuilder.appendLn(2,"}"); // end-for
+					comboInitializerBodyBuilder.appendLn(2,"this."+attr.getName()+".select(");
 					comboInitializerBodyBuilder.append("this."+attr.getName()+".indexOf(selectedValue));");
 				} catch (SecurityException | IllegalArgumentException  e) {
 					e.printStackTrace();
@@ -367,10 +371,11 @@ public class EditorPartGenerator extends Task{
 			}
 		}
 	}
+	*/
 	
 	private void generateListeners(Element element){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"private void addListeners() {");
+		builder.appendLn(1,"private void addListeners() {");
 		for(Attribute attr : element.getAttribute_collection()){
 			String eventType ="";
 			if(attr.getType().contains("#{")){
@@ -378,71 +383,71 @@ public class EditorPartGenerator extends Task{
 			}else{
 				eventType = "org.eclipse.swt.SWT.KeyDown";
 			}
-			builder.appendLn(tabGen(2)+"");
-			builder.appendLn(tabGen(2)+"this."+attr.getName()+".addListener("+eventType+", "+
+			builder.appendLn(2,"");
+			builder.appendLn(2,"this."+attr.getName()+".addListener("+eventType+", "+
 					"new org.eclipse.swt.widgets.Listener() {");
-			builder.appendLn(tabGen(3)+"@Override");
-			builder.appendLn(tabGen(3)+"public void handleEvent(org.eclipse.swt.widgets.Event event) {");
-			builder.appendLn(tabGen(4)+"dirty = true;");
-			builder.appendLn(tabGen(4)+"firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);");
-			builder.appendLn(tabGen(3)+"}");
-			builder.appendLn(tabGen(2)+"});");
+			builder.appendLn(3,"@Override");
+			builder.appendLn(3,"public void handleEvent(org.eclipse.swt.widgets.Event event) {");
+			builder.appendLn(4,"dirty = true;");
+			builder.appendLn(4,"firePropertyChange(org.eclipse.ui.IEditorPart.PROP_DIRTY);");
+			builder.appendLn(3,"}");
+			builder.appendLn(2,"});");
 		}
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(1,"}");
 	}
 	
 	private void generateEditorOverrides(Element element){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"@Override");
-		builder.appendLn(tabGen(1)+"public void init(org.eclipse.ui.IEditorSite site, org.eclipse.ui.IEditorInput input) {");
-		builder.appendLn(tabGen(2)+"setSite(site);");
-		builder.appendLn(tabGen(2)+"setInput(input);");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(1,"@Override");
+		builder.appendLn(1,"public void init(org.eclipse.ui.IEditorSite site, org.eclipse.ui.IEditorInput input) {");
+		builder.appendLn(2,"setSite(site);");
+		builder.appendLn(2,"setInput(input);");
+		builder.appendLn(1,"}");
 		
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"@Override");
-		builder.appendLn(tabGen(1)+"public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {");
+		builder.appendLn(1,"@Override");
+		builder.appendLn(1,"public void doSave(org.eclipse.core.runtime.IProgressMonitor monitor) {");
 		this.generateSaveBodyMethod(element);
-		builder.appendLn(tabGen(2)+"this.dirty = false;");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(2,"this.dirty = false;");
+		builder.appendLn(1,"}");
 
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"@Override");
-		builder.appendLn(tabGen(1)+"public void doSaveAs() {");
-		builder.appendLn(tabGen(2)+"this.dirty = false;");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(1,"@Override");
+		builder.appendLn(1,"public void doSaveAs() {");
+		builder.appendLn(2,"this.dirty = false;");
+		builder.appendLn(1,"}");
 
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"@Override");
-		builder.appendLn(tabGen(1)+"public boolean isDirty() {");
-		builder.appendLn(tabGen(2)+"return this.dirty;");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(1,"@Override");
+		builder.appendLn(1,"public boolean isDirty() {");
+		builder.appendLn(2,"return this.dirty;");
+		builder.appendLn(1,"}");
 		
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"@Override");
-		builder.appendLn(tabGen(1)+"public boolean isSaveAsAllowed() {");
-		builder.appendLn(tabGen(2)+"return true;");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(1,"@Override");
+		builder.appendLn(1,"public boolean isSaveAsAllowed() {");
+		builder.appendLn(2,"return true;");
+		builder.appendLn(1,"}");
 
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"@Override");
-		builder.appendLn(tabGen(1)+"public void setFocus() {");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(1,"@Override");
+		builder.appendLn(1,"public void setFocus() {");
+		builder.appendLn(1,"}");
 		
 		this.generateRecursivePatternInstanceGetter();
 	}
 	
 	private void generateSaveBodyMethod(Element element){
 		String navigatorPackage = "pattern01.plugin.components.navigator";
-		builder.appendLn(tabGen(2)+"String xml_definition ="+quotscape+quotscape+";");
-		builder.appendLn(tabGen(2)+navigatorPackage+".DefaultEditorInput defaultEditorInput = ");
+		builder.appendLn(2,"String xml_definition ="+quotscape+quotscape+";");
+		builder.appendLn(2,navigatorPackage+".DefaultEditorInput defaultEditorInput = ");
 		builder.append("("+navigatorPackage+".DefaultEditorInput)this.getEditorInput();");
-		builder.appendLn(tabGen(2)+"org.eclipse.swt.widgets.TreeItem parentItem = ");
+		builder.appendLn(2,"org.eclipse.swt.widgets.TreeItem parentItem = ");
 		builder.append("defaultEditorInput.getInstanceTree().getItem(0);");
-		builder.appendLn(tabGen(2)+"java.util.List<"+Element.classPackage+".PatternInstance> patternInstanceCollection = ");
+		builder.appendLn(2,"java.util.List<"+Element.classPackage+".PatternInstance> patternInstanceCollection = ");
 		builder.append("getPatternInstanceCollection(parentItem, 0, new java.util.ArrayList<"+Element.classPackage+".PatternInstance>());");
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(tabGen(2)+"(("+Element.classPackage+"."+element.getPrettyName()+")");
+			builder.appendLn(2,"(("+Element.classPackage+"."+element.getPrettyName()+")");
 			builder.append("defaultEditorInput.getInstanceTree()");
 			builder.append(".getSelection()[0].getData("+quotscape+"class_instance"+quotscape+")).set");
 			if (attr.getType().contains("#{")){
@@ -458,32 +463,24 @@ public class EditorPartGenerator extends Task{
 	
 	private void generateRecursivePatternInstanceGetter(){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"private java.util.List<");
+		builder.appendLn(1,"private java.util.List<");
 		builder.append(Element.classPackage+".PatternInstance> getPatternInstanceCollection(");
 		builder.append("org.eclipse.swt.widgets.TreeItem parentItem, int level, java.util.List<"+Element.classPackage+".PatternInstance> ");
 		builder.append("patternInstanceCollection){");
-		builder.appendLn(tabGen(2)+"if (level != 1){ //PatternInstance Nodes are located at secondLevel {1}");
-		builder.appendLn(tabGen(3)+"level++;");
-		builder.appendLn(tabGen(3)+"patternInstanceCollection.addAll(getPatternInstanceCollection(parentItem.getItems()[0],"); 
+		builder.appendLn(2,"if (level != 1){ //PatternInstance Nodes are located at secondLevel {1}");
+		builder.appendLn(3,"level++;");
+		builder.appendLn(3,"patternInstanceCollection.addAll(getPatternInstanceCollection(parentItem.getItems()[0],"); 
 		builder.append("level, patternInstanceCollection));");
-		builder.appendLn(tabGen(2)+"}else{");
-		builder.appendLn(tabGen(3)+"for (org.eclipse.swt.widgets.TreeItem item : parentItem.getItems()){");
-		builder.appendLn(tabGen(4)+"if (item.getText().equalsIgnoreCase("+quotscape+"patterninstance"+quotscape+")){");
-		builder.appendLn(tabGen(5)+"patternInstanceCollection.add(("+Element.classPackage+".PatternInstance)");
+		builder.appendLn(2,"}else{");
+		builder.appendLn(3,"for (org.eclipse.swt.widgets.TreeItem item : parentItem.getItems()){");
+		builder.appendLn(4,"if (item.getText().equalsIgnoreCase("+quotscape+"patterninstance"+quotscape+")){");
+		builder.appendLn(5,"patternInstanceCollection.add(("+Element.classPackage+".PatternInstance)");
 		builder.append("item.getData("+quotscape+"class_instance"+quotscape+"));");
-		builder.appendLn(tabGen(4)+"}");
-		builder.appendLn(tabGen(3)+"}");	
-		builder.appendLn(tabGen(2)+"}");
-		builder.appendLn(tabGen(2)+"return patternInstanceCollection;");
-		builder.appendLn(tabGen(1)+"}");
-	}
-	
-	private String tabGen(int quantity){
-		String tabappender = "";
-		for(int total = 0; total < quantity; total++){
-			tabappender += tabspace;
-		}
-		return tabappender;
+		builder.appendLn(4,"}");
+		builder.appendLn(3,"}");
+		builder.appendLn(2,"}");
+		builder.appendLn(2,"return patternInstanceCollection;");
+		builder.appendLn(1,"}");
 	}
 	
 	private void generateClasses(String className, String classBody){

@@ -3,7 +3,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Fri Jul 08 17:16:02 GFT 2016
+	* Creation date: Wed Aug 31 16:08:46 GFT 2016
 	* Creator: rlomez
 	**/
 public class FacesPatternEditor extends org.eclipse.ui.part.EditorPart{
@@ -13,14 +13,15 @@ public class FacesPatternEditor extends org.eclipse.ui.part.EditorPart{
 
 	@Override
 	public void createPartControl(org.eclipse.swt.widgets.Composite parent) {
+		org.eclipse.jface.viewers.TableViewer tviewer = new org.eclipse.jface.viewers.TableViewer(parent);
 
-		org.eclipse.swt.layout.FillLayout layout = new org.eclipse.swt.layout.FillLayout();
-		org.eclipse.swt.layout.GridData controlLayout = new org.eclipse.swt.layout.GridData();
-		controlLayout.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL_HORIZONTAL;
-		layout.type = org.eclipse.swt.SWT.VERTICAL;
-		parent.setLayout(layout);
-		addListeners();
-		initializeCombos();
+		// Grid lines visible
+		tviewer.getTable().setLinesVisible(true);
+		// Column titles visible
+		tviewer.getTable().setHeaderVisible(true);
+
+		tviewer.setContentProvider(org.eclipse.jface.viewers.ArrayContentProvider.getInstance());
+		tviewer.setColumnProperties(new String[]{"Property","Value"});
 	}
 
 	@Override

@@ -113,24 +113,4 @@
 			 name="DialogPatternEditor">
 		</editor>
 	</extension>
- <extension
-       point="org.eclipse.ui.propertyPages">
-    <page
-          class="pattern01.properties.SamplePropertyPage"
-          id="pattern01.properties.samplePropertyPage"
-          name="Sample Page"
-          nameFilter="*.*">
-       <enabledWhen>
-          <instanceof
-                value="org.eclipse.core.resources.IFile">
-          </instanceof>
-       </enabledWhen>
-    </page>
- </extension>
- <extension
-       point="org.eclipse.ui.propertiesView">
-    <excludeSources
-          id="Pattern01.excludeSources1">
-    </excludeSources>
- </extension>
 </plugin>

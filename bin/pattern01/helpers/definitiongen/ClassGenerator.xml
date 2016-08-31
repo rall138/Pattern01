@@ -31,4 +31,8 @@
 		<replaceregexp file="${filename}" match="${token}" replace="${message}"></replaceregexp>
 	</target>
 	
+	<target name="fileCloner">
+		<copy file="${filename}" overwrite="true" tofile="${dirname}/${newfilename}" />
+	</target>
+	
 </project>

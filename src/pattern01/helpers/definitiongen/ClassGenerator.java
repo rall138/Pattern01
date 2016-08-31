@@ -49,6 +49,8 @@ public class ClassGenerator extends Task{
 		log.writeSingleMessage(" ============================================================== ");
 		generatePatternEditorClasses();
 		log.writeSingleMessage(" ============================================================== ");
+		generatePreferencesDialogs();
+		log.writeSingleMessage(" ============================================================== ");		
 		generatePatternInstanceClass();
 		log.writeSingleMessage(" ============================================================== ");
 	}
@@ -286,6 +288,12 @@ public class ClassGenerator extends Task{
 	private void generatePatternEditorClasses(){
 		EditorPartGenerator epgen = new EditorPartGenerator(this.patterninstanceElement);
 		epgen.execute();
+	}
+	
+	private void generatePreferencesDialogs(){
+		PreferencesDialogGenerator pdgen = 
+				new PreferencesDialogGenerator(this.patterninstanceElement);
+		pdgen.execute();
 	}
 	
 	private void generateNodeTypeClass(){
