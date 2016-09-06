@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IEditorInput;
@@ -20,6 +21,7 @@ import org.eclipse.ui.PlatformUI;
 
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.generated.DialogPatternEditor;
+import pattern01.plugin.components.editors.generated.JFaceDialogPatternInstance;
 import pattern01.plugin.components.editors.generated.PatternInstancePatternEditor;
 import pattern01.plugin.components.editors.generated.RegisterPatternEditor;
 import pattern01.plugin.components.editors.generated.RelatedFilePatternEditor;
@@ -97,7 +99,10 @@ public class MenuFactory {
 							dei.setInstanceTree(parent);
 							NodeType nodetype_pointer = (NodeType)parent.getSelection()[0].getData("type");
 							if (nodetype_pointer == NodeType.PATTERNINSTANCE){
-								page.openEditor(dei, PatternInstancePatternEditor.ID);
+								JFaceDialogPatternInstance jfd = new JFaceDialogPatternInstance(parent.getShell());
+								jfd.create();
+								jfd.open();
+								//page.openEditor(dei, PatternInstancePatternEditor.ID);
 							}else if (nodetype_pointer == NodeType.RELATEDFILE){
 								page.openEditor(dei, RelatedFilePatternEditor.ID);
 							}else if (nodetype_pointer == NodeType.SELECTION){

@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
+import org.eclipse.swt.layout.GridData;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CustomStringBuilder;
@@ -19,6 +20,7 @@ import pattern01.helpers.temporal_containers.Element;
 
 public class PreferencesDialogGenerator extends Task{
 
+	private static final String quotscape = "\"";
 	private LoggerThread log = new LoggerThread();
 	private BuildFileRule bfr = new BuildFileRule();
 	private Element patternInstanceElement = null;
@@ -41,8 +43,13 @@ public class PreferencesDialogGenerator extends Task{
 		String text = null;
 		if (element != null){
 			try{
-				text = replaceMetaTags(element);
-				this.generateClasses(element.getPrettyName(), text);
+				if (element != null){
+					text = this.getDialogCode(element).toString();
+					this.generateClasses(element.getPrettyName(), text);
+					for(Element child : element.getChildElements_collection()){
+						this.generateDialogs(child);
+					}
+				}
 			}catch(IOException ex){
 				System.err.println("Error on preference dialog generation");
 				ex.printStackTrace();
@@ -50,16 +57,7 @@ public class PreferencesDialogGenerator extends Task{
 		}
 	}
 	
-	private String replaceMetaTags(Element element) throws IOException{
-		String text = 
-				getDialogCode().toString()
-				.replace("<<class_name>>", element.getPrettyName())
-				.replace("<<property_method_body>>", getMethodBody(element).toString())
-				.replace("<<property_save>>", "/* TODO - Generar cuerpo del save */");
-		return text;
-	}
-
-	private CustomStringBuilder getDialogCode() throws FileNotFoundException, IOException{
+	private CustomStringBuilder getDialogCode(Element element) throws FileNotFoundException, IOException{
 		
 		CustomStringBuilder builder = new CustomStringBuilder();
 		
@@ -68,6 +66,10 @@ public class PreferencesDialogGenerator extends Task{
 		
 		String line = null;
 		while ((line = reader.readLine())!= null){
+			line = line.replace("<<class_name>>", element.getPrettyName());
+			line = line.replace("<<property_method_body>>", getMethodBody(element).toString());
+			line = line.replace("<<property_save>>", "/* TODO - Generar cuerpo del save */");
+			line = line.replace("<<element_size>>", String.valueOf(element.getAttribute_collection().size()));
 			builder.appendLn(line);
 		}
 		reader.close();
@@ -77,13 +79,17 @@ public class PreferencesDialogGenerator extends Task{
 	private CustomStringBuilder getMethodBody(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(2,"org.eclipse.swt.widgets.Label "+attr.getPrettyName()+"_text");
-			builder.append(" = new org.eclipse.swt.widgets.Label(SWT.NONE);");
-			builder.appendLn(2,attr.getPrettyName()+"_text.setText("+attr.getPrettyName());
-			builder.appendLn(2,"org.eclipse.swt.widgets.Text "+attr.getPrettyName()+"_text");
-			builder.append(" = new org.eclipse.swt.widgets.Text(SWT.SINGLE);");
-			if (element.getAttribute_collection().indexOf(attr) < 
-					element.getAttribute_collection().size()){
+			builder.appendLn(2,"org.eclipse.swt.widgets.Label "+attr.getPrettyName()+"_label");
+			builder.append(" = new org.eclipse.swt.widgets.Label(container,SWT.NONE);");
+			builder.appendLn(2,attr.getPrettyName()+"_label.setText("+quotscape+attr.getPrettyName()+quotscape+");");
+			builder.appendLn(2,"org.eclipse.swt.widgets.Text "+attr.getName()+"_text");
+			builder.append(" = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);");
+			builder.appendLn(2, "org.eclipse.swt.layout.GridData "+attr.getName()+"_layout");
+			builder.append(" = new org.eclipse.swt.layout.GridData();");
+			builder.appendLn(2, attr.getName()+"_layout.grabExcessHorizontalSpace = true;");
+			builder.appendLn(2, attr.getName()+"_layout.horizontalAlignment = GridData.FILL;");
+			builder.appendLn(2, attr.getName()+"_text.setLayoutData("+attr.getName()+"_layout);");
+			if (element.getAttribute_collection().indexOf(attr) < element.getAttribute_collection().size()){
 				builder.clrlf();
 			}
 		}
@@ -91,12 +97,9 @@ public class PreferencesDialogGenerator extends Task{
 	}
 	
 	private void generateClasses(String className, String classBody){
-		bfr.getProject().setProperty("filename", "../../../../generalconfig/templates/JFaceDialog.txt");
-		bfr.getProject().setProperty("dirname", "../../plugin/components/editors/generated/");
-		bfr.getProject().setProperty("newfilename", "JFaceDialog"+className+".java");
 		bfr.getProject().setProperty("message", classBody);
-		bfr.executeTarget("fileCloner");
-		bfr.executeTarget("replacer");
+		bfr.getProject().setProperty("filename", "../../plugin/components/editors/generated/JFaceDialog"+className+".java");
+		bfr.executeTarget("fileRelative");
 	}
 	
 }

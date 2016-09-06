@@ -1,4 +1,6 @@
 
+package pattern01.plugin.components.editors.generated;
+
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -7,19 +9,27 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.layout.GridLayout;
 
-package pattern01.plugins.components.editors.generated
-
-public class <<class_name>>_dialog extends TitleAreaDialog {
+public class JFaceDialog<<class_name>> extends TitleAreaDialog {
 	
-	public <<class_name>>_dialog(Shell parentShell){
+	public JFaceDialog<<class_name>>(Shell parentShell){
 		super(parentShell);
 	}
+	
+	  @Override
+	  public void create() {
+	    super.create();
+	    setTitle("<<class_name>> properties");
+	  }	
 
-	protected Control createAreaDialog(Composite parent){
+  	@Override
+	protected Control createDialogArea(Composite parent){
         Composite area = (Composite) super.createDialogArea(parent);
         Composite container = new Composite(area, SWT.NONE);
         container.setLayoutData(new GridData(GridData.FILL_BOTH));
+        GridLayout gridLayout = new GridLayout(2, false);
+		container.setLayout(gridLayout);
         this.createProperties(container);
         return area;		
 	}
@@ -36,7 +46,7 @@ public class <<class_name>>_dialog extends TitleAreaDialog {
     }	
 	
 	protected Point getInitialSize(){
-	 	retrun new Point(500, 375);
+	 	return new Point(500, 375);
 	}
 	
 	@Override

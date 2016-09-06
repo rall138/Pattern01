@@ -3,7 +3,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Aug 31 16:08:46 GFT 2016
+	* Creation date: Mon Sep 05 21:47:00 UYT 2016
 	* Creator: rlomez
 	**/
 public class RelatedFilePatternEditor extends org.eclipse.ui.part.EditorPart{

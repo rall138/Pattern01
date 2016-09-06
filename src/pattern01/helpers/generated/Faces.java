@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Aug 31 16:08:45 GFT 2016
+	* Creation date: Mon Sep 05 21:47:00 UYT 2016
 	* Creator: rlomez
 	**/
 public class Faces implements IPatternElement{
