@@ -22,6 +22,7 @@ import org.eclipse.ui.PlatformUI;
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.generated.DialogPatternEditor;
 import pattern01.plugin.components.editors.generated.JFaceDialogPatternInstance;
+import pattern01.plugin.components.editors.generated.JFaceDialogRelatedFile;
 import pattern01.plugin.components.editors.generated.PatternInstancePatternEditor;
 import pattern01.plugin.components.editors.generated.RegisterPatternEditor;
 import pattern01.plugin.components.editors.generated.RelatedFilePatternEditor;
@@ -104,7 +105,7 @@ public class MenuFactory {
 								jfd.open();
 								//page.openEditor(dei, PatternInstancePatternEditor.ID);
 							}else if (nodetype_pointer == NodeType.RELATEDFILE){
-								page.openEditor(dei, RelatedFilePatternEditor.ID);
+								(new JFaceDialogRelatedFile(parent.getShell())).open();
 							}else if (nodetype_pointer == NodeType.SELECTION){
 								page.openEditor(dei, SelectionPatternEditor.ID);
 							}else if (nodetype_pointer == NodeType.DIALOG){

@@ -16,6 +16,11 @@ public class PropertyHelper {
 	
 	public void impactPropertiesOnFile(String propertyFilePath, String properties){
 		log.writeSingleMessage("<<< Generating property file (Custom.properties) >>>");
+		this.impactPropertiesOnFile(propertyFilePath, properties, true);
+	}
+
+	public void impactPropertiesOnFile(String propertyFilePath, String properties,
+			boolean noLog){
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		bfr.getProject().setNewProperty("filename", propertyFilePath);
@@ -36,5 +41,4 @@ public class PropertyHelper {
 		}
 		return prop.getProperty(propertyName);
 	}
-
 }
