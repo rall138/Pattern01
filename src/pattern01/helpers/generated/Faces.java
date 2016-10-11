@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Sep 07 17:52:48 GFT 2016
+	* Creation date: Tue Oct 11 16:11:47 GFT 2016
 	* Creator: rlomez
 	**/
 public class Faces implements IPatternElement{
@@ -46,6 +46,7 @@ public class Faces implements IPatternElement{
 	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml="<Faces ";
+		xml+=">";
 		for(int index = 0; index < collection_Selection.size(); index++){
 			xml+=collection_Selection.get(index).toXml();
 		}
@@ -55,7 +56,6 @@ public class Faces implements IPatternElement{
 		for(int index = 0; index < collection_Dialog.size(); index++){
 			xml+=collection_Dialog.get(index).toXml();
 		}
-		xml+=">";
 		xml+="</Faces>";
 		return xml;
 	}

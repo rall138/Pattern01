@@ -18,6 +18,7 @@ import org.osgi.framework.Bundle;
 public class LocationHelper {
 	
 	public enum RL_PLUGIN {PATTERN01};
+	private static String project_folder_path = "";
 	
 	public static String getSelectedProjectPath(){
 		IPath projectPath = null;
@@ -78,7 +79,6 @@ public class LocationHelper {
 			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("classinstances.xml") && 
 					!projectFolder.listFiles()[index].isDirectory()){
 				classInsancesURItoString = projectFolder.listFiles()[index].getAbsolutePath();
-				System.err.println(classInsancesURItoString);
 				itemFound = true;
 			}else{
 				index++;
@@ -96,6 +96,14 @@ public class LocationHelper {
 					className+"Instance.xml"); 
 		}
 		return classPatternInstance == null ? "" : classPatternInstance.getAbsolutePath();
+	}
+
+	public static String getProject_folder_path() {
+		return project_folder_path;
+	}
+
+	public static void setProject_folder_path(String pattern_folder_path) {
+		LocationHelper.project_folder_path = pattern_folder_path;
 	}
 	
 	/* Necesary class and folders on active project */

@@ -53,6 +53,7 @@ public class PatternNavigator extends ViewPart {
 						TreeItem projectParentItem = new TreeItem(this.instanceTree, 0);
 						projectParentItem.setText(potencialProjectFolder.getName());
 						projectParentItem.setImage(ImageHelper.getImage("prj_obj.png"));
+						projectParentItem.setData("path", potencialProjectFolder.getAbsolutePath());
 						try{
 							generateLeafs(projectParentItem, potencialProjectFolder.getPath());
 						}catch(XPathExpressionException e){
@@ -121,6 +122,7 @@ public class PatternNavigator extends ViewPart {
 						instanceParser.generateTreeFromDefinition(className, projectFolderPath);
 						if (instanceParser.getInstance()!= null){
 							classItem = instanceParser.getInstance();
+							LocationHelper.setProject_folder_path(projectFolderPath);
 						}
 					}
 				}

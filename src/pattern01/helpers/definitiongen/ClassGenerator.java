@@ -230,6 +230,7 @@ public class ClassGenerator extends Task{
 			getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName());
 			getterAndSetterBuilder.append("+"+quotscape+"\'"+quotscape+";");
 		}
+		getterAndSetterBuilder.appendLn(2,"xml+="+quotscape+">"+quotscape+";");
 	}
 	
 	private void marshallerBuilder(Element element){
@@ -244,8 +245,8 @@ public class ClassGenerator extends Task{
 				getterAndSetterBuilder.appendLn(tabGen(2)+"}");
 			}
 		}
-		getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+">"+quotscape);
-		getterAndSetterBuilder.append(";");
+		//getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+">"+quotscape);
+		//getterAndSetterBuilder.append(";");
 	}
 	
 	private void marshallerFooter(Element element){

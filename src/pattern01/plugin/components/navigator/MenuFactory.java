@@ -101,9 +101,9 @@ public class MenuFactory {
 							NodeType nodetype_pointer = (NodeType)parent.getSelection()[0].getData("type");
 							if (nodetype_pointer == NodeType.PATTERNINSTANCE){
 								JFaceDialogPatternInstance jfd = new JFaceDialogPatternInstance(parent.getShell());
+								jfd.setParent(parent);
 								jfd.create();
 								jfd.open();
-								//page.openEditor(dei, PatternInstancePatternEditor.ID);
 							}else if (nodetype_pointer == NodeType.RELATEDFILE){
 								(new JFaceDialogRelatedFile(parent.getShell())).open();
 							}else if (nodetype_pointer == NodeType.SELECTION){
