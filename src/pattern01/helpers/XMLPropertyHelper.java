@@ -23,16 +23,24 @@ import pattern01.helpers.generated.PatternInstance;
  */
 public class XMLPropertyHelper {
 
-//	public static Object getPropertyValue(String className, String path, 
-//			String property){
+	public static Tree readProperties(Tree patternInstance){
 		
-//		XPathFactory factory = XPathFactory.newInstance();
-//		XPath xpath = factory.newXPath();
-//		InputSource source = new InputSource(classInstance.getPath());
-//		xpath.evaluate(path, source, XPathConstants.NODE);
+		PatternInstance patterninstance = new PatternInstance();
+		patterninstance.fromXml(xmlDocument)
 		
+		//Project folder item
+		String projectFolder = patternInstance.getItem(0)
+				.getData("path").toString(); 
 		
-//	}
+		PatternInstance classInstance = ((PatternInstance)patternInstance
+				.getSelection()[0].
+				getData("class_instance"));
+		
+		File instance = new File(LocationHelper
+				.searchPatternFolderPath(projectFolder)
+				+System.getProperty("file.separator")
+				+classInstance.getName()+".xml");
+	}
 	
 	public static void saveProperties(Tree patternInstance){
 		//Project folder item
@@ -45,10 +53,8 @@ public class XMLPropertyHelper {
 		
 		File instance = new File(LocationHelper
 				.searchPatternFolderPath(projectFolder)
-				+System.getProperty("separator")
+				+System.getProperty("file.separator")
 				+classInstance.getName()+".xml");
-		
-		System.out.println(instance.getAbsolutePath());
 		
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(instance));
