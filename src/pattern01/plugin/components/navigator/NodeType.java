@@ -6,7 +6,7 @@
 	**/
 package pattern01.plugin.components.navigator;
 
-public enum NodeType {	UNDEFINED,CLASS,PATTERNINSTANCE,RELATEDFILES,RELATEDFILE,FACES,SELECTION,REGISTER,DIALOG;
+public enum NodeType {	UNDEFINED, PACKAGE,CLASS,PATTERNINSTANCE,RELATEDFILES,RELATEDFILE,FACES,SELECTION,REGISTER,DIALOG;
 
 
 	public static String toString(NodeType nodetype){
@@ -14,6 +14,9 @@ public enum NodeType {	UNDEFINED,CLASS,PATTERNINSTANCE,RELATEDFILES,RELATEDFILE,
 			switch(nodetype){
 			case UNDEFINED:
 				nodetypestr = "UNDEFINED";
+				break;
+			case PACKAGE:
+				nodetypestr = "PACKAGE";
 				break;
 			case CLASS:
 				nodetypestr = "CLASS";

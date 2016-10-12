@@ -62,6 +62,7 @@ public class PatternInstanceParser {
 				//Obtenemos el nodo padre (Siempre es patterninstance)
 				Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 				if (parentNode != null){
+					parentNode.a
 					recursiveParseing(parentNode, this.parentItem);
 				}
 			}else{

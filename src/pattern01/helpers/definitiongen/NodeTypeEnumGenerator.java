@@ -62,6 +62,7 @@ public class NodeTypeEnumGenerator extends Task{
 		builder.appendLn("");
 		builder.appendLn("public enum NodeType {");
 		builder.append(tabGen(1)+"UNDEFINED,");
+		builder.append("PACKAGE,");
 		builder.append("CLASS,");
 	}
 	
@@ -82,6 +83,9 @@ public class NodeTypeEnumGenerator extends Task{
 		builder.appendLn(tabGen(3)+"switch(nodetype){");
 		builder.appendLn(tabGen(3)+"case UNDEFINED:");
 		builder.appendLn(tabGen(4)+"nodetypestr = "+quotscape+"UNDEFINED"+quotscape+";");
+		builder.appendLn(tabGen(3)+"switch(nodetype){");
+		builder.appendLn(tabGen(3)+"case PACKAGE:");
+		builder.appendLn(tabGen(4)+"nodetypestr = "+quotscape+"PACKAGE"+quotscape+";");
 		builder.appendLn(tabGen(4)+"break;");
 		builder.appendLn(tabGen(3)+"case CLASS:");
 		builder.appendLn(tabGen(4)+"nodetypestr = "+quotscape+"CLASS"+quotscape+";");

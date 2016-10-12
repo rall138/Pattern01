@@ -108,16 +108,24 @@ public class PatternNavigator extends ViewPart {
 		for(int index = 0; index < packageList.getLength(); index++){ //Packages
 			if(packageList.item(index).getNodeType() == Node.ELEMENT_NODE){				
 				packageName = packageList.item(index).getAttributes().getNamedItem("name").getNodeValue();
+				
+				//Declaramos el tipo de nodo package
 				packageItem = new TreeItem(parent, 0);
 				packageItem.setText(packageName);
+				classItem.setData("type", NodeType.PACKAGE);
 				packageItem.setImage(ImageHelper.getImage("package_obj.png"));
+				
 				classList = this.getClassesDeclared(projectFolderPath, packageName);
 				for (int hindex = 0; hindex < classList.getLength(); hindex++){ //Classes
 					if(classList.item(hindex).getNodeType() == Node.ELEMENT_NODE){						
 						className = classList.item(hindex).getAttributes().getNamedItem("name").getNodeValue();
+						
+						//Declaramos el tipo de nodo clase
 						classItem = new TreeItem(packageItem, 0);
 						classItem.setText(className);
+						classItem.setData("type", NodeType.CLASS);
 						classItem.setImage(ImageHelper.getImage("class_obj.png"));
+						
 						PatternInstanceParser instanceParser = new PatternInstanceParser(classItem);
 						instanceParser.generateTreeFromDefinition(className, projectFolderPath);
 						if (instanceParser.getInstance()!= null){
