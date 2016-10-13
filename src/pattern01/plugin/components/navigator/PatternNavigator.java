@@ -1,6 +1,8 @@
 package pattern01.plugin.components.navigator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -102,7 +104,7 @@ public class PatternNavigator extends ViewPart {
 	
 	private void generateLeafs(TreeItem parent, String projectFolderPath) throws XPathExpressionException{
 		TreeItem packageItem = null, classItem = null;
-		String packageName = "", className = "";
+		String packageName = "", className = "", patternName = "";
 		NodeList packageList = this.getPackagesDeclared(projectFolderPath), classList = null;
 		
 		for(int index = 0; index < packageList.getLength(); index++){ //Packages
@@ -112,7 +114,8 @@ public class PatternNavigator extends ViewPart {
 				//Declaramos el tipo de nodo package
 				packageItem = new TreeItem(parent, 0);
 				packageItem.setText(packageName);
-				classItem.setData("type", NodeType.PACKAGE);
+				packageItem.setData("type", NodeType.PACKAGE);
+				packageItem.setData("package", packageName);
 				packageItem.setImage(ImageHelper.getImage("package_obj.png"));
 				
 				classList = this.getClassesDeclared(projectFolderPath, packageName);
@@ -127,15 +130,40 @@ public class PatternNavigator extends ViewPart {
 						classItem.setImage(ImageHelper.getImage("class_obj.png"));
 						
 						PatternInstanceParser instanceParser = new PatternInstanceParser(classItem);
-						instanceParser.generateTreeFromDefinition(className, projectFolderPath);
-						if (instanceParser.getInstance()!= null){
-							classItem = instanceParser.getInstance();
-							LocationHelper.setProject_folder_path(projectFolderPath);
+						
+						//Obtenemos las instancias declaradas
+						NodeList listadoInstancias =  getPatternsDeclaredOnClass(projectFolderPath, packageName, className);
+						
+						for (int jindex = 0; jindex < listadoInstancias.getLength(); jindex++){
+							
+							patternName = listadoInstancias.item(jindex).getAttributes()
+									.getNamedItem("name").getNodeValue();
+							
+							instanceParser.generateTreeFromDefinition(patternName, projectFolderPath);
+							if (instanceParser.getInstance()!= null){
+								classItem = instanceParser.getInstance();
+								LocationHelper.setProject_folder_path(projectFolderPath);
+							}
 						}
 					}
 				}
 			}
 		}
+	}
+
+	private NodeList getPatternsDeclaredOnClass(String projectFolderPath, String packageName, String className) throws XPathExpressionException{
+		NodeList patternNodeList = null;
+		String classInstancesXml = this.getClassInstanceFile(projectFolderPath), expression = "";
+		
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		expression = "/Packages/Package[@name='"+packageName+"']/Class[@name='"+className+"']/Pattern";
+		try{
+			patternNodeList = (NodeList) xpath.evaluate (expression, 
+					new InputSource(classInstancesXml), XPathConstants.NODESET);
+		}catch(XPathExpressionException e){
+			throw new XPathExpressionException("No pattern defined for "+packageName+"."+className);			
+		}
+		return patternNodeList;
 	}
 	
 	private void menuBuilder(){

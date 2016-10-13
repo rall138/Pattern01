@@ -87,15 +87,15 @@ public class LocationHelper {
 		return classInsancesURItoString;
 	}
 	
-	public static String searchClassPatternInstanceByClassName(String className, String projectFolderPath){
-		File classPatternInstance = null;
+	public static String getPatternInstanceFromFile(String patternInstanceName, String projectFolderPath){
+		File patternInstanceFile = null;
 		File patternFolder = new File(searchPatternFolderPath(projectFolderPath));
 		if (patternFolder.exists()){
-			classPatternInstance = new File(patternFolder.getAbsolutePath()+
+			patternInstanceFile = new File(patternFolder.getAbsolutePath()+
 					System.getProperty("file.separator")+
-					className+"Instance.xml"); 
+					patternInstanceName+".xml"); 
 		}
-		return classPatternInstance == null ? "" : classPatternInstance.getAbsolutePath();
+		return patternInstanceFile == null ? "" : patternInstanceFile.getAbsolutePath();
 	}
 
 	public static String getProject_folder_path() {

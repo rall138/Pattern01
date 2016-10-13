@@ -49,32 +49,28 @@ public class PatternInstanceParser {
 		}
 	}
 	
-	public void generateTreeFromDefinition(String className, String projectFolderPath){
+	public void generateTreeFromDefinition(String patternName, String projectFolderPath){
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		String expression = "/PatternInstance";
-		lgt.writeSingleMessage("Reading instances from: "+className);
+		lgt.writeSingleMessage("Reading instance: "+patternName);
 		try {
 			//String classInstanceXml_Path = LocationHelper.searchClassInstancesFile(patternfolderPath);
-			File file = new File(LocationHelper.searchClassPatternInstanceByClassName(className, projectFolderPath));
+			File file = new File(LocationHelper.getPatternInstanceFromFile(patternName, projectFolderPath));
 			if (file.exists()){
 				InputSource is = new InputSource(new FileReader(file));
 				
 				//Obtenemos el nodo padre (Siempre es patterninstance)
-				Node parentNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
-				if (parentNode != null){
-					parentNode.a
-					recursiveParseing(parentNode, this.parentItem);
+				Node patternNode = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
+				if (patternNode != null){
+					recursiveParseing(patternNode, this.parentItem);
 				}
 			}else{
-				lgt.writeSingleMessage("Warning no definition found for: "+className);
+				lgt.writeSingleMessage("Warning no definition found for: "+patternName);
 			}
 		} catch (XPathExpressionException | IllegalStateException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-
-
-
 
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**

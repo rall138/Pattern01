@@ -37,7 +37,16 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	    setTitle("PatternInstance properties");
 	  }	
 
+	  
+	  
   	@Override
+	public int open() {
+		// TODO Auto-generated method stub
+  		this.getProperties();
+		return super.open();
+	}
+
+	@Override
 	protected Control createDialogArea(Composite parent){
         Composite area = (Composite) super.createDialogArea(parent);
         Composite container = new Composite(area, SWT.NONE);
@@ -73,7 +82,6 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 		description_layout.grabExcessHorizontalSpace = true;
 		description_layout.horizontalAlignment = GridData.FILL;
 		description_text.setLayoutData(description_layout);
-
 	}
 	
 	protected void createButtonsForButtonBar(Composite parent) {
@@ -91,6 +99,22 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	protected void okPressed(){
 		setProperties();
 		super.okPressed();
+	}
+	
+	private void getProperties(){
+		
+		System.out.println("Parent "+this.parent);
+		System.out.println("Seleccion "+this.parent.getSelection()[0]);
+		
+		pattern01.helpers.generated.PatternInstance instance = 
+				(pattern01.helpers.generated.PatternInstance)
+				this.parent.getSelection()[0].getData("class_instance");
+		
+		System.out.println("Print nombre:"+instance.getName());
+		
+		this.name_text.setText(instance.getName());
+		this.description_text.setText(instance.getDescription());
+		this.generator_text.setText(instance.getGenerator().name());
 	}
 	
 	private void setProperties(){
@@ -118,7 +142,5 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	public void setParent(Tree parent) {
 		this.parent = parent;
 	}
-	
-	
 
 }
