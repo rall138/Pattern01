@@ -13,6 +13,8 @@ import org.eclipse.swt.layout.GridLayout;
 
 public class JFaceDialog<<class_name>> extends TitleAreaDialog {
 	
+	<<properties>>
+	
 	public JFaceDialog<<class_name>>(Shell parentShell){
 		super(parentShell);
 	}

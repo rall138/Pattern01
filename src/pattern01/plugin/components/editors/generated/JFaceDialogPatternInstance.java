@@ -37,12 +37,8 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	    setTitle("PatternInstance properties");
 	  }	
 
-	  
-	  
   	@Override
 	public int open() {
-		// TODO Auto-generated method stub
-  		this.getProperties();
 		return super.open();
 	}
 
@@ -82,6 +78,8 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 		description_layout.grabExcessHorizontalSpace = true;
 		description_layout.horizontalAlignment = GridData.FILL;
 		description_text.setLayoutData(description_layout);
+		
+		getProperties();
 	}
 	
 	protected void createButtonsForButtonBar(Composite parent) {

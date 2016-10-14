@@ -67,6 +67,7 @@ public class PreferencesDialogGenerator extends Task{
 		String line = null;
 		while ((line = reader.readLine())!= null){
 			line = line.replace("<<class_name>>", element.getPrettyName());
+			line = line.replace("<<properties>>", getPropertiesDefinitionCode(element).toString());
 			line = line.replace("<<property_method_body>>", getMethodBody(element).toString());
 			line = line.replace("<<property_save>>", "/* TODO - Generar cuerpo del save */");
 			line = line.replace("<<element_size>>", String.valueOf(element.getAttribute_collection().size()));
@@ -76,13 +77,22 @@ public class PreferencesDialogGenerator extends Task{
 		return builder;
 	}
 	
+	private CustomStringBuilder getPropertiesDefinitionCode(Element element){
+		CustomStringBuilder builder = new CustomStringBuilder();
+		for (Attribute attr : element.getAttribute_collection()){
+			builder.appendLn(2,"org.eclipse.swt.widgets.Label "+attr.getPrettyName()+"_label;");
+			builder.appendLn(2,"private org.eclipse.swt.widgets.Text "+attr.getName()+"_text;");
+		}
+		return builder;
+	}
+	
 	private CustomStringBuilder getMethodBody(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(2,"org.eclipse.swt.widgets.Label "+attr.getPrettyName()+"_label");
+			builder.appendLn(2, attr.getPrettyName()+"_label");
 			builder.append(" = new org.eclipse.swt.widgets.Label(container,SWT.NONE);");
 			builder.appendLn(2,attr.getPrettyName()+"_label.setText("+quotscape+attr.getPrettyName()+quotscape+");");
-			builder.appendLn(2,"org.eclipse.swt.widgets.Text "+attr.getName()+"_text");
+			builder.appendLn(2, attr.getName()+"_text");
 			builder.append(" = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);");
 			builder.appendLn(2, "org.eclipse.swt.layout.GridData "+attr.getName()+"_layout");
 			builder.append(" = new org.eclipse.swt.layout.GridData();");

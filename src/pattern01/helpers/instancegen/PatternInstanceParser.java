@@ -104,15 +104,9 @@ public class PatternInstanceParser {
 	private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){
 		if(actualNode.getNodeName().equalsIgnoreCase("patterninstance")){
 			pattern01.helpers.generated.PatternInstance patterninstance = new pattern01.helpers.generated.PatternInstance();
-			if("generator" == actualNode.getNodeName()){
-				patterninstance.setGenerator(actualNode.getNodeValue() != null ? pattern01.helpers.generated.Generator.valueOf(actualNode.getNodeValue().toString()):pattern01.helpers.generated.Generator.WEB);
-			}
-			if("name" == actualNode.getNodeName()){
-				patterninstance.setName(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
-			}
-			if("description" == actualNode.getNodeName()){
-				patterninstance.setDescription(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
-			}
+			patterninstance.setGenerator(actualNode.getAttributes().getNamedItem("generator") != null ? pattern01.helpers.generated.Generator.valueOf(actualNode.getAttributes().getNamedItem("generator").getNodeValue()):pattern01.helpers.generated.Generator.WEB);
+			patterninstance.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
+			patterninstance.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",patterninstance);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFiles")){

@@ -25,25 +25,6 @@ import pattern01.plugin.components.navigator.NodeType;
  */
 public class XMLPropertyHelper {
 
-//	public static Tree readProperties(Tree patternInstance){
-//		
-//		PatternInstance patterninstance = new PatternInstance();
-//		//patterninstance.fromXml(xmlDocument);
-//		
-//		//Project folder item
-//		String projectFolder = patternInstance.getItem(0)
-//				.getData("path").toString(); 
-//		
-//		PatternInstance classInstance = ((PatternInstance)patternInstance
-//				.getSelection()[0].
-//				getData("class_instance"));
-//		
-//		File instance = new File(LocationHelper
-//				.searchPatternFolderPath(projectFolder)
-//				+System.getProperty("file.separator")
-//				+classInstance.getName()+".xml");
-//	}
-	
 	public static void saveProperties(Tree fullPatternInstance){
 
 		//La referencia es el verdadero identificador de la instancia
