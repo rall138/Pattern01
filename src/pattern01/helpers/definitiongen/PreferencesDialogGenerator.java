@@ -71,6 +71,7 @@ public class PreferencesDialogGenerator extends Task{
 			line = line.replace("<<property_method_body>>", getMethodBody(element).toString());
 			line = line.replace("<<property_save>>", "/* TODO - Generar cuerpo del save */");
 			line = line.replace("<<element_size>>", String.valueOf(element.getAttribute_collection().size()));
+			line = line.replace("<<getProperties>>", getPropertyCode(element).toString());
 			builder.appendLn(line);
 		}
 		reader.close();
@@ -105,7 +106,35 @@ public class PreferencesDialogGenerator extends Task{
 		}
 		return builder;
 	}
+
+	private CustomStringBuilder getPropertyCode(Element element){
+		CustomStringBuilder builder = new CustomStringBuilder();
+		builder.appendLn(1, "private void getProperties(){");
+		builder.appendLn(2, Element.classPackage+"."+element.getPrettyName());
+		builder.append(" "+element.getName());
+		builder.append(" ("+Element.classPackage+"."+element.getPrettyName()+")");
+		builder.append(" this.parent.getSelection[0].getData("+quotscape+"class_instance"+quotscape+")");
+		for (Attribute attr : element.getAttribute_collection()){
+			builder.appendLn(2, "this.set"+attr.getPrettyName()+"_text(");
+			builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
+		}
+		return builder;
+	}
 	
+	private CustomStringBuilder getPropertySetterCode(Element element){
+		CustomStringBuilder builder = new CustomStringBuilder();
+		builder.appendLn(1, "private void getProperties(){");
+		builder.appendLn(2, Element.classPackage+"."+element.getPrettyName());
+		builder.append(" "+element.getName());
+		builder.append(" ("+Element.classPackage+"."+element.getPrettyName()+")");
+		builder.append(" this.parent.getSelection[0].getData("+quotscape+"class_instance"+quotscape+")");
+		for (Attribute attr : element.getAttribute_collection()){
+			builder.appendLn(2, "this.set"+attr.getPrettyName()+"_text(");
+			builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
+		}
+		return builder;
+	}
+
 	private void generateClasses(String className, String classBody){
 		bfr.getProject().setProperty("message", classBody);
 		bfr.getProject().setProperty("filename", "../../plugin/components/editors/generated/JFaceDialog"+className+".java");
