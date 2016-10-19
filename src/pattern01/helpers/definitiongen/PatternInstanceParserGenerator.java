@@ -90,7 +90,8 @@ public class PatternInstanceParserGenerator extends Task{
 	}
 	
 	private void generateElementStrategyHeader(){
-		builder.appendLn(tabGen(1)+"private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){");		
+		builder.appendLn(1,"private void classInstanceStrategy(org.w3c.dom.Node actualNode");
+		builder.append(", org.eclipse.swt.widgets.TreeItem item){");
 	}
 	
 	private void generateElementStrategy(Element element, boolean isParentElement){

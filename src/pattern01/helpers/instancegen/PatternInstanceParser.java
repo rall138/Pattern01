@@ -72,10 +72,18 @@ public class PatternInstanceParser {
 		}
 	}
 
+
+
+
+
+
+
+
+
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Oct 11 16:11:49 GFT 2016
+	* Creation date: Tue Oct 18 22:53:14 UYST 2016
 	* Creator: rlomez
 	**/
 	private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){
@@ -104,29 +112,35 @@ public class PatternInstanceParser {
 	private void classInstanceStrategy(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem item){
 		if(actualNode.getNodeName().equalsIgnoreCase("patterninstance")){
 			pattern01.helpers.generated.PatternInstance patterninstance = new pattern01.helpers.generated.PatternInstance();
-			patterninstance.setGenerator(actualNode.getAttributes().getNamedItem("generator") != null ? pattern01.helpers.generated.Generator.valueOf(actualNode.getAttributes().getNamedItem("generator").getNodeValue()):pattern01.helpers.generated.Generator.WEB);
-			patterninstance.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
-			patterninstance.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
+			if(actualNode.getAttributes().getNamedItem("generator")){
+				patterninstance.setGenerator(actualNode.getAttributes().getNamedItem("generator") != null ? pattern01.helpers.generated.Generator.valueOf(actualNode.getAttributes().getNamedItem("generator").getNodeValue()):pattern01.helpers.generated.Generator.WEB);
+			}
+			if(actualNode.getAttributes().getNamedItem("name")){
+				patterninstance.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
+			}
+			if(actualNode.getAttributes().getNamedItem("description")){
+				patterninstance.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
+			}
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",patterninstance);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFiles")){
 			pattern01.helpers.generated.RelatedFiles relatedFiles = new pattern01.helpers.generated.RelatedFiles();
-			if("image" == actualNode.getNodeName()){
-				relatedFiles.setImage(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"generic.jpg");
+			if(actualNode.getAttributes().getNamedItem("image")){
+				relatedFiles.setImage(actualNode.getAttributes().getNamedItem("image") != null ? actualNode.getAttributes().getNamedItem("image").getNodeValue():"generic.jpg");
 			}
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",relatedFiles);
 			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).setRelatedFiles(relatedFiles);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFile")){
 			pattern01.helpers.generated.RelatedFile relatedFile = new pattern01.helpers.generated.RelatedFile();
-			if("name" == actualNode.getNodeName()){
-				relatedFile.setName(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("name")){
+				relatedFile.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			}
-			if("description" == actualNode.getNodeName()){
-				relatedFile.setDescription(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("description")){
+				relatedFile.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			}
-			if("reference" == actualNode.getNodeName()){
-				relatedFile.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("reference")){
+				relatedFile.setReference(actualNode.getAttributes().getNamedItem("reference") != null ? actualNode.getAttributes().getNamedItem("reference").getNodeValue():"");
 			}
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",relatedFile);
@@ -138,54 +152,54 @@ public class PatternInstanceParser {
 			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).getCollection_Faces().add(faces);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("selection")){
 			pattern01.helpers.generated.Selection selection = new pattern01.helpers.generated.Selection();
-			if("name" == actualNode.getNodeName()){
-				selection.setName(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("name")){
+				selection.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			}
-			if("description" == actualNode.getNodeName()){
-				selection.setDescription(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("description")){
+				selection.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			}
-			if("reference" == actualNode.getNodeName()){
-				selection.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("reference")){
+				selection.setReference(actualNode.getAttributes().getNamedItem("reference") != null ? actualNode.getAttributes().getNamedItem("reference").getNodeValue():"");
 			}
-			if("insert" == actualNode.getNodeName()){
-				selection.setInsert(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			if(actualNode.getAttributes().getNamedItem("insert")){
+				selection.setInsert(actualNode.getAttributes().getNamedItem("insert") != null ? java.lang.Boolean.valueOf(actualNode.getAttributes().getNamedItem("insert").getNodeValue()).booleanValue():true);
 			}
-			if("update" == actualNode.getNodeName()){
-				selection.setUpdate(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			if(actualNode.getAttributes().getNamedItem("update")){
+				selection.setUpdate(actualNode.getAttributes().getNamedItem("update") != null ? java.lang.Boolean.valueOf(actualNode.getAttributes().getNamedItem("update").getNodeValue()).booleanValue():true);
 			}
-			if("delete" == actualNode.getNodeName()){
-				selection.setDelete(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			if(actualNode.getAttributes().getNamedItem("delete")){
+				selection.setDelete(actualNode.getAttributes().getNamedItem("delete") != null ? java.lang.Boolean.valueOf(actualNode.getAttributes().getNamedItem("delete").getNodeValue()).booleanValue():true);
 			}
-			if("display" == actualNode.getNodeName()){
-				selection.setDisplay(actualNode.getNodeValue() != null ? java.lang.Boolean.valueOf(actualNode.getNodeValue().toString()).booleanValue():true);
+			if(actualNode.getAttributes().getNamedItem("display")){
+				selection.setDisplay(actualNode.getAttributes().getNamedItem("display") != null ? java.lang.Boolean.valueOf(actualNode.getAttributes().getNamedItem("display").getNodeValue()).booleanValue():true);
 			}
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",selection);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Selection().add(selection);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("register")){
 			pattern01.helpers.generated.Register register = new pattern01.helpers.generated.Register();
-			if("name" == actualNode.getNodeName()){
-				register.setName(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("name")){
+				register.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			}
-			if("description" == actualNode.getNodeName()){
-				register.setDescription(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("description")){
+				register.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			}
-			if("reference" == actualNode.getNodeName()){
-				register.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("reference")){
+				register.setReference(actualNode.getAttributes().getNamedItem("reference") != null ? actualNode.getAttributes().getNamedItem("reference").getNodeValue():"");
 			}
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",register);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Register().add(register);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("dialog")){
 			pattern01.helpers.generated.Dialog dialog = new pattern01.helpers.generated.Dialog();
-			if("name" == actualNode.getNodeName()){
-				dialog.setName(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("name")){
+				dialog.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			}
-			if("description" == actualNode.getNodeName()){
-				dialog.setDescription(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("description")){
+				dialog.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			}
-			if("reference" == actualNode.getNodeName()){
-				dialog.setReference(actualNode.getNodeValue() != null ? actualNode.getNodeValue().toString():"");
+			if(actualNode.getAttributes().getNamedItem("reference")){
+				dialog.setReference(actualNode.getAttributes().getNamedItem("reference") != null ? actualNode.getAttributes().getNamedItem("reference").getNodeValue():"");
 			}
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",dialog);

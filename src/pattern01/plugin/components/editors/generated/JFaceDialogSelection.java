@@ -11,8 +11,27 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Tree;
 
 public class JFaceDialogSelection extends TitleAreaDialog {
+	
+	private Tree parent = null;
+	
+	private final static String Selection;
+	private org.eclipse.swt.widgets.Label name_label = null;
+	private org.eclipse.swt.widgets.Text name_text = null;
+	private org.eclipse.swt.widgets.Label description_label = null;
+	private org.eclipse.swt.widgets.Text description_text = null;
+	private org.eclipse.swt.widgets.Label reference_label = null;
+	private org.eclipse.swt.widgets.Text reference_text = null;
+	private org.eclipse.swt.widgets.Label insert_label = null;
+	private org.eclipse.swt.widgets.Text insert_text = null;
+	private org.eclipse.swt.widgets.Label update_label = null;
+	private org.eclipse.swt.widgets.Text update_text = null;
+	private org.eclipse.swt.widgets.Label delete_label = null;
+	private org.eclipse.swt.widgets.Text delete_text = null;
+	private org.eclipse.swt.widgets.Label display_label = null;
+	private org.eclipse.swt.widgets.Text display_text = null;
 	
 	public JFaceDialogSelection(Shell parentShell){
 		super(parentShell);
@@ -37,57 +56,57 @@ public class JFaceDialogSelection extends TitleAreaDialog {
 	
 	private void createProperties(Composite container){
 		
-		org.eclipse.swt.widgets.Label Name_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		Name_label.setText("Name");
-		org.eclipse.swt.widgets.Text name_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		name_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		name_label.setText("Name");
+		name_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData name_layout = new org.eclipse.swt.layout.GridData();
 		name_layout.grabExcessHorizontalSpace = true;
 		name_layout.horizontalAlignment = GridData.FILL;
 		name_text.setLayoutData(name_layout);
 
-		org.eclipse.swt.widgets.Label Description_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		Description_label.setText("Description");
-		org.eclipse.swt.widgets.Text description_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		description_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		description_label.setText("Description");
+		description_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData description_layout = new org.eclipse.swt.layout.GridData();
 		description_layout.grabExcessHorizontalSpace = true;
 		description_layout.horizontalAlignment = GridData.FILL;
 		description_text.setLayoutData(description_layout);
 
-		org.eclipse.swt.widgets.Label Reference_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		Reference_label.setText("Reference");
-		org.eclipse.swt.widgets.Text reference_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		reference_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		reference_label.setText("Reference");
+		reference_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData reference_layout = new org.eclipse.swt.layout.GridData();
 		reference_layout.grabExcessHorizontalSpace = true;
 		reference_layout.horizontalAlignment = GridData.FILL;
 		reference_text.setLayoutData(reference_layout);
 
-		org.eclipse.swt.widgets.Label Insert_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		Insert_label.setText("Insert");
-		org.eclipse.swt.widgets.Text insert_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		insert_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		insert_label.setText("Insert");
+		insert_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData insert_layout = new org.eclipse.swt.layout.GridData();
 		insert_layout.grabExcessHorizontalSpace = true;
 		insert_layout.horizontalAlignment = GridData.FILL;
 		insert_text.setLayoutData(insert_layout);
 
-		org.eclipse.swt.widgets.Label Update_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		Update_label.setText("Update");
-		org.eclipse.swt.widgets.Text update_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		update_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		update_label.setText("Update");
+		update_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData update_layout = new org.eclipse.swt.layout.GridData();
 		update_layout.grabExcessHorizontalSpace = true;
 		update_layout.horizontalAlignment = GridData.FILL;
 		update_text.setLayoutData(update_layout);
 
-		org.eclipse.swt.widgets.Label Delete_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		Delete_label.setText("Delete");
-		org.eclipse.swt.widgets.Text delete_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		delete_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		delete_label.setText("Delete");
+		delete_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData delete_layout = new org.eclipse.swt.layout.GridData();
 		delete_layout.grabExcessHorizontalSpace = true;
 		delete_layout.horizontalAlignment = GridData.FILL;
 		delete_text.setLayoutData(delete_layout);
 
-		org.eclipse.swt.widgets.Label Display_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		Display_label.setText("Display");
-		org.eclipse.swt.widgets.Text display_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		display_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		display_label.setText("Display");
+		display_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData display_layout = new org.eclipse.swt.layout.GridData();
 		display_layout.grabExcessHorizontalSpace = true;
 		display_layout.horizontalAlignment = GridData.FILL;
@@ -106,10 +125,42 @@ public class JFaceDialogSelection extends TitleAreaDialog {
 	 	return new Point(500, 375);
 	}
 	
+	
+	private void getProperties(){
+		pattern01.helpers.generated.Selection selection=(pattern01.helpers.generated.Selection) this.parent.getSelection()[0].getData("class_instance");
+		this.name_text.setText(selection.getName());
+		this.description_text.setText(selection.getDescription());
+		this.reference_text.setText(selection.getReference());
+		this.insert_text.setText(selection.getInsert());
+		this.update_text.setText(selection.getUpdate());
+		this.delete_text.setText(selection.getDelete());
+		this.display_text.setText(selection.getDisplay());
+	}
+	
+	
+	private void setProperties(){
+		pattern01.helpers.generated.Selection selection=(pattern01.helpers.generated.Selection) this.parent.getSelection()[0].getData("class_instance");
+		selection.setName(selection.getname());
+		selection.setDescription(selection.getdescription());
+		selection.setReference(selection.getreference());
+		selection.setInsert(selection.getinsert());
+		selection.setUpdate(selection.getupdate());
+		selection.setDelete(selection.getdelete());
+		selection.setDisplay(selection.getdisplay());
+		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+	
 	@Override
 	protected void okPressed(){
 		/* TODO - Generar cuerpo del save */
 		super.okPressed();
 	}
 
+	public Tree getParent() {
+		return parent;
+	}
+
+	public void setParent(Tree parent) {
+		this.parent = parent;
+	}
+	
 }

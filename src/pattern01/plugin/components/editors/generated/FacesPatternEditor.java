@@ -3,7 +3,7 @@ package pattern01.plugin.components.editors.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Oct 11 16:11:48 GFT 2016
+	* Creation date: Tue Oct 18 22:53:14 UYST 2016
 	* Creator: rlomez
 	**/
 public class FacesPatternEditor extends org.eclipse.ui.part.EditorPart{

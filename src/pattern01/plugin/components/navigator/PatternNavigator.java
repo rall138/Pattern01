@@ -74,10 +74,9 @@ public class PatternNavigator extends ViewPart {
 	
 	private NodeList getPackagesDeclared(String projectFolderPath) throws XPathExpressionException {
 		NodeList classNodeList = null;
-		String classInstancesXml = this.getClassInstanceFile(projectFolderPath), expression = "";
+		String classInstancesXml = this.getClassInstanceFile(projectFolderPath), expression = "/Packages/Package";
 		
 		XPath xpath = XPathFactory.newInstance().newXPath();
-		expression = "/Packages/Package";
 		try{
 			classNodeList = (NodeList) xpath.evaluate (expression, 
 					new InputSource(classInstancesXml), XPathConstants.NODESET);

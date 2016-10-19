@@ -9,11 +9,10 @@ import java.io.IOException;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
-import org.eclipse.swt.layout.GridData;
 
 import pattern01.helpers.CommonPathFix;
-import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
+import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
@@ -72,6 +71,7 @@ public class PreferencesDialogGenerator extends Task{
 			line = line.replace("<<property_save>>", "/* TODO - Generar cuerpo del save */");
 			line = line.replace("<<element_size>>", String.valueOf(element.getAttribute_collection().size()));
 			line = line.replace("<<getProperties>>", getPropertyCode(element).toString());
+			line = line.replace("<<setProperties>>", getPropertySetterCode(element).toString());
 			builder.appendLn(line);
 		}
 		reader.close();
@@ -80,9 +80,11 @@ public class PreferencesDialogGenerator extends Task{
 	
 	private CustomStringBuilder getPropertiesDefinitionCode(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
+		builder.appendLn(1, "private final static String ");
+		builder.append(element.getPrettyName()+";");
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(2,"org.eclipse.swt.widgets.Label "+attr.getPrettyName()+"_label;");
-			builder.appendLn(2,"private org.eclipse.swt.widgets.Text "+attr.getName()+"_text;");
+			builder.appendLn(1,"private org.eclipse.swt.widgets.Label "+attr.getName()+"_label = null;");
+			builder.appendLn(1,"private org.eclipse.swt.widgets.Text "+attr.getName()+"_text = null;");
 		}
 		return builder;
 	}
@@ -90,9 +92,9 @@ public class PreferencesDialogGenerator extends Task{
 	private CustomStringBuilder getMethodBody(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(2, attr.getPrettyName()+"_label");
+			builder.appendLn(2, attr.getName()+"_label");
 			builder.append(" = new org.eclipse.swt.widgets.Label(container,SWT.NONE);");
-			builder.appendLn(2,attr.getPrettyName()+"_label.setText("+quotscape+attr.getPrettyName()+quotscape+");");
+			builder.appendLn(2,attr.getName()+"_label.setText("+quotscape+attr.getPrettyName()+quotscape+");");
 			builder.appendLn(2, attr.getName()+"_text");
 			builder.append(" = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);");
 			builder.appendLn(2, "org.eclipse.swt.layout.GridData "+attr.getName()+"_layout");
@@ -112,26 +114,28 @@ public class PreferencesDialogGenerator extends Task{
 		builder.appendLn(1, "private void getProperties(){");
 		builder.appendLn(2, Element.classPackage+"."+element.getPrettyName());
 		builder.append(" "+element.getName());
-		builder.append(" ("+Element.classPackage+"."+element.getPrettyName()+")");
-		builder.append(" this.parent.getSelection[0].getData("+quotscape+"class_instance"+quotscape+")");
+		builder.append("=("+Element.classPackage+"."+element.getPrettyName()+")");
+		builder.append(" this.parent.getSelection()[0].getData("+quotscape+"class_instance"+quotscape+");");
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(2, "this.set"+attr.getPrettyName()+"_text(");
+			builder.appendLn(2, "this."+attr.getName()+"_text.setText(");
 			builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
 		}
+		builder.appendLn(1, "}");
 		return builder;
 	}
 	
 	private CustomStringBuilder getPropertySetterCode(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
-		builder.appendLn(1, "private void getProperties(){");
+		builder.appendLn(1, "private void setProperties(){");
 		builder.appendLn(2, Element.classPackage+"."+element.getPrettyName());
 		builder.append(" "+element.getName());
-		builder.append(" ("+Element.classPackage+"."+element.getPrettyName()+")");
-		builder.append(" this.parent.getSelection[0].getData("+quotscape+"class_instance"+quotscape+")");
+		builder.append("=("+Element.classPackage+"."+element.getPrettyName()+")");
+		builder.append(" this.parent.getSelection()[0].getData("+quotscape+"class_instance"+quotscape+");");
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(2, "this.set"+attr.getPrettyName()+"_text(");
-			builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
+			builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
+			builder.append(element.getName()+".get"+attr.getName()+"());");
 		}
+		builder.appendLn(2, "pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);");
 		return builder;
 	}
 

@@ -10,9 +10,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Tree;
 
 public class JFaceDialog<<class_name>> extends TitleAreaDialog {
 	
+	private Tree parent = null;
 	<<properties>>
 	
 	public JFaceDialog<<class_name>>(Shell parentShell){
@@ -51,10 +53,22 @@ public class JFaceDialog<<class_name>> extends TitleAreaDialog {
 	 	return new Point(500, 375);
 	}
 	
+	<<getProperties>>
+	
+	<<setProperties>>
+	
 	@Override
 	protected void okPressed(){
 		<<property_save>>
 		super.okPressed();
 	}
 
+	public Tree getParent() {
+		return parent;
+	}
+
+	public void setParent(Tree parent) {
+		this.parent = parent;
+	}
+	
 }
