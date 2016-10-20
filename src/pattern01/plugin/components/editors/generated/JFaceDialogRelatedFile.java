@@ -17,7 +17,6 @@ public class JFaceDialogRelatedFile extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private final static String RelatedFile;
 	private org.eclipse.swt.widgets.Label name_label = null;
 	private org.eclipse.swt.widgets.Text name_text = null;
 	private org.eclipse.swt.widgets.Label description_label = null;
@@ -33,7 +32,8 @@ public class JFaceDialogRelatedFile extends TitleAreaDialog {
 	  public void create() {
 	    super.create();
 	    setTitle("RelatedFile properties");
-	  }	
+	    getPropertiesFromInstance();
+	  }
 
   	@Override
 	protected Control createDialogArea(Composite parent){
@@ -43,7 +43,7 @@ public class JFaceDialogRelatedFile extends TitleAreaDialog {
         GridLayout gridLayout = new GridLayout(2, false);
 		container.setLayout(gridLayout);
         this.createProperties(container);
-        return area;		
+        return area;
 	}
 	
 	private void createProperties(Composite container){
@@ -86,24 +86,30 @@ public class JFaceDialogRelatedFile extends TitleAreaDialog {
 	}
 	
 	
-	private void getProperties(){
-		pattern01.helpers.generated.RelatedFile relatedFile=(pattern01.helpers.generated.RelatedFile) this.parent.getSelection()[0].getData("class_instance");
+	private pattern01.helpers.generated.RelatedFile getSelectedInstance(){
+		return ((pattern01.helpers.generated.RelatedFile)this.parent.getSelection()[0].getData("class_instance"));
+	}
+	
+	
+	private void getPropertiesFromInstance(){
+		pattern01.helpers.generated.RelatedFile relatedFile = getSelectedInstance();
 		this.name_text.setText(relatedFile.getName());
 		this.description_text.setText(relatedFile.getDescription());
 		this.reference_text.setText(relatedFile.getReference());
 	}
 	
 	
-	private void setProperties(){
-		pattern01.helpers.generated.RelatedFile relatedFile=(pattern01.helpers.generated.RelatedFile) this.parent.getSelection()[0].getData("class_instance");
-		relatedFile.setName(relatedFile.getname());
-		relatedFile.setDescription(relatedFile.getdescription());
-		relatedFile.setReference(relatedFile.getreference());
+	private void savePropertiesOnInstance(){
+		pattern01.helpers.generated.RelatedFile relatedFile = getSelectedInstance();
+		relatedFile.setName(relatedFile.getName());
+		relatedFile.setDescription(relatedFile.getDescription());
+		relatedFile.setReference(relatedFile.getReference());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+	}
 	
 	@Override
 	protected void okPressed(){
-		/* TODO - Generar cuerpo del save */
+		savePropertiesOnInstance();
 		super.okPressed();
 	}
 

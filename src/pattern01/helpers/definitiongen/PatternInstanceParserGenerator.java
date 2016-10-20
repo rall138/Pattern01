@@ -135,14 +135,12 @@ public class PatternInstanceParserGenerator extends Task{
 	
 	private void generatePropertiesAssignment(Element element){
 		for(Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(tabGen(3)+"if(actualNode.getAttributes().getNamedItem("+quotscape+attr.getName()+quotscape+")){");
-			builder.appendLn(tabGen(4)+element.getName()+".set"+attr.getPrettyName());
+			builder.appendLn(tabGen(3)+element.getName()+".set"+attr.getPrettyName());
 			builder.append("(actualNode.getAttributes().getNamedItem("+quotscape);
 			builder.append(attr.getName()+quotscape+") != null "+"? ");
 			builder.append(DataTypeConversion.getDataTypeWrapper(attr.getType(),"actualNode.getAttributes()"
 					+ ".getNamedItem("+quotscape+attr.getName()+quotscape+").getNodeValue()")+":");
 			builder.append(DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
-			builder.appendLn(tabGen(3)+"}");
 		}
 	}
 	

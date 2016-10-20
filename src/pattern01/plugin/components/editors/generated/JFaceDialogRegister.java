@@ -17,7 +17,6 @@ public class JFaceDialogRegister extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private final static String Register;
 	private org.eclipse.swt.widgets.Label name_label = null;
 	private org.eclipse.swt.widgets.Text name_text = null;
 	private org.eclipse.swt.widgets.Label description_label = null;
@@ -33,7 +32,8 @@ public class JFaceDialogRegister extends TitleAreaDialog {
 	  public void create() {
 	    super.create();
 	    setTitle("Register properties");
-	  }	
+	    getPropertiesFromInstance();
+	  }
 
   	@Override
 	protected Control createDialogArea(Composite parent){
@@ -43,7 +43,7 @@ public class JFaceDialogRegister extends TitleAreaDialog {
         GridLayout gridLayout = new GridLayout(2, false);
 		container.setLayout(gridLayout);
         this.createProperties(container);
-        return area;		
+        return area;
 	}
 	
 	private void createProperties(Composite container){
@@ -86,24 +86,30 @@ public class JFaceDialogRegister extends TitleAreaDialog {
 	}
 	
 	
-	private void getProperties(){
-		pattern01.helpers.generated.Register register=(pattern01.helpers.generated.Register) this.parent.getSelection()[0].getData("class_instance");
+	private pattern01.helpers.generated.Register getSelectedInstance(){
+		return ((pattern01.helpers.generated.Register)this.parent.getSelection()[0].getData("class_instance"));
+	}
+	
+	
+	private void getPropertiesFromInstance(){
+		pattern01.helpers.generated.Register register = getSelectedInstance();
 		this.name_text.setText(register.getName());
 		this.description_text.setText(register.getDescription());
 		this.reference_text.setText(register.getReference());
 	}
 	
 	
-	private void setProperties(){
-		pattern01.helpers.generated.Register register=(pattern01.helpers.generated.Register) this.parent.getSelection()[0].getData("class_instance");
-		register.setName(register.getname());
-		register.setDescription(register.getdescription());
-		register.setReference(register.getreference());
+	private void savePropertiesOnInstance(){
+		pattern01.helpers.generated.Register register = getSelectedInstance();
+		register.setName(register.getName());
+		register.setDescription(register.getDescription());
+		register.setReference(register.getReference());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+	}
 	
 	@Override
 	protected void okPressed(){
-		/* TODO - Generar cuerpo del save */
+		savePropertiesOnInstance();
 		super.okPressed();
 	}
 

@@ -68,8 +68,9 @@ public class PreferencesDialogGenerator extends Task{
 			line = line.replace("<<class_name>>", element.getPrettyName());
 			line = line.replace("<<properties>>", getPropertiesDefinitionCode(element).toString());
 			line = line.replace("<<property_method_body>>", getMethodBody(element).toString());
-			line = line.replace("<<property_save>>", "/* TODO - Generar cuerpo del save */");
+			line = line.replace("<<property_save>>", "savePropertiesOnInstance();");
 			line = line.replace("<<element_size>>", String.valueOf(element.getAttribute_collection().size()));
+			line = line.replace("<<getSelectedInstance>>", getSelectedInstanceCode(element).toString());
 			line = line.replace("<<getProperties>>", getPropertyCode(element).toString());
 			line = line.replace("<<setProperties>>", getPropertySetterCode(element).toString());
 			builder.appendLn(line);
@@ -80,8 +81,6 @@ public class PreferencesDialogGenerator extends Task{
 	
 	private CustomStringBuilder getPropertiesDefinitionCode(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
-		builder.appendLn(1, "private final static String ");
-		builder.append(element.getPrettyName()+";");
 		for (Attribute attr : element.getAttribute_collection()){
 			builder.appendLn(1,"private org.eclipse.swt.widgets.Label "+attr.getName()+"_label = null;");
 			builder.appendLn(1,"private org.eclipse.swt.widgets.Text "+attr.getName()+"_text = null;");
@@ -109,13 +108,24 @@ public class PreferencesDialogGenerator extends Task{
 		return builder;
 	}
 
+	private CustomStringBuilder getSelectedInstanceCode(Element element){
+		CustomStringBuilder builder = new CustomStringBuilder();
+		builder.appendLn(1, "private "+Element.classPackage+"."+element.getPrettyName()+" getSelectedInstance(){");
+		builder.appendLn(2,"return (("+Element.classPackage+"."+element.getPrettyName()+")"
+				+ "this.parent.getSelection()[0].getData("+quotscape+"class_instance"+quotscape+"));");
+		builder.appendLn(1, "}");
+		return builder;
+	}
+	
 	private CustomStringBuilder getPropertyCode(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
-		builder.appendLn(1, "private void getProperties(){");
+		builder.appendLn(1, "private void getPropertiesFromInstance(){");
+
+		//Obtencion de instancia
 		builder.appendLn(2, Element.classPackage+"."+element.getPrettyName());
-		builder.append(" "+element.getName());
-		builder.append("=("+Element.classPackage+"."+element.getPrettyName()+")");
-		builder.append(" this.parent.getSelection()[0].getData("+quotscape+"class_instance"+quotscape+");");
+		builder.append(" "+element.getName()+" = getSelectedInstance();");
+		
+		//Asignacion de valores en propiedades de pantalla modal
 		for (Attribute attr : element.getAttribute_collection()){
 			builder.appendLn(2, "this."+attr.getName()+"_text.setText(");
 			builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
@@ -126,16 +136,19 @@ public class PreferencesDialogGenerator extends Task{
 	
 	private CustomStringBuilder getPropertySetterCode(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
-		builder.appendLn(1, "private void setProperties(){");
+		builder.appendLn(1, "private void savePropertiesOnInstance(){");
+
+		//Obtencion de instancia
 		builder.appendLn(2, Element.classPackage+"."+element.getPrettyName());
-		builder.append(" "+element.getName());
-		builder.append("=("+Element.classPackage+"."+element.getPrettyName()+")");
-		builder.append(" this.parent.getSelection()[0].getData("+quotscape+"class_instance"+quotscape+");");
+		builder.append(" "+element.getName()+" = getSelectedInstance();");
+
+		//Asignacion de valores en instancia
 		for (Attribute attr : element.getAttribute_collection()){
 			builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
-			builder.append(element.getName()+".get"+attr.getName()+"());");
+			builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
 		}
 		builder.appendLn(2, "pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);");
+		builder.appendLn(1, "}");
 		return builder;
 	}
 
@@ -144,5 +157,4 @@ public class PreferencesDialogGenerator extends Task{
 		bfr.getProject().setProperty("filename", "../../plugin/components/editors/generated/JFaceDialog"+className+".java");
 		bfr.executeTarget("fileRelative");
 	}
-	
 }

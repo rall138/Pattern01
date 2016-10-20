@@ -47,8 +47,8 @@ public class ClassGenerator extends Task{
 		log.writeSingleMessage(" ============================================================== ");
 		generatePropertyFile();
 		log.writeSingleMessage(" ============================================================== ");
-		generatePatternEditorClasses();
-		log.writeSingleMessage(" ============================================================== ");
+//		generatePatternEditorClasses();
+//		log.writeSingleMessage(" ============================================================== ");
 		generatePreferencesDialogs();
 		log.writeSingleMessage(" ============================================================== ");		
 		generatePatternInstanceClass();
@@ -286,10 +286,10 @@ public class ClassGenerator extends Task{
 		bfr.executeTarget("fileRelative");
 	}
 	
-	private void generatePatternEditorClasses(){
-		EditorPartGenerator epgen = new EditorPartGenerator(this.patterninstanceElement);
-		epgen.execute();
-	}
+//	private void generatePatternEditorClasses(){
+//		EditorPartGenerator epgen = new EditorPartGenerator(this.patterninstanceElement);
+//		epgen.execute();
+//	}
 	
 	private void generatePreferencesDialogs(){
 		PreferencesDialogGenerator pdgen = 

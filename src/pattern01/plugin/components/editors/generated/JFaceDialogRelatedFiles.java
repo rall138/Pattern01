@@ -17,7 +17,6 @@ public class JFaceDialogRelatedFiles extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private final static String RelatedFiles;
 	private org.eclipse.swt.widgets.Label image_label = null;
 	private org.eclipse.swt.widgets.Text image_text = null;
 	
@@ -29,7 +28,8 @@ public class JFaceDialogRelatedFiles extends TitleAreaDialog {
 	  public void create() {
 	    super.create();
 	    setTitle("RelatedFiles properties");
-	  }	
+	    getPropertiesFromInstance();
+	  }
 
   	@Override
 	protected Control createDialogArea(Composite parent){
@@ -39,7 +39,7 @@ public class JFaceDialogRelatedFiles extends TitleAreaDialog {
         GridLayout gridLayout = new GridLayout(2, false);
 		container.setLayout(gridLayout);
         this.createProperties(container);
-        return area;		
+        return area;
 	}
 	
 	private void createProperties(Composite container){
@@ -66,20 +66,26 @@ public class JFaceDialogRelatedFiles extends TitleAreaDialog {
 	}
 	
 	
-	private void getProperties(){
-		pattern01.helpers.generated.RelatedFiles relatedFiles=(pattern01.helpers.generated.RelatedFiles) this.parent.getSelection()[0].getData("class_instance");
+	private pattern01.helpers.generated.RelatedFiles getSelectedInstance(){
+		return ((pattern01.helpers.generated.RelatedFiles)this.parent.getSelection()[0].getData("class_instance"));
+	}
+	
+	
+	private void getPropertiesFromInstance(){
+		pattern01.helpers.generated.RelatedFiles relatedFiles = getSelectedInstance();
 		this.image_text.setText(relatedFiles.getImage());
 	}
 	
 	
-	private void setProperties(){
-		pattern01.helpers.generated.RelatedFiles relatedFiles=(pattern01.helpers.generated.RelatedFiles) this.parent.getSelection()[0].getData("class_instance");
-		relatedFiles.setImage(relatedFiles.getimage());
+	private void savePropertiesOnInstance(){
+		pattern01.helpers.generated.RelatedFiles relatedFiles = getSelectedInstance();
+		relatedFiles.setImage(relatedFiles.getImage());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+	}
 	
 	@Override
 	protected void okPressed(){
-		/* TODO - Generar cuerpo del save */
+		savePropertiesOnInstance();
 		super.okPressed();
 	}
 

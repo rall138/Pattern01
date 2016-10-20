@@ -25,7 +25,8 @@ public class JFaceDialog<<class_name>> extends TitleAreaDialog {
 	  public void create() {
 	    super.create();
 	    setTitle("<<class_name>> properties");
-	  }	
+	    getPropertiesFromInstance();
+	  }
 
   	@Override
 	protected Control createDialogArea(Composite parent){
@@ -35,7 +36,7 @@ public class JFaceDialog<<class_name>> extends TitleAreaDialog {
         GridLayout gridLayout = new GridLayout(2, false);
 		container.setLayout(gridLayout);
         this.createProperties(container);
-        return area;		
+        return area;
 	}
 	
 	private void createProperties(Composite container){
@@ -52,6 +53,8 @@ public class JFaceDialog<<class_name>> extends TitleAreaDialog {
 	protected Point getInitialSize(){
 	 	return new Point(500, 375);
 	}
+	
+	<<getSelectedInstance>>
 	
 	<<getProperties>>
 	

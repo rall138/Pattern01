@@ -47,17 +47,27 @@ public class XMLPropertyHelper {
 				+System.getProperty("file.separator")
 				+"Mapper.xml");
 		
+		TreeItem packageItem =
+				getItemByType(fullPatternInstance.getItem(0), NodeType.PACKAGE);
+		
 		//Obtención de nodo clase
 		TreeItem classItem = 
 				getItemByType(fullPatternInstance.getItem(0), NodeType.CLASS);
 		
 		try {
 			
+			String packageName = packageItem.getData("package").toString(), 
+					className = classItem.getData("name").toString(),
+					expression = ""; 
+			
 			//Modificamos la propiedad name
 			XPath xpath = XPathFactory.newInstance().newXPath();
-			Node node = (Node) xpath.evaluate("/Class[@name='"+classItem.getData("name").toString()+"']"
-					+"/Pattern[@type='WWPattern', @reference='"+reference+"']"
-					, mapper, XPathConstants.NODE);
+			
+			expression = "*//Pattern[@type='WWPattern' and @reference='"+reference+"']";
+			
+			System.out.println("Expressiones: "+expression);
+			
+			Node node = (Node) xpath.evaluate(expression, mapper, XPathConstants.NODE);
 			
 			node.getAttributes().getNamedItem("name")
 			.setNodeValue(classInstance.getName());

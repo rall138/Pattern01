@@ -20,13 +20,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import pattern01.helpers.instancegen.PatternInstanceParser;
-import pattern01.plugin.components.editors.generated.DialogPatternEditor;
 import pattern01.plugin.components.editors.generated.JFaceDialogPatternInstance;
 import pattern01.plugin.components.editors.generated.JFaceDialogRelatedFile;
-import pattern01.plugin.components.editors.generated.PatternInstancePatternEditor;
-import pattern01.plugin.components.editors.generated.RegisterPatternEditor;
-import pattern01.plugin.components.editors.generated.RelatedFilePatternEditor;
-import pattern01.plugin.components.editors.generated.SelectionPatternEditor;
 
 @SuppressWarnings("unused")
 public class MenuFactory {
@@ -95,26 +90,22 @@ public class MenuFactory {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				//TODO Flexibilizar esta logica				
 				if(parent.getSelection()[0].getData("type") != null){
-						try{
-							DefaultEditorInput dei = new DefaultEditorInput();
-							dei.setInstanceTree(parent);
-							NodeType nodetype_pointer = (NodeType)parent.getSelection()[0].getData("type");
-							if (nodetype_pointer == NodeType.PATTERNINSTANCE){
-								JFaceDialogPatternInstance jfd = new JFaceDialogPatternInstance(parent.getShell());
-								jfd.setParent(parent);
-								jfd.create();
-								jfd.open();
-							}else if (nodetype_pointer == NodeType.RELATEDFILE){
-								(new JFaceDialogRelatedFile(parent.getShell())).open();
-							}else if (nodetype_pointer == NodeType.SELECTION){
-								page.openEditor(dei, SelectionPatternEditor.ID);
-							}else if (nodetype_pointer == NodeType.DIALOG){
-								page.openEditor(dei, DialogPatternEditor.ID);
-							}else if (nodetype_pointer == NodeType.REGISTER){
-								page.openEditor(dei, RegisterPatternEditor.ID);
-							}
-						} catch (PartInitException e) {
-							e.printStackTrace();
+						DefaultEditorInput dei = new DefaultEditorInput();
+						dei.setInstanceTree(parent);
+						NodeType nodetype_pointer = (NodeType)parent.getSelection()[0].getData("type");
+						if (nodetype_pointer == NodeType.PATTERNINSTANCE){
+							JFaceDialogPatternInstance jfd = new JFaceDialogPatternInstance(parent.getShell());
+							jfd.setParent(parent);
+							jfd.create();
+							jfd.open();
+						}else if (nodetype_pointer == NodeType.RELATEDFILE){
+							(new JFaceDialogRelatedFile(parent.getShell())).open();
+						}else if (nodetype_pointer == NodeType.SELECTION){
+							
+						}else if (nodetype_pointer == NodeType.DIALOG){
+							
+						}else if (nodetype_pointer == NodeType.REGISTER){
+							
 						}
 					}
 				}

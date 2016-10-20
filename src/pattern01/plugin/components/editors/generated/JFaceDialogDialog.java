@@ -17,7 +17,6 @@ public class JFaceDialogDialog extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private final static String Dialog;
 	private org.eclipse.swt.widgets.Label name_label = null;
 	private org.eclipse.swt.widgets.Text name_text = null;
 	private org.eclipse.swt.widgets.Label description_label = null;
@@ -33,7 +32,8 @@ public class JFaceDialogDialog extends TitleAreaDialog {
 	  public void create() {
 	    super.create();
 	    setTitle("Dialog properties");
-	  }	
+	    getPropertiesFromInstance();
+	  }
 
   	@Override
 	protected Control createDialogArea(Composite parent){
@@ -43,7 +43,7 @@ public class JFaceDialogDialog extends TitleAreaDialog {
         GridLayout gridLayout = new GridLayout(2, false);
 		container.setLayout(gridLayout);
         this.createProperties(container);
-        return area;		
+        return area;
 	}
 	
 	private void createProperties(Composite container){
@@ -86,24 +86,30 @@ public class JFaceDialogDialog extends TitleAreaDialog {
 	}
 	
 	
-	private void getProperties(){
-		pattern01.helpers.generated.Dialog dialog=(pattern01.helpers.generated.Dialog) this.parent.getSelection()[0].getData("class_instance");
+	private pattern01.helpers.generated.Dialog getSelectedInstance(){
+		return ((pattern01.helpers.generated.Dialog)this.parent.getSelection()[0].getData("class_instance"));
+	}
+	
+	
+	private void getPropertiesFromInstance(){
+		pattern01.helpers.generated.Dialog dialog = getSelectedInstance();
 		this.name_text.setText(dialog.getName());
 		this.description_text.setText(dialog.getDescription());
 		this.reference_text.setText(dialog.getReference());
 	}
 	
 	
-	private void setProperties(){
-		pattern01.helpers.generated.Dialog dialog=(pattern01.helpers.generated.Dialog) this.parent.getSelection()[0].getData("class_instance");
-		dialog.setName(dialog.getname());
-		dialog.setDescription(dialog.getdescription());
-		dialog.setReference(dialog.getreference());
+	private void savePropertiesOnInstance(){
+		pattern01.helpers.generated.Dialog dialog = getSelectedInstance();
+		dialog.setName(dialog.getName());
+		dialog.setDescription(dialog.getDescription());
+		dialog.setReference(dialog.getReference());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+	}
 	
 	@Override
 	protected void okPressed(){
-		/* TODO - Generar cuerpo del save */
+		savePropertiesOnInstance();
 		super.okPressed();
 	}
 

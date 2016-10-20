@@ -1,26 +1,26 @@
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Oct 18 22:53:14 UYST 2016
+	* Creation date: Thu Oct 20 14:39:27 GFT 2016
 	* Creator: rlomez
 	**/
 package pattern01.plugin.components.navigator;
 
-public enum NodeType {	UNDEFINED,PACKAGE,CLASS,PATTERNINSTANCE,RELATEDFILES,RELATEDFILE,FACES,SELECTION,REGISTER,DIALOG;
-
+public enum NodeType {
+	UNDEFINED,PACKAGE,CLASS,PATTERNINSTANCE,RELATEDFILES,RELATEDFILE,FACES,SELECTION,REGISTER,DIALOG;
 
 	public static String toString(NodeType nodetype){
 		String nodetypestr = "";
 			switch(nodetype){
-			case UNDEFINED:
-				nodetypestr = "UNDEFINED";
-			switch(nodetype){
-			case PACKAGE:
-				nodetypestr = "PACKAGE";
-				break;
-			case CLASS:
-				nodetypestr = "CLASS";
-				break;
+				case UNDEFINED:
+			nodetypestr = "UNDEFINED";
+			break;
+				case PACKAGE:
+			nodetypestr = "PACKAGE";
+			break;
+				case CLASS:
+			nodetypestr = "CLASS";
+			break;
 			case PATTERNINSTANCE:
 				nodetypestr ="PATTERNINSTANCE";
 				break;

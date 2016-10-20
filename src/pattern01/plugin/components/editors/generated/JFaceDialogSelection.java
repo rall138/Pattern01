@@ -17,7 +17,6 @@ public class JFaceDialogSelection extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private final static String Selection;
 	private org.eclipse.swt.widgets.Label name_label = null;
 	private org.eclipse.swt.widgets.Text name_text = null;
 	private org.eclipse.swt.widgets.Label description_label = null;
@@ -41,7 +40,8 @@ public class JFaceDialogSelection extends TitleAreaDialog {
 	  public void create() {
 	    super.create();
 	    setTitle("Selection properties");
-	  }	
+	    getPropertiesFromInstance();
+	  }
 
   	@Override
 	protected Control createDialogArea(Composite parent){
@@ -51,7 +51,7 @@ public class JFaceDialogSelection extends TitleAreaDialog {
         GridLayout gridLayout = new GridLayout(2, false);
 		container.setLayout(gridLayout);
         this.createProperties(container);
-        return area;		
+        return area;
 	}
 	
 	private void createProperties(Composite container){
@@ -126,32 +126,38 @@ public class JFaceDialogSelection extends TitleAreaDialog {
 	}
 	
 	
-	private void getProperties(){
-		pattern01.helpers.generated.Selection selection=(pattern01.helpers.generated.Selection) this.parent.getSelection()[0].getData("class_instance");
-		this.name_text.setText(selection.getName());
-		this.description_text.setText(selection.getDescription());
-		this.reference_text.setText(selection.getReference());
-		this.insert_text.setText(selection.getInsert());
-		this.update_text.setText(selection.getUpdate());
-		this.delete_text.setText(selection.getDelete());
-		this.display_text.setText(selection.getDisplay());
+	private pattern01.helpers.generated.Selection getSelectedInstance(){
+		return ((pattern01.helpers.generated.Selection)this.parent.getSelection()[0].getData("class_instance"));
 	}
 	
 	
-	private void setProperties(){
-		pattern01.helpers.generated.Selection selection=(pattern01.helpers.generated.Selection) this.parent.getSelection()[0].getData("class_instance");
-		selection.setName(selection.getname());
-		selection.setDescription(selection.getdescription());
-		selection.setReference(selection.getreference());
-		selection.setInsert(selection.getinsert());
-		selection.setUpdate(selection.getupdate());
-		selection.setDelete(selection.getdelete());
-		selection.setDisplay(selection.getdisplay());
+	private void getPropertiesFromInstance(){
+		pattern01.helpers.generated.Selection selection = getSelectedInstance();
+		this.name_text.setText(selection.getName());
+		this.description_text.setText(selection.getDescription());
+		this.reference_text.setText(selection.getReference());
+//		this.insert_text.setText(selection.getInsert());
+//		this.update_text.setText(selection.getUpdate());
+//		this.delete_text.setText(selection.getDelete());
+//		this.display_text.setText(selection.getDisplay());
+	}
+	
+	
+	private void savePropertiesOnInstance(){
+		pattern01.helpers.generated.Selection selection = getSelectedInstance();
+		selection.setName(selection.getName());
+		selection.setDescription(selection.getDescription());
+		selection.setReference(selection.getReference());
+		selection.setInsert(selection.getInsert());
+		selection.setUpdate(selection.getUpdate());
+		selection.setDelete(selection.getDelete());
+		selection.setDisplay(selection.getDisplay());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+	}
 	
 	@Override
 	protected void okPressed(){
-		/* TODO - Generar cuerpo del save */
+		savePropertiesOnInstance();
 		super.okPressed();
 	}
 

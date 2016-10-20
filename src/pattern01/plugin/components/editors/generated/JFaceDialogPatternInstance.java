@@ -17,7 +17,6 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private final static String PatternInstance;
 	private org.eclipse.swt.widgets.Label generator_label = null;
 	private org.eclipse.swt.widgets.Text generator_text = null;
 	private org.eclipse.swt.widgets.Label name_label = null;
@@ -33,7 +32,8 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	  public void create() {
 	    super.create();
 	    setTitle("PatternInstance properties");
-	  }	
+	    getPropertiesFromInstance();
+	  }
 
   	@Override
 	protected Control createDialogArea(Composite parent){
@@ -43,7 +43,7 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
         GridLayout gridLayout = new GridLayout(2, false);
 		container.setLayout(gridLayout);
         this.createProperties(container);
-        return area;		
+        return area;
 	}
 	
 	private void createProperties(Composite container){
@@ -86,24 +86,30 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	}
 	
 	
-	private void getProperties(){
-		pattern01.helpers.generated.PatternInstance patterninstance=(pattern01.helpers.generated.PatternInstance) this.parent.getSelection()[0].getData("class_instance");
-		this.generator_text.setText(patterninstance.getGenerator());
+	private pattern01.helpers.generated.PatternInstance getSelectedInstance(){
+		return ((pattern01.helpers.generated.PatternInstance)this.parent.getSelection()[0].getData("class_instance"));
+	}
+	
+	
+	private void getPropertiesFromInstance(){
+		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
+//		this.generator_text.setText(patterninstance.getGenerator());
 		this.name_text.setText(patterninstance.getName());
 		this.description_text.setText(patterninstance.getDescription());
 	}
 	
 	
-	private void setProperties(){
-		pattern01.helpers.generated.PatternInstance patterninstance=(pattern01.helpers.generated.PatternInstance) this.parent.getSelection()[0].getData("class_instance");
-		patterninstance.setGenerator(patterninstance.getgenerator());
-		patterninstance.setName(patterninstance.getname());
-		patterninstance.setDescription(patterninstance.getdescription());
+	private void savePropertiesOnInstance(){
+		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
+		patterninstance.setGenerator(patterninstance.getGenerator());
+		patterninstance.setName(patterninstance.getName());
+		patterninstance.setDescription(patterninstance.getDescription());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+	}
 	
 	@Override
 	protected void okPressed(){
-		/* TODO - Generar cuerpo del save */
+		savePropertiesOnInstance();
 		super.okPressed();
 	}
 

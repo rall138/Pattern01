@@ -59,9 +59,10 @@ public class NodeTypeEnumGenerator extends Task{
 		builder = new CustomStringBuilder();
 		builder.appendLn(classHeaderComment);
 		builder.appendLn("package pattern01.plugin.components.navigator;");
-		builder.appendLn("");
+		builder.clrlf();
+		
 		builder.appendLn("public enum NodeType {");
-		builder.append(tabGen(1)+"UNDEFINED,");
+		builder.appendLn(1,"UNDEFINED,");
 		builder.append("PACKAGE,");
 		builder.append("CLASS,");
 	}
@@ -77,19 +78,18 @@ public class NodeTypeEnumGenerator extends Task{
 	
 	private void generateHardCodedToStringMethod(){
 		builder.clrlf();
-		builder.clrlf();
-		builder.appendLn(tabGen(1)+"public static String toString(NodeType nodetype){");
-		builder.appendLn(tabGen(2)+"String nodetypestr = "+quotscape+quotscape+";");
-		builder.appendLn(tabGen(3)+"switch(nodetype){");
-		builder.appendLn(tabGen(3)+"case UNDEFINED:");
-		builder.appendLn(tabGen(4)+"nodetypestr = "+quotscape+"UNDEFINED"+quotscape+";");
-		builder.appendLn(tabGen(3)+"switch(nodetype){");
-		builder.appendLn(tabGen(3)+"case PACKAGE:");
-		builder.appendLn(tabGen(4)+"nodetypestr = "+quotscape+"PACKAGE"+quotscape+";");
-		builder.appendLn(tabGen(4)+"break;");
-		builder.appendLn(tabGen(3)+"case CLASS:");
-		builder.appendLn(tabGen(4)+"nodetypestr = "+quotscape+"CLASS"+quotscape+";");
-		builder.appendLn(tabGen(4)+"break;");
+		builder.appendLn(1,"public static String toString(NodeType nodetype){");
+		builder.appendLn(2,"String nodetypestr = "+quotscape+quotscape+";");
+		builder.appendLn(3,"switch(nodetype){");
+		builder.appendLn(4,"case UNDEFINED:");
+		builder.appendLn(3,"nodetypestr = "+quotscape+"UNDEFINED"+quotscape+";");
+		builder.appendLn(3,"break;");
+		builder.appendLn(4,"case PACKAGE:");
+		builder.appendLn(3,"nodetypestr = "+quotscape+"PACKAGE"+quotscape+";");
+		builder.appendLn(3,"break;");
+		builder.appendLn(4,"case CLASS:");
+		builder.appendLn(3,"nodetypestr = "+quotscape+"CLASS"+quotscape+";");
+		builder.appendLn(3,"break;");
 	}
 	
 	private void generateToStringMethod(Element element){
