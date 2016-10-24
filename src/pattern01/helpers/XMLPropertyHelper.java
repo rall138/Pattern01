@@ -41,36 +41,28 @@ public class XMLPropertyHelper {
 				.getItem(0), NodeType.PATTERNINSTANCE).getData("class_instance");
 		
 
-		//Obtenemos el mapper para cambiar la línea de esta pattern
+		//Obtenemos el mapper para cambiar la lï¿½nea de esta pattern
 		File mapper = new File(LocationHelper
 				.searchPatternFolderPath(projectFolder)
 				+System.getProperty("file.separator")
 				+"Mapper.xml");
 		
-		TreeItem packageItem =
-				getItemByType(fullPatternInstance.getItem(0), NodeType.PACKAGE);
-		
-		//Obtención de nodo clase
-		TreeItem classItem = 
-				getItemByType(fullPatternInstance.getItem(0), NodeType.CLASS);
 		
 		try {
 			
-			String packageName = packageItem.getData("package").toString(), 
-					className = classItem.getData("name").toString(),
-					expression = ""; 
+			String expression = "//*Pattern[@type='WWPattern' and @reference='"+reference+"']"; 
+			
+			
+			System.out.println(expression);
 			
 			//Modificamos la propiedad name
 			XPath xpath = XPathFactory.newInstance().newXPath();
 			
-			expression = "*//Pattern[@type='WWPattern' and @reference='"+reference+"']";
-			
-			System.out.println("Expressiones: "+expression);
-			
 			Node node = (Node) xpath.evaluate(expression, mapper, XPathConstants.NODE);
 			
-			node.getAttributes().getNamedItem("name")
-			.setNodeValue(classInstance.getName());
+			node.getAttributes().getNamedItem("name").setNodeValue(classInstance.getName());
+			
+			System.out.println("Nodes "+node.toString());
 
 			File instance = new File(LocationHelper
 					.searchPatternFolderPath(projectFolder)
