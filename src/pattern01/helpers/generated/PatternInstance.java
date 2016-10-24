@@ -3,13 +3,14 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Oct 20 14:39:26 GFT 2016
+	* Creation date: Mon Oct 24 12:02:31 GFT 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance implements IPatternElement{
 	private Generator generator=pattern01.helpers.generated.Generator.WEB;
 	private java.lang.String name;
 	private java.lang.String description;
+	private java.lang.String parentClass;
 	private RelatedFiles relatedFiles;
 	private java.util.List<Faces> collection_Faces = new java.util.ArrayList<>();
 	public Generator getGenerator(){
@@ -34,6 +35,14 @@ public class PatternInstance implements IPatternElement{
 
 	public void setDescription(java.lang.String description){
 		this.description = description;
+	}
+
+	public java.lang.String getParentClass(){
+		return this.parentClass;
+	}
+
+	public void setParentClass(java.lang.String parentClass){
+		this.parentClass = parentClass;
 	}
 
 	public RelatedFiles getrelatedFiles(){
@@ -68,6 +77,7 @@ public class PatternInstance implements IPatternElement{
 		xml+="generator='"+this.generator+"'";
 		xml+="name='"+this.name+"'";
 		xml+="description='"+this.description+"'";
+		xml+="parentClass='"+this.parentClass+"'";
 		xml+=">";
 		xml+=this.relatedFiles.toXml();
 		for(int index = 0; index < collection_Faces.size(); index++){

@@ -72,12 +72,10 @@ public class PatternInstanceParser {
 		}
 	}
 
-	
-
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Oct 20 14:39:27 GFT 2016
+	* Creation date: Mon Oct 24 12:02:32 GFT 2016
 	* Creator: rlomez
 	**/
 	private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){
@@ -91,6 +89,7 @@ public class PatternInstanceParser {
 				actualNode.getAttributes().item(index).getNodeValue().toString());
 		}
 		classInstanceStrategy(actualNode, item);
+		extraInfoForPatternInstance(parent, item);
 
 		// Recursion over child nodes
 		if (actualNode.getChildNodes().getLength() > 0){
@@ -109,6 +108,7 @@ public class PatternInstanceParser {
 			patterninstance.setGenerator(actualNode.getAttributes().getNamedItem("generator") != null ? pattern01.helpers.generated.Generator.valueOf(actualNode.getAttributes().getNamedItem("generator").getNodeValue()):pattern01.helpers.generated.Generator.WEB);
 			patterninstance.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			patterninstance.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
+			patterninstance.setParentClass(actualNode.getAttributes().getNamedItem("parentClass") != null ? actualNode.getAttributes().getNamedItem("parentClass").getNodeValue():"");
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",patterninstance);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFiles")){
@@ -158,6 +158,12 @@ public class PatternInstanceParser {
 			item.setImage(pattern01.helpers.ImageHelper.getImage(""));
 			item.setData("class_instance",dialog);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Dialog().add(dialog);
+		}
+	}
+
+	private void extraInfoForPatternInstance( org.eclipse.swt.widgets.TreeItem parentItem, org.eclipse.swt.widgets.TreeItem item){
+		if (item.getData("type").toString().compareToIgnoreCase("patterninstance")==0){
+			((pattern01.helpers.generated.PatternInstance)item.getData("class_instance")).setParentClass(parentItem.getData("name").toString());
 		}
 	}
 /* [End] Auto-generated code for pattern instance parser do not remove */

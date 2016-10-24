@@ -67,6 +67,7 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(2)+"}");
 
 		builder.appendLn(tabGen(2)+"classInstanceStrategy(actualNode, item);");
+		builder.appendLn(tabGen(2)+"extraInfoForPatternInstance(parent, item);");
 		
 		builder.clrlf();
 		builder.appendLn(tabGen(2)+"// Recursion over child nodes");
@@ -85,6 +86,7 @@ public class PatternInstanceParserGenerator extends Task{
 		generateElementStrategyHeader();
 		generateElementStrategy(element, true);
 		generateElementStrategyFooter();
+		generatePatternInstanceExtraInfo();
 		builder.appendLn(endTag);
 		generateClasses("PatternInstanceParser", builder.toString());
 	}
@@ -158,6 +160,19 @@ public class PatternInstanceParserGenerator extends Task{
 					element.getPrettyName()+"("+element.getName()+");");
 			}
 		}
+	}
+	
+	private void generatePatternInstanceExtraInfo(){
+		builder.clrlf();
+		builder.appendLn(1, "private void extraInfoForPatternInstance( org.eclipse.swt.widgets.TreeItem parentItem,");
+		builder.append(" org.eclipse.swt.widgets.TreeItem item){");
+		builder.appendLn(2, "if (item.getData("+quotscape+"type"+quotscape+").toString().compareToIgnoreCase(");
+		builder.append(quotscape+"patterninstance"+quotscape+")==0){");
+		builder.appendLn(3, "(("+Element.classPackage+".PatternInstance)");
+		builder.append("item.getData("+quotscape+"class_instance"+quotscape+")).setParentClass(");
+		builder.append("parentItem.getData("+quotscape+"name"+quotscape+").toString());");
+		builder.appendLn(2, "}");
+		builder.appendLn(1, "}");
 	}
 	
 	private String tabGen(int quantity){

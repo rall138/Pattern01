@@ -8,6 +8,7 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 		<AttributeElement name="generator" prettyName="Generator" type="#{Generator}" required="true" default="#{Generator.WEB}" />
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
+		<AttributeElement name="parentClass" prettyName="ParentClass" type="java.lang.String" required="true" />
 		<ChildElement references="relatedFiles" unique="true" />
 		<ChildElement references="faces" unique="true" />		
 	</Element>

@@ -113,7 +113,6 @@ public class PatternNavigator extends ViewPart {
 				//Declaramos el tipo de nodo package
 				packageItem = new TreeItem(parent, 0);
 				packageItem.setText(packageName);
-				packageItem.setData("package", packageName);
 				packageItem.setData("type", NodeType.PACKAGE);
 				packageItem.setImage(ImageHelper.getImage("package_obj.png"));
 				
@@ -125,6 +124,7 @@ public class PatternNavigator extends ViewPart {
 						//Declaramos el tipo de nodo clase
 						classItem = new TreeItem(packageItem, 0);
 						classItem.setText(className);
+						classItem.setData("package", packageName);
 						classItem.setData("name", className);
 						classItem.setData("type", NodeType.CLASS);
 						classItem.setImage(ImageHelper.getImage("class_obj.png"));
