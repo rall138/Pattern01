@@ -101,10 +101,10 @@ public class JFaceDialogRelatedFile extends TitleAreaDialog {
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.RelatedFile relatedFile = getSelectedInstance();
-		relatedFile.setName(relatedFile.getName());
-		relatedFile.setDescription(relatedFile.getDescription());
-		relatedFile.setReference(relatedFile.getReference());
-		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+		relatedFile.setName(this.name_text.getText());
+		relatedFile.setDescription(this.description_text.getText());
+		relatedFile.setReference(this.reference_text.getText());
+		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	
 	@Override

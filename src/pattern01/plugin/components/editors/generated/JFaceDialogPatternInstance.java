@@ -23,8 +23,6 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	private org.eclipse.swt.widgets.Text name_text = null;
 	private org.eclipse.swt.widgets.Label description_label = null;
 	private org.eclipse.swt.widgets.Text description_text = null;
-	private org.eclipse.swt.widgets.Label parentClass_label = null;
-	private org.eclipse.swt.widgets.Text parentClass_text = null;
 	
 	public JFaceDialogPatternInstance(Shell parentShell){
 		super(parentShell);
@@ -74,14 +72,6 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 		description_layout.horizontalAlignment = GridData.FILL;
 		description_text.setLayoutData(description_layout);
 
-		parentClass_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		parentClass_label.setText("ParentClass");
-		parentClass_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
-		org.eclipse.swt.layout.GridData parentClass_layout = new org.eclipse.swt.layout.GridData();
-		parentClass_layout.grabExcessHorizontalSpace = true;
-		parentClass_layout.horizontalAlignment = GridData.FILL;
-		parentClass_text.setLayoutData(parentClass_layout);
-
 	}
 	
 	protected void createButtonsForButtonBar(Composite parent) {
@@ -103,20 +93,18 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private void getPropertiesFromInstance(){
 		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
-		this.generator_text.setText(patterninstance.getGenerator());
+//		this.generator_text.setText(patterninstance.getGenerator());
 		this.name_text.setText(patterninstance.getName());
 		this.description_text.setText(patterninstance.getDescription());
-		this.parentClass_text.setText(patterninstance.getParentClass());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
-		patterninstance.setGenerator(patterninstance.getGenerator());
-		patterninstance.setName(patterninstance.getName());
-		patterninstance.setDescription(patterninstance.getDescription());
-		patterninstance.setParentClass(patterninstance.getParentClass());
-		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+//		patterninstance.setGenerator(this.generator_text.getText());
+		patterninstance.setName(this.name_text.getText());
+		patterninstance.setDescription(this.description_text.getText());
+		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	
 	@Override

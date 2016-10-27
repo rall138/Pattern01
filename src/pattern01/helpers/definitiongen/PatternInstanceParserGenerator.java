@@ -35,6 +35,9 @@ public class PatternInstanceParserGenerator extends Task{
 	private BuildFileRule bfr = new BuildFileRule();
 	private Element patternInstanceElement = null;
 	private CustomStringBuilder builder = null;
+	private Element parentElement = null;
+	
+	
 	LoggerThread log = new LoggerThread();
 	
 	public PatternInstanceParserGenerator(Element patternInstanceElement){
@@ -55,8 +58,14 @@ public class PatternInstanceParserGenerator extends Task{
 		builder = new CustomStringBuilder();
 		builder.appendLn(beginTag);
 		builder.appendLn(classHeaderComment);
-		builder.appendLn(tabGen(1)+"private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent){");
+		
+		//Nodo padre (PatternInstance) para referencia en todos los nodos del arbol
+		generateParentReference(element);
+		
+		builder.appendLn(tabGen(1)+"private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent"
+				+ ", String patternUUID){");
 		builder.appendLn(tabGen(2)+"org.eclipse.swt.widgets.TreeItem item = new org.eclipse.swt.widgets.TreeItem(parent, 0);");
+		builder.appendLn(tabGen(2)+"item.setData("+quotscape+"reference"+quotscape+",patternUUID);");
 		builder.appendLn(tabGen(2)+"item.setText(actualNode.getNodeName());");
 		builder.appendLn(tabGen(2)+"item.setData("+quotscape+"type"+quotscape+", NodeType.valueOf(actualNode.getNodeName().toUpperCase()));");
 		builder.clrlf();
@@ -67,14 +76,13 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(tabGen(2)+"}");
 
 		builder.appendLn(tabGen(2)+"classInstanceStrategy(actualNode, item);");
-		builder.appendLn(tabGen(2)+"extraInfoForPatternInstance(parent, item);");
 		
 		builder.clrlf();
 		builder.appendLn(tabGen(2)+"// Recursion over child nodes");
 		builder.appendLn(tabGen(2)+"if (actualNode.getChildNodes().getLength() > 0){");
 		builder.appendLn(tabGen(3)+"for(int index = 0; index < actualNode.getChildNodes().getLength(); index++){");
 		builder.appendLn(tabGen(4)+"if (actualNode.getChildNodes().item(index).getNodeType() == Node.ELEMENT_NODE){");
-		builder.appendLn(tabGen(5)+"recursiveParseing(actualNode.getChildNodes().item(index), item);");
+		builder.appendLn(tabGen(5)+"recursiveParseing(actualNode.getChildNodes().item(index), item, patternUUID);");
 		builder.appendLn(tabGen(4)+"}");
 		builder.appendLn(tabGen(3)+"}");
 		builder.appendLn(tabGen(2)+"}");
@@ -86,9 +94,16 @@ public class PatternInstanceParserGenerator extends Task{
 		generateElementStrategyHeader();
 		generateElementStrategy(element, true);
 		generateElementStrategyFooter();
-		generatePatternInstanceExtraInfo();
+		//generatePatternInstanceExtraInfo();
 		builder.appendLn(endTag);
 		generateClasses("PatternInstanceParser", builder.toString());
+	}
+	
+	private void generateParentReference(Element element){
+		builder.clrlf();
+		builder.appendLn(1,"private "+Element.classPackage+"."+element.getPrettyName());
+		builder.append(" "+element.getName()+" = null;");
+		builder.clrlf();
 	}
 	
 	private void generateElementStrategyHeader(){
@@ -99,19 +114,33 @@ public class PatternInstanceParserGenerator extends Task{
 	private void generateElementStrategy(Element element, boolean isParentElement){
 		if (element != null){
 			if (isParentElement){
+				
+				this.parentElement = element;
+				
 				builder.appendLn(tabGen(2)+"if(actualNode.getNodeName()"
 						+ ".equalsIgnoreCase("+quotscape+element.getName()+quotscape+")){");
+				
 			}else{
 				builder.appendLn(tabGen(2)+"}else if(actualNode.getNodeName()"
-						+ ".equalsIgnoreCase("+quotscape+element.getName()+quotscape+")){");				
+						+ ".equalsIgnoreCase("+quotscape+element.getName()+quotscape+")){");
 			}
 		}
 		
-		//New de la variable 
-		builder.appendLn(tabGen(3)+"pattern01.helpers.generated."+element.getPrettyName()+
-				" "+element.getName()+" = new pattern01.helpers.generated."+element.getPrettyName()+"();");
 		
+		//New de la variable 
+		builder.appendLn(3,"pattern01.helpers.generated."+element.getPrettyName()+
+				" "+element.getName()+" = new pattern01.helpers.generated."+element.getPrettyName()+"();");
+
 		generatePropertiesAssignment(element);
+		
+		// Si es padre igualamos la variable de clase con la que queremos enlazar en los demas nodoss
+		if (isParentElement){
+			//Inicializacion de la referencia padre
+			builder.appendLn(3, "this."+parentElement.getName()+" = new "+Element.classPackage+".");
+				builder.append(parentElement.getPrettyName()+"();");
+				
+			builder.appendLn(3, "this."+parentElement.getName()+" = "+element.getName()+";");
+		}
 
 		//Image assignment
 		builder.appendLn(tabGen(3)+"item.setImage(pattern01.helpers.ImageHelper.getImage("+quotscape+getDefaultImageValue(element)+quotscape+"));");
@@ -119,6 +148,9 @@ public class PatternInstanceParserGenerator extends Task{
 		//Element instance assignment in treeviewItem Data
 		builder.appendLn(tabGen(3)+"item.setData("+quotscape+"class_instance"+quotscape+","+element.getName()+");");
 
+		if (!isParentElement)
+			builder.appendLn(3, "item.setData("+quotscape+"parent_reference"+quotscape+",this."+parentElement.getName()+");");
+		
 		generateDependenciesInjection(element);
 		
 		for (Element childElement : element.getChildElements_collection()){
@@ -162,18 +194,18 @@ public class PatternInstanceParserGenerator extends Task{
 		}
 	}
 	
-	private void generatePatternInstanceExtraInfo(){
-		builder.clrlf();
-		builder.appendLn(1, "private void extraInfoForPatternInstance( org.eclipse.swt.widgets.TreeItem parentItem,");
-		builder.append(" org.eclipse.swt.widgets.TreeItem item){");
-		builder.appendLn(2, "if (item.getData("+quotscape+"type"+quotscape+").toString().compareToIgnoreCase(");
-		builder.append(quotscape+"patterninstance"+quotscape+")==0){");
-		builder.appendLn(3, "(("+Element.classPackage+".PatternInstance)");
-		builder.append("item.getData("+quotscape+"class_instance"+quotscape+")).setParentClass(");
-		builder.append("parentItem.getData("+quotscape+"name"+quotscape+").toString());");
-		builder.appendLn(2, "}");
-		builder.appendLn(1, "}");
-	}
+//	private void generatePatternInstanceExtraInfo(){
+//		builder.clrlf();
+//		builder.appendLn(1, "private void extraInfoForPatternInstance( org.eclipse.swt.widgets.TreeItem parentItem,");
+//		builder.append(" org.eclipse.swt.widgets.TreeItem item){");
+//		builder.appendLn(2, "if (item.getData("+quotscape+"type"+quotscape+").toString().compareToIgnoreCase(");
+//		builder.append(quotscape+"patterninstance"+quotscape+")==0){");
+//		builder.appendLn(3, "(("+Element.classPackage+".PatternInstance)");
+//		builder.append("item.getData("+quotscape+"class_instance"+quotscape+")).setParentClass(");
+//		builder.append("parentItem.getData("+quotscape+"name"+quotscape+").toString());");
+//		builder.appendLn(2, "}");
+//		builder.appendLn(1, "}");
+//	}
 	
 	private String tabGen(int quantity){
 		String tabappender = "";

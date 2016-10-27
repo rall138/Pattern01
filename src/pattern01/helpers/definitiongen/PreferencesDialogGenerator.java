@@ -145,9 +145,9 @@ public class PreferencesDialogGenerator extends Task{
 		//Asignacion de valores en instancia
 		for (Attribute attr : element.getAttribute_collection()){
 			builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
-			builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
+			builder.append("this."+attr.getName()+"_text.getText());");
 		}
-		builder.appendLn(2, "pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);");
+		builder.appendLn(2, "pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);");
 		builder.appendLn(1, "}");
 		return builder;
 	}

@@ -1,8 +1,6 @@
 package pattern01.plugin.components.navigator;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -81,7 +79,7 @@ public class PatternNavigator extends ViewPart {
 			classNodeList = (NodeList) xpath.evaluate (expression, 
 					new InputSource(classInstancesXml), XPathConstants.NODESET);
 		}catch(XPathExpressionException e){
-			throw new XPathExpressionException("No packages defined at classinstances.xml file");			
+			throw new XPathExpressionException("No packages defined at Mapper.xml file");			
 		}
 		return classNodeList;
 	}
@@ -103,8 +101,10 @@ public class PatternNavigator extends ViewPart {
 	
 	private void generateLeafs(TreeItem parent, String projectFolderPath) throws XPathExpressionException{
 		TreeItem packageItem = null, classItem = null;
-		String packageName = "", className = "", patternName = "";
+		String packageName = "", className = "", patternUUID = "";
 		NodeList packageList = this.getPackagesDeclared(projectFolderPath), classList = null;
+		
+		parent.getParent().setData("project_path", projectFolderPath);
 		
 		for(int index = 0; index < packageList.getLength(); index++){ //Packages
 			if(packageList.item(index).getNodeType() == Node.ELEMENT_NODE){				
@@ -124,7 +124,6 @@ public class PatternNavigator extends ViewPart {
 						//Declaramos el tipo de nodo clase
 						classItem = new TreeItem(packageItem, 0);
 						classItem.setText(className);
-						classItem.setData("package", packageName);
 						classItem.setData("name", className);
 						classItem.setData("type", NodeType.CLASS);
 						classItem.setImage(ImageHelper.getImage("class_obj.png"));
@@ -136,10 +135,10 @@ public class PatternNavigator extends ViewPart {
 						
 						for (int jindex = 0; jindex < listadoInstancias.getLength(); jindex++){
 							
-							patternName = listadoInstancias.item(jindex).getAttributes()
-									.getNamedItem("name").getNodeValue();
+							patternUUID = listadoInstancias.item(jindex).getAttributes()
+									.getNamedItem("reference").getNodeValue().toString();
 							
-							instanceParser.generateTreeFromDefinition(patternName, projectFolderPath);
+							instanceParser.generateTreeFromDefinition(patternUUID, projectFolderPath);
 							if (instanceParser.getInstance()!= null){
 								classItem = instanceParser.getInstance();
 								LocationHelper.setProject_folder_path(projectFolderPath);

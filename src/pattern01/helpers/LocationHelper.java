@@ -76,7 +76,7 @@ public class LocationHelper {
 		int index = 0;
 		boolean itemFound = false;
 		while (projectFolder.exists() && index < projectFolder.listFiles().length && !itemFound){
-			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("classinstances.xml") && 
+			if (projectFolder.listFiles()[index].getName().equalsIgnoreCase("mapper.xml") && 
 					!projectFolder.listFiles()[index].isDirectory()){
 				classInsancesURItoString = projectFolder.listFiles()[index].getAbsolutePath();
 				itemFound = true;

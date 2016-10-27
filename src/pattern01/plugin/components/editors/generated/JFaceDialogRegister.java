@@ -101,10 +101,10 @@ public class JFaceDialogRegister extends TitleAreaDialog {
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.Register register = getSelectedInstance();
-		register.setName(register.getName());
-		register.setDescription(register.getDescription());
-		register.setReference(register.getReference());
-		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+		register.setName(this.name_text.getText());
+		register.setDescription(this.description_text.getText());
+		register.setReference(this.reference_text.getText());
+		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	
 	@Override

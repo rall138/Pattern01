@@ -4,18 +4,18 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
 import pattern01.helpers.generated.PatternInstance;
-import pattern01.plugin.components.navigator.NodeType;
 
 /***
  * 
@@ -25,80 +25,52 @@ import pattern01.plugin.components.navigator.NodeType;
  */
 public class XMLPropertyHelper {
 
-	public static void saveProperties(Tree fullPatternInstance){
+	public static void saveProperties(TreeItem selectedTreeItem){
 
 		//La referencia es el verdadero identificador de la instancia
-		byte reference = Byte.valueOf(fullPatternInstance.getSelection()[0]
-				.getData("reference").toString());
+		UUID reference = UUID.fromString(selectedTreeItem.getData("reference").toString());
 		
 		//Project folder item
-		String projectFolder = fullPatternInstance.getItem(0)
-				.getData("path").toString(); 
+		String projectFolder = selectedTreeItem.getParent().getData("project_path").toString(); 
 		
-		//Obtenemos la clase asociada al primer elemento del pattern
-		PatternInstance classInstance = 
-				(PatternInstance)getItemByType(fullPatternInstance
-				.getItem(0), NodeType.PATTERNINSTANCE).getData("class_instance");
+		PatternInstance patternInstanceObj = null;
+		if (!(selectedTreeItem.getData("class_instance") instanceof PatternInstance)){
+			//Obtenemos la clase asociada al primer elemento del pattern
+			patternInstanceObj = (PatternInstance)selectedTreeItem.getData("parent_reference");
+		}else{
+			patternInstanceObj = (PatternInstance)selectedTreeItem.getData("class_instance");
+		}
 		
-
-		//Obtenemos el mapper para cambiar la l�nea de esta pattern
-		File mapper = new File(LocationHelper
-				.searchPatternFolderPath(projectFolder)
-				+System.getProperty("file.separator")
-				+"Mapper.xml");
-		
+		//Obtenemos el mapper para cambiar la linea de esta pattern
+//		File mapper = new File(LocationHelper.searchPatternFolderPath(projectFolder)
+//				+System.getProperty("file.separator")+"Mapper.xml");
 		
 		try {
-			
-			String expression = "//*Pattern[@type='WWPattern' and @reference='"+reference+"']"; 
-			
-			
-			System.out.println(expression);
-			
-			//Modificamos la propiedad name
-			XPath xpath = XPathFactory.newInstance().newXPath();
-			
-			Node node = (Node) xpath.evaluate(expression, mapper, XPathConstants.NODE);
-			
-			node.getAttributes().getNamedItem("name").setNodeValue(classInstance.getName());
-			
-			System.out.println("Nodes "+node.toString());
 
-			File instance = new File(LocationHelper
-					.searchPatternFolderPath(projectFolder)
-					+System.getProperty("file.separator")
-					+classInstance.getName()+".xml");
+//			String expression = "*//Pattern[@type='WWPattern' and @reference='"+reference.toString()+"']"; 
+//			
+//			//Modificamos la propiedad name
+//			XPath xpath = XPathFactory.newInstance().newXPath();
+			
+//			Node node = (Node) xpath.evaluate(expression, new InputSource(mapper.getAbsolutePath()), XPathConstants.NODE);
+			
+			File instance = new File(LocationHelper.searchPatternFolderPath(projectFolder)
+					+System.getProperty("file.separator")+reference+".xml");
 			
 			//Eliminamos el archivo y lo volvemos a crear
 			instance.delete();
 			
-			instance = new File(LocationHelper
-					.searchPatternFolderPath(projectFolder)
-					+System.getProperty("file.separator")
-					+classInstance.getName()+".xml");
+			instance = new File(LocationHelper.searchPatternFolderPath(projectFolder)
+					+System.getProperty("file.separator")+reference+".xml");
 			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(instance));
-			writer.write(classInstance.toXml());
+			writer.write(patternInstanceObj.toXml());
 			writer.flush();
 			writer.close();
 	
 			
-		} catch (IOException |XPathExpressionException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private static TreeItem getItemByType(TreeItem item, NodeType type){
-		if (item.getData("type")==type){
-			return item;
-		}else{
-			if (item.getItems().length > 0){
-				for (TreeItem it: item.getItems()){
-					item = getItemByType(it, type);
-				}
-			}
-		}
-		return item;
-	}
-
 }

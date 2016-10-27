@@ -68,7 +68,7 @@ public class JFaceDialogFaces extends TitleAreaDialog {
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.Faces faces = getSelectedInstance();
-		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	
 	@Override

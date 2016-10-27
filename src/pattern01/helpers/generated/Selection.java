@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Oct 24 12:02:31 GFT 2016
+	* Creation date: Thu Oct 27 17:05:01 GFT 2016
 	* Creator: rlomez
 	**/
 public class Selection implements IPatternElement{
@@ -85,13 +85,13 @@ public class Selection implements IPatternElement{
 	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml="<Selection ";
-		xml+="name='"+this.name+"'";
-		xml+="description='"+this.description+"'";
-		xml+="reference='"+this.reference+"'";
-		xml+="insert='"+this.insert+"'";
-		xml+="update='"+this.update+"'";
-		xml+="delete='"+this.delete+"'";
-		xml+="display='"+this.display+"'";
+		xml+="name='"+this.name+"' ";
+		xml+="description='"+this.description+"' ";
+		xml+="reference='"+this.reference+"' ";
+		xml+="insert='"+this.insert+"' ";
+		xml+="update='"+this.update+"' ";
+		xml+="delete='"+this.delete+"' ";
+		xml+="display='"+this.display+"' ";
 		xml+=">";
 		xml+="</Selection>";
 		return xml;

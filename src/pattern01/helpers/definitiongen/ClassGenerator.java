@@ -47,8 +47,6 @@ public class ClassGenerator extends Task{
 		log.writeSingleMessage(" ============================================================== ");
 		generatePropertyFile();
 		log.writeSingleMessage(" ============================================================== ");
-//		generatePatternEditorClasses();
-//		log.writeSingleMessage(" ============================================================== ");
 		generatePreferencesDialogs();
 		log.writeSingleMessage(" ============================================================== ");		
 		generatePatternInstanceClass();
@@ -228,7 +226,7 @@ public class ClassGenerator extends Task{
 		getterAndSetterBuilder.appendLn(tabGen(2)+"java.lang.String xml="+quotscape+"<"+element.getPrettyName()+" "+quotscape+";");
 		for(Attribute attr : element.getAttribute_collection()){
 			getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+attr.getName()+"=\'"+quotscape+"+this."+attr.getName());
-			getterAndSetterBuilder.append("+"+quotscape+"\'"+quotscape+";");
+			getterAndSetterBuilder.append("+"+quotscape+"\' "+quotscape+";");
 		}
 		getterAndSetterBuilder.appendLn(2,"xml+="+quotscape+">"+quotscape+";");
 	}
@@ -285,11 +283,6 @@ public class ClassGenerator extends Task{
 		bfr.getProject().setProperty("message", classBody);
 		bfr.executeTarget("fileRelative");
 	}
-	
-//	private void generatePatternEditorClasses(){
-//		EditorPartGenerator epgen = new EditorPartGenerator(this.patterninstanceElement);
-//		epgen.execute();
-//	}
 	
 	private void generatePreferencesDialogs(){
 		PreferencesDialogGenerator pdgen = 

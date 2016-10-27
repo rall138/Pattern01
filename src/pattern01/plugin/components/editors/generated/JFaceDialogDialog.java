@@ -101,10 +101,10 @@ public class JFaceDialogDialog extends TitleAreaDialog {
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.Dialog dialog = getSelectedInstance();
-		dialog.setName(dialog.getName());
-		dialog.setDescription(dialog.getDescription());
-		dialog.setReference(dialog.getReference());
-		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent);
+		dialog.setName(this.name_text.getText());
+		dialog.setDescription(this.description_text.getText());
+		dialog.setReference(this.reference_text.getText());
+		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	
 	@Override
