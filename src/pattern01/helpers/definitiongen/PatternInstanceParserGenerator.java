@@ -143,7 +143,8 @@ public class PatternInstanceParserGenerator extends Task{
 		}
 
 		//Image assignment
-		builder.appendLn(tabGen(3)+"item.setImage(pattern01.helpers.ImageHelper.getImage("+quotscape+getDefaultImageValue(element)+quotscape+"));");
+		builder.appendLn(tabGen(3)+"item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("+quotscape+"image"
+				+quotscape+").getNodeValue().toString()));");
 		
 		//Element instance assignment in treeviewItem Data
 		builder.appendLn(tabGen(3)+"item.setData("+quotscape+"class_instance"+quotscape+","+element.getName()+");");
@@ -161,10 +162,6 @@ public class PatternInstanceParserGenerator extends Task{
 	private void generateElementStrategyFooter(){
 		builder.appendLn(tabGen(2)+"}");
 		builder.appendLn(tabGen(1)+"}");
-	}
-	
-	private String getDefaultImageValue(Element element){
-		return element.getImage() == null? "": element.getImage();
 	}
 	
 	private void generatePropertiesAssignment(Element element){

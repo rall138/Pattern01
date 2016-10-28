@@ -3,11 +3,11 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Oct 27 17:05:01 GFT 2016
+	* Creation date: Thu Oct 27 22:34:40 UYST 2016
 	* Creator: rlomez
 	**/
 public class RelatedFiles implements IPatternElement{
-	private java.lang.String image = "generic.jpg";
+	private java.lang.String image = "generic.png";
 	private java.util.List<RelatedFile> collection_RelatedFile = new java.util.ArrayList<>();
 
 	public java.lang.String getImage(){

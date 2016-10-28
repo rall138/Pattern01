@@ -4,7 +4,7 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 
-	<Element name="patterninstance" prettyName="PatternInstance" image="generic.jpg" unique="true" >
+	<Element name="patterninstance" prettyName="PatternInstance" image="generic.png" unique="true" >
 		<AttributeElement name="generator" prettyName="Generator" type="#{Generator}" required="true" default="#{Generator.WEB}" />
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
@@ -12,24 +12,24 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 		<ChildElement references="faces" unique="true" />		
 	</Element>
 	
-	<Element name="relatedFiles" prettyName="RelatedFiles" unique="true" image="generic.jpg">
-		<AttributeElement name="image" prettyName="Image" type="java.lang.String" required="true" default="generic.jpg" />		
+	<Element name="relatedFiles" prettyName="RelatedFiles" unique="true" image="generic.png">
+		<AttributeElement name="image" prettyName="Image" type="java.lang.String" required="true" default="generic.png" />		
 		<ChildElement references="relatedFile" unique="false" />
 	</Element>
 	
-	<Element name="relatedFile" prettyName="RelatedFile" image="generic.jpg"  unique="false">
+	<Element name="relatedFile" prettyName="RelatedFile" image="generic.png"  unique="false">
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
 	</Element>
 
-	<Element name="faces" prettyName="Faces" image="generic.jpg">
+	<Element name="faces" prettyName="Faces" image="generic.png">
 		<ChildElement references="selection" unique="true" />
 		<ChildElement references="register" unique="true" />
 		<ChildElement references="dialog" unique="false" />
 	</Element>
 	
-	<Element name="selection" prettyName="Selection" image="generic.jpg">
+	<Element name="selection" prettyName="Selection" image="generic.png">
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
@@ -39,13 +39,13 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 		<AttributeElement name="display" prettyName="Display" type="java.lang.Boolean" required="true" default="true" group="Mode"/>
 	</Element>
 	
-	<Element name="register" prettyName="Register" image="generic.jpg">
+	<Element name="register" prettyName="Register" image="generic.png">
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
 	</Element>
 	
-	<Element name="dialog" prettyName="Dialog" image="generic.jpg">
+	<Element name="dialog" prettyName="Dialog" image="generic.png">
 		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
