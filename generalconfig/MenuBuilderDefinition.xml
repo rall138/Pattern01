@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE MenubuilderDefinition PUBLIC "//UNKNOWN/" "MenubuilderDefinition.dtd">
+<Menu 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="MenuBuilderDefinition.xsd">
+
+	<MenuItem name="pattern_mn01" prettyName="Pattern Parts" icon="" referencedClass="pattern01.helpers.generated.*" >
+		<MenuItem name="pattern_mn011" prettyName="Selection" icon="" condition="./[@type='patterninstance']"/>
+		<MenuItem name="pattern_mn012" prettyName="Selection" icon="" condition="./[@type='Selection']"/>
+	</MenuItem>
+
+	
+</Menu>
