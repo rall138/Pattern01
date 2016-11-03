@@ -51,4 +51,24 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
 	</Element>
 	
+	<Element name="form" image="generic.png">
+		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
+	</Element>
+
+	<Element name="table" image="generic.png">
+		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
+		<AttributeElement name="columns" prettyName="Columns" type="java.lang.Integer" required="true" default="0" description="Number of columns for distributing data" />
+	</Element>
+
+	<Element name="grid" image="generic.png">
+		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
+	</Element>
+	
+	<Element name="input" image="generic.png">
+		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
+		<AttributeElement name="readonly" prettyName="ReadOnly" type="java.lang.String" required="true" default="false" />
+		<AttributeElement name="datatype" prettyName="DataType" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
+		<AttributeElement name="datatype" prettyName="DataType" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
+	</Element>
+	
 </PatternDefinition>
