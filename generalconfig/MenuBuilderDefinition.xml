@@ -7,20 +7,19 @@ xsi:noNamespaceSchemaLocation="MenuBuilderDefinition.xsd">
 	<MenuItem name="patternparts" prettyName="Pattern Parts" icon="" referencedClass="pattern01.helpers.generated.*" >
 		<MenuItem name="additem" prettyName="Add item" icon="">
 			
-			<MenuItem name="selection" prettyName="Selection" icon="" condition="./[@type='patterninstance']" class="pattern01.helpers.generated.Selection"/>
-			<MenuItem name="dialog" prettyName="Dialog" icon="" condition="./[@type='patterninstance']" class="pattern01.helpers.generated.Dialog"/>
-			<MenuItem name="register" prettyName="Register" icon="" condition="./[@type='patterninstance']" class="pattern01.helpers.generated.Register"/>
+			<MenuItem name="selection" prettyName="Selection" icon="" condition="[@type='patterninstance']" class="pattern01.helpers.generated.Selection"/>
+			<MenuItem name="dialog" prettyName="Dialog" icon="" condition="[@type='patterninstance']" class="pattern01.helpers.generated.Dialog"/>
+			<MenuItem name="register" prettyName="Register" icon="" condition="[@type='patterninstance']" class="pattern01.helpers.generated.Register"/>
 
-			<MenuItem name="form" prettyName="Form" icon="" condition="./[@type='selection' or @type='dialog' or @type='register']" class="pattern01.helpers.generated.Form"/>
-			<MenuItem name="grid" prettyName="Grid" icon="" condition="./[@type='form']" class="pattern01.helpers.generated.Grid"/>
-			<MenuItem name="table" prettyName="Table" icon="" condition="./[@type='form' or @type='table']" class="pattern01.helpers.generated.Table"/>
-			<MenuItem name="filters" prettyName="Filters" icon="" condition="./[@type='form' or @type='table']" class="pattern01.helpers.generated.Filters"/>
-			<MenuItem name="input" prettyName="Input" icon="" condition="./[@type='filters' or @type='table' or @type='grid']" class="pattern01.helpers.generated.Input"/>
-			<MenuItem name="outputtext" prettyName="OutputText" icon="" condition="./[@type='filters' or @type='table']" class="pattern01.helpers.generated.OutputText"/>
-			<MenuItem name="command" prettyName="Command" icon="" condition="./[@type='filters' or @type='table']" class="pattern01.helpers.generated.Command"/>
+			<MenuItem name="form" prettyName="Form" icon="" condition="[@type='selection' or @type='dialog' or @type='register']" class="pattern01.helpers.generated.Form"/>
+			<MenuItem name="grid" prettyName="Grid" icon="" condition="[@type='form']" class="pattern01.helpers.generated.Grid"/>
+			<MenuItem name="table" prettyName="Table" icon="" condition="[@type='form' or @type='table']" class="pattern01.helpers.generated.Table"/>
+			<MenuItem name="filters" prettyName="Filters" icon="" condition="[@type='form' or @type='table']" class="pattern01.helpers.generated.Filters"/>
+			<MenuItem name="input" prettyName="Input" icon="" condition="[@type='filters' or @type='table' or @type='grid']" class="pattern01.helpers.generated.Input"/>
+			<MenuItem name="outputtext" prettyName="OutputText" icon="" condition="[@type='filters' or @type='table']" class="pattern01.helpers.generated.OutputText"/>
+			<MenuItem name="command" prettyName="Command" icon="" condition="[@type='filters' or @type='table']" class="pattern01.helpers.generated.Command"/>
 
 		</MenuItem>
 	</MenuItem>
-
 	
 </Menu>

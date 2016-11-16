@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import pattern01.helpers.ImageHelper;
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.generated.JFaceDialogPatternInstance;
 import pattern01.plugin.components.editors.generated.JFaceDialogRelatedFile;
@@ -34,11 +35,11 @@ public class MenuFactory {
 		this.parent = parent;
 		Menu menu =  new Menu(parent);
 		MenuItem auxiliarMenuItem = null;
+		parent.setMenu(menu);
 		switch (nodeType) {
 			case CLASS:
 				auxiliarMenuItem = new MenuItem(menu, SWT.CASCADE);
 				auxiliarMenuItem.setText("Patterns");
-				parent.setMenu(menu);
 	
 				menu = new Menu(auxiliarMenuItem);
 				auxiliarMenuItem.setMenu(menu);
@@ -52,28 +53,48 @@ public class MenuFactory {
 				
 				applyDefaultPatternListener(applyfromDefaultInstance);
 				break;
+			case PATTERNINSTANCE:
+				MenuItem add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				
+				Menu add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+				
+				MenuItem item = new MenuItem(add_itemMenu, SWT.PUSH);
+				item.setText("Selection");
+				item.setImage(ImageHelper.getImage("primefaces.jpg"));
+				
+				MenuItem item2 = new MenuItem(add_itemMenu, SWT.PUSH);
+				item2.setText("Dialog");
+				item2.setImage(ImageHelper.getImage("primefaces.jpg"));
+				
+				MenuItem item3 = new MenuItem(add_itemMenu, SWT.PUSH);
+				item3.setText("Register");
+				item3.setImage(ImageHelper.getImage("primefaces.jpg"));
+				
+				break;
 			default:
 				break;
 		}
 		if (parent.getMenu() == null){
 			parent.setMenu(menu);
 		}
-		auxiliarMenuItem = new MenuItem(parent.getMenu(), SWT.PUSH);
-		auxiliarMenuItem.setText("Properties");
-		propertiesListener(auxiliarMenuItem);
+//		auxiliarMenuItem = new MenuItem(parent.getMenu(), SWT.PUSH);
+//		auxiliarMenuItem.setText("Properties");
+//		propertiesListener(auxiliarMenuItem);
 	}
 	
-	private void generateAddMenuOptions(NodeType nodeType, Menu menu){
-		MenuItem menuItem = new MenuItem(menu, SWT.CASCADE);
-		menuItem.setText("Add");
-		switch (nodeType){
-			case PATTERNINSTANCE:
-				menuItem = new MenuItem(menu, SWT.PUSH);
-				menuItem.setText("RelatedFiles");
-				
-				
-		}
-	}
+//	private void generateAddMenuOptions(NodeType nodeType, Menu menu){
+//		MenuItem menuItem = new MenuItem(menu, SWT.CASCADE);
+//		menuItem.setText("Add");
+//		switch (nodeType){
+//			case PATTERNINSTANCE:
+//				menuItem = new MenuItem(menu, SWT.PUSH);
+//				menuItem.setText("RelatedFiles");
+//				
+//				
+//		}
+//	}
 	
 	private void addElement(NodeType nodeType){
 		TreeItem treeItem = new TreeItem(this.parent.getSelection()[0], 0);
