@@ -191,19 +191,6 @@ public class PatternInstanceParserGenerator extends Task{
 		}
 	}
 	
-//	private void generatePatternInstanceExtraInfo(){
-//		builder.clrlf();
-//		builder.appendLn(1, "private void extraInfoForPatternInstance( org.eclipse.swt.widgets.TreeItem parentItem,");
-//		builder.append(" org.eclipse.swt.widgets.TreeItem item){");
-//		builder.appendLn(2, "if (item.getData("+quotscape+"type"+quotscape+").toString().compareToIgnoreCase(");
-//		builder.append(quotscape+"patterninstance"+quotscape+")==0){");
-//		builder.appendLn(3, "(("+Element.classPackage+".PatternInstance)");
-//		builder.append("item.getData("+quotscape+"class_instance"+quotscape+")).setParentClass(");
-//		builder.append("parentItem.getData("+quotscape+"name"+quotscape+").toString());");
-//		builder.appendLn(2, "}");
-//		builder.appendLn(1, "}");
-//	}
-	
 	private String tabGen(int quantity){
 		String tabappender = "";
 		for(int total = 0; total < quantity; total++){

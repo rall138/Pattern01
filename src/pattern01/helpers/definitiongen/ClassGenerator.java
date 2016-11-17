@@ -243,8 +243,6 @@ public class ClassGenerator extends Task{
 				getterAndSetterBuilder.appendLn(tabGen(2)+"}");
 			}
 		}
-		//getterAndSetterBuilder.appendLn(tabGen(2)+"xml+="+quotscape+">"+quotscape);
-		//getterAndSetterBuilder.append(";");
 	}
 	
 	private void marshallerFooter(Element element){

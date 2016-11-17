@@ -31,6 +31,8 @@ public class MenuFactory {
 
 	public MenuFactory(){}
 	
+	/* [Begin] Auto-generated code for pattern instance parser do not remove */
+	
 	public void generateDisplayableOptions(NodeType nodeType, Tree parent){
 		this.parent = parent;
 		Menu menu =  new Menu(parent);
@@ -84,18 +86,9 @@ public class MenuFactory {
 //		propertiesListener(auxiliarMenuItem);
 	}
 	
-//	private void generateAddMenuOptions(NodeType nodeType, Menu menu){
-//		MenuItem menuItem = new MenuItem(menu, SWT.CASCADE);
-//		menuItem.setText("Add");
-//		switch (nodeType){
-//			case PATTERNINSTANCE:
-//				menuItem = new MenuItem(menu, SWT.PUSH);
-//				menuItem.setText("RelatedFiles");
-//				
-//				
-//		}
-//	}
 	
+	/* [Begin] Auto-generated code for pattern instance parser do not remove */
+
 	private void addElement(NodeType nodeType){
 		TreeItem treeItem = new TreeItem(this.parent.getSelection()[0], 0);
 		switch (nodeType){
