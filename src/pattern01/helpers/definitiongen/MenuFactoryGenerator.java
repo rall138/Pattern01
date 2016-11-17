@@ -55,12 +55,8 @@ public class MenuFactoryGenerator extends Task {
 		builder.appendLn(1,"public void generateDisplayableOptions(NodeType nodeType){");
 		builder.appendLn(2,"Menu menu = new Menu(parent);");
 		builder.appendLn(2,"parent.setMenu(menu);");
-		
-		builder.appendLn(2,"MenuItem add_item = new MenuItem(menu, SWT.CASCADE);");
-		builder.appendLn(2,"add_item.setText("+quotscape+"Add"+quotscape+");");
-		
-		builder.appendLn(2,"Menu add_itemMenu = new Menu(add_item);");
-		builder.appendLn(2,"add_item.setMenu(add_itemMenu);");
+		builder.appendLn(2,"MenuItem add_item = null;");
+		builder.appendLn(2,"Menu add_itemMenu = null;");
 		builder.appendLn(2,"switch (nodeType) {");
 		builder = generateSwitchOptions(element, builder);
 		builder.appendLn(3,"default:");
@@ -76,6 +72,12 @@ public class MenuFactoryGenerator extends Task {
 	
 	private CustomStringBuilder generateSwitchOptions(Element element, CustomStringBuilder builder){
 		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+		if (element.getChildElements_collection().size() > 0){
+			builder.appendLn(4,"add_item = new MenuItem(menu, SWT.CASCADE);");
+			builder.appendLn(4,"add_item.setText("+quotscape+"Add"+quotscape+");");
+			builder.appendLn(4,"add_itemMenu = new Menu(add_item);");
+			builder.appendLn(4,"add_item.setMenu(add_itemMenu);");
+		}
 		for(Element childElement : element.getChildElements_collection()){
 			builder.appendLn(4,"MenuItem item_"+childElement.getPrettyName()+" = new MenuItem(add_itemMenu, SWT.PUSH);");
 			builder.appendLn(4,"item_"+childElement.getPrettyName()+".setText("+quotscape+childElement.getPrettyName()+quotscape+");");

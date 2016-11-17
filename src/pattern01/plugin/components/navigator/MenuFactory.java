@@ -47,22 +47,28 @@ public class MenuFactory {
 	
 	
 	
+	
+	
+	
+	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Nov 17 16:32:08 GFT 2016
+	* Creation date: Thu Nov 17 17:24:12 GFT 2016
 	* Creator: rlomez
 	**/
 
 	public void generateDisplayableOptions(NodeType nodeType){
 		Menu menu = new Menu(parent);
 		parent.setMenu(menu);
-		MenuItem add_item = new MenuItem(menu, SWT.CASCADE);
-		add_item.setText("Add");
-		Menu add_itemMenu = new Menu(add_item);
-		add_item.setMenu(add_itemMenu);
+		MenuItem add_item = null;
+		Menu add_itemMenu = null;
 		switch (nodeType) {
 			case PATTERNINSTANCE:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
 				MenuItem item_RelatedFiles = new MenuItem(add_itemMenu, SWT.PUSH);
 				item_RelatedFiles.setText("RelatedFiles");
 				item_RelatedFiles.setImage(ImageHelper.getImage("null"));
@@ -76,6 +82,10 @@ public class MenuFactory {
 				item_Faces.addSelectionListener(listenerFactory());
 				break;
 			case RELATEDFILES:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
 				MenuItem item_RelatedFile = new MenuItem(add_itemMenu, SWT.PUSH);
 				item_RelatedFile.setText("RelatedFile");
 				item_RelatedFile.setImage(ImageHelper.getImage("null"));
@@ -85,6 +95,10 @@ public class MenuFactory {
 			case RELATEDFILE:
 				break;
 			case FACES:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
 				MenuItem item_Selection = new MenuItem(add_itemMenu, SWT.PUSH);
 				item_Selection.setText("Selection");
 				item_Selection.setImage(ImageHelper.getImage("null"));
@@ -163,6 +177,10 @@ public class MenuFactory {
 		}
 	}
 	/* [End] Auto-generated code for menu factory do not remove */
+
+
+
+
 
 
 
