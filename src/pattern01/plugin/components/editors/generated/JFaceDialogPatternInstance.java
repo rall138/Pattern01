@@ -93,7 +93,7 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private void getPropertiesFromInstance(){
 		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
-//		this.generator_text.setText(patterninstance.getGenerator());
+		this.generator_text.setText(patterninstance.getGenerator());
 		this.name_text.setText(patterninstance.getName());
 		this.description_text.setText(patterninstance.getDescription());
 	}
@@ -101,7 +101,7 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
-//		patterninstance.setGenerator(this.generator_text.getText());
+		patterninstance.setGenerator(this.generator_text.getText());
 		patterninstance.setName(this.name_text.getText());
 		patterninstance.setDescription(this.description_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);

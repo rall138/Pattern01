@@ -136,10 +136,10 @@ public class JFaceDialogSelection extends TitleAreaDialog {
 		this.name_text.setText(selection.getName());
 		this.description_text.setText(selection.getDescription());
 		this.reference_text.setText(selection.getReference());
-//		this.insert_text.setText(selection.getInsert());
-//		this.update_text.setText(selection.getUpdate());
-//		this.delete_text.setText(selection.getDelete());
-//		this.display_text.setText(selection.getDisplay());
+		this.insert_text.setText(selection.getInsert());
+		this.update_text.setText(selection.getUpdate());
+		this.delete_text.setText(selection.getDelete());
+		this.display_text.setText(selection.getDisplay());
 	}
 	
 	
@@ -148,10 +148,10 @@ public class JFaceDialogSelection extends TitleAreaDialog {
 		selection.setName(this.name_text.getText());
 		selection.setDescription(this.description_text.getText());
 		selection.setReference(this.reference_text.getText());
-//		selection.setInsert(this.insert_text.getText());
-//		selection.setUpdate(this.update_text.getText());
-//		selection.setDelete(this.delete_text.getText());
-//		selection.setDisplay(this.display_text.getText());
+		selection.setInsert(this.insert_text.getText());
+		selection.setUpdate(this.update_text.getText());
+		selection.setDelete(this.delete_text.getText());
+		selection.setDisplay(this.display_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

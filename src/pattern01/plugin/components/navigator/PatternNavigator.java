@@ -166,19 +166,8 @@ public class PatternNavigator extends ViewPart {
 	}
 	
 	private void menuBuilder(){
-		instanceTree.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-				instanceTree.setMenu(null);
-				MenuFactory mfact = new MenuFactory();
-				TreeItem aux_item = (TreeItem)event.item;
-				NodeType aux_nodeType = aux_item.getData("type") != null ? 
-					(NodeType)aux_item.getData("type"): NodeType.UNDEFINED;
-				if (aux_nodeType != NodeType.UNDEFINED){
-					mfact.generateDisplayableOptions(aux_nodeType, instanceTree);
-				}
-			}
-		});
+		
+		MenuFactory menuFactory = new MenuFactory(this.instanceTree);
 		
 		instanceTree.addKeyListener(new KeyListener() {
 			@Override

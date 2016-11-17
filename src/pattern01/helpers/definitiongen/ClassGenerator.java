@@ -51,6 +51,8 @@ public class ClassGenerator extends Task{
 		log.writeSingleMessage(" ============================================================== ");		
 		generatePatternInstanceClass();
 		log.writeSingleMessage(" ============================================================== ");
+		generateMenuFactoryClass();
+		log.writeSingleMessage(" ============================================================== ");
 	}
 	
 	private void parsePatternDefinition(){
@@ -296,6 +298,11 @@ public class ClassGenerator extends Task{
 	private void generatePatternInstanceClass(){
 		PatternInstanceParserGenerator pipgen = new PatternInstanceParserGenerator(this.patterninstanceElement);
 		pipgen.execute();
+	}
+	
+	private void generateMenuFactoryClass(){
+		MenuFactoryGenerator mnfgen = new MenuFactoryGenerator(this.patterninstanceElement);
+		mnfgen.execute();
 	}
 	
 	private void generatePropertyFile(){

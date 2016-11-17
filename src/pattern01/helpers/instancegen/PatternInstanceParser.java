@@ -76,10 +76,26 @@ public class PatternInstanceParser {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Oct 27 22:34:41 UYST 2016
+	* Creation date: Thu Nov 17 16:32:08 GFT 2016
 	* Creator: rlomez
 	**/
 
