@@ -3,6 +3,8 @@ package pattern01.plugin.components.navigator;
 import java.lang.reflect.Method;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Control;
@@ -21,8 +23,7 @@ import org.eclipse.ui.PlatformUI;
 
 import pattern01.helpers.ImageHelper;
 import pattern01.helpers.instancegen.PatternInstanceParser;
-import pattern01.plugin.components.editors.generated.JFaceDialogPatternInstance;
-import pattern01.plugin.components.editors.generated.JFaceDialogRelatedFile;
+import pattern01.plugin.components.editors.generated.*;
 
 @SuppressWarnings("unused")
 public class MenuFactory {
@@ -31,7 +32,11 @@ public class MenuFactory {
 
 	public MenuFactory(Tree tree_parent){
 		this.parent = tree_parent;
+	}
+	
+	public void generateListenerAttachement(){
 		this.attachSelectionListener();
+		this.attachDeleteListener();
 	}
 	
 	private void attachSelectionListener(){
@@ -46,25 +51,24 @@ public class MenuFactory {
 	}
 	
 	
-	
-	
-	
-	
-	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Nov 17 17:24:12 GFT 2016
+	* Creation date: Mon Nov 21 17:32:38 GFT 2016
 	* Creator: rlomez
 	**/
 
 	public void generateDisplayableOptions(NodeType nodeType){
 		Menu menu = new Menu(parent);
 		parent.setMenu(menu);
+		MenuItem properties_item = null;
 		MenuItem add_item = null;
 		Menu add_itemMenu = null;
 		switch (nodeType) {
 			case PATTERNINSTANCE:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
@@ -82,6 +86,9 @@ public class MenuFactory {
 				item_Faces.addSelectionListener(listenerFactory());
 				break;
 			case RELATEDFILES:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
@@ -93,8 +100,14 @@ public class MenuFactory {
 				item_RelatedFile.addSelectionListener(listenerFactory());
 				break;
 			case RELATEDFILE:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
 				break;
 			case FACES:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
@@ -118,10 +131,19 @@ public class MenuFactory {
 				item_Dialog.addSelectionListener(listenerFactory());
 				break;
 			case SELECTION:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
 				break;
 			case REGISTER:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
 				break;
 			case DIALOG:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
 				break;
 			default:
 				break;
@@ -176,6 +198,56 @@ public class MenuFactory {
 				break;
 		}
 	}
+
+	private void propertiesElement(MenuItem selectedItem){
+		switch(((NodeType)selectedItem.getData("type"))){
+			case PATTERNINSTANCE:
+				JFaceDialogPatternInstance jfacedialogpatterninstance = new JFaceDialogPatternInstance(this.parent.getShell());
+				jfacedialogpatterninstance.setParent(this.parent);
+				jfacedialogpatterninstance.create();
+				jfacedialogpatterninstance.open();
+				break;
+			case RELATEDFILES:
+				JFaceDialogRelatedFiles jfacedialogrelatedFiles = new JFaceDialogRelatedFiles(this.parent.getShell());
+				jfacedialogrelatedFiles.setParent(this.parent);
+				jfacedialogrelatedFiles.create();
+				jfacedialogrelatedFiles.open();
+				break;
+			case RELATEDFILE:
+				JFaceDialogRelatedFile jfacedialogrelatedFile = new JFaceDialogRelatedFile(this.parent.getShell());
+				jfacedialogrelatedFile.setParent(this.parent);
+				jfacedialogrelatedFile.create();
+				jfacedialogrelatedFile.open();
+				break;
+			case FACES:
+				JFaceDialogFaces jfacedialogfaces = new JFaceDialogFaces(this.parent.getShell());
+				jfacedialogfaces.setParent(this.parent);
+				jfacedialogfaces.create();
+				jfacedialogfaces.open();
+				break;
+			case SELECTION:
+				JFaceDialogSelection jfacedialogselection = new JFaceDialogSelection(this.parent.getShell());
+				jfacedialogselection.setParent(this.parent);
+				jfacedialogselection.create();
+				jfacedialogselection.open();
+				break;
+			case REGISTER:
+				JFaceDialogRegister jfacedialogregister = new JFaceDialogRegister(this.parent.getShell());
+				jfacedialogregister.setParent(this.parent);
+				jfacedialogregister.create();
+				jfacedialogregister.open();
+				break;
+			case DIALOG:
+				JFaceDialogDialog jfacedialogdialog = new JFaceDialogDialog(this.parent.getShell());
+				jfacedialogdialog.setParent(this.parent);
+				jfacedialogdialog.create();
+				jfacedialogdialog.open();
+				break;
+			default:
+				break;
+		}
+	}
+
 	/* [End] Auto-generated code for menu factory do not remove */
 
 
@@ -197,34 +269,39 @@ public class MenuFactory {
 		return listener;
 	}
 	
-	private void propertiesListener(MenuItem menu_item){
-		menu_item.addListener(SWT.Selection, new Listener() {
-
+	private SelectionListener propertiesListener(){
+		SelectionListener listener = new SelectionListener() {
+			
 			@Override
-			public void handleEvent(Event event) {
-				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-				//TODO Flexibilizar esta logica				
-				if(parent.getSelection()[0].getData("type") != null){
-						DefaultEditorInput dei = new DefaultEditorInput();
-						dei.setInstanceTree(parent);
-						NodeType nodetype_pointer = (NodeType)parent.getSelection()[0].getData("type");
-						if (nodetype_pointer == NodeType.PATTERNINSTANCE){
-							JFaceDialogPatternInstance jfd = new JFaceDialogPatternInstance(parent.getShell());
-							jfd.setParent(parent);
-							jfd.create();
-							jfd.open();
-						}else if (nodetype_pointer == NodeType.RELATEDFILE){
-							(new JFaceDialogRelatedFile(parent.getShell())).open();
-						}else if (nodetype_pointer == NodeType.SELECTION){
-							
-						}else if (nodetype_pointer == NodeType.DIALOG){
-							
-						}else if (nodetype_pointer == NodeType.REGISTER){
-							
-						}
-					}
+			public void widgetSelected(SelectionEvent e) {
+				propertiesElement((MenuItem)e.getSource());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		return listener;
+	}
+
+	
+	private void attachDeleteListener(){
+		this.parent.addKeyListener(new KeyListener() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == SWT.DEL){
+					parent.getSelection()[0].dispose();
 				}
-		} );
+			}
+		});
+		
 	}
 	
 	private void applyDefaultPatternListener(MenuItem menu_item){

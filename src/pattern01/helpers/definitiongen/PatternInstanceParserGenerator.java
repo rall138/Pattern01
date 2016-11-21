@@ -62,39 +62,38 @@ public class PatternInstanceParserGenerator extends Task{
 		//Nodo padre (PatternInstance) para referencia en todos los nodos del arbol
 		generateParentReference(element);
 		
-		builder.appendLn(tabGen(1)+"private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent"
+		builder.appendLn(1,"private void recursiveParseing(org.w3c.dom.Node actualNode, org.eclipse.swt.widgets.TreeItem parent"
 				+ ", String patternUUID){");
-		builder.appendLn(tabGen(2)+"org.eclipse.swt.widgets.TreeItem item = new org.eclipse.swt.widgets.TreeItem(parent, 0);");
-		builder.appendLn(tabGen(2)+"item.setData("+quotscape+"reference"+quotscape+",patternUUID);");
-		builder.appendLn(tabGen(2)+"item.setText(actualNode.getNodeName());");
-		builder.appendLn(tabGen(2)+"item.setData("+quotscape+"type"+quotscape+", NodeType.valueOf(actualNode.getNodeName().toUpperCase()));");
+		builder.appendLn(2,"org.eclipse.swt.widgets.TreeItem item = new org.eclipse.swt.widgets.TreeItem(parent, 0);");
+		builder.appendLn(2,"item.setData("+quotscape+"reference"+quotscape+",patternUUID);");
+		builder.appendLn(2,"item.setText(actualNode.getNodeName());");
+		builder.appendLn(2,"item.setData("+quotscape+"type"+quotscape+", NodeType.valueOf(actualNode.getNodeName().toUpperCase()));");
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"// Attribute traspasseing (from xpath node --> treeItem node)");
-		builder.appendLn(tabGen(2)+"for(int index = 0; index < actualNode.getAttributes().getLength(); index++){");
-		builder.appendLn(tabGen(3)+"item.setData(actualNode.getAttributes().item(index).getNodeName(),"); 
-		builder.appendLn(tabGen(4)+"actualNode.getAttributes().item(index).getNodeValue().toString());");
-		builder.appendLn(tabGen(2)+"}");
+		builder.appendLn(2,"// Attribute traspasseing (from xpath node --> treeItem node)");
+		builder.appendLn(2,"for(int index = 0; index < actualNode.getAttributes().getLength(); index++){");
+		builder.appendLn(3,"item.setData(actualNode.getAttributes().item(index).getNodeName(),"); 
+		builder.appendLn(4,"actualNode.getAttributes().item(index).getNodeValue().toString());");
+		builder.appendLn(2,"}");
 
-		builder.appendLn(tabGen(2)+"classInstanceStrategy(actualNode, item);");
+		builder.appendLn(2,"classInstanceStrategy(actualNode, item);");
 		
 		builder.clrlf();
-		builder.appendLn(tabGen(2)+"// Recursion over child nodes");
-		builder.appendLn(tabGen(2)+"if (actualNode.getChildNodes().getLength() > 0){");
-		builder.appendLn(tabGen(3)+"for(int index = 0; index < actualNode.getChildNodes().getLength(); index++){");
-		builder.appendLn(tabGen(4)+"if (actualNode.getChildNodes().item(index).getNodeType() == Node.ELEMENT_NODE){");
-		builder.appendLn(tabGen(5)+"recursiveParseing(actualNode.getChildNodes().item(index), item, patternUUID);");
-		builder.appendLn(tabGen(4)+"}");
-		builder.appendLn(tabGen(3)+"}");
-		builder.appendLn(tabGen(2)+"}");
+		builder.appendLn(2,"// Recursion over child nodes");
+		builder.appendLn(2,"if (actualNode.getChildNodes().getLength() > 0){");
+		builder.appendLn(3,"for(int index = 0; index < actualNode.getChildNodes().getLength(); index++){");
+		builder.appendLn(4,"if (actualNode.getChildNodes().item(index).getNodeType() == Node.ELEMENT_NODE){");
+		builder.appendLn(5,"recursiveParseing(actualNode.getChildNodes().item(index), item, patternUUID);");
+		builder.appendLn(4,"}");
+		builder.appendLn(3,"}");
+		builder.appendLn(2,"}");
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(1,"}");
 
 		//Generamos el codigo para las instancias 
 		builder.clrlf();
 		generateElementStrategyHeader();
 		generateElementStrategy(element, true);
 		generateElementStrategyFooter();
-		//generatePatternInstanceExtraInfo();
 		builder.appendLn(endTag);
 		generateClasses("PatternInstanceParser", builder.toString());
 	}
@@ -117,11 +116,11 @@ public class PatternInstanceParserGenerator extends Task{
 				
 				this.parentElement = element;
 				
-				builder.appendLn(tabGen(2)+"if(actualNode.getNodeName()"
+				builder.appendLn(2,"if(actualNode.getNodeName()"
 						+ ".equalsIgnoreCase("+quotscape+element.getName()+quotscape+")){");
 				
 			}else{
-				builder.appendLn(tabGen(2)+"}else if(actualNode.getNodeName()"
+				builder.appendLn(2,"}else if(actualNode.getNodeName()"
 						+ ".equalsIgnoreCase("+quotscape+element.getName()+quotscape+")){");
 			}
 		}
@@ -143,11 +142,13 @@ public class PatternInstanceParserGenerator extends Task{
 		}
 
 		//Image assignment
-		builder.appendLn(tabGen(3)+"item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("+quotscape+"image"
+		builder.appendLn(3,"try{");
+		builder.appendLn(4,"item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("+quotscape+"image"
 				+quotscape+").getNodeValue().toString()));");
+		builder.appendLn(3,"}catch(java.lang.NullPointerException ex){}");
 		
 		//Element instance assignment in treeviewItem Data
-		builder.appendLn(tabGen(3)+"item.setData("+quotscape+"class_instance"+quotscape+","+element.getName()+");");
+		builder.appendLn(3,"item.setData("+quotscape+"class_instance"+quotscape+","+element.getName()+");");
 
 		if (!isParentElement)
 			builder.appendLn(3, "item.setData("+quotscape+"parent_reference"+quotscape+",this."+parentElement.getName()+");");
@@ -160,13 +161,13 @@ public class PatternInstanceParserGenerator extends Task{
 	}
 
 	private void generateElementStrategyFooter(){
-		builder.appendLn(tabGen(2)+"}");
-		builder.appendLn(tabGen(1)+"}");
+		builder.appendLn(2,"}");
+		builder.appendLn(1,"}");
 	}
 	
 	private void generatePropertiesAssignment(Element element){
 		for(Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(tabGen(3)+element.getName()+".set"+attr.getPrettyName());
+			builder.appendLn(3,element.getName()+".set"+attr.getPrettyName());
 			builder.append("(actualNode.getAttributes().getNamedItem("+quotscape);
 			builder.append(attr.getName()+quotscape+") != null "+"? ");
 			builder.append(DataTypeConversion.getDataTypeWrapper(attr.getType(),"actualNode.getAttributes()"
@@ -178,25 +179,17 @@ public class PatternInstanceParserGenerator extends Task{
 	private void generateDependenciesInjection(Element element){
 		if (element != null && ((CommonElement)element).getParentElement() != null){
 			if (!element.isUnique()){
-				builder.appendLn(tabGen(3)+
+				builder.appendLn(3,
 					"((pattern01.helpers.generated."+((CommonElement)element).getParentElement().getPrettyName()+")"+
 					"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).getCollection_"+
 					element.getPrettyName()+"().add("+element.getName()+");");
 			}else {
-				builder.appendLn(tabGen(3)+
+				builder.appendLn(3,
 					"((pattern01.helpers.generated."+((CommonElement)element).getParentElement().getPrettyName()+")"+
 					"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).set"+
 					element.getPrettyName()+"("+element.getName()+");");
 			}
 		}
-	}
-	
-	private String tabGen(int quantity){
-		String tabappender = "";
-		for(int total = 0; total < quantity; total++){
-			tabappender += tabspace;
-		}
-		return tabappender;
 	}
 	
 	private void generateClasses(String className, String classBody){

@@ -80,26 +80,10 @@ public class PatternInstanceParser {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Nov 17 17:24:12 GFT 2016
+	* Creation date: Mon Nov 21 17:32:38 GFT 2016
 	* Creator: rlomez
 	**/
 
@@ -137,12 +121,16 @@ public class PatternInstanceParser {
 			patterninstance.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			this.patterninstance = new pattern01.helpers.generated.PatternInstance();
 			this.patterninstance = patterninstance;
-			item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			try{
+				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",patterninstance);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("relatedFiles")){
 			pattern01.helpers.generated.RelatedFiles relatedFiles = new pattern01.helpers.generated.RelatedFiles();
 			relatedFiles.setImage(actualNode.getAttributes().getNamedItem("image") != null ? actualNode.getAttributes().getNamedItem("image").getNodeValue():"generic.png");
-			item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			try{
+				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",relatedFiles);
 			item.setData("parent_reference",this.patterninstance);
 			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).setRelatedFiles(relatedFiles);
@@ -151,13 +139,17 @@ public class PatternInstanceParser {
 			relatedFile.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			relatedFile.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			relatedFile.setReference(actualNode.getAttributes().getNamedItem("reference") != null ? actualNode.getAttributes().getNamedItem("reference").getNodeValue():"");
-			item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			try{
+				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",relatedFile);
 			item.setData("parent_reference",this.patterninstance);
 			((pattern01.helpers.generated.RelatedFiles)item.getParentItem().getData("class_instance")).getCollection_RelatedFile().add(relatedFile);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("faces")){
 			pattern01.helpers.generated.Faces faces = new pattern01.helpers.generated.Faces();
-			item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			try{
+				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",faces);
 			item.setData("parent_reference",this.patterninstance);
 			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).getCollection_Faces().add(faces);
@@ -170,7 +162,9 @@ public class PatternInstanceParser {
 			selection.setUpdate(actualNode.getAttributes().getNamedItem("update") != null ? java.lang.Boolean.valueOf(actualNode.getAttributes().getNamedItem("update").getNodeValue()).booleanValue():true);
 			selection.setDelete(actualNode.getAttributes().getNamedItem("delete") != null ? java.lang.Boolean.valueOf(actualNode.getAttributes().getNamedItem("delete").getNodeValue()).booleanValue():true);
 			selection.setDisplay(actualNode.getAttributes().getNamedItem("display") != null ? java.lang.Boolean.valueOf(actualNode.getAttributes().getNamedItem("display").getNodeValue()).booleanValue():true);
-			item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			try{
+				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",selection);
 			item.setData("parent_reference",this.patterninstance);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Selection().add(selection);
@@ -179,7 +173,9 @@ public class PatternInstanceParser {
 			register.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			register.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			register.setReference(actualNode.getAttributes().getNamedItem("reference") != null ? actualNode.getAttributes().getNamedItem("reference").getNodeValue():"");
-			item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			try{
+				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",register);
 			item.setData("parent_reference",this.patterninstance);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Register().add(register);
@@ -188,7 +184,9 @@ public class PatternInstanceParser {
 			dialog.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue():"");
 			dialog.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue():"");
 			dialog.setReference(actualNode.getAttributes().getNamedItem("reference") != null ? actualNode.getAttributes().getNamedItem("reference").getNodeValue():"");
-			item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			try{
+				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
+			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",dialog);
 			item.setData("parent_reference",this.patterninstance);
 			((pattern01.helpers.generated.Faces)item.getParentItem().getData("class_instance")).getCollection_Dialog().add(dialog);

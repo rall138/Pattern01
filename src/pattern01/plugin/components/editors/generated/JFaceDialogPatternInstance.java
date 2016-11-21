@@ -18,7 +18,7 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	private Tree parent = null;
 	
 	private org.eclipse.swt.widgets.Label generator_label = null;
-	private org.eclipse.swt.widgets.Text generator_text = null;
+	private org.eclipse.swt.widgets.Combo generator_cmb = null;
 	private org.eclipse.swt.widgets.Label name_label = null;
 	private org.eclipse.swt.widgets.Text name_text = null;
 	private org.eclipse.swt.widgets.Label description_label = null;
@@ -50,11 +50,11 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 		
 		generator_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
 		generator_label.setText("Generator");
-		generator_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		generator_cmb = new org.eclipse.swt.widgets.Combo(container, SWT.SINGLE);
 		org.eclipse.swt.layout.GridData generator_layout = new org.eclipse.swt.layout.GridData();
 		generator_layout.grabExcessHorizontalSpace = true;
 		generator_layout.horizontalAlignment = GridData.FILL;
-		generator_text.setLayoutData(generator_layout);
+		generator_cmb.setLayoutData(generator_layout);
 
 		name_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
 		name_label.setText("Name");
@@ -93,7 +93,11 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private void getPropertiesFromInstance(){
 		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
-		this.generator_text.setText(patterninstance.getGenerator());
+		for(String option : pattern01.helpers.generated.Generator.getOptionCollection()){
+			this.generator_cmb.add(option);
+		}
+
+		this.generator_cmb.select(this.generator_cmb.indexOf(patterninstance.getGenerator().toString()));
 		this.name_text.setText(patterninstance.getName());
 		this.description_text.setText(patterninstance.getDescription());
 	}
@@ -101,7 +105,7 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.PatternInstance patterninstance = getSelectedInstance();
-		patterninstance.setGenerator(this.generator_text.getText());
+		patterninstance.setGenerator(pattern01.helpers.generated.Generator.valueOf(this.generator_cmb.getText()));
 		patterninstance.setName(this.name_text.getText());
 		patterninstance.setDescription(this.description_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);

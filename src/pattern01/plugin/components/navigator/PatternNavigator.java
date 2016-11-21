@@ -9,12 +9,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.ViewPart;
@@ -24,7 +19,9 @@ import org.xml.sax.InputSource;
 
 import pattern01.helpers.ImageHelper;
 import pattern01.helpers.LocationHelper;
+import pattern01.helpers.XMLPropertyHelper;
 import pattern01.helpers.instancegen.PatternInstanceParser;
+import pattern01.helpers.tree.TreeInstancesHelper;
 
 public class PatternNavigator extends ViewPart {
 
@@ -166,49 +163,44 @@ public class PatternNavigator extends ViewPart {
 	}
 	
 	private void menuBuilder(){
-		
 		MenuFactory menuFactory = new MenuFactory(this.instanceTree);
-		
-		instanceTree.addKeyListener(new KeyListener() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.character == SWT.DEL){
-					instanceTree.getSelection()[0].dispose();
-				}
-			}
-		});
+		menuFactory.generateListenerAttachement();
 	}
 	
 	private void defineActionBarActions(){
 		
-		searchPatternAction = new Action("Search class") {
+		searchPatternAction = searchPatternAcion(); 
+		searchPatternAction.setImageDescriptor(ImageHelper.getImageDescriptor("lupa.png"));
+		
+		savePatternAction = savePatternAction();
+		savePatternAction.setImageDescriptor(ImageHelper.getImageDescriptor("save.png"));
+		
+		createActionBar();
+	}
+	
+	
+	private Action searchPatternAcion(){
+		return new Action("Search class") {
 			public void run(){
 				//Aca va el codigo de la accion
 			}
 		};
-		
-		searchPatternAction.setImageDescriptor(ImageHelper
-				.getImageDescriptor("lupa.png"));
-		
-		savePatternAction = new Action("Save instance") {
+	}
+	
+	private Action savePatternAction(){
+		return new Action("Save instance") {
 			public void run(){
-				
+				for(TreeItem item : TreeInstancesHelper.getSingleton().getDirtyTreeItems()){
+					XMLPropertyHelper.saveProperties(item);
+				}
 			}
 		};
-		
-		savePatternAction.setImageDescriptor(ImageHelper
-				.getImageDescriptor("save.png"));
-		createActionBar();
 	}
 	
 	private void createActionBar(){
 		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
 		mgr.add(searchPatternAction);
+		mgr.add(savePatternAction);
 	}	
 
 	@Override

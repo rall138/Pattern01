@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.UUID;
 import org.eclipse.swt.widgets.TreeItem;
 
+import pattern01.helpers.generated.IPatternElement;
 import pattern01.helpers.generated.PatternInstance;
+import pattern01.helpers.temporal_containers.Element;
 
 /***
  * 
@@ -17,22 +19,27 @@ import pattern01.helpers.generated.PatternInstance;
  */
 public class XMLPropertyHelper {
 
+	
 	public static void saveProperties(TreeItem selectedTreeItem){
-
-		//La referencia es el verdadero identificador de la instancia
 		UUID reference = UUID.fromString(selectedTreeItem.getData("reference").toString());
 		
 		//Project folder item
 		String projectFolder = selectedTreeItem.getParent().getData("project_path").toString(); 
 		
-		PatternInstance patternInstanceObj = null;
+		IPatternElement patternInstanceObj = null;
 		if (!(selectedTreeItem.getData("class_instance") instanceof PatternInstance)){
 			//Obtenemos la clase asociada al primer elemento del pattern
-			patternInstanceObj = (PatternInstance)selectedTreeItem.getData("parent_reference");
+			patternInstanceObj = (IPatternElement)selectedTreeItem.getData("parent_reference");
 		}else{
-			patternInstanceObj = (PatternInstance)selectedTreeItem.getData("class_instance");
+			patternInstanceObj = (IPatternElement)selectedTreeItem.getData("class_instance");
 		}
 		
+		saveProperties(patternInstanceObj, reference, projectFolder);
+	}
+	
+	
+	public static void saveProperties(IPatternElement patternInstanceObj, UUID reference, String projectFolder){
+
 		try {
 			File instance = new File(LocationHelper.searchPatternFolderPath(projectFolder)
 					+System.getProperty("file.separator")+reference+".xml");
@@ -44,7 +51,7 @@ public class XMLPropertyHelper {
 					+System.getProperty("file.separator")+reference+".xml");
 			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(instance));
-			writer.write(patternInstanceObj.toXml());
+			writer.write(((PatternInstance)patternInstanceObj).toXml());
 			writer.flush();
 			writer.close();
 	

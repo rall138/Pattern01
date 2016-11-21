@@ -55,6 +55,7 @@ public class MenuFactoryGenerator extends Task {
 		builder.appendLn(1,"public void generateDisplayableOptions(NodeType nodeType){");
 		builder.appendLn(2,"Menu menu = new Menu(parent);");
 		builder.appendLn(2,"parent.setMenu(menu);");
+		builder.appendLn(2,"MenuItem properties_item = null;");
 		builder.appendLn(2,"MenuItem add_item = null;");
 		builder.appendLn(2,"Menu add_itemMenu = null;");
 		builder.appendLn(2,"switch (nodeType) {");
@@ -65,6 +66,9 @@ public class MenuFactoryGenerator extends Task {
 		builder.appendLn(1,"}");
 		builder.clrlf();
 		builder = generateAddElementMethod(this.patternInstanceElement, builder);
+		builder.clrlf();
+		builder = generatePropertiesMethod(this.patternInstanceElement, builder);
+		builder.clrlf();		
 		builder.appendLn(1,endTag);
 		builder.clrlf();
 		generateClasses(builder.toString());
@@ -72,6 +76,9 @@ public class MenuFactoryGenerator extends Task {
 	
 	private CustomStringBuilder generateSwitchOptions(Element element, CustomStringBuilder builder){
 		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+		builder.appendLn(4,"properties_item = new MenuItem(menu, SWT.PUSH);");
+		builder.appendLn(4,"properties_item.setText("+quotscape+"Properties"+quotscape+");");
+		builder.appendLn(4,"properties_item.addSelectionListener(propertiesListener());");
 		if (element.getChildElements_collection().size() > 0){
 			builder.appendLn(4,"add_item = new MenuItem(menu, SWT.CASCADE);");
 			builder.appendLn(4,"add_item.setText("+quotscape+"Add"+quotscape+");");
@@ -93,6 +100,31 @@ public class MenuFactoryGenerator extends Task {
 		
 		for(Element childElement : element.getChildElements_collection()){
 			builder = (generateSwitchOptions(childElement, builder));
+		}
+		return builder;
+	}
+	
+	private CustomStringBuilder generatePropertiesMethod(Element element, CustomStringBuilder builder){
+		builder.appendLn(1,"private void propertiesElement(MenuItem selectedItem){");
+		builder.appendLn(2,"switch(((NodeType)selectedItem.getData("+quotscape+"type"+quotscape+"))){");
+		builder = generatePropertiesMethodSwitchOptions(element, builder);
+		builder.appendLn(3,"default:");
+		builder.appendLn(4,"break;");
+		builder.appendLn(2,"}");
+		builder.appendLn(1,"}");
+		return builder;
+	}
+	
+	private CustomStringBuilder generatePropertiesMethodSwitchOptions(Element element, CustomStringBuilder builder){
+		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+		builder.appendLn(4,"JFaceDialog"+element.getPrettyName()+" jfacedialog"+element.getName());
+		builder.append(" = new JFaceDialog"+element.getPrettyName()+"(this.parent.getShell());");
+		builder.appendLn(4,"jfacedialog"+element.getName()+".setParent(this.parent);");
+		builder.appendLn(4,"jfacedialog"+element.getName()+".create();");		
+		builder.appendLn(4,"jfacedialog"+element.getName()+".open();");
+		builder.appendLn(4,"break;");
+		for(Element childElement : element.getChildElements_collection()){
+			builder = (generatePropertiesMethodSwitchOptions(childElement, builder));
 		}
 		return builder;
 	}

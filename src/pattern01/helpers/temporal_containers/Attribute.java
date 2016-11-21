@@ -9,16 +9,17 @@ public class Attribute {
 	private boolean requiered;
 	private String group = "Default";
 	
-	public Attribute(){
-		
-	}
+	public Attribute(){}
 	
-	public Attribute(String name, String prettyName, 
-			String type, boolean requiered){
+	public Attribute(String name, String prettyName, String type, boolean requiered){
 		this.name = name;
 		this.prettyName = prettyName;
 		this.type = type;
 		this.requiered = requiered;
+	}
+	
+	public boolean isCustomAttribute(){
+		return type.contains("#{");
 	}
 
 	public String getName() {
