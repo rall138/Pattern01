@@ -153,6 +153,8 @@ public class PatternInstanceParserGenerator extends Task{
 		if (!isParentElement)
 			builder.appendLn(3, "item.setData("+quotscape+"parent_reference"+quotscape+",this."+parentElement.getName()+");");
 		
+		builder.appendLn(3,"item.setData("+quotscape+"type"+quotscape+","+quotscape+element.getName().toUpperCase()+quotscape+");");
+		
 		generateDependenciesInjection(element);
 		
 		for (Element childElement : element.getChildElements_collection()){
@@ -170,9 +172,9 @@ public class PatternInstanceParserGenerator extends Task{
 			builder.appendLn(3,element.getName()+".set"+attr.getPrettyName());
 			builder.append("(actualNode.getAttributes().getNamedItem("+quotscape);
 			builder.append(attr.getName()+quotscape+") != null "+"? ");
-			builder.append(DataTypeConversion.getDataTypeWrapper(attr.getType(),"actualNode.getAttributes()"
-					+ ".getNamedItem("+quotscape+attr.getName()+quotscape+").getNodeValue()")+":");
-			builder.append(DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
+			builder.append(DataTypeConversion.getDataTypeWrapper(attr.getType(),"actualNode.getAttributes()"+
+				".getNamedItem("+quotscape+attr.getName()+quotscape+").getNodeValue().toString()"));
+			builder.append(":"+DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+");");
 		}
 	}
 	

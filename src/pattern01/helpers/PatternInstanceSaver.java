@@ -7,7 +7,8 @@ import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import pattern01.helpers.generated.Patterninstance;
+import pattern01.helpers.generated.PatternInstance;
+
 
 public class PatternInstanceSaver {
 	

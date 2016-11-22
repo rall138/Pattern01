@@ -31,7 +31,7 @@ public class PatternDefinitionParser {
 	 */
 	public Element parseDefinition(){
 		CommonElement parentElement = null;
-		expression = "/PatternDefinition/Element[@name='patterninstance'][1]"; //First element
+		expression = "/PatternDefinition/Element[@name='patternInstance'][1]"; //First element
 		try {
 			URI classInstanceXml_uri = CommonPathFix.getHardCodedPath(PATH_NAME.PATTERNDEFINITION_XML);
 			InputSource is = new InputSource(classInstanceXml_uri.getPath());

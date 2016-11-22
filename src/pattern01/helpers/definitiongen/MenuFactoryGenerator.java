@@ -76,14 +76,12 @@ public class MenuFactoryGenerator extends Task {
 	
 	private CustomStringBuilder generateSwitchOptions(Element element, CustomStringBuilder builder){
 		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
-		builder.appendLn(4,"properties_item = new MenuItem(menu, SWT.PUSH);");
-		builder.appendLn(4,"properties_item.setText("+quotscape+"Properties"+quotscape+");");
-		builder.appendLn(4,"properties_item.addSelectionListener(propertiesListener());");
 		if (element.getChildElements_collection().size() > 0){
 			builder.appendLn(4,"add_item = new MenuItem(menu, SWT.CASCADE);");
 			builder.appendLn(4,"add_item.setText("+quotscape+"Add"+quotscape+");");
 			builder.appendLn(4,"add_itemMenu = new Menu(add_item);");
 			builder.appendLn(4,"add_item.setMenu(add_itemMenu);");
+			builder.clrlf();
 		}
 		for(Element childElement : element.getChildElements_collection()){
 			builder.appendLn(4,"MenuItem item_"+childElement.getPrettyName()+" = new MenuItem(add_itemMenu, SWT.PUSH);");
@@ -92,10 +90,13 @@ public class MenuFactoryGenerator extends Task {
 			builder.appendLn(4,"item_"+childElement.getPrettyName()+".setData("+quotscape+"type"+quotscape+",");
 			builder.append("NodeType."+childElement.getName().toUpperCase()+");");
 			builder.appendLn(4,"item_"+childElement.getPrettyName()+".addSelectionListener(listenerFactory());");
-			if (element.getChildElements_collection().indexOf(childElement)<element.getChildElements_collection().size()-1){
-				builder.clrlf();
-			}
+			builder.clrlf();
 		}
+		builder.appendLn(4,"properties_item = new MenuItem(menu, SWT.PUSH);");
+		builder.appendLn(4,"properties_item.setText("+quotscape+"Properties"+quotscape+");");
+		builder.appendLn(4,"properties_item.addSelectionListener(propertiesListener());");
+		builder.appendLn(4,"properties_item.setData("+quotscape+"type"+quotscape+",");
+			builder.append("NodeType."+element.getName().toUpperCase()+");");		
 		builder.appendLn(4,"break;");
 		
 		for(Element childElement : element.getChildElements_collection()){

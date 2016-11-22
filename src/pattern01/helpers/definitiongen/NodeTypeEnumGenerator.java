@@ -43,6 +43,7 @@ public class NodeTypeEnumGenerator extends Task{
 		if (element != null){
 			builder = new CustomStringBuilder();
 			elementListBuilder = new CustomStringBuilder();
+			System.out.println("Hasta aca");
 			generateClassHeader(element);
 			generateElementList(element);
 			builder.append(elementListBuilder.toString().substring(0, elementListBuilder.toString().length()-1)+";");
@@ -51,8 +52,8 @@ public class NodeTypeEnumGenerator extends Task{
 			generateToStringMethod(element);
 			generateToStringMethodFooter();
 			builder.appendLn("}");
+			generateClasses("NodeType", builder.toString());
 		}
-		generateClasses("NodeType", builder.toString());
 	}
 	
 	private void generateClassHeader(Element element){
@@ -60,7 +61,6 @@ public class NodeTypeEnumGenerator extends Task{
 		builder.appendLn(classHeaderComment);
 		builder.appendLn("package pattern01.plugin.components.navigator;");
 		builder.clrlf();
-		
 		builder.appendLn("public enum NodeType {");
 		builder.appendLn(1,"UNDEFINED,");
 		builder.append("PACKAGE,");
@@ -69,8 +69,10 @@ public class NodeTypeEnumGenerator extends Task{
 	
 	private void generateElementList(Element element){
 		if (element != null){
+			System.out.println("Element: "+element.getName());
 			elementListBuilder.append(element.getName().toUpperCase()+",");
 			for (Element childElement : element.getChildElements_collection()){
+				System.out.println("ChildElement: "+childElement.getName());
 				generateElementList(childElement);
 			}
 		}
@@ -94,9 +96,9 @@ public class NodeTypeEnumGenerator extends Task{
 	
 	private void generateToStringMethod(Element element){
 		if (element != null){
-			builder.appendLn(tabGen(3)+"case "+element.getName().toUpperCase()+":");
-			builder.appendLn(tabGen(4)+"nodetypestr ="+quotscape+element.getName().toUpperCase()+quotscape+";");
-			builder.appendLn(tabGen(4)+"break;");
+			builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+			builder.appendLn(4,"nodetypestr ="+quotscape+element.getName().toUpperCase()+quotscape+";");
+			builder.appendLn(4,"break;");
 			for (Element childElement : element.getChildElements_collection()){
 				generateToStringMethod(childElement);
 			}
@@ -104,17 +106,9 @@ public class NodeTypeEnumGenerator extends Task{
 	}
 	
 	private void generateToStringMethodFooter(){
-		builder.appendLn(tabGen(2)+"}");
-		builder.appendLn(tabGen(2)+"return nodetypestr;");
-		builder.appendLn(tabGen(1)+"}");
-	}
-	
-	private String tabGen(int quantity){
-		String tabappender = "";
-		for(int total = 0; total < quantity; total++){
-			tabappender += tabspace;
-		}
-		return tabappender;
+		builder.appendLn(2,"}");
+		builder.appendLn(2,"return nodetypestr;");
+		builder.appendLn(1,"}");
 	}
 	
 	private void generateClasses(String className, String classBody){

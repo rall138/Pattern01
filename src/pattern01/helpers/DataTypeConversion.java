@@ -1,6 +1,7 @@
 package pattern01.helpers;
 
 import pattern01.helpers.definitiongen.EnumGenerator;
+import pattern01.helpers.temporal_containers.Element;
 
 public class DataTypeConversion {
 
@@ -63,8 +64,8 @@ public class DataTypeConversion {
 		}else if (data_type.contains("#{")){ //Custom type
 			String processedType = data_type
 					.substring(data_type.indexOf("#{")+2, data_type.indexOf("}"));
-			processed_wrapper = "pattern01.helpers.generated."+processedType+".valueOf("+value+")";
-		}else {
+			processed_wrapper = Element.classPackage+"."+processedType+".valueOf("+value+")";
+		}else{
 			processed_wrapper = value;
 		}
 		return processed_wrapper;

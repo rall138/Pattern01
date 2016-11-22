@@ -43,33 +43,18 @@ public class MenuFactory {
 		parent.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
-				parent.setMenu(null);
 				TreeItem aux_item = (TreeItem)event.item;
-				generateDisplayableOptions((NodeType)aux_item.getData("type"));
+				if (aux_item.getData("type") != null){
+					generateDisplayableOptions((NodeType.valueOf(aux_item.getData("type").toString().toUpperCase())));
+				}
 			}
 		});
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Nov 21 23:37:27 UYST 2016
+	* Creation date: Tue Nov 22 16:58:37 GFT 2016
 	* Creator: rlomez
 	**/
 
@@ -81,13 +66,11 @@ public class MenuFactory {
 		Menu add_itemMenu = null;
 		switch (nodeType) {
 			case PATTERNINSTANCE:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
+
 				MenuItem item_RelatedFiles = new MenuItem(add_itemMenu, SWT.PUSH);
 				item_RelatedFiles.setText("RelatedFiles");
 				item_RelatedFiles.setImage(ImageHelper.getImage("null"));
@@ -99,34 +82,41 @@ public class MenuFactory {
 				item_Faces.setImage(ImageHelper.getImage("null"));
 				item_Faces.setData("type",NodeType.FACES);
 				item_Faces.addSelectionListener(listenerFactory());
-				break;
-			case RELATEDFILES:
+
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE);
+				break;
+			case RELATEDFILES:
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
+
 				MenuItem item_RelatedFile = new MenuItem(add_itemMenu, SWT.PUSH);
 				item_RelatedFile.setText("RelatedFile");
 				item_RelatedFile.setImage(ImageHelper.getImage("null"));
 				item_RelatedFile.setData("type",NodeType.RELATEDFILE);
 				item_RelatedFile.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.RELATEDFILES);
 				break;
 			case RELATEDFILE:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.RELATEDFILE);
 				break;
 			case FACES:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
+
 				MenuItem item_Selection = new MenuItem(add_itemMenu, SWT.PUSH);
 				item_Selection.setText("Selection");
 				item_Selection.setImage(ImageHelper.getImage("null"));
@@ -144,21 +134,29 @@ public class MenuFactory {
 				item_Dialog.setImage(ImageHelper.getImage("null"));
 				item_Dialog.setData("type",NodeType.DIALOG);
 				item_Dialog.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.FACES);
 				break;
 			case SELECTION:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.SELECTION);
 				break;
 			case REGISTER:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.REGISTER);
 				break;
 			case DIALOG:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.DIALOG);
 				break;
 			default:
 				break;
@@ -168,10 +166,10 @@ public class MenuFactory {
 	private void addElement(MenuItem selectedItem){
 		switch(((NodeType)selectedItem.getData("type"))){
 			case PATTERNINSTANCE:
-				TreeItem item_Patterninstance = new TreeItem(this.parent.getSelection()[0], 0);
-				item_Patterninstance.setText(selectedItem.getText());
-				item_Patterninstance.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_Patterninstance.setData("type",NodeType.PATTERNINSTANCE);
+				TreeItem item_PatternInstance = new TreeItem(this.parent.getSelection()[0], 0);
+				item_PatternInstance.setText(selectedItem.getText());
+				item_PatternInstance.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_PatternInstance.setData("type",NodeType.PATTERNINSTANCE);
 				break;
 			case RELATEDFILES:
 				TreeItem item_RelatedFiles = new TreeItem(this.parent.getSelection()[0], 0);
@@ -217,10 +215,10 @@ public class MenuFactory {
 	private void propertiesElement(MenuItem selectedItem){
 		switch(((NodeType)selectedItem.getData("type"))){
 			case PATTERNINSTANCE:
-				JFaceDialogPatterninstance jfacedialogpatterninstance = new JFaceDialogPatterninstance(this.parent.getShell());
-				jfacedialogpatterninstance.setParent(this.parent);
-				jfacedialogpatterninstance.create();
-				jfacedialogpatterninstance.open();
+				JFaceDialogPatternInstance jfacedialogpatternInstance = new JFaceDialogPatternInstance(this.parent.getShell());
+				jfacedialogpatternInstance.setParent(this.parent);
+				jfacedialogpatternInstance.create();
+				jfacedialogpatternInstance.open();
 				break;
 			case RELATEDFILES:
 				JFaceDialogRelatedFiles jfacedialogrelatedFiles = new JFaceDialogRelatedFiles(this.parent.getShell());
@@ -264,23 +262,6 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	private SelectionListener listenerFactory(){
 		SelectionListener listener = new SelectionListener() {
