@@ -46,12 +46,13 @@ public class EnumGenerator extends Task{
 		CustomValuesDefinitionParser parser = new CustomValuesDefinitionParser();
 		collected_elements = parser.parseDefinition();
 
-		builder = new CustomStringBuilder();
 		EnumElement enumElement = null;
 		int hindex = 0;
 		for(int index = 0; index < collected_elements.size(); index++){
 			enumElement = (EnumElement)collected_elements.get(index);
 			log.writeSingleMessage("<<< Generating enum class "+enumElement.getPrettyName()+" >>>");
+
+			builder = new CustomStringBuilder();
 			builder.appendLn("package "+Element.classPackage+";");
 			builder.clrlf();
 			builder.appendLn(classHeaderComment);
@@ -60,59 +61,53 @@ public class EnumGenerator extends Task{
 			builder.append("UNDEFINED,");
 			for(Map.Entry<String, String> entry : enumElement.getValue_list().entrySet()){
 				if(hindex <  enumElement.getValue_list().size()){
-					builder.append(tabGen(1)+entry.getKey().toUpperCase()+",");
+					builder.append(" "+entry.getKey().toUpperCase()+",");
 				}else{
-					builder.append(tabGen(1)+entry.getKey().toUpperCase()+";");					
+					builder.append(" "+entry.getKey().toUpperCase()+";");					
 				}
 				hindex++;
 			}
 			builder.clrlf();
-			builder.appendLn(tabGen(1)+"public static java.lang.String getValueDescription("+
+			builder.appendLn(1,"public static java.lang.String getValueDescription("+
 					enumElement.getPrettyName()+" description){");
-			builder.appendLn(tabGen(2)+"switch(description){");
+			builder.appendLn(2,"switch(description){");
 			for(Map.Entry<String, String> entry : enumElement.getValue_list().entrySet()){
-				builder.appendLn(tabGen(3)+"case "+entry.getKey().toUpperCase()+":");
-				builder.appendLn(tabGen(4)+"return "+quotscape+entry.getValue().toUpperCase()+quotscape+";");
+				builder.appendLn(3,"case "+entry.getKey().toUpperCase()+":");
+				builder.appendLn(4,"return "+quotscape+entry.getValue().toUpperCase()+quotscape+";");
 			}
-			builder.appendLn(tabGen(3)+"default:");
-			builder.appendLn(tabGen(4)+"return "+quotscape+quotscape+";");
-			builder.appendLn(tabGen(2)+"}");
-			builder.appendLn(tabGen(1)+"}");
+			builder.appendLn(3,"default:");
+			builder.appendLn(4,"return "+quotscape+quotscape+";");
+			builder.appendLn(2,"}");
+			builder.appendLn(1,"}");
 			
 			generateFullyQualifiedValueComparator(enumElement);
 			
 			builder.clrlf();
-			builder.appendLn(tabGen(1)+"public static java.util.List<java.lang.String> getOptionCollection(){");
-			builder.appendLn(tabGen(2)+"java.util.List<java.lang.String> optionCollection = new java.util.ArrayList<>();");
+			builder.appendLn(1,"public static java.util.List<java.lang.String> getOptionCollection(){");
+			builder.appendLn(2,"java.util.List<java.lang.String> optionCollection = new java.util.ArrayList<>();");
 			for(Map.Entry<String, String> entry : enumElement.getValue_list().entrySet()){
-				builder.appendLn(tabGen(2)+"optionCollection.add("+quotscape+entry.getValue().toUpperCase()+quotscape+");");
+				builder.appendLn(2,"optionCollection.add("+quotscape+entry.getValue().toUpperCase()+quotscape+");");
 			}
-			builder.appendLn(tabGen(2)+"return optionCollection;");
-			builder.appendLn(tabGen(1)+"}");
+			builder.appendLn(2,"return optionCollection;");
+			builder.appendLn(1,"}");
 			
 			builder.appendLn("}");
 			
 			//Generamos las clases
 			generateClasses(enumElement.getPrettyName(), builder.toString());
+			
+			
 		}
 	}
 	
 	private void generateFullyQualifiedValueComparator(EnumElement element){
 		builder.clrlf();
-		builder.appendLn(tabGen(1)+"public static boolean fullyQualifiedComparer(String fullyQualifiedValue, String simpleValue){");
-		builder.appendLn(tabGen(2)+"return fullyQualifiedValue.replace("+quotscape+Element.classPackage+quotscape+","+quotscape+quotscape+")");
+		builder.appendLn(1,"public static boolean fullyQualifiedComparer(String fullyQualifiedValue, String simpleValue){");
+		builder.appendLn(2,"return fullyQualifiedValue.replace("+quotscape+Element.classPackage+quotscape+","+quotscape+quotscape+")");
 		builder.append(".replace("+quotscape+element.getPrettyName()+quotscape+","+quotscape+quotscape+")");
 		builder.append(".replace("+quotscape+"."+quotscape+","+quotscape+quotscape+")");
 		builder.append(".equalsIgnoreCase(simpleValue);");
-		builder.appendLn(tabGen(1)+"}");
-	}
-
-	private String tabGen(int quantity){
-		String tabappender = "";
-		for(int total = 0; total < quantity; total++){
-			tabappender += tabspace;
-		}
-		return tabappender;
+		builder.appendLn(1,"}");
 	}
 
 	private void generateClasses(String className, String classBody){

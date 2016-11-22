@@ -3,17 +3,17 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Nov 21 17:32:37 GFT 2016
+	* Creation date: Mon Nov 21 23:37:26 UYST 2016
 	* Creator: rlomez
 	**/
 public class Selection implements IPatternElement{
 	private java.lang.String name;
 	private java.lang.String description;
 	private java.lang.String reference;
-	private java.lang.Boolean insert = true;
-	private java.lang.Boolean update = true;
-	private java.lang.Boolean delete = true;
-	private java.lang.Boolean display = true;
+	private Bool insert = pattern01.helpers.generated.Bool.TRUE;
+	private Bool update = pattern01.helpers.generated.Bool.TRUE;
+	private Bool delete = pattern01.helpers.generated.Bool.TRUE;
+	private Bool display = pattern01.helpers.generated.Bool.TRUE;
 
 	public java.lang.String getName(){
 		return this.name;
@@ -38,36 +38,32 @@ public class Selection implements IPatternElement{
 	public void setReference(java.lang.String reference){
 		this.reference = reference;
 	}
-
-	public java.lang.Boolean getInsert(){
+	public Bool getInsert(){
 		return this.insert;
 	}
 
-	public void setInsert(java.lang.Boolean insert){
+	public void setInsert(Bool insert){
 		this.insert = insert;
 	}
-
-	public java.lang.Boolean getUpdate(){
+	public Bool getUpdate(){
 		return this.update;
 	}
 
-	public void setUpdate(java.lang.Boolean update){
+	public void setUpdate(Bool update){
 		this.update = update;
 	}
-
-	public java.lang.Boolean getDelete(){
+	public Bool getDelete(){
 		return this.delete;
 	}
 
-	public void setDelete(java.lang.Boolean delete){
+	public void setDelete(Bool delete){
 		this.delete = delete;
 	}
-
-	public java.lang.Boolean getDisplay(){
+	public Bool getDisplay(){
 		return this.display;
 	}
 
-	public void setDisplay(java.lang.Boolean display){
+	public void setDisplay(Bool display){
 		this.display = display;
 	}
 

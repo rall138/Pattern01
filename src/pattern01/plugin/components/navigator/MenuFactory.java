@@ -51,10 +51,25 @@ public class MenuFactory {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Nov 21 17:32:38 GFT 2016
+	* Creation date: Mon Nov 21 23:37:27 UYST 2016
 	* Creator: rlomez
 	**/
 
@@ -153,10 +168,10 @@ public class MenuFactory {
 	private void addElement(MenuItem selectedItem){
 		switch(((NodeType)selectedItem.getData("type"))){
 			case PATTERNINSTANCE:
-				TreeItem item_PatternInstance = new TreeItem(this.parent.getSelection()[0], 0);
-				item_PatternInstance.setText(selectedItem.getText());
-				item_PatternInstance.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_PatternInstance.setData("type",NodeType.PATTERNINSTANCE);
+				TreeItem item_Patterninstance = new TreeItem(this.parent.getSelection()[0], 0);
+				item_Patterninstance.setText(selectedItem.getText());
+				item_Patterninstance.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_Patterninstance.setData("type",NodeType.PATTERNINSTANCE);
 				break;
 			case RELATEDFILES:
 				TreeItem item_RelatedFiles = new TreeItem(this.parent.getSelection()[0], 0);
@@ -202,7 +217,7 @@ public class MenuFactory {
 	private void propertiesElement(MenuItem selectedItem){
 		switch(((NodeType)selectedItem.getData("type"))){
 			case PATTERNINSTANCE:
-				JFaceDialogPatternInstance jfacedialogpatterninstance = new JFaceDialogPatternInstance(this.parent.getShell());
+				JFaceDialogPatterninstance jfacedialogpatterninstance = new JFaceDialogPatterninstance(this.parent.getShell());
 				jfacedialogpatterninstance.setParent(this.parent);
 				jfacedialogpatterninstance.create();
 				jfacedialogpatterninstance.open();
@@ -249,6 +264,21 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

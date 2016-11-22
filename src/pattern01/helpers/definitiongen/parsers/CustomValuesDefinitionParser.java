@@ -1,17 +1,17 @@
 package pattern01.helpers.definitiongen.parsers;
 
-import java.io.File;
-import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathException;
+import javax.xml.xpath.XPathFactory;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
@@ -20,75 +20,40 @@ import pattern01.helpers.temporal_containers.EnumElement;
 
 public class CustomValuesDefinitionParser {
 	
-	private List<Element> collected_elements = null;
+	private XPath xpath = XPathFactory.newInstance().newXPath();
+	private String expression = "";
+	private List<Element> collected_elements = new ArrayList<>();
+
 	public CustomValuesDefinitionParser(){}
 	
 	public List<Element> parseDefinition(){
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		collected_elements = new ArrayList<>();
+		expression = "/CustomValueDefinition/CustomValue";
+		
 		try {
-			SAXParser parser = factory.newSAXParser();
-			DefaultHandler handler = new DefaultHandler(){
-
-				Element customValueElement = new EnumElement();
-				String valueName = "";
-				
-				@Override
-				public void startElement(String uri, String localName, 
-						String qName, Attributes attributes)throws SAXException {
-					if(qName.equalsIgnoreCase("customvalue")){
-						customValueElement.setName(getValue(attributes, "name"));
-						customValueElement.setPrettyName(getValue(attributes, "prettyName"));
-						addElementIfnotExists(customValueElement);
-					}else if(qName.equalsIgnoreCase("value")){ //Valores dentro de la defincion de opciones
-						valueName = getValue(attributes, "name");
-					}
-				}
-				
-				@Override
-				public void characters(char[] ch, int start, int length) throws SAXException {
-					String valueDescription = new String(ch, start, length);
-					if (valueDescription.trim().compareTo("")!=0){
-						((EnumElement)customValueElement).getValue_list()
-							.put(valueName, valueDescription);
-					}
-				}
-
-				private String getValue(Attributes attributes, String qName){
-					String value = "";
-					if (attributes.getValue(qName) != null){
-						value = attributes.getValue(qName);
-					}
-					return value;
-				}
-				
-			};
+			URI customvalues_uri = CommonPathFix.getHardCodedPath(PATH_NAME.CUSTOMVALUESDEFINITION);
+			InputSource is = new InputSource(customvalues_uri.getPath());
 			
-			parser.parse(new File(CommonPathFix
-					.getHardCodedPath(PATH_NAME.CUSTOMVALUESDEFINITION)), 
-					handler);
-
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			e.printStackTrace();
-		}
-		return collected_elements;		
-	}
-	
-	private void addElementIfnotExists(Element element){
-		if(element != null){
-			boolean itemFound = false;
-			int index = 0;
-			while(!itemFound && index < collected_elements.size()){
-				if(collected_elements.get(index).getName() == element.getName()){
-					itemFound = true;
-				}else{
-					index++;
+			EnumElement element = null;
+			
+			NodeList nodes = (NodeList) xpath.evaluate(expression, is, XPathConstants.NODESET);
+			for(int jindex =0; jindex < nodes.getLength(); jindex++){
+				Node node = nodes.item(jindex);
+				element = new EnumElement();
+				element.setName(node.getAttributes().getNamedItem("name").getNodeValue());
+				for (int index =0; index < node.getChildNodes().getLength(); index++){
+					Node childNode = node.getChildNodes().item(index);
+					if (childNode.hasAttributes() && childNode.getAttributes().getNamedItem("name") != null){
+						element.getValue_list().put(childNode.getAttributes().getNamedItem("name").getNodeValue(), 
+								childNode.getAttributes().getNamedItem("name").getNodeValue());
+					}
 				}
-			}
-			if(!itemFound){
 				collected_elements.add(element);
 			}
+			
+		}catch(XPathException ex){
+			ex.printStackTrace();
 		}
+		return collected_elements;
 	}
 	
 	

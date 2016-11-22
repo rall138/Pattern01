@@ -13,6 +13,7 @@ import org.apache.tools.ant.Task;
 import pattern01.helpers.CommonPathFix;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.CustomStringBuilder;
+import pattern01.helpers.DataTypeConversion;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
@@ -143,7 +144,8 @@ public class PreferencesDialogGenerator extends Task{
 		//Asignacion de valores en propiedades de pantalla modal
 		for (Attribute attr : element.getAttribute_collection()){
 			if (attr.isCustomAttribute()){
-				builder.appendLn(2,"for(String option : "+Element.classPackage+"."+attr.getPrettyName()+".getOptionCollection()){");
+				builder.appendLn(2,"for(String option : "+Element.classPackage+"."+DataTypeConversion.getProcessedType(attr.getType())
+				+".getOptionCollection()){");
 				builder.appendLn(3,"this."+attr.getName()+"_cmb.add(option);");
 				builder.appendLn(2,"}");
 				builder.clrlf();
@@ -171,7 +173,7 @@ public class PreferencesDialogGenerator extends Task{
 		for (Attribute attr : element.getAttribute_collection()){
 			if (attr.isCustomAttribute()){ 
 				builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
-				builder.append(Element.classPackage+"."+attr.getPrettyName()
+				builder.append(Element.classPackage+"."+DataTypeConversion.getProcessedType(attr.getType())
 				+".valueOf(this."+attr.getName()+"_cmb.getText()));");
 			}else{
 				builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");

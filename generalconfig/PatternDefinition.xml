@@ -4,71 +4,71 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 
-	<Element name="patterninstance" prettyName="PatternInstance" image="generic.png" unique="true" >
-		<AttributeElement name="generator" prettyName="Generator" type="#{Generator}" required="true" default="#{Generator.WEB}" />
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
+	<Element name="patternInstance" image="primefaces.jpg" unique="true" >
+		<AttributeElement name="generator" type="#{Generator}" required="true" default="#{Generator.WEB}" />
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
 		<ChildElement references="relatedFiles" unique="true" />
 		<ChildElement references="faces" unique="true" />		
 	</Element>
 	
-	<Element name="relatedFiles" prettyName="RelatedFiles" unique="true" image="generic.png">
-		<AttributeElement name="image" prettyName="Image" type="java.lang.String" required="true" default="generic.png" />		
+	<Element name="relatedFiles" unique="true" image="primefaces.jpg">
+		<AttributeElement name="image" type="java.lang.String" required="true" default="primefaces.jpg" />		
 		<ChildElement references="relatedFile" unique="false" />
 	</Element>
 	
-	<Element name="relatedFile" prettyName="RelatedFile" image="generic.png"  unique="false">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
+	<Element name="relatedFile" image="primefaces.jpg"  unique="false">
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="reference" type="java.lang.String" required="true" />
 	</Element>
 
-	<Element name="faces" prettyName="Faces" image="generic.png">
+	<Element name="faces" image="primefaces.jpg">
 		<ChildElement references="selection" unique="true" />
 		<ChildElement references="register" unique="true" />
 		<ChildElement references="dialog" unique="false" />
 	</Element>
 	
-	<Element name="selection" prettyName="Selection" image="generic.png">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
-		<AttributeElement name="insert" prettyName="Insert" type="java.lang.Boolean" required="true" default="true" group="Mode"/>
-		<AttributeElement name="update" prettyName="Update" type="java.lang.Boolean" required="true" default="true" group="Mode"/>
-		<AttributeElement name="delete" prettyName="Delete" type="java.lang.Boolean" required="true" default="true" group="Mode"/>
-		<AttributeElement name="display" prettyName="Display" type="java.lang.Boolean" required="true" default="true" group="Mode"/>
+	<Element name="selection" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="reference" type="java.lang.String" required="true" />
+		<AttributeElement name="insert" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
+		<AttributeElement name="update" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
+		<AttributeElement name="delete" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
+		<AttributeElement name="display" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
 	</Element>
 	
-	<Element name="register" prettyName="Register" image="generic.png">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
+	<Element name="register" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="reference" type="java.lang.String" required="true" />
 	</Element>
 	
-	<Element name="dialog" prettyName="Dialog" image="generic.png">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" prettyName="Description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" prettyName="Reference" type="java.lang.String" required="true" />
+	<Element name="dialog" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="reference" type="java.lang.String" required="true" />
 	</Element>
 	
-	<Element name="form" image="generic.png">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
+	<Element name="form" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="false" />
 	</Element>
 
-	<Element name="table" image="generic.png">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
-		<AttributeElement name="columns" prettyName="Columns" type="java.lang.Integer" required="true" default="0" description="Number of columns for distributing data" />
+	<Element name="table" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="false" />
+		<AttributeElement name="columns" type="java.lang.Integer" required="true" default="0" userDescription="Number of columns for distributing data" />
 	</Element>
 
-	<Element name="grid" image="generic.png">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
+	<Element name="grid" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="false" />
 	</Element>
 	
-	<Element name="input" image="generic.png">
-		<AttributeElement name="name" prettyName="Name" type="java.lang.String" required="false" />
-		<AttributeElement name="readonly" prettyName="ReadOnly" type="java.lang.String" required="true" default="false" />
-		<AttributeElement name="datatype" prettyName="DataType" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
-		<AttributeElement name="datatype" prettyName="DataType" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
+	<Element name="input" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="false" />
+		<AttributeElement name="readonly" type="java.lang.String" required="true" default="false" />
+		<AttributeElement name="datatype" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
+		<AttributeElement name="datatype" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
 	</Element>
 	
 </PatternDefinition>

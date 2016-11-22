@@ -8,7 +8,7 @@ import java.util.UUID;
 import org.eclipse.swt.widgets.TreeItem;
 
 import pattern01.helpers.generated.IPatternElement;
-import pattern01.helpers.generated.PatternInstance;
+import pattern01.helpers.generated.Patterninstance;
 import pattern01.helpers.temporal_containers.Element;
 
 /***
@@ -27,7 +27,7 @@ public class XMLPropertyHelper {
 		String projectFolder = selectedTreeItem.getParent().getData("project_path").toString(); 
 		
 		IPatternElement patternInstanceObj = null;
-		if (!(selectedTreeItem.getData("class_instance") instanceof PatternInstance)){
+		if (!(selectedTreeItem.getData("class_instance") instanceof Patterninstance)){
 			//Obtenemos la clase asociada al primer elemento del pattern
 			patternInstanceObj = (IPatternElement)selectedTreeItem.getData("parent_reference");
 		}else{

@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Nov 21 17:32:37 GFT 2016
+	* Creation date: Mon Nov 21 23:37:26 UYST 2016
 	* Creator: rlomez
 	**/
 public class RelatedFile implements IPatternElement{

@@ -13,7 +13,7 @@ import pattern01.helpers.DataTypeConversion;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.PropertyHelper;
 import pattern01.helpers.definitiongen.parsers.CustomValuesDefinitionParser;
-import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser2;
+import pattern01.helpers.definitiongen.parsers.PatternDefinitionParser;
 import pattern01.helpers.temporal_containers.Attribute;
 import pattern01.helpers.temporal_containers.Element;
 
@@ -59,7 +59,7 @@ public class ClassGenerator extends Task{
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		
-		PatternDefinitionParser2 parser = new PatternDefinitionParser2();
+		PatternDefinitionParser parser = new PatternDefinitionParser();
 		patterninstanceElement = parser.parseDefinition();
 	}
 	
@@ -104,10 +104,10 @@ public class ClassGenerator extends Task{
 	
 	private void generateAttributes(Element element){
 		for(Attribute attr : element.getAttribute_collection()){
-			if (attr.getType().contains("#{")){
+			if (attr.isCustomAttribute()){
 				String processedValue = DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value());
 				String processedType = DataTypeConversion.getProcessedType(attr.getType());
-				generateCustomValueBasedProperties(processedType, processedValue, attr.getName());
+				generateCustomValueBasedProperties(processedType, processedValue, attr);
 			}else{
 				attributeBuilder.appendLn(tabGen(1)+"private "+attr.getType()+" "+attr.getName()+
 						(attr.getDefault_value() == null || attr.getDefault_value().equalsIgnoreCase("")?"":" = "+
@@ -191,7 +191,7 @@ public class ClassGenerator extends Task{
 		getterAndSetterBuilder.appendLn(tabGen(1)+"}");
 	}
 	
-	private void generateCustomValueBasedProperties(String processedType, String processedValue, String attrName){
+	private void generateCustomValueBasedProperties(String processedType, String processedValue, Attribute attr){
 		List<Element> collected_custom_values = (new CustomValuesDefinitionParser()).parseDefinition();
 		if (collected_custom_values.size() > 0){
 			int index = 0;
@@ -199,7 +199,7 @@ public class ClassGenerator extends Task{
 			while(index < collected_custom_values.size() && !itemFound){
 				if (collected_custom_values.get(index).getName().equalsIgnoreCase(processedType)){
 					attributeBuilder.appendLn(tabGen(1)+"private "+collected_custom_values.get(index).getPrettyName()
-							+" "+attrName+"="+processedValue+";");
+							+" "+attr.getName()+" = "+processedValue+";");
 					itemFound = true;
 				}else{
 					index++;
@@ -207,13 +207,14 @@ public class ClassGenerator extends Task{
 			}
 			if (itemFound){
 				getterAndSetterBuilder.appendLn(tabGen(1)+"public "+collected_custom_values.get(index).getPrettyName()
-						+" get"+collected_custom_values.get(index).getPrettyName()+"(){");
-				getterAndSetterBuilder.appendLn(tabGen(2)+"return this."+attrName+";");
+						+" get"+attr.getPrettyName()+"(){");
+				getterAndSetterBuilder.appendLn(tabGen(2)+"return this."+attr.getName()+";");
 				getterAndSetterBuilder.appendLn(tabGen(1)+"}");
 				getterAndSetterBuilder.clrlf();
-				getterAndSetterBuilder.appendLn(tabGen(1)+"public void set"+collected_custom_values.get(index).getPrettyName()
-						+"("+collected_custom_values.get(index).getPrettyName()+" "+collected_custom_values.get(index).getName()+"){");
-				getterAndSetterBuilder.appendLn(tabGen(2)+"this."+attrName+" = "+collected_custom_values.get(index).getName()+";");
+				
+				getterAndSetterBuilder.appendLn(tabGen(1)+"public void set"+attr.getPrettyName()
+						+"("+collected_custom_values.get(index).getPrettyName()+" "+attr.getName()+"){");
+				getterAndSetterBuilder.appendLn(tabGen(2)+"this."+attr.getName()+" = "+attr.getName()+";");
 				getterAndSetterBuilder.appendLn(tabGen(1)+"}");
 			}else{
 				log.writeSingleMessage("[Exception]:No custom type {"+processedType+"} definition declared!");

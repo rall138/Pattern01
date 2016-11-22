@@ -14,7 +14,6 @@ public class Element {
 	protected List<CommonElement> childElements_collection = new ArrayList<>();
 	protected boolean unique;
 	protected String name;
-	protected String prettyName;
 	protected String image;
 	protected String xpathURI;
 	
@@ -51,11 +50,7 @@ public class Element {
 	}
 	
 	public String getPrettyName() {
-		return prettyName;
-	}
-
-	public void setPrettyName(String prettyName) {
-		this.prettyName = prettyName;
+		return name.substring(0, 1).toUpperCase()+name.substring(1);
 	}
 	
 	public String getImage() {

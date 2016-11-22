@@ -19,6 +19,10 @@ public class EnumElement extends Element{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getPrettyName(){
+		super.setName(name);
+		return super.getPrettyName();
+	}
 	public VISIBLE_INFO getVisible_info() {
 		return visible_info;
 	}

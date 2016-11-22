@@ -6,27 +6,27 @@ package pattern01.helpers.generated;
 	* Creation date: Mon Nov 21 23:40:18 UYST 2016
 	* Creator: rlomez
 	**/
-public enum Generator {UNDEFINED, WEB, MOBILE;
+public enum Bool {UNDEFINED, FALSE, TRUE;
 
-	public static java.lang.String getValueDescription(Generator description){
+	public static java.lang.String getValueDescription(Bool description){
 		switch(description){
-			case WEB:
-				return "WEB";
-			case MOBILE:
-				return "MOBILE";
+			case FALSE:
+				return "FALSE";
+			case TRUE:
+				return "TRUE";
 			default:
 				return "";
 		}
 	}
 
 	public static boolean fullyQualifiedComparer(String fullyQualifiedValue, String simpleValue){
-		return fullyQualifiedValue.replace("pattern01.helpers.generated","").replace("Generator","").replace(".","").equalsIgnoreCase(simpleValue);
+		return fullyQualifiedValue.replace("pattern01.helpers.generated","").replace("Bool","").replace(".","").equalsIgnoreCase(simpleValue);
 	}
 
 	public static java.util.List<java.lang.String> getOptionCollection(){
 		java.util.List<java.lang.String> optionCollection = new java.util.ArrayList<>();
-		optionCollection.add("WEB");
-		optionCollection.add("MOBILE");
+		optionCollection.add("FALSE");
+		optionCollection.add("TRUE");
 		return optionCollection;
 	}
 }

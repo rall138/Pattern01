@@ -3,7 +3,6 @@ package pattern01.helpers.temporal_containers;
 public class Attribute {
 	
 	private String name;
-	private String prettyName;
 	private String type;
 	private String default_value;
 	private boolean requiered;
@@ -11,9 +10,8 @@ public class Attribute {
 	
 	public Attribute(){}
 	
-	public Attribute(String name, String prettyName, String type, boolean requiered){
+	public Attribute(String name, String type, boolean requiered){
 		this.name = name;
-		this.prettyName = prettyName;
 		this.type = type;
 		this.requiered = requiered;
 	}
@@ -27,7 +25,7 @@ public class Attribute {
 	}
 
 	public String getPrettyName() {
-		return prettyName;
+		return name.substring(0, 1).toUpperCase()+name.substring(1);
 	}
 
 	public String getType() {
@@ -40,10 +38,6 @@ public class Attribute {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setPrettyName(String prettyName) {
-		this.prettyName = prettyName;
 	}
 
 	public void setType(String type) {

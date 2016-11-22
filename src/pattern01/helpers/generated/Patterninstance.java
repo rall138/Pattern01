@@ -3,11 +3,11 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Mon Nov 21 17:32:37 GFT 2016
+	* Creation date: Mon Nov 21 23:37:26 UYST 2016
 	* Creator: rlomez
 	**/
-public class PatternInstance implements IPatternElement{
-	private Generator generator=pattern01.helpers.generated.Generator.WEB;
+public class Patterninstance implements IPatternElement{
+	private Generator generator = pattern01.helpers.generated.Generator.WEB;
 	private java.lang.String name;
 	private java.lang.String description;
 	private RelatedFiles relatedFiles;
@@ -64,7 +64,7 @@ public class PatternInstance implements IPatternElement{
 
 	@Override
 	public java.lang.String toXml(){
-		java.lang.String xml="<PatternInstance ";
+		java.lang.String xml="<Patterninstance ";
 		xml+="generator='"+this.generator+"' ";
 		xml+="name='"+this.name+"' ";
 		xml+="description='"+this.description+"' ";
@@ -73,7 +73,7 @@ public class PatternInstance implements IPatternElement{
 		for(int index = 0; index < collection_Faces.size(); index++){
 			xml+=collection_Faces.get(index).toXml();
 		}
-		xml+="</PatternInstance>";
+		xml+="</Patterninstance>";
 		return xml;
 	}
 
