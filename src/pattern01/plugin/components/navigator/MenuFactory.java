@@ -51,10 +51,11 @@ public class MenuFactory {
 		});
 	}
 	
+	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Nov 22 16:58:37 GFT 2016
+	* Creation date: Thu Nov 24 22:20:21 UYST 2016
 	* Creator: rlomez
 	**/
 
@@ -262,6 +263,7 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
+
 
 	private SelectionListener listenerFactory(){
 		SelectionListener listener = new SelectionListener() {
