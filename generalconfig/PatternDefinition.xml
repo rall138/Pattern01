@@ -12,23 +12,44 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 		<ChildElement references="faces" unique="true" />		
 	</Element>
 	
-	<Element name="relatedFiles" unique="true" image="primefaces.jpg">
-		<AttributeElement name="image" type="java.lang.String" required="true" default="primefaces.jpg" />		
-		<ChildElement references="relatedFile" unique="false" />
+	<Element name="body" unique="true" image="primefaces.jpg">
+		<AttributeElement name="id" type="java.lang.String" required="false" default="primefaces.jpg" />		
+		<ChildElement references="form" unique="false" />
 	</Element>
 	
-	<Element name="relatedFile" image="primefaces.jpg"  unique="false">
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" type="java.lang.String" required="true" />
+	<Element name="form" image="primefaces.jpg"  unique="true">
+		<AttributeElement name="id" type="java.lang.String" required="false" default="primefaces.jpg" />
+		<ChildElement references="panelGrid" unique="false" />
+		<ChildElement references="panel" unique="false" />
+		<ChildElement references="property" unique="false" />		
+		<ChildElement references="text" unique="false" />
+		<ChildElement references="messages" unique="false" />
+		<ChildElement references="dataTable" unique="false" />
+		<ChildElement references="commandButton" unique="false" />
 	</Element>
 
-	<Element name="faces" image="primefaces.jpg">
-		<ChildElement references="selection" unique="true" />
-		<ChildElement references="register" unique="true" />
-		<ChildElement references="dialog" unique="false" />
+	<Element name="panelGrid" image="primefaces.jpg">
+		<ChildElement references="panel" unique="false" />
+		<ChildElement references="property" unique="false" />		
+		<ChildElement references="text" unique="false" />
+		<ChildElement references="commandButton" unique="false" />
+		<ChildElement references="dataTable" unique="false" />
 	</Element>
 	
+	<Element name="panel" image="primefaces.jpg">
+		<ChildElement references="panel" unique="false" />
+		<ChildElement references="property" unique="false" />		
+		<ChildElement references="text" unique="false" />
+		<ChildElement references="commandButton" unique="false" />
+		<ChildElement references="dataTable" unique="false" />
+	</Element>
+
+	<Element name="property" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="type" type="java.lang.String" required="true" />
+	</Element>
+
 	<Element name="selection" image="primefaces.jpg">
 		<AttributeElement name="name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" type="java.lang.String" required="false" />

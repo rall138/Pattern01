@@ -5,6 +5,7 @@
 	name="default-instance"
 	description="Descripcion de instance" 
 	image="generic.jpg">
+	<
 	<RelatedFiles name="default-relatedFiles" description="Descripcion de related files" image="generic.jpg">
 		<RelatedFile name="Archivo relativo 1" description="Descripcion de archivo relativo 1" reference="../archivo1.java" image="generic.jpg"/>
 		<RelatedFile name="Archivo relativo 2" description="Descripcion de archivo relativo 2" reference="../archivo2.java" image="generic.jpg"/>
