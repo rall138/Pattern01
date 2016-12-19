@@ -40,7 +40,7 @@ public class PatternDefinitionParser {
 			Node firstNodeElement = (Node) xpath.evaluate(expression, is, XPathConstants.NODE);
 			if (firstNodeElement != null){
 				parentElement = new CommonElement();
-				initializeCommonElement(parentElement, firstNodeElement);
+				initializeCommonElement(null, parentElement, firstNodeElement);
 				recursiveParseing(parentElement, firstNodeElement, is);
 			}
 		} catch (XPathExpressionException | IllegalStateException e) {
@@ -63,30 +63,47 @@ public class PatternDefinitionParser {
 				if (childNodes.item(index).getNodeName().equalsIgnoreCase("attributeelement")){
 					attributeAttacher(parentElement, childNodes.item(index).getAttributes());
 				}else if (childNodes.item(index).getNodeName().equalsIgnoreCase("childelement")){
-					expression = "/PatternDefinition/Element[@name='"+
-							childNodes.item(index).getAttributes().getNamedItem("references").getNodeValue()+"']";
+					
+					String name = childNodes.item(index).getAttributes()
+							.getNamedItem("references").getNodeValue();
+					
+					expression = "/PatternDefinition/Element[@name='"+name+"']";
+
+					// This is how we get the referenced element
 					Node auxililarNode = (Node)xpath.evaluate(expression, is, XPathConstants.NODE);
-					if (auxililarNode != null){
-						CommonElement childElement = new CommonElement(parentElement);
-						childElement.setXpathURI(auxililarNode.getNamespaceURI());
-						initializeCommonElement(childElement, auxililarNode);
-						parentElement.getChildElements_collection().add(childElement);
-						recursiveParseing(childElement, auxililarNode, is);
-					}
+					
+					if (auxililarNode == null)
+						throw new NullPointerException("Not definition found for: "+name);
+					
+					CommonElement childElement = new CommonElement(parentElement);
+					childElement.setXpathURI(auxililarNode.getNamespaceURI());
+					initializeCommonElement(parentElement, childElement, auxililarNode);
+					parentElement.getChildElements_collection().add(childElement);
+					recursiveParseing(childElement, auxililarNode, is);
+
 				}
 			}
 		}
 	}
 	
-	private void initializeCommonElement(CommonElement commonElement, Node nodeElement){
+	private void initializeCommonElement(Element parentElement, CommonElement commonElement, Node nodeElement){
 		commonElement.setXpathURI(nodeElement.getNamespaceURI());
 		for (int hindex = 0; hindex < nodeElement.getAttributes().getLength(); hindex++){
 			Node attributeNode = nodeElement.getAttributes().item(hindex);
 			if (attributeNode.getNodeName().equalsIgnoreCase("name")){
-				commonElement.setName(attributeNode.getNodeValue());
+				
+				// PrettyName setting
+				if (parentElement != null)
+					commonElement.setName(parentElement.getName()+"_"+attributeNode.getNodeValue());
+				else
+					commonElement.setName(attributeNode.getNodeValue());
+				
+				commonElement.setPrettyName(attributeNode.getNodeValue().substring(0, 1).toUpperCase()+
+						attributeNode.getNodeValue().substring(1, attributeNode.getNodeValue().length()));
+				
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
 				commonElement.setUnique(Boolean.valueOf(attributeNode.getNodeValue()));
-			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("image")){
 				commonElement.setImage(attributeNode.getNodeValue());
 			}
 		}
@@ -99,8 +116,8 @@ public class PatternDefinitionParser {
 			if (attributeNode.getNodeName().equalsIgnoreCase("name")){
 				attr.setName(attributeNode.getNodeValue());
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("type")){
-				attr.setType(attributeNode.getNodeValue()); //TODO - Ver como convertir con DataTypeConversion
-			}else if (attributeNode.getNodeName().equalsIgnoreCase("requiered")){
+				attr.setType(attributeNode.getNodeValue());
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("required")){
 				attr.setRequiered(Boolean.valueOf(attributeNode.getNodeValue()));
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("default")){
 				attr.setDefault_value(attributeNode.getNodeValue());

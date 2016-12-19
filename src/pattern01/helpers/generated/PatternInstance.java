@@ -3,21 +3,30 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Nov 24 22:20:19 UYST 2016
+	* Creation date: Sun Dec 18 19:38:30 UYST 2016
 	* Creator: rlomez
 	**/
 public class PatternInstance implements IPatternElement{
 	private Generator generator = pattern01.helpers.generated.Generator.WEB;
+	private PatternType type = pattern01.helpers.generated.PatternType.WORKWITH;
 	private java.lang.String name;
 	private java.lang.String description;
-	private RelatedFiles relatedFiles;
-	private java.util.List<Faces> collection_Faces = new java.util.ArrayList<>();
+	private Form patternInstance_form;
+
 	public Generator getGenerator(){
 		return this.generator;
 	}
 
 	public void setGenerator(Generator generator){
 		this.generator = generator;
+	}
+
+	public PatternType getType(){
+		return this.type;
+	}
+
+	public void setType(PatternType type){
+		this.type = type;
 	}
 
 	public java.lang.String getName(){
@@ -36,19 +45,12 @@ public class PatternInstance implements IPatternElement{
 		this.description = description;
 	}
 
-	public RelatedFiles getrelatedFiles(){
-		return this.relatedFiles;
+	public Form getpatternInstance_form(){
+		return this.patternInstance_form;
 	}
 
-	public void setRelatedFiles(RelatedFiles relatedFiles){
-		this.relatedFiles = relatedFiles;
-	}
-	public void setCollection_Faces(java.util.List<Faces> collection_Faces){
-		this.collection_Faces = collection_Faces;
-	}
-
-	public java.util.List<Faces> getCollection_Faces(){
-		return this.collection_Faces;
+	public void setForm(Form patternInstance_form){
+		this.patternInstance_form = patternInstance_form;
 	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){
@@ -66,13 +68,11 @@ public class PatternInstance implements IPatternElement{
 	public java.lang.String toXml(){
 		java.lang.String xml="<PatternInstance ";
 		xml+="generator='"+this.generator+"' ";
+		xml+="type='"+this.type+"' ";
 		xml+="name='"+this.name+"' ";
 		xml+="description='"+this.description+"' ";
 		xml+=">";
-		xml+=this.relatedFiles.toXml();
-		for(int index = 0; index < collection_Faces.size(); index++){
-			xml+=collection_Faces.get(index).toXml();
-		}
+		xml+=this.patternInstance_form.toXml();
 		xml+="</PatternInstance>";
 		return xml;
 	}

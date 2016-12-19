@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated enum class via ClassGenerator.xml
-	* Creation date: Thu Nov 24 22:20:19 UYST 2016
+	* Creation date: Sun Dec 18 19:38:30 UYST 2016
 	* Creator: rlomez
 	**/
 public enum Bool {UNDEFINED, FALSE, TRUE;

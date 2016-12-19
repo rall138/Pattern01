@@ -1,6 +1,9 @@
 package pattern01.helpers.definitiongen;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -26,6 +29,8 @@ public class NodeTypeEnumGenerator extends Task{
 	private Element patternInstanceElement = null;
 	private CustomStringBuilder builder = null;
 	private CustomStringBuilder elementListBuilder = null;
+	private Map<String, String> map = new HashMap<>();
+	
 	
 	public NodeTypeEnumGenerator(Element patternInstanceElement){
 		this.patternInstanceElement = patternInstanceElement;
@@ -43,13 +48,12 @@ public class NodeTypeEnumGenerator extends Task{
 		if (element != null){
 			builder = new CustomStringBuilder();
 			elementListBuilder = new CustomStringBuilder();
-			System.out.println("Hasta aca");
 			generateClassHeader(element);
-			generateElementList(element);
-			builder.append(elementListBuilder.toString().substring(0, elementListBuilder.toString().length()-1)+";");
-			//TODO reemplazar coma por punto y coma en el ultimo elemento de la lista
+			generateMapFromIteration(element);
+			generateEnumListFromMap();
+			builder.append(replaceLastCharacterFromEnumList(elementListBuilder));
 			generateHardCodedToStringMethod();
-			generateToStringMethod(element);
+			generateCasesFromMap();
 			generateToStringMethodFooter();
 			builder.appendLn("}");
 			generateClasses("NodeType", builder.toString());
@@ -67,42 +71,51 @@ public class NodeTypeEnumGenerator extends Task{
 		builder.append("CLASS,");
 	}
 	
-	private void generateElementList(Element element){
-		if (element != null){
-			System.out.println("Element: "+element.getName());
-			elementListBuilder.append(element.getName().toUpperCase()+",");
-			for (Element childElement : element.getChildElements_collection()){
-				System.out.println("ChildElement: "+childElement.getName());
-				generateElementList(childElement);
-			}
+	private void generateMapFromIteration(Element element){
+		map.put(element.getName().toUpperCase(), element.getName().toUpperCase());
+		for (Element childElement : element.getChildElements_collection()){
+			generateMapFromIteration(childElement);
 		}
+	}
+	
+	private void generateCasesFromMap(){
+		for (Entry<String, String> entry : map.entrySet()){
+			generateCaseForSwitch(entry.getValue());
+		}
+	}
+	
+	private void generateEnumListFromMap(){
+		for (Entry<String, String> entry : map.entrySet()){
+			elementListBuilder.append(entry.getValue()+",");		
+		}
+	}
+	
+	private String replaceLastCharacterFromEnumList(CustomStringBuilder elementBuilder){
+		char[] charArray = elementListBuilder.toString().toCharArray();
+		charArray[charArray.length -1] = ';';
+		return String.valueOf(charArray);
 	}
 	
 	private void generateHardCodedToStringMethod(){
 		builder.clrlf();
 		builder.appendLn(1,"public static String toString(NodeType nodetype){");
 		builder.appendLn(2,"String nodetypestr = "+quotscape+quotscape+";");
-		builder.appendLn(3,"switch(nodetype){");
-		builder.appendLn(4,"case UNDEFINED:");
-		builder.appendLn(3,"nodetypestr = "+quotscape+"UNDEFINED"+quotscape+";");
-		builder.appendLn(3,"break;");
-		builder.appendLn(4,"case PACKAGE:");
-		builder.appendLn(3,"nodetypestr = "+quotscape+"PACKAGE"+quotscape+";");
-		builder.appendLn(3,"break;");
-		builder.appendLn(4,"case CLASS:");
-		builder.appendLn(3,"nodetypestr = "+quotscape+"CLASS"+quotscape+";");
-		builder.appendLn(3,"break;");
+		builder.appendLn(2,"switch(nodetype){");
+		builder.appendLn(3,"case UNDEFINED:");
+		builder.appendLn(4,"nodetypestr = "+quotscape+"UNDEFINED"+quotscape+";");
+		builder.appendLn(4,"break;");
+		builder.appendLn(3,"case PACKAGE:");
+		builder.appendLn(4,"nodetypestr = "+quotscape+"PACKAGE"+quotscape+";");
+		builder.appendLn(4,"break;");
+		builder.appendLn(3,"case CLASS:");
+		builder.appendLn(4,"nodetypestr = "+quotscape+"CLASS"+quotscape+";");
+		builder.appendLn(4,"break;");
 	}
 	
-	private void generateToStringMethod(Element element){
-		if (element != null){
-			builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
-			builder.appendLn(4,"nodetypestr ="+quotscape+element.getName().toUpperCase()+quotscape+";");
-			builder.appendLn(4,"break;");
-			for (Element childElement : element.getChildElements_collection()){
-				generateToStringMethod(childElement);
-			}
-		}
+	private void generateCaseForSwitch(String entryValue){
+		builder.appendLn(3,"case "+entryValue+":");
+		builder.appendLn(4,"nodetypestr = "+quotscape+entryValue+quotscape+";");
+		builder.appendLn(4,"break;");
 	}
 	
 	private void generateToStringMethodFooter(){

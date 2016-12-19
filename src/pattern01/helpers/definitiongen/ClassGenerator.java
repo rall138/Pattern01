@@ -206,6 +206,7 @@ public class ClassGenerator extends Task{
 				}
 			}
 			if (itemFound){
+				getterAndSetterBuilder.clrlf();
 				getterAndSetterBuilder.appendLn(tabGen(1)+"public "+collected_custom_values.get(index).getPrettyName()
 						+" get"+attr.getPrettyName()+"(){");
 				getterAndSetterBuilder.appendLn(tabGen(2)+"return this."+attr.getName()+";");

@@ -1,6 +1,8 @@
 package pattern01.helpers.definitiongen;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -31,6 +33,8 @@ public class MenuFactoryGenerator extends Task {
 	private BuildFileRule bfr = new BuildFileRule();
 	private Element patternInstanceElement = null;
 	private CustomStringBuilder builder = null;
+	private Map<String, String> map = new HashMap<>();
+	
 	
 	LoggerThread log = new LoggerThread();
 	
@@ -41,7 +45,7 @@ public class MenuFactoryGenerator extends Task {
 	public void execute(){
 		bfr.configureProject(CommonPathFix
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
-
+		
 		//Se anaden los datos faltantes a los childselements creados
 		generateClasses(this.patternInstanceElement);
 	}
@@ -65,8 +69,10 @@ public class MenuFactoryGenerator extends Task {
 		builder.appendLn(2,"}");
 		builder.appendLn(1,"}");
 		builder.clrlf();
+		generateMapFromIteration(this.patternInstanceElement);
 		builder = generateAddElementMethod(this.patternInstanceElement, builder);
 		builder.clrlf();
+		generateMapFromIteration(this.patternInstanceElement);
 		builder = generatePropertiesMethod(this.patternInstanceElement, builder);
 		builder.clrlf();		
 		builder.appendLn(1,endTag);
@@ -75,34 +81,48 @@ public class MenuFactoryGenerator extends Task {
 	}
 	
 	private CustomStringBuilder generateSwitchOptions(Element element, CustomStringBuilder builder){
-		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
-		if (element.getChildElements_collection().size() > 0){
-			builder.appendLn(4,"add_item = new MenuItem(menu, SWT.CASCADE);");
-			builder.appendLn(4,"add_item.setText("+quotscape+"Add"+quotscape+");");
-			builder.appendLn(4,"add_itemMenu = new Menu(add_item);");
-			builder.appendLn(4,"add_item.setMenu(add_itemMenu);");
-			builder.clrlf();
-		}
-		for(Element childElement : element.getChildElements_collection()){
-			builder.appendLn(4,"MenuItem item_"+childElement.getPrettyName()+" = new MenuItem(add_itemMenu, SWT.PUSH);");
-			builder.appendLn(4,"item_"+childElement.getPrettyName()+".setText("+quotscape+childElement.getPrettyName()+quotscape+");");
-			builder.appendLn(4,"item_"+childElement.getPrettyName()+".setImage(ImageHelper.getImage("+quotscape+childElement.getImage()+quotscape+"));");
-			builder.appendLn(4,"item_"+childElement.getPrettyName()+".setData("+quotscape+"type"+quotscape+",");
-			builder.append("NodeType."+childElement.getName().toUpperCase()+");");
-			builder.appendLn(4,"item_"+childElement.getPrettyName()+".addSelectionListener(listenerFactory());");
-			builder.clrlf();
-		}
-		builder.appendLn(4,"properties_item = new MenuItem(menu, SWT.PUSH);");
-		builder.appendLn(4,"properties_item.setText("+quotscape+"Properties"+quotscape+");");
-		builder.appendLn(4,"properties_item.addSelectionListener(propertiesListener());");
-		builder.appendLn(4,"properties_item.setData("+quotscape+"type"+quotscape+",");
-			builder.append("NodeType."+element.getName().toUpperCase()+");");		
-		builder.appendLn(4,"break;");
-		
-		for(Element childElement : element.getChildElements_collection()){
-			builder = (generateSwitchOptions(childElement, builder));
+		boolean notUsed = map.containsValue(element.getName().toUpperCase());
+		if (notUsed){
+			map.remove(element.getName().toUpperCase());
+			builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+			
+			if (element.getChildElements_collection().size() > 0){
+				builder.appendLn(4,"add_item = new MenuItem(menu, SWT.CASCADE);");
+				builder.appendLn(4,"add_item.setText("+quotscape+"Add"+quotscape+");");
+				builder.appendLn(4,"add_itemMenu = new Menu(add_item);");
+				builder.appendLn(4,"add_item.setMenu(add_itemMenu);");
+				builder.clrlf();
+			}
+			
+			for(Element childElement : element.getChildElements_collection()){
+				builder.appendLn(4,"MenuItem item_"+childElement.getName()+" = new MenuItem(add_itemMenu, SWT.PUSH);");
+				builder.appendLn(4,"item_"+childElement.getName()+".setText("+quotscape+childElement.getPrettyName()+quotscape+");");
+				builder.appendLn(4,"item_"+childElement.getName()+".setImage(ImageHelper.getImage("+quotscape+childElement.getImage()+quotscape+"));");
+				builder.appendLn(4,"item_"+childElement.getName()+".setData("+quotscape+"type"+quotscape+",");
+				builder.append("NodeType."+childElement.getPrettyName().toUpperCase()+");");
+				builder.appendLn(4,"item_"+childElement.getName()+".addSelectionListener(listenerFactory());");
+				builder.clrlf();
+			}
+			
+			builder.appendLn(4,"properties_item = new MenuItem(menu, SWT.PUSH);");
+			builder.appendLn(4,"properties_item.setText("+quotscape+"Properties"+quotscape+");");
+			builder.appendLn(4,"properties_item.addSelectionListener(propertiesListener());");
+			builder.appendLn(4,"properties_item.setData("+quotscape+"type"+quotscape+",");
+				builder.append("NodeType."+element.getName().toUpperCase()+");");		
+			builder.appendLn(4,"break;");
+			
+			for(Element childElement : element.getChildElements_collection()){
+				builder = generateSwitchOptions(childElement, builder);
+			}
 		}
 		return builder;
+	}
+	
+	private void generateMapFromIteration(Element element){
+		map.put(element.getName().toUpperCase(), element.getName().toUpperCase());
+		for(Element childElement : element.getChildElements_collection()){
+			generateMapFromIteration(childElement);
+		}
 	}
 	
 	private CustomStringBuilder generatePropertiesMethod(Element element, CustomStringBuilder builder){
@@ -117,15 +137,19 @@ public class MenuFactoryGenerator extends Task {
 	}
 	
 	private CustomStringBuilder generatePropertiesMethodSwitchOptions(Element element, CustomStringBuilder builder){
-		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
-		builder.appendLn(4,"JFaceDialog"+element.getPrettyName()+" jfacedialog"+element.getName());
-		builder.append(" = new JFaceDialog"+element.getPrettyName()+"(this.parent.getShell());");
-		builder.appendLn(4,"jfacedialog"+element.getName()+".setParent(this.parent);");
-		builder.appendLn(4,"jfacedialog"+element.getName()+".create();");		
-		builder.appendLn(4,"jfacedialog"+element.getName()+".open();");
-		builder.appendLn(4,"break;");
-		for(Element childElement : element.getChildElements_collection()){
-			builder = (generatePropertiesMethodSwitchOptions(childElement, builder));
+		boolean notUsed = map.containsKey(element.getName().toUpperCase());
+		if (notUsed){
+			builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+			builder.appendLn(4,"JFaceDialog"+element.getPrettyName()+" jfacedialog"+element.getName());
+			builder.append(" = new JFaceDialog"+element.getPrettyName()+"(this.parent.getShell());");
+			builder.appendLn(4,"jfacedialog"+element.getName()+".setParent(this.parent);");
+			builder.appendLn(4,"jfacedialog"+element.getName()+".create();");		
+			builder.appendLn(4,"jfacedialog"+element.getName()+".open();");
+			builder.appendLn(4,"break;");
+			for(Element childElement : element.getChildElements_collection()){
+				builder = generatePropertiesMethodSwitchOptions(childElement, builder);
+			}
+			map.remove(element.getName().toUpperCase());
 		}
 		return builder;
 	}
@@ -133,7 +157,7 @@ public class MenuFactoryGenerator extends Task {
 	private CustomStringBuilder generateAddElementMethod(Element element, CustomStringBuilder builder){
 		builder.appendLn(1,"private void addElement(MenuItem selectedItem){");
 		builder.appendLn(2,"switch(((NodeType)selectedItem.getData("+quotscape+"type"+quotscape+"))){");
-		builder = generateAddElementMethodSwitchOptions(element, builder);
+		builder = generateAddElementMethodSwitchOptions(element, builder,0);
 		builder.appendLn(3,"default:");
 		builder.appendLn(4,"break;");
 		builder.appendLn(2,"}");
@@ -141,15 +165,15 @@ public class MenuFactoryGenerator extends Task {
 		return builder;
 	}
 	
-	private CustomStringBuilder generateAddElementMethodSwitchOptions(Element element, CustomStringBuilder builder){
+	private CustomStringBuilder generateAddElementMethodSwitchOptions(Element element, CustomStringBuilder builder, int index){
 		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
-		builder.appendLn(4,"TreeItem item_"+element.getPrettyName()+" = new TreeItem(this.parent.getSelection()[0], 0);");
-		builder.appendLn(4,"item_"+element.getPrettyName()+".setText(selectedItem.getText());");
-		builder.appendLn(4,"item_"+element.getPrettyName()+".setImage(ImageHelper.getImage("+quotscape+"primefaces.jpg"+quotscape+"));");
-		builder.appendLn(4,"item_"+element.getPrettyName()+".setData("+quotscape+"type"+quotscape+",NodeType."+element.getName().toUpperCase()+");");
+		builder.appendLn(4,"TreeItem item_"+element.getName()+" = new TreeItem(this.parent.getSelection()[0], 0);");
+		builder.appendLn(4,"item_"+element.getName()+".setText(selectedItem.getText());");
+		builder.appendLn(4,"item_"+element.getName()+".setImage(ImageHelper.getImage("+quotscape+"primefaces.jpg"+quotscape+"));");
+		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"type"+quotscape+",NodeType."+element.getName().toUpperCase()+");");
 		builder.appendLn(4,"break;");
 		for(Element childElement : element.getChildElements_collection()){
-			builder = (generateAddElementMethodSwitchOptions(childElement, builder));
+			builder = (generateAddElementMethodSwitchOptions(childElement, builder, index++));
 		}
 		return builder;
 	}

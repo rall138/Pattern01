@@ -6,17 +6,12 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 
 	<Element name="patternInstance" image="primefaces.jpg" unique="true" >
 		<AttributeElement name="generator" type="#{Generator}" required="true" default="#{Generator.WEB}" />
+		<AttributeElement name="type" type="#{PatternType}" required="true" default="#{PatternType.WORKWITH}" />
 		<AttributeElement name="name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" type="java.lang.String" required="false" />
-		<ChildElement references="relatedFiles" unique="true" />
-		<ChildElement references="faces" unique="true" />		
+		<ChildElement references="form" unique="true" />
 	</Element>
-	
-	<Element name="body" unique="true" image="primefaces.jpg">
-		<AttributeElement name="id" type="java.lang.String" required="false" default="primefaces.jpg" />		
-		<ChildElement references="form" unique="false" />
-	</Element>
-	
+			
 	<Element name="form" image="primefaces.jpg"  unique="true">
 		<AttributeElement name="id" type="java.lang.String" required="false" default="primefaces.jpg" />
 		<ChildElement references="panelGrid" unique="false" />
@@ -37,7 +32,6 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 	</Element>
 	
 	<Element name="panel" image="primefaces.jpg">
-		<ChildElement references="panel" unique="false" />
 		<ChildElement references="property" unique="false" />		
 		<ChildElement references="text" unique="false" />
 		<ChildElement references="commandButton" unique="false" />
@@ -48,48 +42,34 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 		<AttributeElement name="name" type="java.lang.String" required="true" />
 		<AttributeElement name="description" type="java.lang.String" required="false" />
 		<AttributeElement name="type" type="java.lang.String" required="true" />
+		<AttributeElement name="defaultValue" type="java.lang.String" required="false" />
 	</Element>
 
-	<Element name="selection" image="primefaces.jpg">
+	<Element name="text" image="primefaces.jpg">
 		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="value" type="java.lang.String" required="true" />
+		<AttributeElement name="type" type="#{TextType}" default="#{TextType.PLAINTEXT}" required="true" />
 		<AttributeElement name="description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" type="java.lang.String" required="true" />
-		<AttributeElement name="insert" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
-		<AttributeElement name="update" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
-		<AttributeElement name="delete" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
-		<AttributeElement name="display" type="#{Bool}" required="true" default="#{Bool.TRUE}" group="Mode"/>
-	</Element>
-	
-	<Element name="register" image="primefaces.jpg">
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" type="java.lang.String" required="true" />
-	</Element>
-	
-	<Element name="dialog" image="primefaces.jpg">
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
-		<AttributeElement name="reference" type="java.lang.String" required="true" />
-	</Element>
-	
-	<Element name="form" image="primefaces.jpg">
-		<AttributeElement name="name" type="java.lang.String" required="false" />
 	</Element>
 
-	<Element name="table" image="primefaces.jpg">
-		<AttributeElement name="name" type="java.lang.String" required="false" />
-		<AttributeElement name="columns" type="java.lang.Integer" required="true" default="0" userDescription="Number of columns for distributing data" />
-	</Element>
-
-	<Element name="grid" image="primefaces.jpg">
-		<AttributeElement name="name" type="java.lang.String" required="false" />
+	<Element name="messages" image="primefaces.jpg"></Element>
+	
+	<Element name="dataTable" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="managedBean" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<ChildElement references="column" unique="false" />		
 	</Element>
 	
-	<Element name="input" image="primefaces.jpg">
-		<AttributeElement name="name" type="java.lang.String" required="false" />
-		<AttributeElement name="readonly" type="java.lang.String" required="true" default="false" />
-		<AttributeElement name="datatype" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
-		<AttributeElement name="datatype" type="#{DataType}" required="true" default="#{DataType.ALPHANUMERIC}" />
+	<Element name="column" image="primefaces.jpg">
+		<AttributeElement name="headerText" type="java.lang.String" required="true" />
+		<ChildElement references="text" unique="true" />		
+	</Element>
+	
+	<Element name="commandButton" image="primefaces.jpg">
+		<AttributeElement name="name" type="java.lang.String" required="true" />
+		<AttributeElement name="action" type="java.lang.String" required="true" />
+		<AttributeElement name="description" type="java.lang.String" required="false" />
 	</Element>
 	
 </PatternDefinition>

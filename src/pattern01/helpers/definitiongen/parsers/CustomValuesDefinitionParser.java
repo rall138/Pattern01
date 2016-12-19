@@ -37,10 +37,15 @@ public class CustomValuesDefinitionParser {
 			
 			NodeList nodes = (NodeList) xpath.evaluate(expression, is, XPathConstants.NODESET);
 			for(int jindex =0; jindex < nodes.getLength(); jindex++){
+				
+				//Generation of enum element
 				Node node = nodes.item(jindex);
+				String name = node.getAttributes().getNamedItem("name").getNodeValue();
 				element = new EnumElement();
-				element.setName(node.getAttributes().getNamedItem("name").getNodeValue());
-				for (int index =0; index < node.getChildNodes().getLength(); index++){
+				element.setName(name);
+				element.setPrettyName(name.substring(0, 1).toUpperCase()+name.substring(1, name.length()));
+				
+				for (int index = 0; index < node.getChildNodes().getLength(); index++){
 					Node childNode = node.getChildNodes().item(index);
 					if (childNode.hasAttributes() && childNode.getAttributes().getNamedItem("name") != null){
 						element.getValue_list().put(childNode.getAttributes().getNamedItem("name").getNodeValue(), 

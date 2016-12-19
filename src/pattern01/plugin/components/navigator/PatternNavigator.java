@@ -35,6 +35,8 @@ public class PatternNavigator extends ViewPart {
 		defineActionBarActions();
 	}
 	
+	
+	
 	private void generateTree(Composite parent){
 		this.instanceTree = new Tree(parent,0);
 		generateProjectNodeFromWorkspace();
@@ -95,6 +97,7 @@ public class PatternNavigator extends ViewPart {
 		}
 		return classNodeList;
 	}
+
 	
 	private void generateLeafs(TreeItem parent, String projectFolderPath) throws XPathExpressionException{
 		TreeItem packageItem = null, classItem = null;
