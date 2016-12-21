@@ -2,9 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.menus">
-   </extension>
-   <extension
          point="org.eclipse.ui.views">
       <view
             class="pattern01.plugin.components.navigator.PatternNavigator"
