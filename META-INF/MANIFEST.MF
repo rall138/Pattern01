@@ -39,7 +39,6 @@ Export-Package: pattern01,
  pattern01.plugin.components.editors,
  pattern01.plugin.components.editors.generated,
  pattern01.plugin.components.navigator,
- pattern01.popup.commands
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit,
