@@ -51,11 +51,10 @@ public class MenuFactory {
 		});
 	}
 	
-	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sun Dec 18 19:38:32 UYST 2016
+	* Creation date: Mon Mar 20 17:47:47 GFT 2017
 	* Creator: rlomez
 	**/
 
@@ -66,6 +65,425 @@ public class MenuFactory {
 		MenuItem add_item = null;
 		Menu add_itemMenu = null;
 		switch (nodeType) {
+			case PATTERNINSTANCE:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form.setText("Form");
+				item_patternInstance_form.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form.setData("type",NodeType.PATTERNINSTANCE_FORM);
+				item_patternInstance_form.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE);
+				break;
+			case PATTERNINSTANCE_FORM:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panelGrid = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid.setText("PanelGrid");
+				item_patternInstance_form_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID);
+				item_patternInstance_form_panelGrid.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panel = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panel.setText("Panel");
+				item_patternInstance_form_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL);
+				item_patternInstance_form_panel.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_property = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_property.setText("Property");
+				item_patternInstance_form_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PROPERTY);
+				item_patternInstance_form_property.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_text.setText("Text");
+				item_patternInstance_form_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_text.setData("type",NodeType.PATTERNINSTANCE_FORM_TEXT);
+				item_patternInstance_form_text.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_messages = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_messages.setText("Messages");
+				item_patternInstance_form_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_messages.setData("type",NodeType.PATTERNINSTANCE_FORM_MESSAGES);
+				item_patternInstance_form_messages.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_dataTable.setText("DataTable");
+				item_patternInstance_form_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE);
+				item_patternInstance_form_dataTable.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_commandButton.setText("CommandButton");
+				item_patternInstance_form_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_COMMANDBUTTON);
+				item_patternInstance_form_commandButton.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panelGrid_panel = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_panel.setText("Panel");
+				item_patternInstance_form_panelGrid_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL);
+				item_patternInstance_form_panelGrid_panel.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panelGrid_property = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_property.setText("Property");
+				item_patternInstance_form_panelGrid_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PROPERTY);
+				item_patternInstance_form_panelGrid_property.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panelGrid_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_text.setText("Text");
+				item_patternInstance_form_panelGrid_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_TEXT);
+				item_patternInstance_form_panelGrid_text.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panelGrid_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_commandButton.setText("CommandButton");
+				item_patternInstance_form_panelGrid_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON);
+				item_patternInstance_form_panelGrid_commandButton.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panelGrid_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_dataTable.setText("DataTable");
+				item_patternInstance_form_panelGrid_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE);
+				item_patternInstance_form_panelGrid_dataTable.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PANEL:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panelGrid_panel_property = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_panel_property.setText("Property");
+				item_patternInstance_form_panelGrid_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY);
+				item_patternInstance_form_panelGrid_panel_property.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panelGrid_panel_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_panel_text.setText("Text");
+				item_patternInstance_form_panelGrid_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT);
+				item_patternInstance_form_panelGrid_panel_text.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panelGrid_panel_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_panel_commandButton.setText("CommandButton");
+				item_patternInstance_form_panelGrid_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON);
+				item_patternInstance_form_panelGrid_panel_commandButton.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panelGrid_panel_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_panel_dataTable.setText("DataTable");
+				item_patternInstance_form_panelGrid_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE);
+				item_patternInstance_form_panelGrid_panel_dataTable.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panelGrid_panel_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_panel_dataTable_column.setText("Column");
+				item_patternInstance_form_panelGrid_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN);
+				item_patternInstance_form_panelGrid_panel_dataTable_column.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panelGrid_panel_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setText("Text");
+				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT);
+				item_patternInstance_form_panelGrid_panel_dataTable_column_text.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_PROPERTY:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PROPERTY);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panelGrid_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_dataTable_column.setText("Column");
+				item_patternInstance_form_panelGrid_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN);
+				item_patternInstance_form_panelGrid_dataTable_column.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panelGrid_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panelGrid_dataTable_column_text.setText("Text");
+				item_patternInstance_form_panelGrid_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panelGrid_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT);
+				item_patternInstance_form_panelGrid_dataTable_column_text.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN);
+				break;
+			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_PANEL:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panel_property = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panel_property.setText("Property");
+				item_patternInstance_form_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_PROPERTY);
+				item_patternInstance_form_panel_property.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panel_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panel_text.setText("Text");
+				item_patternInstance_form_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_TEXT);
+				item_patternInstance_form_panel_text.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panel_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panel_commandButton.setText("CommandButton");
+				item_patternInstance_form_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON);
+				item_patternInstance_form_panel_commandButton.addSelectionListener(listenerFactory());
+
+				MenuItem item_patternInstance_form_panel_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panel_dataTable.setText("DataTable");
+				item_patternInstance_form_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE);
+				item_patternInstance_form_panel_dataTable.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL);
+				break;
+			case PATTERNINSTANCE_FORM_PANEL_PROPERTY:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_PROPERTY);
+				break;
+			case PATTERNINSTANCE_FORM_PANEL_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON);
+				break;
+			case PATTERNINSTANCE_FORM_PANEL_DATATABLE:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panel_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panel_dataTable_column.setText("Column");
+				item_patternInstance_form_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN);
+				item_patternInstance_form_panel_dataTable_column.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE);
+				break;
+			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_panel_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_panel_dataTable_column_text.setText("Text");
+				item_patternInstance_form_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT);
+				item_patternInstance_form_panel_dataTable_column_text.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN);
+				break;
+			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_PROPERTY:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PROPERTY);
+				break;
+			case PATTERNINSTANCE_FORM_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_MESSAGES:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_MESSAGES);
+				break;
+			case PATTERNINSTANCE_FORM_DATATABLE:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_dataTable_column.setText("Column");
+				item_patternInstance_form_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN);
+				item_patternInstance_form_dataTable_column.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE);
+				break;
+			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance_form_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance_form_dataTable_column_text.setText("Text");
+				item_patternInstance_form_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance_form_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT);
+				item_patternInstance_form_dataTable_column_text.addSelectionListener(listenerFactory());
+
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN);
+				break;
+			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT);
+				break;
+			case PATTERNINSTANCE_FORM_COMMANDBUTTON:
+				properties_item = new MenuItem(menu, SWT.PUSH);
+				properties_item.setText("Properties");
+				properties_item.addSelectionListener(propertiesListener());
+				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_COMMANDBUTTON);
+				break;
 			default:
 				break;
 		}
@@ -446,6 +864,11 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
+
+
+
+
+
 
 	private SelectionListener listenerFactory(){
 		SelectionListener listener = new SelectionListener() {

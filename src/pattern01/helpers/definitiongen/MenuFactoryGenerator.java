@@ -47,6 +47,7 @@ public class MenuFactoryGenerator extends Task {
 				.getHardCodedPath(PATH_NAME.CLASSGENERATOR_XML).getPath());
 		
 		//Se anaden los datos faltantes a los childselements creados
+		generateMapFromIteration(this.patternInstanceElement);
 		generateClasses(this.patternInstanceElement);
 	}
 	
@@ -99,7 +100,7 @@ public class MenuFactoryGenerator extends Task {
 				builder.appendLn(4,"item_"+childElement.getName()+".setText("+quotscape+childElement.getPrettyName()+quotscape+");");
 				builder.appendLn(4,"item_"+childElement.getName()+".setImage(ImageHelper.getImage("+quotscape+childElement.getImage()+quotscape+"));");
 				builder.appendLn(4,"item_"+childElement.getName()+".setData("+quotscape+"type"+quotscape+",");
-				builder.append("NodeType."+childElement.getPrettyName().toUpperCase()+");");
+				builder.append("NodeType."+element.getName().toUpperCase()+"_"+childElement.getPrettyName().toUpperCase()+");");
 				builder.appendLn(4,"item_"+childElement.getName()+".addSelectionListener(listenerFactory());");
 				builder.clrlf();
 			}
