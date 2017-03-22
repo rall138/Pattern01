@@ -677,6 +677,7 @@ public class MenuFactory {
 	}
 
 	private void propertiesElement(MenuItem selectedItem){
+		System.err.println("Tipo de elemento seleccionado: "+selectedItem.getData("type"));
 		switch(((NodeType)selectedItem.getData("type"))){
 			case PATTERNINSTANCE:
 				JFaceDialogPatternInstance jfacedialogpatternInstance = new JFaceDialogPatternInstance(this.parent.getShell());
@@ -864,11 +865,6 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
-
-
-
-
-
 
 	private SelectionListener listenerFactory(){
 		SelectionListener listener = new SelectionListener() {
