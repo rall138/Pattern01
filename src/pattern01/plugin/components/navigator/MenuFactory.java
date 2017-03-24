@@ -22,6 +22,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import pattern01.helpers.ImageHelper;
+import pattern01.helpers.generated.Form;
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.generated.*;
 
