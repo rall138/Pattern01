@@ -172,6 +172,14 @@ public class MenuFactoryGenerator extends Task {
 		builder.appendLn(4,"item_"+element.getName()+".setText(selectedItem.getText());");
 		builder.appendLn(4,"item_"+element.getName()+".setImage(ImageHelper.getImage("+quotscape+"primefaces.jpg"+quotscape+"));");
 		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"type"+quotscape+",NodeType."+element.getName().toUpperCase()+");");
+		
+		// Vinculando las instancias nuevas con el padre
+		builder.appendLn(4,element.getPrettyName()+" "+element.getName()+" = ("+element.getPrettyName()+")selectedItem.getData("+quotscape+"class_instance"+quotscape+");");
+
+		
+		
+		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"class_instance"+quotscape+", "+element.getName()+");");
+		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+", item_"+element.getName()+".getParent().getData("+quotscape+"reference"+quotscape+"));");
 		builder.appendLn(4,"break;");
 		for(Element childElement : element.getChildElements_collection()){
 			builder = (generateAddElementMethodSwitchOptions(childElement, builder, index++));
