@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sat Mar 25 22:48:29 UYT 2017
+	* Creation date: Tue Mar 28 17:03:02 GFT 2017
 	* Creator: rlomez
 	**/
 public class Messages implements IPatternElement{
@@ -28,8 +28,6 @@ public class Messages implements IPatternElement{
 	}
 
 	@Override
-	public IPatternElement fromXml(java.lang.String xmlDocument){
-		java.lang.String xpathuri = "null";
-		return null;
+	public void setGenericElement(Object o){
 	}
 }

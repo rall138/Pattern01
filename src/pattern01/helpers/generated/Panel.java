@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sat Mar 25 22:48:29 UYT 2017
+	* Creation date: Tue Mar 28 17:03:02 GFT 2017
 	* Creator: rlomez
 	**/
 public class Panel implements IPatternElement{
@@ -72,8 +72,15 @@ public class Panel implements IPatternElement{
 	}
 
 	@Override
-	public IPatternElement fromXml(java.lang.String xmlDocument){
-		java.lang.String xpathuri = "null";
-		return null;
+	public void setGenericElement(Object o){
+		if (o instanceof Panel){
+			this.getCollection_Property().add((Property)o);
+		}else if (o instanceof Text){
+			this.getCollection_Text().add((Text)o);
+		}else if (o instanceof CommandButton){
+			this.getCollection_CommandButton().add((CommandButton)o);
+		}else if (o instanceof DataTable){
+			this.getCollection_DataTable().add((DataTable)o);
+		}
 	}
 }
