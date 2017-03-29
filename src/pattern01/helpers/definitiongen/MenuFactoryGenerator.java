@@ -12,6 +12,7 @@ import pattern01.helpers.CustomStringBuilder;
 import pattern01.helpers.LoggerThread;
 import pattern01.helpers.CommonPathFix.PATH_NAME;
 import pattern01.helpers.temporal_containers.Element;
+import pattern01.plugin.components.navigator.NodeType;
 
 public class MenuFactoryGenerator extends Task {
 
@@ -64,24 +65,44 @@ public class MenuFactoryGenerator extends Task {
 		builder.appendLn(2,"MenuItem add_item = null;");
 		builder.appendLn(2,"Menu add_itemMenu = null;");
 		builder.appendLn(2,"switch (nodeType) {");
-		builder = generateSwitchOptions(element, builder);
+		generateSwitchOptionsForClassItem(builder);
+		generateSwitchOptions(element, builder);
 		builder.appendLn(3,"default:");
 		builder.appendLn(4,"break;");
 		builder.appendLn(2,"}");
 		builder.appendLn(1,"}");
 		builder.clrlf();
 		generateMapFromIteration(this.patternInstanceElement);
-		builder = generateAddElementMethod(this.patternInstanceElement, builder);
+		generateAddElementMethod(this.patternInstanceElement, builder);
 		builder.clrlf();
 		generateMapFromIteration(this.patternInstanceElement);
-		builder = generatePropertiesMethod(this.patternInstanceElement, builder);
+		generatePropertiesMethod(this.patternInstanceElement, builder);
 		builder.clrlf();		
 		builder.appendLn(1,endTag);
 		builder.clrlf();
 		generateClasses(builder.toString());
 	}
 	
-	private CustomStringBuilder generateSwitchOptions(Element element, CustomStringBuilder builder){
+	private void generateSwitchOptionsForClassItem(CustomStringBuilder builder){
+		builder.appendLn(3,"case CLASS:");
+		builder.appendLn(4,"add_item = new MenuItem(menu, SWT.CASCADE);");
+		builder.appendLn(4,"add_item.setText("+quotscape+"Add"+quotscape+");");
+		builder.appendLn(4,"add_itemMenu = new Menu(add_item);");
+		builder.appendLn(4,"add_item.setMenu(add_itemMenu);");
+		builder.clrlf();
+		
+		builder.appendLn(4,"MenuItem item_patternInstance = new MenuItem(add_itemMenu, SWT.PUSH);");
+		builder.appendLn(4,"item_patternInstance.setText("+quotscape+"PatternInstance"+quotscape+");");
+		builder.appendLn(4,"item_patternInstance.setImage(ImageHelper.getImage("+quotscape+"primefaces.jpg"+quotscape+"));");
+		builder.appendLn(4,"item_patternInstance.setData("+quotscape+"type"+quotscape+",");
+		builder.append("NodeType.PATTERNINSTANCE);");
+		builder.appendLn(4,"item_patternInstance.setData("+quotscape+"reference"+quotscape+",");
+		builder.append("java.util.UUID.randomUUID());");
+		builder.appendLn(4,"item_patternInstance.addSelectionListener(listenerFactory());");
+		builder.appendLn(4, "break;");
+	}
+	
+	private void generateSwitchOptions(Element element, CustomStringBuilder builder){
 		boolean notUsed = map.containsValue(element.getName().toUpperCase());
 		if (notUsed){
 			map.remove(element.getName().toUpperCase());
@@ -113,10 +134,9 @@ public class MenuFactoryGenerator extends Task {
 			builder.appendLn(4,"break;");
 			
 			for(Element childElement : element.getChildElements_collection()){
-				builder = generateSwitchOptions(childElement, builder);
+				generateSwitchOptions(childElement, builder);
 			}
 		}
-		return builder;
 	}
 	
 	private void generateMapFromIteration(Element element){
@@ -155,42 +175,58 @@ public class MenuFactoryGenerator extends Task {
 		return builder;
 	}
 	
-	private CustomStringBuilder generateAddElementMethod(Element element, CustomStringBuilder builder){
+	private void generateAddElementMethod(Element element, CustomStringBuilder builder){
 		builder.appendLn(1,"private void addElement(MenuItem selectedItem){");
 		builder.appendLn(2,"switch(((NodeType)selectedItem.getData("+quotscape+"type"+quotscape+"))){");
-		builder = generateAddElementMethodSwitchOptions(element, builder,0);
+		generateAddElementMethodForClassItem(builder);
+		generateAddElementMethodSwitchOptions(element, builder,0);
 		builder.appendLn(3,"default:");
 		builder.appendLn(4,"break;");
 		builder.appendLn(2,"}");
 		builder.appendLn(1,"}");
-		return builder;
 	}
 	
-	private CustomStringBuilder generateAddElementMethodSwitchOptions(Element element, CustomStringBuilder builder, int index){
+	private void generateAddElementMethodForClassItem(CustomStringBuilder builder){
+		builder.appendLn(3,"case UNDEFINED:");
+		builder.appendLn(4, "break;");
+		builder.appendLn(3,"case CLASS:");
+		builder.appendLn(4, "break;");
+	}
+	
+	private void generateAddElementMethodSwitchOptions(Element element, CustomStringBuilder builder, int index){
 		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
 		builder.appendLn(4,"TreeItem item_"+element.getName()+" = new TreeItem(this.parent.getSelection()[0], 0);");
 		builder.appendLn(4,"item_"+element.getName()+".setText(selectedItem.getText());");
 		builder.appendLn(4,"item_"+element.getName()+".setImage(ImageHelper.getImage("+quotscape+"primefaces.jpg"+quotscape+"));");
 		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"type"+quotscape+",NodeType."+element.getName().toUpperCase()+");");
-		builder.clrlf();
-		
+
 		builder.appendLn(4,element.getPrettyName()+" "+element.getName()+" = ");
 		builder.append("new "+element.getPrettyName()+"();");
 		builder.clrlf();
-		
+
 		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"class_instance"+quotscape+", "+element.getName()+");");
-		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+", item_"+element.getName()+".getParent().getData("+quotscape+"reference"+quotscape+"));");
+
+		if (!element.getPrettyName().equalsIgnoreCase(NodeType.PATTERNINSTANCE.toString())){
+			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape);
+			builder.append(", item_"+element.getName()+".getParentItem().getData("+quotscape+"parent_reference"+quotscape+"));");
+			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+", ");
+			builder.append("item_"+element.getName()+".getParentItem().getData("+quotscape+"reference"+quotscape+"));");
+		}else{
+			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+",java.util.UUID.randomUUID());");
+			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape+",");
+			builder.append(element.getName()+");");			
+		}
 		builder.clrlf();
+
 		builder.appendComment(4, "Vinculando las instancias nuevas con su respectivo padre");
 		builder.appendLn(4,"IPatternElement "+element.getName()+"_parentInstance = ");
-		builder.append("(IPatternElement)item_"+element.getName()+".getParent().getData("+quotscape+"class_instance"+quotscape+");");
+		builder.append("(IPatternElement)item_"+element.getName()+".getParentItem().getData("+quotscape+"class_instance"+quotscape+");");
 
 		builder.appendLn(4,element.getName()+"_parentInstance.setGenericElement("+element.getName()+");");
 		builder.appendLn(4,"break;");
 		for(Element childElement : element.getChildElements_collection()){
-			builder = (generateAddElementMethodSwitchOptions(childElement, builder, index++));
+			generateAddElementMethodSwitchOptions(childElement, builder, index++);
 		}
-		return builder;
 	}
 	
 	private void generateClasses(String classBody){

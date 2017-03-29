@@ -52,26 +52,10 @@ public class MenuFactory {
 		});
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Mar 28 17:03:04 GFT 2017
+	* Creation date: Wed Mar 29 17:11:11 GFT 2017
 	* Creator: rlomez
 	**/
 
@@ -82,6 +66,19 @@ public class MenuFactory {
 		MenuItem add_item = null;
 		Menu add_itemMenu = null;
 		switch (nodeType) {
+			case CLASS:
+				add_item = new MenuItem(menu, SWT.CASCADE);
+				add_item.setText("Add");
+				add_itemMenu = new Menu(add_item);
+				add_item.setMenu(add_itemMenu);
+
+				MenuItem item_patternInstance = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_patternInstance.setText("PatternInstance");
+				item_patternInstance.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_patternInstance.setData("type",NodeType.PATTERNINSTANCE);
+				item_patternInstance.setData("reference",java.util.UUID.randomUUID());
+				item_patternInstance.addSelectionListener(listenerFactory());
+				break;
 			case PATTERNINSTANCE:
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
@@ -508,21 +505,25 @@ public class MenuFactory {
 
 	private void addElement(MenuItem selectedItem){
 		switch(((NodeType)selectedItem.getData("type"))){
+			case UNDEFINED:
+				break;
+			case CLASS:
+				break;
 			case PATTERNINSTANCE:
 				TreeItem item_patternInstance = new TreeItem(this.parent.getSelection()[0], 0);
 				item_patternInstance.setText(selectedItem.getText());
 				item_patternInstance.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance.setData("type",NodeType.PATTERNINSTANCE);
-
 				PatternInstance patternInstance = new PatternInstance();
 
 				item_patternInstance.setData("class_instance", patternInstance);
-				item_patternInstance.setData("reference", item_patternInstance.getParent().getData("reference"));
+				item_patternInstance.setData("reference",java.util.UUID.randomUUID());
+				item_patternInstance.setData("parent_reference",patternInstance);
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_parentInstance = (IPatternElement)item_patternInstance.getParent().getData("class_instance");
+				IPatternElement patternInstance_parentInstance = (IPatternElement)item_patternInstance.getParentItem().getData("class_instance");
 				patternInstance_parentInstance.setGenericElement(patternInstance);
 				break;
 			case PATTERNINSTANCE_FORM:
@@ -530,16 +531,16 @@ public class MenuFactory {
 				item_patternInstance_form.setText(selectedItem.getText());
 				item_patternInstance_form.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form.setData("type",NodeType.PATTERNINSTANCE_FORM);
-
 				Form patternInstance_form = new Form();
 
 				item_patternInstance_form.setData("class_instance", patternInstance_form);
-				item_patternInstance_form.setData("reference", item_patternInstance_form.getParent().getData("reference"));
+				item_patternInstance_form.setData("parent_reference", item_patternInstance_form.getParentItem().getData("parent_reference"));
+				item_patternInstance_form.setData("reference", item_patternInstance_form.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_parentInstance = (IPatternElement)item_patternInstance_form.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_parentInstance = (IPatternElement)item_patternInstance_form.getParentItem().getData("class_instance");
 				patternInstance_form_parentInstance.setGenericElement(patternInstance_form);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID:
@@ -547,16 +548,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID);
-
 				PanelGrid patternInstance_form_panelGrid = new PanelGrid();
 
 				item_patternInstance_form_panelGrid.setData("class_instance", patternInstance_form_panelGrid);
-				item_patternInstance_form_panelGrid.setData("reference", item_patternInstance_form_panelGrid.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid.setData("parent_reference", item_patternInstance_form_panelGrid.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid.setData("reference", item_patternInstance_form_panelGrid.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_parentInstance.setGenericElement(patternInstance_form_panelGrid);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PANEL:
@@ -564,16 +565,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_panel.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL);
-
 				Panel patternInstance_form_panelGrid_panel = new Panel();
 
 				item_patternInstance_form_panelGrid_panel.setData("class_instance", patternInstance_form_panelGrid_panel);
-				item_patternInstance_form_panelGrid_panel.setData("reference", item_patternInstance_form_panelGrid_panel.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_panel.setData("parent_reference", item_patternInstance_form_panelGrid_panel.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_panel.setData("reference", item_patternInstance_form_panelGrid_panel.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_panel_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_panel_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY:
@@ -581,16 +582,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_panel_property.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY);
-
 				Property patternInstance_form_panelGrid_panel_property = new Property();
 
 				item_patternInstance_form_panelGrid_panel_property.setData("class_instance", patternInstance_form_panelGrid_panel_property);
-				item_patternInstance_form_panelGrid_panel_property.setData("reference", item_patternInstance_form_panelGrid_panel_property.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_panel_property.setData("parent_reference", item_patternInstance_form_panelGrid_panel_property.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_panel_property.setData("reference", item_patternInstance_form_panelGrid_panel_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_property_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_property.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_panel_property_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_property.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_panel_property_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_property);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT:
@@ -598,16 +599,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_panel_text.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT);
-
 				Text patternInstance_form_panelGrid_panel_text = new Text();
 
 				item_patternInstance_form_panelGrid_panel_text.setData("class_instance", patternInstance_form_panelGrid_panel_text);
-				item_patternInstance_form_panelGrid_panel_text.setData("reference", item_patternInstance_form_panelGrid_panel_text.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_panel_text.setData("parent_reference", item_patternInstance_form_panelGrid_panel_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_panel_text.setData("reference", item_patternInstance_form_panelGrid_panel_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_panel_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_text.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_panel_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_text);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON:
@@ -615,16 +616,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_panel_commandButton.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON);
-
 				CommandButton patternInstance_form_panelGrid_panel_commandButton = new CommandButton();
 
 				item_patternInstance_form_panelGrid_panel_commandButton.setData("class_instance", patternInstance_form_panelGrid_panel_commandButton);
-				item_patternInstance_form_panelGrid_panel_commandButton.setData("reference", item_patternInstance_form_panelGrid_panel_commandButton.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_panel_commandButton.setData("parent_reference", item_patternInstance_form_panelGrid_panel_commandButton.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_panel_commandButton.setData("reference", item_patternInstance_form_panelGrid_panel_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_commandButton.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_panel_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_commandButton.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_panel_commandButton_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_commandButton);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE:
@@ -632,16 +633,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_panel_dataTable.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE);
-
 				DataTable patternInstance_form_panelGrid_panel_dataTable = new DataTable();
 
 				item_patternInstance_form_panelGrid_panel_dataTable.setData("class_instance", patternInstance_form_panelGrid_panel_dataTable);
-				item_patternInstance_form_panelGrid_panel_dataTable.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_panel_dataTable.setData("parent_reference", item_patternInstance_form_panelGrid_panel_dataTable.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_panel_dataTable.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_panel_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_panel_dataTable_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_dataTable);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN:
@@ -649,16 +650,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_panel_dataTable_column.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN);
-
 				Column patternInstance_form_panelGrid_panel_dataTable_column = new Column();
 
 				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("class_instance", patternInstance_form_panelGrid_panel_dataTable_column);
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable_column.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("parent_reference", item_patternInstance_form_panelGrid_panel_dataTable_column.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable_column.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_panel_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable_column.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_panel_dataTable_column_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_dataTable_column);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT:
@@ -666,16 +667,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT);
-
 				Text patternInstance_form_panelGrid_panel_dataTable_column_text = new Text();
 
 				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("class_instance", patternInstance_form_panelGrid_panel_dataTable_column_text);
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("parent_reference", item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_panel_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_panel_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_dataTable_column_text);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_PROPERTY:
@@ -683,16 +684,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_property.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_property.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PROPERTY);
-
 				Property patternInstance_form_panelGrid_property = new Property();
 
 				item_patternInstance_form_panelGrid_property.setData("class_instance", patternInstance_form_panelGrid_property);
-				item_patternInstance_form_panelGrid_property.setData("reference", item_patternInstance_form_panelGrid_property.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_property.setData("parent_reference", item_patternInstance_form_panelGrid_property.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_property.setData("reference", item_patternInstance_form_panelGrid_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_property_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_property.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_property_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_property.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_property_parentInstance.setGenericElement(patternInstance_form_panelGrid_property);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_TEXT:
@@ -700,16 +701,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_text.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_TEXT);
-
 				Text patternInstance_form_panelGrid_text = new Text();
 
 				item_patternInstance_form_panelGrid_text.setData("class_instance", patternInstance_form_panelGrid_text);
-				item_patternInstance_form_panelGrid_text.setData("reference", item_patternInstance_form_panelGrid_text.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_text.setData("parent_reference", item_patternInstance_form_panelGrid_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_text.setData("reference", item_patternInstance_form_panelGrid_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_text.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_text);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON:
@@ -717,16 +718,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_commandButton.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON);
-
 				CommandButton patternInstance_form_panelGrid_commandButton = new CommandButton();
 
 				item_patternInstance_form_panelGrid_commandButton.setData("class_instance", patternInstance_form_panelGrid_commandButton);
-				item_patternInstance_form_panelGrid_commandButton.setData("reference", item_patternInstance_form_panelGrid_commandButton.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_commandButton.setData("parent_reference", item_patternInstance_form_panelGrid_commandButton.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_commandButton.setData("reference", item_patternInstance_form_panelGrid_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_commandButton.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_commandButton.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_commandButton_parentInstance.setGenericElement(patternInstance_form_panelGrid_commandButton);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE:
@@ -734,16 +735,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_dataTable.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE);
-
 				DataTable patternInstance_form_panelGrid_dataTable = new DataTable();
 
 				item_patternInstance_form_panelGrid_dataTable.setData("class_instance", patternInstance_form_panelGrid_dataTable);
-				item_patternInstance_form_panelGrid_dataTable.setData("reference", item_patternInstance_form_panelGrid_dataTable.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_dataTable.setData("parent_reference", item_patternInstance_form_panelGrid_dataTable.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_dataTable.setData("reference", item_patternInstance_form_panelGrid_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_dataTable_parentInstance.setGenericElement(patternInstance_form_panelGrid_dataTable);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN:
@@ -751,16 +752,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_dataTable_column.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN);
-
 				Column patternInstance_form_panelGrid_dataTable_column = new Column();
 
 				item_patternInstance_form_panelGrid_dataTable_column.setData("class_instance", patternInstance_form_panelGrid_dataTable_column);
-				item_patternInstance_form_panelGrid_dataTable_column.setData("reference", item_patternInstance_form_panelGrid_dataTable_column.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_dataTable_column.setData("parent_reference", item_patternInstance_form_panelGrid_dataTable_column.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_dataTable_column.setData("reference", item_patternInstance_form_panelGrid_dataTable_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable_column.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable_column.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_dataTable_column_parentInstance.setGenericElement(patternInstance_form_panelGrid_dataTable_column);
 				break;
 			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT:
@@ -768,16 +769,16 @@ public class MenuFactory {
 				item_patternInstance_form_panelGrid_dataTable_column_text.setText(selectedItem.getText());
 				item_patternInstance_form_panelGrid_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panelGrid_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT);
-
 				Text patternInstance_form_panelGrid_dataTable_column_text = new Text();
 
 				item_patternInstance_form_panelGrid_dataTable_column_text.setData("class_instance", patternInstance_form_panelGrid_dataTable_column_text);
-				item_patternInstance_form_panelGrid_dataTable_column_text.setData("reference", item_patternInstance_form_panelGrid_dataTable_column_text.getParent().getData("reference"));
+				item_patternInstance_form_panelGrid_dataTable_column_text.setData("parent_reference", item_patternInstance_form_panelGrid_dataTable_column_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panelGrid_dataTable_column_text.setData("reference", item_patternInstance_form_panelGrid_dataTable_column_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable_column_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panelGrid_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable_column_text.getParentItem().getData("class_instance");
 				patternInstance_form_panelGrid_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_dataTable_column_text);
 				break;
 			case PATTERNINSTANCE_FORM_PANEL:
@@ -785,16 +786,16 @@ public class MenuFactory {
 				item_patternInstance_form_panel.setText(selectedItem.getText());
 				item_patternInstance_form_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL);
-
 				Panel patternInstance_form_panel = new Panel();
 
 				item_patternInstance_form_panel.setData("class_instance", patternInstance_form_panel);
-				item_patternInstance_form_panel.setData("reference", item_patternInstance_form_panel.getParent().getData("reference"));
+				item_patternInstance_form_panel.setData("parent_reference", item_patternInstance_form_panel.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panel.setData("reference", item_patternInstance_form_panel.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_parentInstance = (IPatternElement)item_patternInstance_form_panel.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panel_parentInstance = (IPatternElement)item_patternInstance_form_panel.getParentItem().getData("class_instance");
 				patternInstance_form_panel_parentInstance.setGenericElement(patternInstance_form_panel);
 				break;
 			case PATTERNINSTANCE_FORM_PANEL_PROPERTY:
@@ -802,16 +803,16 @@ public class MenuFactory {
 				item_patternInstance_form_panel_property.setText(selectedItem.getText());
 				item_patternInstance_form_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_PROPERTY);
-
 				Property patternInstance_form_panel_property = new Property();
 
 				item_patternInstance_form_panel_property.setData("class_instance", patternInstance_form_panel_property);
-				item_patternInstance_form_panel_property.setData("reference", item_patternInstance_form_panel_property.getParent().getData("reference"));
+				item_patternInstance_form_panel_property.setData("parent_reference", item_patternInstance_form_panel_property.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panel_property.setData("reference", item_patternInstance_form_panel_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_property_parentInstance = (IPatternElement)item_patternInstance_form_panel_property.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panel_property_parentInstance = (IPatternElement)item_patternInstance_form_panel_property.getParentItem().getData("class_instance");
 				patternInstance_form_panel_property_parentInstance.setGenericElement(patternInstance_form_panel_property);
 				break;
 			case PATTERNINSTANCE_FORM_PANEL_TEXT:
@@ -819,16 +820,16 @@ public class MenuFactory {
 				item_patternInstance_form_panel_text.setText(selectedItem.getText());
 				item_patternInstance_form_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_TEXT);
-
 				Text patternInstance_form_panel_text = new Text();
 
 				item_patternInstance_form_panel_text.setData("class_instance", patternInstance_form_panel_text);
-				item_patternInstance_form_panel_text.setData("reference", item_patternInstance_form_panel_text.getParent().getData("reference"));
+				item_patternInstance_form_panel_text.setData("parent_reference", item_patternInstance_form_panel_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panel_text.setData("reference", item_patternInstance_form_panel_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_text_parentInstance = (IPatternElement)item_patternInstance_form_panel_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panel_text_parentInstance = (IPatternElement)item_patternInstance_form_panel_text.getParentItem().getData("class_instance");
 				patternInstance_form_panel_text_parentInstance.setGenericElement(patternInstance_form_panel_text);
 				break;
 			case PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON:
@@ -836,16 +837,16 @@ public class MenuFactory {
 				item_patternInstance_form_panel_commandButton.setText(selectedItem.getText());
 				item_patternInstance_form_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON);
-
 				CommandButton patternInstance_form_panel_commandButton = new CommandButton();
 
 				item_patternInstance_form_panel_commandButton.setData("class_instance", patternInstance_form_panel_commandButton);
-				item_patternInstance_form_panel_commandButton.setData("reference", item_patternInstance_form_panel_commandButton.getParent().getData("reference"));
+				item_patternInstance_form_panel_commandButton.setData("parent_reference", item_patternInstance_form_panel_commandButton.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panel_commandButton.setData("reference", item_patternInstance_form_panel_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panel_commandButton.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panel_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panel_commandButton.getParentItem().getData("class_instance");
 				patternInstance_form_panel_commandButton_parentInstance.setGenericElement(patternInstance_form_panel_commandButton);
 				break;
 			case PATTERNINSTANCE_FORM_PANEL_DATATABLE:
@@ -853,16 +854,16 @@ public class MenuFactory {
 				item_patternInstance_form_panel_dataTable.setText(selectedItem.getText());
 				item_patternInstance_form_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE);
-
 				DataTable patternInstance_form_panel_dataTable = new DataTable();
 
 				item_patternInstance_form_panel_dataTable.setData("class_instance", patternInstance_form_panel_dataTable);
-				item_patternInstance_form_panel_dataTable.setData("reference", item_patternInstance_form_panel_dataTable.getParent().getData("reference"));
+				item_patternInstance_form_panel_dataTable.setData("parent_reference", item_patternInstance_form_panel_dataTable.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panel_dataTable.setData("reference", item_patternInstance_form_panel_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panel_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable.getParentItem().getData("class_instance");
 				patternInstance_form_panel_dataTable_parentInstance.setGenericElement(patternInstance_form_panel_dataTable);
 				break;
 			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN:
@@ -870,16 +871,16 @@ public class MenuFactory {
 				item_patternInstance_form_panel_dataTable_column.setText(selectedItem.getText());
 				item_patternInstance_form_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN);
-
 				Column patternInstance_form_panel_dataTable_column = new Column();
 
 				item_patternInstance_form_panel_dataTable_column.setData("class_instance", patternInstance_form_panel_dataTable_column);
-				item_patternInstance_form_panel_dataTable_column.setData("reference", item_patternInstance_form_panel_dataTable_column.getParent().getData("reference"));
+				item_patternInstance_form_panel_dataTable_column.setData("parent_reference", item_patternInstance_form_panel_dataTable_column.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panel_dataTable_column.setData("reference", item_patternInstance_form_panel_dataTable_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable_column.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panel_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable_column.getParentItem().getData("class_instance");
 				patternInstance_form_panel_dataTable_column_parentInstance.setGenericElement(patternInstance_form_panel_dataTable_column);
 				break;
 			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT:
@@ -887,16 +888,16 @@ public class MenuFactory {
 				item_patternInstance_form_panel_dataTable_column_text.setText(selectedItem.getText());
 				item_patternInstance_form_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT);
-
 				Text patternInstance_form_panel_dataTable_column_text = new Text();
 
 				item_patternInstance_form_panel_dataTable_column_text.setData("class_instance", patternInstance_form_panel_dataTable_column_text);
-				item_patternInstance_form_panel_dataTable_column_text.setData("reference", item_patternInstance_form_panel_dataTable_column_text.getParent().getData("reference"));
+				item_patternInstance_form_panel_dataTable_column_text.setData("parent_reference", item_patternInstance_form_panel_dataTable_column_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_panel_dataTable_column_text.setData("reference", item_patternInstance_form_panel_dataTable_column_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable_column_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_panel_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable_column_text.getParentItem().getData("class_instance");
 				patternInstance_form_panel_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_panel_dataTable_column_text);
 				break;
 			case PATTERNINSTANCE_FORM_PROPERTY:
@@ -904,16 +905,16 @@ public class MenuFactory {
 				item_patternInstance_form_property.setText(selectedItem.getText());
 				item_patternInstance_form_property.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PROPERTY);
-
 				Property patternInstance_form_property = new Property();
 
 				item_patternInstance_form_property.setData("class_instance", patternInstance_form_property);
-				item_patternInstance_form_property.setData("reference", item_patternInstance_form_property.getParent().getData("reference"));
+				item_patternInstance_form_property.setData("parent_reference", item_patternInstance_form_property.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_property.setData("reference", item_patternInstance_form_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_property_parentInstance = (IPatternElement)item_patternInstance_form_property.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_property_parentInstance = (IPatternElement)item_patternInstance_form_property.getParentItem().getData("class_instance");
 				patternInstance_form_property_parentInstance.setGenericElement(patternInstance_form_property);
 				break;
 			case PATTERNINSTANCE_FORM_TEXT:
@@ -921,16 +922,16 @@ public class MenuFactory {
 				item_patternInstance_form_text.setText(selectedItem.getText());
 				item_patternInstance_form_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_text.setData("type",NodeType.PATTERNINSTANCE_FORM_TEXT);
-
 				Text patternInstance_form_text = new Text();
 
 				item_patternInstance_form_text.setData("class_instance", patternInstance_form_text);
-				item_patternInstance_form_text.setData("reference", item_patternInstance_form_text.getParent().getData("reference"));
+				item_patternInstance_form_text.setData("parent_reference", item_patternInstance_form_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_text.setData("reference", item_patternInstance_form_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_text_parentInstance = (IPatternElement)item_patternInstance_form_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_text_parentInstance = (IPatternElement)item_patternInstance_form_text.getParentItem().getData("class_instance");
 				patternInstance_form_text_parentInstance.setGenericElement(patternInstance_form_text);
 				break;
 			case PATTERNINSTANCE_FORM_MESSAGES:
@@ -938,16 +939,16 @@ public class MenuFactory {
 				item_patternInstance_form_messages.setText(selectedItem.getText());
 				item_patternInstance_form_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_messages.setData("type",NodeType.PATTERNINSTANCE_FORM_MESSAGES);
-
 				Messages patternInstance_form_messages = new Messages();
 
 				item_patternInstance_form_messages.setData("class_instance", patternInstance_form_messages);
-				item_patternInstance_form_messages.setData("reference", item_patternInstance_form_messages.getParent().getData("reference"));
+				item_patternInstance_form_messages.setData("parent_reference", item_patternInstance_form_messages.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_messages.setData("reference", item_patternInstance_form_messages.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_messages_parentInstance = (IPatternElement)item_patternInstance_form_messages.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_messages_parentInstance = (IPatternElement)item_patternInstance_form_messages.getParentItem().getData("class_instance");
 				patternInstance_form_messages_parentInstance.setGenericElement(patternInstance_form_messages);
 				break;
 			case PATTERNINSTANCE_FORM_DATATABLE:
@@ -955,16 +956,16 @@ public class MenuFactory {
 				item_patternInstance_form_dataTable.setText(selectedItem.getText());
 				item_patternInstance_form_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE);
-
 				DataTable patternInstance_form_dataTable = new DataTable();
 
 				item_patternInstance_form_dataTable.setData("class_instance", patternInstance_form_dataTable);
-				item_patternInstance_form_dataTable.setData("reference", item_patternInstance_form_dataTable.getParent().getData("reference"));
+				item_patternInstance_form_dataTable.setData("parent_reference", item_patternInstance_form_dataTable.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_dataTable.setData("reference", item_patternInstance_form_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_dataTable.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_dataTable.getParentItem().getData("class_instance");
 				patternInstance_form_dataTable_parentInstance.setGenericElement(patternInstance_form_dataTable);
 				break;
 			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN:
@@ -972,16 +973,16 @@ public class MenuFactory {
 				item_patternInstance_form_dataTable_column.setText(selectedItem.getText());
 				item_patternInstance_form_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN);
-
 				Column patternInstance_form_dataTable_column = new Column();
 
 				item_patternInstance_form_dataTable_column.setData("class_instance", patternInstance_form_dataTable_column);
-				item_patternInstance_form_dataTable_column.setData("reference", item_patternInstance_form_dataTable_column.getParent().getData("reference"));
+				item_patternInstance_form_dataTable_column.setData("parent_reference", item_patternInstance_form_dataTable_column.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_dataTable_column.setData("reference", item_patternInstance_form_dataTable_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_dataTable_column.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_dataTable_column.getParentItem().getData("class_instance");
 				patternInstance_form_dataTable_column_parentInstance.setGenericElement(patternInstance_form_dataTable_column);
 				break;
 			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT:
@@ -989,16 +990,16 @@ public class MenuFactory {
 				item_patternInstance_form_dataTable_column_text.setText(selectedItem.getText());
 				item_patternInstance_form_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT);
-
 				Text patternInstance_form_dataTable_column_text = new Text();
 
 				item_patternInstance_form_dataTable_column_text.setData("class_instance", patternInstance_form_dataTable_column_text);
-				item_patternInstance_form_dataTable_column_text.setData("reference", item_patternInstance_form_dataTable_column_text.getParent().getData("reference"));
+				item_patternInstance_form_dataTable_column_text.setData("parent_reference", item_patternInstance_form_dataTable_column_text.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_dataTable_column_text.setData("reference", item_patternInstance_form_dataTable_column_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_dataTable_column_text.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_dataTable_column_text.getParentItem().getData("class_instance");
 				patternInstance_form_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_dataTable_column_text);
 				break;
 			case PATTERNINSTANCE_FORM_COMMANDBUTTON:
@@ -1006,16 +1007,16 @@ public class MenuFactory {
 				item_patternInstance_form_commandButton.setText(selectedItem.getText());
 				item_patternInstance_form_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance_form_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_COMMANDBUTTON);
-
 				CommandButton patternInstance_form_commandButton = new CommandButton();
 
 				item_patternInstance_form_commandButton.setData("class_instance", patternInstance_form_commandButton);
-				item_patternInstance_form_commandButton.setData("reference", item_patternInstance_form_commandButton.getParent().getData("reference"));
+				item_patternInstance_form_commandButton.setData("parent_reference", item_patternInstance_form_commandButton.getParentItem().getData("parent_reference"));
+				item_patternInstance_form_commandButton.setData("reference", item_patternInstance_form_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_commandButton.getParent().getData("class_instance");
+				IPatternElement patternInstance_form_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_commandButton.getParentItem().getData("class_instance");
 				patternInstance_form_commandButton_parentInstance.setGenericElement(patternInstance_form_commandButton);
 				break;
 			default:
@@ -1211,6 +1212,11 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
+
+
+
+
+
 
 
 

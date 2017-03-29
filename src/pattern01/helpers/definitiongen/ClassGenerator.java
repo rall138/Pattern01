@@ -73,9 +73,6 @@ public class ClassGenerator extends Task{
 			marshallerHeader(element);
 			marshallerBuilder(element);
 			marshallerFooter(element);
-//			unmarshallerHeader(element);
-//			unmarshallerBuilder(element);
-//			unmarshallerFooter(element);
 			generateGenericSetter(element);
 			builder.append(attributeBuilder.toString());
 			builder.append(getterAndSetterBuilder.toString());
@@ -110,9 +107,8 @@ public class ClassGenerator extends Task{
 				String processedType = DataTypeConversion.getProcessedType(attr.getType());
 				generateCustomValueBasedProperties(processedType, processedValue, attr);
 			}else{
-				attributeBuilder.appendLn(1, "private "+attr.getType()+" "+attr.getName()+
-						(attr.getDefault_value() == null || attr.getDefault_value().equalsIgnoreCase("")?"":" = "+
-								DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value()))+";");
+				attributeBuilder.appendLn(1, "private "+attr.getType()+" "+attr.getName()+" = "+
+								DataTypeConversion.getProcessedValue(attr.getType(), attr.getDefault_value())+";");
 				
 				generateGetterAndSettersOfAttributes(attr);
 			}
@@ -239,13 +235,15 @@ public class ClassGenerator extends Task{
 	private void marshallerBuilder(Element element){
 		for(Element childElement : element.getChildElements_collection()){
 			if(childElement.isUnique()){
-				getterAndSetterBuilder.appendLn(2, "xml+=this."+childElement.getName()+".toXml();");
+				getterAndSetterBuilder.appendLn(2, "if("+childElement.getName()+" != null)");
+				getterAndSetterBuilder.appendLn(3, "xml+=this."+childElement.getName()+".toXml();");
 			}else{
-				getterAndSetterBuilder.appendLn(2, "for(int index = 0; index < "+collectionPrefix+
+				getterAndSetterBuilder.appendLn(2, "if("+collectionPrefix+childElement.getPrettyName()+" != null)");				
+				getterAndSetterBuilder.appendLn(3, "for(int index = 0; index < "+collectionPrefix+
 						childElement.getPrettyName()+".size(); index++){");
-				getterAndSetterBuilder.appendLn(tabGen(3)+"xml+="+collectionPrefix+
+				getterAndSetterBuilder.appendLn(4, "xml+="+collectionPrefix+
 						childElement.getPrettyName()+".get(index).toXml();");
-				getterAndSetterBuilder.appendLn(2, "}");
+				getterAndSetterBuilder.appendLn(3, "}");
 			}
 		}
 	}
@@ -257,29 +255,13 @@ public class ClassGenerator extends Task{
 		getterAndSetterBuilder.appendLn(1, "}");
 	}
 	
-//	private void unmarshallerHeader(Element element){
-//		getterAndSetterBuilder.clrlf();
-//		getterAndSetterBuilder.appendLn(1, "@Override");
-//		getterAndSetterBuilder.appendLn(1, "public IPatternElement fromXml(java.lang.String xmlDocument){");
-//	}
-//	
-//	private void unmarshallerBuilder(Element element){
-//		getterAndSetterBuilder.appendLn(2, "java.lang.String xpathuri = ");
-//		getterAndSetterBuilder.append(quotscape+element.getXPathURI()+quotscape+";");
-//	}
-//	
-//	private void unmarshallerFooter(Element element){
-//		getterAndSetterBuilder.appendLn(2, "return null;");
-//		getterAndSetterBuilder.appendLn(1, "}");
-//	}
-	
 	private void generateGenericSetter(Element element){
 		getterAndSetterBuilder.clrlf();
 		getterAndSetterBuilder.appendLn(1, "@Override");
 		getterAndSetterBuilder.appendLn(1, "public void setGenericElement(Object o){");
 		if (element.getChildElements_collection().size() > 0){
 			Element aux = element.getChildElements_collection().get(0);
-			getterAndSetterBuilder.appendLn(2, "if (o instanceof "+element.getPrettyName()+"){");
+			getterAndSetterBuilder.appendLn(2, "if (o instanceof "+aux.getPrettyName()+"){");
 			if (aux.isUnique())
 				getterAndSetterBuilder.appendLn(3, "this.set"+aux.getPrettyName()+"(("+aux.getPrettyName()+")o);");
 			else

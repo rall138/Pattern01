@@ -3,14 +3,14 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Mar 28 17:03:02 GFT 2017
+	* Creation date: Wed Mar 29 17:11:09 GFT 2017
 	* Creator: rlomez
 	**/
 public class Property implements IPatternElement{
-	private java.lang.String name;
-	private java.lang.String description;
-	private java.lang.String type;
-	private java.lang.String defaultValue;
+	private java.lang.String name = "";
+	private java.lang.String description = "";
+	private java.lang.String type = "";
+	private java.lang.String defaultValue = "";
 
 	public java.lang.String getName(){
 		return this.name;

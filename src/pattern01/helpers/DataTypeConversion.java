@@ -20,7 +20,7 @@ public class DataTypeConversion {
 			}
 		}else if (data_type.equalsIgnoreCase("java.lang.String")){
 			if (value == null){
-				processed_value = quotscape+quotscape;				
+				processed_value = quotscape+quotscape;
 			}else{
 				processed_value = quotscape+value+quotscape;				
 			}

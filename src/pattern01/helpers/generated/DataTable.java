@@ -3,13 +3,13 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Mar 28 17:03:02 GFT 2017
+	* Creation date: Wed Mar 29 17:11:09 GFT 2017
 	* Creator: rlomez
 	**/
 public class DataTable implements IPatternElement{
-	private java.lang.String name;
-	private java.lang.String managedBean;
-	private java.lang.String description;
+	private java.lang.String name = "";
+	private java.lang.String managedBean = "";
+	private java.lang.String description = "";
 	private java.util.List<Column> collection_Column = new java.util.ArrayList<>();
 
 	public java.lang.String getName(){
@@ -61,16 +61,17 @@ public class DataTable implements IPatternElement{
 		xml+="managedBean='"+this.managedBean+"' ";
 		xml+="description='"+this.description+"' ";
 		xml+=">";
-		for(int index = 0; index < collection_Column.size(); index++){
-			xml+=collection_Column.get(index).toXml();
-		}
+		if(collection_Column != null)
+			for(int index = 0; index < collection_Column.size(); index++){
+				xml+=collection_Column.get(index).toXml();
+			}
 		xml+="</DataTable>";
 		return xml;
 	}
 
 	@Override
 	public void setGenericElement(Object o){
-		if (o instanceof DataTable){
+		if (o instanceof Column){
 			this.getCollection_Column().add((Column)o);
 		}
 	}

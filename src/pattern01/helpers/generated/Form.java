@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Mar 28 17:03:02 GFT 2017
+	* Creation date: Wed Mar 29 17:11:09 GFT 2017
 	* Creator: rlomez
 	**/
 public class Form implements IPatternElement{
@@ -89,34 +89,41 @@ public class Form implements IPatternElement{
 		java.lang.String xml="<Form ";
 		xml+="id='"+this.id+"' ";
 		xml+=">";
-		for(int index = 0; index < collection_PanelGrid.size(); index++){
-			xml+=collection_PanelGrid.get(index).toXml();
-		}
-		for(int index = 0; index < collection_Panel.size(); index++){
-			xml+=collection_Panel.get(index).toXml();
-		}
-		for(int index = 0; index < collection_Property.size(); index++){
-			xml+=collection_Property.get(index).toXml();
-		}
-		for(int index = 0; index < collection_Text.size(); index++){
-			xml+=collection_Text.get(index).toXml();
-		}
-		for(int index = 0; index < collection_Messages.size(); index++){
-			xml+=collection_Messages.get(index).toXml();
-		}
-		for(int index = 0; index < collection_DataTable.size(); index++){
-			xml+=collection_DataTable.get(index).toXml();
-		}
-		for(int index = 0; index < collection_CommandButton.size(); index++){
-			xml+=collection_CommandButton.get(index).toXml();
-		}
+		if(collection_PanelGrid != null)
+			for(int index = 0; index < collection_PanelGrid.size(); index++){
+				xml+=collection_PanelGrid.get(index).toXml();
+			}
+		if(collection_Panel != null)
+			for(int index = 0; index < collection_Panel.size(); index++){
+				xml+=collection_Panel.get(index).toXml();
+			}
+		if(collection_Property != null)
+			for(int index = 0; index < collection_Property.size(); index++){
+				xml+=collection_Property.get(index).toXml();
+			}
+		if(collection_Text != null)
+			for(int index = 0; index < collection_Text.size(); index++){
+				xml+=collection_Text.get(index).toXml();
+			}
+		if(collection_Messages != null)
+			for(int index = 0; index < collection_Messages.size(); index++){
+				xml+=collection_Messages.get(index).toXml();
+			}
+		if(collection_DataTable != null)
+			for(int index = 0; index < collection_DataTable.size(); index++){
+				xml+=collection_DataTable.get(index).toXml();
+			}
+		if(collection_CommandButton != null)
+			for(int index = 0; index < collection_CommandButton.size(); index++){
+				xml+=collection_CommandButton.get(index).toXml();
+			}
 		xml+="</Form>";
 		return xml;
 	}
 
 	@Override
 	public void setGenericElement(Object o){
-		if (o instanceof Form){
+		if (o instanceof PanelGrid){
 			this.getCollection_PanelGrid().add((PanelGrid)o);
 		}else if (o instanceof Panel){
 			this.getCollection_Panel().add((Panel)o);

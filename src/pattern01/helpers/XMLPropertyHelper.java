@@ -18,7 +18,6 @@ import pattern01.helpers.generated.PatternInstance;
  */
 public class XMLPropertyHelper {
 
-	
 	public static void saveProperties(TreeItem selectedTreeItem){
 		UUID reference = UUID.fromString(selectedTreeItem.getData("reference").toString());
 		
@@ -35,7 +34,6 @@ public class XMLPropertyHelper {
 		
 		saveProperties(patternInstanceObj, reference, projectFolder);
 	}
-	
 	
 	public static void saveProperties(IPatternElement patternInstanceObj, UUID reference, String projectFolder){
 
