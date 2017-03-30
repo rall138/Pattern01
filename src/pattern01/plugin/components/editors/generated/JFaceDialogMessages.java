@@ -62,12 +62,12 @@ public class JFaceDialogMessages extends TitleAreaDialog {
 	
 	
 	private void getPropertiesFromInstance(){
-		pattern01.helpers.generated.Messages patternInstance_form_messages = getSelectedInstance();
+		pattern01.helpers.generated.Messages messages = getSelectedInstance();
 	}
 	
 	
 	private void savePropertiesOnInstance(){
-		pattern01.helpers.generated.Messages patternInstance_form_messages = getSelectedInstance();
+		pattern01.helpers.generated.Messages messages = getSelectedInstance();
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

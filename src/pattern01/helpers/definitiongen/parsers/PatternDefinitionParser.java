@@ -93,9 +93,9 @@ public class PatternDefinitionParser {
 			if (attributeNode.getNodeName().equalsIgnoreCase("name")){
 				
 				// PrettyName setting
-				if (parentElement != null)
-					commonElement.setName(parentElement.getName()+"_"+attributeNode.getNodeValue());
-				else
+//				if (parentElement != null)
+//					commonElement.setName(parentElement.getName()+"_"+attributeNode.getNodeValue());
+//				else
 					commonElement.setName(attributeNode.getNodeValue());
 				
 				commonElement.setPrettyName(attributeNode.getNodeValue().substring(0, 1).toUpperCase()+

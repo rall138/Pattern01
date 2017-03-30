@@ -102,24 +102,24 @@ public class JFaceDialogText extends TitleAreaDialog {
 	
 	
 	private void getPropertiesFromInstance(){
-		pattern01.helpers.generated.Text patternInstance_form_dataTable_column_text = getSelectedInstance();
-		this.name_text.setText(patternInstance_form_dataTable_column_text.getName());
-		this.value_text.setText(patternInstance_form_dataTable_column_text.getValue());
+		pattern01.helpers.generated.Text text = getSelectedInstance();
+		this.name_text.setText(text.getName());
+		this.value_text.setText(text.getValue());
 		for(String option : pattern01.helpers.generated.TextType.getOptionCollection()){
 			this.type_cmb.add(option);
 		}
 
-		this.type_cmb.select(this.type_cmb.indexOf(patternInstance_form_dataTable_column_text.getType().toString()));
-		this.description_text.setText(patternInstance_form_dataTable_column_text.getDescription());
+		this.type_cmb.select(this.type_cmb.indexOf(text.getType().toString()));
+		this.description_text.setText(text.getDescription());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
-		pattern01.helpers.generated.Text patternInstance_form_dataTable_column_text = getSelectedInstance();
-		patternInstance_form_dataTable_column_text.setName(this.name_text.getText());
-		patternInstance_form_dataTable_column_text.setValue(this.value_text.getText());
-		patternInstance_form_dataTable_column_text.setType(pattern01.helpers.generated.TextType.valueOf(this.type_cmb.getText()));
-		patternInstance_form_dataTable_column_text.setDescription(this.description_text.getText());
+		pattern01.helpers.generated.Text text = getSelectedInstance();
+		text.setName(this.name_text.getText());
+		text.setValue(this.value_text.getText());
+		text.setType(pattern01.helpers.generated.TextType.valueOf(this.type_cmb.getText()));
+		text.setDescription(this.description_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

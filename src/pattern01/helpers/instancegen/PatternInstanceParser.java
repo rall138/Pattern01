@@ -79,77 +79,10 @@ public class PatternInstanceParser {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Mar 29 17:11:10 GFT 2017
+	* Creation date: Thu Mar 30 17:08:03 GFT 2017
 	* Creator: rlomez
 	**/
 
@@ -193,344 +126,344 @@ public class PatternInstanceParser {
 			}catch(java.lang.NullPointerException ex){}
 			item.setData("class_instance",patternInstance);
 			item.setData("type","PATTERNINSTANCE");
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form")){
-			pattern01.helpers.generated.Form patternInstance_form = new pattern01.helpers.generated.Form();
-			patternInstance_form.setId(actualNode.getAttributes().getNamedItem("id") != null ? actualNode.getAttributes().getNamedItem("id").getNodeValue().toString():"primefaces.jpg");
+		}else if(actualNode.getNodeName().equalsIgnoreCase("form")){
+			pattern01.helpers.generated.Form form = new pattern01.helpers.generated.Form();
+			form.setId(actualNode.getAttributes().getNamedItem("id") != null ? actualNode.getAttributes().getNamedItem("id").getNodeValue().toString():"primefaces.jpg");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form);
+			item.setData("class_instance",form);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM");
-			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).setForm(patternInstance_form);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid")){
-			pattern01.helpers.generated.PanelGrid patternInstance_form_panelGrid = new pattern01.helpers.generated.PanelGrid();
+			item.setData("type","FORM");
+			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).setForm(form);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("panelGrid")){
+			pattern01.helpers.generated.PanelGrid panelGrid = new pattern01.helpers.generated.PanelGrid();
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid);
+			item.setData("class_instance",panelGrid);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_PanelGrid().add(patternInstance_form_panelGrid);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_panel")){
-			pattern01.helpers.generated.Panel patternInstance_form_panelGrid_panel = new pattern01.helpers.generated.Panel();
+			item.setData("type","PANELGRID");
+			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_PanelGrid().add(panelGrid);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("panel")){
+			pattern01.helpers.generated.Panel panel = new pattern01.helpers.generated.Panel();
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_panel);
+			item.setData("class_instance",panel);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PANEL");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Panel().add(patternInstance_form_panelGrid_panel);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_panel_property")){
-			pattern01.helpers.generated.Property patternInstance_form_panelGrid_panel_property = new pattern01.helpers.generated.Property();
-			patternInstance_form_panelGrid_panel_property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
+			item.setData("type","PANEL");
+			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Panel().add(panel);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
+			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
+			property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
+			property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_panel_property);
+			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Property().add(patternInstance_form_panelGrid_panel_property);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_panel_text")){
-			pattern01.helpers.generated.Text patternInstance_form_panelGrid_panel_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_panelGrid_panel_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_panelGrid_panel_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","PROPERTY");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_panel_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_panelGrid_panel_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_panel_commandButton")){
-			pattern01.helpers.generated.CommandButton patternInstance_form_panelGrid_panel_commandButton = new pattern01.helpers.generated.CommandButton();
-			patternInstance_form_panelGrid_panel_commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
+			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
+			commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
+			commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_panel_commandButton);
+			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(patternInstance_form_panelGrid_panel_commandButton);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_panel_dataTable")){
-			pattern01.helpers.generated.DataTable patternInstance_form_panelGrid_panel_dataTable = new pattern01.helpers.generated.DataTable();
-			patternInstance_form_panelGrid_panel_dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","COMMANDBUTTON");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
+			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
+			dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
+			dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_panel_dataTable);
+			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(patternInstance_form_panelGrid_panel_dataTable);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_panel_dataTable_column")){
-			pattern01.helpers.generated.Column patternInstance_form_panelGrid_panel_dataTable_column = new pattern01.helpers.generated.Column();
-			patternInstance_form_panelGrid_panel_dataTable_column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
+			item.setData("type","DATATABLE");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
+			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
+			column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_panel_dataTable_column);
+			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(patternInstance_form_panelGrid_panel_dataTable_column);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_panel_dataTable_column_text")){
-			pattern01.helpers.generated.Text patternInstance_form_panelGrid_panel_dataTable_column_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_panelGrid_panel_dataTable_column_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_dataTable_column_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_panel_dataTable_column_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_panelGrid_panel_dataTable_column_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","COLUMN");
+			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_panel_dataTable_column_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_panelGrid_panel_dataTable_column_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_property")){
-			pattern01.helpers.generated.Property patternInstance_form_panelGrid_property = new pattern01.helpers.generated.Property();
-			patternInstance_form_panelGrid_property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
+			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
+			property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
+			property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_property);
+			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_PROPERTY");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Property().add(patternInstance_form_panelGrid_property);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_text")){
-			pattern01.helpers.generated.Text patternInstance_form_panelGrid_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_panelGrid_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_panelGrid_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","PROPERTY");
+			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_TEXT");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_panelGrid_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_commandButton")){
-			pattern01.helpers.generated.CommandButton patternInstance_form_panelGrid_commandButton = new pattern01.helpers.generated.CommandButton();
-			patternInstance_form_panelGrid_commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
+			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
+			commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
+			commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_commandButton);
+			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(patternInstance_form_panelGrid_commandButton);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_dataTable")){
-			pattern01.helpers.generated.DataTable patternInstance_form_panelGrid_dataTable = new pattern01.helpers.generated.DataTable();
-			patternInstance_form_panelGrid_dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","COMMANDBUTTON");
+			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
+			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
+			dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
+			dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_dataTable);
+			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_DATATABLE");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(patternInstance_form_panelGrid_dataTable);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_dataTable_column")){
-			pattern01.helpers.generated.Column patternInstance_form_panelGrid_dataTable_column = new pattern01.helpers.generated.Column();
-			patternInstance_form_panelGrid_dataTable_column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
+			item.setData("type","DATATABLE");
+			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
+			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
+			column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_dataTable_column);
+			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(patternInstance_form_panelGrid_dataTable_column);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panelGrid_dataTable_column_text")){
-			pattern01.helpers.generated.Text patternInstance_form_panelGrid_dataTable_column_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_panelGrid_dataTable_column_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_dataTable_column_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_panelGrid_dataTable_column_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_panelGrid_dataTable_column_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","COLUMN");
+			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panelGrid_dataTable_column_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_panelGrid_dataTable_column_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panel")){
-			pattern01.helpers.generated.Panel patternInstance_form_panel = new pattern01.helpers.generated.Panel();
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("panel")){
+			pattern01.helpers.generated.Panel panel = new pattern01.helpers.generated.Panel();
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panel);
+			item.setData("class_instance",panel);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANEL");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Panel().add(patternInstance_form_panel);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panel_property")){
-			pattern01.helpers.generated.Property patternInstance_form_panel_property = new pattern01.helpers.generated.Property();
-			patternInstance_form_panel_property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panel_property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
-			patternInstance_form_panel_property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
-			patternInstance_form_panel_property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
+			item.setData("type","PANEL");
+			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Panel().add(panel);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
+			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
+			property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
+			property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panel_property);
+			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANEL_PROPERTY");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Property().add(patternInstance_form_panel_property);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panel_text")){
-			pattern01.helpers.generated.Text patternInstance_form_panel_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_panel_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panel_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_panel_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_panel_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","PROPERTY");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panel_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANEL_TEXT");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_panel_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panel_commandButton")){
-			pattern01.helpers.generated.CommandButton patternInstance_form_panel_commandButton = new pattern01.helpers.generated.CommandButton();
-			patternInstance_form_panel_commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panel_commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
-			patternInstance_form_panel_commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
+			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
+			commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
+			commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panel_commandButton);
+			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(patternInstance_form_panel_commandButton);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panel_dataTable")){
-			pattern01.helpers.generated.DataTable patternInstance_form_panel_dataTable = new pattern01.helpers.generated.DataTable();
-			patternInstance_form_panel_dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panel_dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
-			patternInstance_form_panel_dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","COMMANDBUTTON");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
+			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
+			dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
+			dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panel_dataTable);
+			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANEL_DATATABLE");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(patternInstance_form_panel_dataTable);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panel_dataTable_column")){
-			pattern01.helpers.generated.Column patternInstance_form_panel_dataTable_column = new pattern01.helpers.generated.Column();
-			patternInstance_form_panel_dataTable_column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
+			item.setData("type","DATATABLE");
+			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
+			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
+			column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panel_dataTable_column);
+			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(patternInstance_form_panel_dataTable_column);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_panel_dataTable_column_text")){
-			pattern01.helpers.generated.Text patternInstance_form_panel_dataTable_column_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_panel_dataTable_column_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_panel_dataTable_column_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_panel_dataTable_column_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_panel_dataTable_column_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","COLUMN");
+			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_panel_dataTable_column_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_panel_dataTable_column_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_property")){
-			pattern01.helpers.generated.Property patternInstance_form_property = new pattern01.helpers.generated.Property();
-			patternInstance_form_property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
-			patternInstance_form_property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
-			patternInstance_form_property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
+			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
+			property.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			property.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			property.setType(actualNode.getAttributes().getNamedItem("type") != null ? actualNode.getAttributes().getNamedItem("type").getNodeValue().toString():"");
+			property.setDefaultValue(actualNode.getAttributes().getNamedItem("defaultValue") != null ? actualNode.getAttributes().getNamedItem("defaultValue").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_property);
+			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_PROPERTY");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Property().add(patternInstance_form_property);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_text")){
-			pattern01.helpers.generated.Text patternInstance_form_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","PROPERTY");
+			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_TEXT");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_messages")){
-			pattern01.helpers.generated.Messages patternInstance_form_messages = new pattern01.helpers.generated.Messages();
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("messages")){
+			pattern01.helpers.generated.Messages messages = new pattern01.helpers.generated.Messages();
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_messages);
+			item.setData("class_instance",messages);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_MESSAGES");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Messages().add(patternInstance_form_messages);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_dataTable")){
-			pattern01.helpers.generated.DataTable patternInstance_form_dataTable = new pattern01.helpers.generated.DataTable();
-			patternInstance_form_dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
-			patternInstance_form_dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","MESSAGES");
+			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Messages().add(messages);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
+			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
+			dataTable.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			dataTable.setManagedBean(actualNode.getAttributes().getNamedItem("managedBean") != null ? actualNode.getAttributes().getNamedItem("managedBean").getNodeValue().toString():"");
+			dataTable.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_dataTable);
+			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_DATATABLE");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(patternInstance_form_dataTable);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_dataTable_column")){
-			pattern01.helpers.generated.Column patternInstance_form_dataTable_column = new pattern01.helpers.generated.Column();
-			patternInstance_form_dataTable_column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
+			item.setData("type","DATATABLE");
+			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
+			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
+			column.setHeaderText(actualNode.getAttributes().getNamedItem("headerText") != null ? actualNode.getAttributes().getNamedItem("headerText").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_dataTable_column);
+			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_DATATABLE_COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(patternInstance_form_dataTable_column);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_dataTable_column_text")){
-			pattern01.helpers.generated.Text patternInstance_form_dataTable_column_text = new pattern01.helpers.generated.Text();
-			patternInstance_form_dataTable_column_text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_dataTable_column_text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
-			patternInstance_form_dataTable_column_text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
-			patternInstance_form_dataTable_column_text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","COLUMN");
+			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
+			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
+			text.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			text.setValue(actualNode.getAttributes().getNamedItem("value") != null ? actualNode.getAttributes().getNamedItem("value").getNodeValue().toString():"");
+			text.setType(actualNode.getAttributes().getNamedItem("type") != null ? pattern01.helpers.generated.TextType.valueOf(actualNode.getAttributes().getNamedItem("type").getNodeValue().toString()):pattern01.helpers.generated.TextType.PLAINTEXT);
+			text.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_dataTable_column_text);
+			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(patternInstance_form_dataTable_column_text);
-		}else if(actualNode.getNodeName().equalsIgnoreCase("patternInstance_form_commandButton")){
-			pattern01.helpers.generated.CommandButton patternInstance_form_commandButton = new pattern01.helpers.generated.CommandButton();
-			patternInstance_form_commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
-			patternInstance_form_commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
-			patternInstance_form_commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
+			item.setData("type","TEXT");
+			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
+			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
+			commandButton.setName(actualNode.getAttributes().getNamedItem("name") != null ? actualNode.getAttributes().getNamedItem("name").getNodeValue().toString():"");
+			commandButton.setAction(actualNode.getAttributes().getNamedItem("action") != null ? actualNode.getAttributes().getNamedItem("action").getNodeValue().toString():"");
+			commandButton.setDescription(actualNode.getAttributes().getNamedItem("description") != null ? actualNode.getAttributes().getNamedItem("description").getNodeValue().toString():"");
 			try{
 				item.setImage(pattern01.helpers.ImageHelper.getImage(actualNode.getAttributes().getNamedItem("image").getNodeValue().toString()));
 			}catch(java.lang.NullPointerException ex){}
-			item.setData("class_instance",patternInstance_form_commandButton);
+			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
-			item.setData("type","PATTERNINSTANCE_FORM_COMMANDBUTTON");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(patternInstance_form_commandButton);
+			item.setData("type","COMMANDBUTTON");
+			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
 		}
 	}
 /* [End] Auto-generated code for pattern instance parser do not remove */

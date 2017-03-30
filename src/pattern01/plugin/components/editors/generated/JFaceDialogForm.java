@@ -72,14 +72,14 @@ public class JFaceDialogForm extends TitleAreaDialog {
 	
 	
 	private void getPropertiesFromInstance(){
-		pattern01.helpers.generated.Form patternInstance_form = getSelectedInstance();
-		this.id_text.setText(patternInstance_form.getId());
+		pattern01.helpers.generated.Form form = getSelectedInstance();
+		this.id_text.setText(form.getId());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
-		pattern01.helpers.generated.Form patternInstance_form = getSelectedInstance();
-		patternInstance_form.setId(this.id_text.getText());
+		pattern01.helpers.generated.Form form = getSelectedInstance();
+		form.setId(this.id_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

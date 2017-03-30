@@ -52,10 +52,16 @@ public class MenuFactory {
 		});
 	}
 	
+	
+	
+	
+	
+	
+	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Mar 29 17:11:11 GFT 2017
+	* Creation date: Thu Mar 30 17:08:03 GFT 2017
 	* Creator: rlomez
 	**/
 
@@ -88,7 +94,7 @@ public class MenuFactory {
 				MenuItem item_patternInstance_form = new MenuItem(add_itemMenu, SWT.PUSH);
 				item_patternInstance_form.setText("Form");
 				item_patternInstance_form.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form.setData("type",NodeType.PATTERNINSTANCE_FORM);
+				item_patternInstance_form.setData("type",NodeType.FORM);
 				item_patternInstance_form.addSelectionListener(listenerFactory());
 
 				properties_item = new MenuItem(menu, SWT.PUSH);
@@ -96,407 +102,192 @@ public class MenuFactory {
 				properties_item.addSelectionListener(propertiesListener());
 				properties_item.setData("type",NodeType.PATTERNINSTANCE);
 				break;
-			case PATTERNINSTANCE_FORM:
+			case FORM:
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
 
-				MenuItem item_patternInstance_form_panelGrid = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid.setText("PanelGrid");
-				item_patternInstance_form_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID);
-				item_patternInstance_form_panelGrid.addSelectionListener(listenerFactory());
+				MenuItem item_form_panelGrid = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_form_panelGrid.setText("PanelGrid");
+				item_form_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form_panelGrid.setData("type",NodeType.PANELGRID);
+				item_form_panelGrid.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panel = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panel.setText("Panel");
-				item_patternInstance_form_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL);
-				item_patternInstance_form_panel.addSelectionListener(listenerFactory());
+				MenuItem item_form_panel = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_form_panel.setText("Panel");
+				item_form_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form_panel.setData("type",NodeType.PANEL);
+				item_form_panel.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_property = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_property.setText("Property");
-				item_patternInstance_form_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PROPERTY);
-				item_patternInstance_form_property.addSelectionListener(listenerFactory());
+				MenuItem item_form_property = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_form_property.setText("Property");
+				item_form_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form_property.setData("type",NodeType.PROPERTY);
+				item_form_property.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_text.setText("Text");
-				item_patternInstance_form_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_text.setData("type",NodeType.PATTERNINSTANCE_FORM_TEXT);
-				item_patternInstance_form_text.addSelectionListener(listenerFactory());
+				MenuItem item_form_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_form_text.setText("Text");
+				item_form_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form_text.setData("type",NodeType.TEXT);
+				item_form_text.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_messages = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_messages.setText("Messages");
-				item_patternInstance_form_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_messages.setData("type",NodeType.PATTERNINSTANCE_FORM_MESSAGES);
-				item_patternInstance_form_messages.addSelectionListener(listenerFactory());
+				MenuItem item_form_messages = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_form_messages.setText("Messages");
+				item_form_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form_messages.setData("type",NodeType.MESSAGES);
+				item_form_messages.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_dataTable.setText("DataTable");
-				item_patternInstance_form_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE);
-				item_patternInstance_form_dataTable.addSelectionListener(listenerFactory());
+				MenuItem item_form_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_form_dataTable.setText("DataTable");
+				item_form_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form_dataTable.setData("type",NodeType.DATATABLE);
+				item_form_dataTable.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_commandButton.setText("CommandButton");
-				item_patternInstance_form_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_COMMANDBUTTON);
-				item_patternInstance_form_commandButton.addSelectionListener(listenerFactory());
+				MenuItem item_form_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_form_commandButton.setText("CommandButton");
+				item_form_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form_commandButton.setData("type",NodeType.COMMANDBUTTON);
+				item_form_commandButton.addSelectionListener(listenerFactory());
 
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM);
+				properties_item.setData("type",NodeType.FORM);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID:
+			case PANELGRID:
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
 
-				MenuItem item_patternInstance_form_panelGrid_panel = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_panel.setText("Panel");
-				item_patternInstance_form_panelGrid_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL);
-				item_patternInstance_form_panelGrid_panel.addSelectionListener(listenerFactory());
+				MenuItem item_panelGrid_panel = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panelGrid_panel.setText("Panel");
+				item_panelGrid_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panelGrid_panel.setData("type",NodeType.PANEL);
+				item_panelGrid_panel.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panelGrid_property = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_property.setText("Property");
-				item_patternInstance_form_panelGrid_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PROPERTY);
-				item_patternInstance_form_panelGrid_property.addSelectionListener(listenerFactory());
+				MenuItem item_panelGrid_property = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panelGrid_property.setText("Property");
+				item_panelGrid_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panelGrid_property.setData("type",NodeType.PROPERTY);
+				item_panelGrid_property.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panelGrid_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_text.setText("Text");
-				item_patternInstance_form_panelGrid_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_TEXT);
-				item_patternInstance_form_panelGrid_text.addSelectionListener(listenerFactory());
+				MenuItem item_panelGrid_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panelGrid_text.setText("Text");
+				item_panelGrid_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panelGrid_text.setData("type",NodeType.TEXT);
+				item_panelGrid_text.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panelGrid_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_commandButton.setText("CommandButton");
-				item_patternInstance_form_panelGrid_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON);
-				item_patternInstance_form_panelGrid_commandButton.addSelectionListener(listenerFactory());
+				MenuItem item_panelGrid_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panelGrid_commandButton.setText("CommandButton");
+				item_panelGrid_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panelGrid_commandButton.setData("type",NodeType.COMMANDBUTTON);
+				item_panelGrid_commandButton.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panelGrid_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_dataTable.setText("DataTable");
-				item_patternInstance_form_panelGrid_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE);
-				item_patternInstance_form_panelGrid_dataTable.addSelectionListener(listenerFactory());
+				MenuItem item_panelGrid_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panelGrid_dataTable.setText("DataTable");
+				item_panelGrid_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panelGrid_dataTable.setData("type",NodeType.DATATABLE);
+				item_panelGrid_dataTable.addSelectionListener(listenerFactory());
 
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID);
+				properties_item.setData("type",NodeType.PANELGRID);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL:
+			case PANEL:
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
 
-				MenuItem item_patternInstance_form_panelGrid_panel_property = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_panel_property.setText("Property");
-				item_patternInstance_form_panelGrid_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY);
-				item_patternInstance_form_panelGrid_panel_property.addSelectionListener(listenerFactory());
+				MenuItem item_panel_property = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panel_property.setText("Property");
+				item_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panel_property.setData("type",NodeType.PROPERTY);
+				item_panel_property.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panelGrid_panel_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_panel_text.setText("Text");
-				item_patternInstance_form_panelGrid_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT);
-				item_patternInstance_form_panelGrid_panel_text.addSelectionListener(listenerFactory());
+				MenuItem item_panel_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panel_text.setText("Text");
+				item_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panel_text.setData("type",NodeType.TEXT);
+				item_panel_text.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panelGrid_panel_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_panel_commandButton.setText("CommandButton");
-				item_patternInstance_form_panelGrid_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON);
-				item_patternInstance_form_panelGrid_panel_commandButton.addSelectionListener(listenerFactory());
+				MenuItem item_panel_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panel_commandButton.setText("CommandButton");
+				item_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panel_commandButton.setData("type",NodeType.COMMANDBUTTON);
+				item_panel_commandButton.addSelectionListener(listenerFactory());
 
-				MenuItem item_patternInstance_form_panelGrid_panel_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_panel_dataTable.setText("DataTable");
-				item_patternInstance_form_panelGrid_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE);
-				item_patternInstance_form_panelGrid_panel_dataTable.addSelectionListener(listenerFactory());
+				MenuItem item_panel_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_panel_dataTable.setText("DataTable");
+				item_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panel_dataTable.setData("type",NodeType.DATATABLE);
+				item_panel_dataTable.addSelectionListener(listenerFactory());
 
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL);
+				properties_item.setData("type",NodeType.PANEL);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY:
+			case PROPERTY:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY);
+				properties_item.setData("type",NodeType.PROPERTY);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT:
+			case TEXT:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT);
+				properties_item.setData("type",NodeType.TEXT);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON:
+			case COMMANDBUTTON:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON);
+				properties_item.setData("type",NodeType.COMMANDBUTTON);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE:
+			case DATATABLE:
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
 
-				MenuItem item_patternInstance_form_panelGrid_panel_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setText("Column");
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN);
-				item_patternInstance_form_panelGrid_panel_dataTable_column.addSelectionListener(listenerFactory());
+				MenuItem item_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_dataTable_column.setText("Column");
+				item_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_dataTable_column.setData("type",NodeType.COLUMN);
+				item_dataTable_column.addSelectionListener(listenerFactory());
 
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE);
+				properties_item.setData("type",NodeType.DATATABLE);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN:
+			case COLUMN:
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
 				add_item.setMenu(add_itemMenu);
 
-				MenuItem item_patternInstance_form_panelGrid_panel_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setText("Text");
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT);
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.addSelectionListener(listenerFactory());
+				MenuItem item_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
+				item_column_text.setText("Text");
+				item_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_column_text.setData("type",NodeType.TEXT);
+				item_column_text.addSelectionListener(listenerFactory());
 
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN);
+				properties_item.setData("type",NodeType.COLUMN);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT:
+			case MESSAGES:
 				properties_item = new MenuItem(menu, SWT.PUSH);
 				properties_item.setText("Properties");
 				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT);
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PROPERTY:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PROPERTY);
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_TEXT:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_TEXT);
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON);
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE:
-				add_item = new MenuItem(menu, SWT.CASCADE);
-				add_item.setText("Add");
-				add_itemMenu = new Menu(add_item);
-				add_item.setMenu(add_itemMenu);
-
-				MenuItem item_patternInstance_form_panelGrid_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_dataTable_column.setText("Column");
-				item_patternInstance_form_panelGrid_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN);
-				item_patternInstance_form_panelGrid_dataTable_column.addSelectionListener(listenerFactory());
-
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE);
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN:
-				add_item = new MenuItem(menu, SWT.CASCADE);
-				add_item.setText("Add");
-				add_itemMenu = new Menu(add_item);
-				add_item.setMenu(add_itemMenu);
-
-				MenuItem item_patternInstance_form_panelGrid_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panelGrid_dataTable_column_text.setText("Text");
-				item_patternInstance_form_panelGrid_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT);
-				item_patternInstance_form_panelGrid_dataTable_column_text.addSelectionListener(listenerFactory());
-
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN);
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT);
-				break;
-			case PATTERNINSTANCE_FORM_PANEL:
-				add_item = new MenuItem(menu, SWT.CASCADE);
-				add_item.setText("Add");
-				add_itemMenu = new Menu(add_item);
-				add_item.setMenu(add_itemMenu);
-
-				MenuItem item_patternInstance_form_panel_property = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panel_property.setText("Property");
-				item_patternInstance_form_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_PROPERTY);
-				item_patternInstance_form_panel_property.addSelectionListener(listenerFactory());
-
-				MenuItem item_patternInstance_form_panel_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panel_text.setText("Text");
-				item_patternInstance_form_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_TEXT);
-				item_patternInstance_form_panel_text.addSelectionListener(listenerFactory());
-
-				MenuItem item_patternInstance_form_panel_commandButton = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panel_commandButton.setText("CommandButton");
-				item_patternInstance_form_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON);
-				item_patternInstance_form_panel_commandButton.addSelectionListener(listenerFactory());
-
-				MenuItem item_patternInstance_form_panel_dataTable = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panel_dataTable.setText("DataTable");
-				item_patternInstance_form_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE);
-				item_patternInstance_form_panel_dataTable.addSelectionListener(listenerFactory());
-
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL);
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_PROPERTY:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_PROPERTY);
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_TEXT:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_TEXT);
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON);
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE:
-				add_item = new MenuItem(menu, SWT.CASCADE);
-				add_item.setText("Add");
-				add_itemMenu = new Menu(add_item);
-				add_item.setMenu(add_itemMenu);
-
-				MenuItem item_patternInstance_form_panel_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panel_dataTable_column.setText("Column");
-				item_patternInstance_form_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN);
-				item_patternInstance_form_panel_dataTable_column.addSelectionListener(listenerFactory());
-
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE);
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN:
-				add_item = new MenuItem(menu, SWT.CASCADE);
-				add_item.setText("Add");
-				add_itemMenu = new Menu(add_item);
-				add_item.setMenu(add_itemMenu);
-
-				MenuItem item_patternInstance_form_panel_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_panel_dataTable_column_text.setText("Text");
-				item_patternInstance_form_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT);
-				item_patternInstance_form_panel_dataTable_column_text.addSelectionListener(listenerFactory());
-
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN);
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT);
-				break;
-			case PATTERNINSTANCE_FORM_PROPERTY:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_PROPERTY);
-				break;
-			case PATTERNINSTANCE_FORM_TEXT:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_TEXT);
-				break;
-			case PATTERNINSTANCE_FORM_MESSAGES:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_MESSAGES);
-				break;
-			case PATTERNINSTANCE_FORM_DATATABLE:
-				add_item = new MenuItem(menu, SWT.CASCADE);
-				add_item.setText("Add");
-				add_itemMenu = new Menu(add_item);
-				add_item.setMenu(add_itemMenu);
-
-				MenuItem item_patternInstance_form_dataTable_column = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_dataTable_column.setText("Column");
-				item_patternInstance_form_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN);
-				item_patternInstance_form_dataTable_column.addSelectionListener(listenerFactory());
-
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE);
-				break;
-			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN:
-				add_item = new MenuItem(menu, SWT.CASCADE);
-				add_item.setText("Add");
-				add_itemMenu = new Menu(add_item);
-				add_item.setMenu(add_itemMenu);
-
-				MenuItem item_patternInstance_form_dataTable_column_text = new MenuItem(add_itemMenu, SWT.PUSH);
-				item_patternInstance_form_dataTable_column_text.setText("Text");
-				item_patternInstance_form_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT);
-				item_patternInstance_form_dataTable_column_text.addSelectionListener(listenerFactory());
-
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN);
-				break;
-			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT);
-				break;
-			case PATTERNINSTANCE_FORM_COMMANDBUTTON:
-				properties_item = new MenuItem(menu, SWT.PUSH);
-				properties_item.setText("Properties");
-				properties_item.addSelectionListener(propertiesListener());
-				properties_item.setData("type",NodeType.PATTERNINSTANCE_FORM_COMMANDBUTTON);
+				properties_item.setData("type",NodeType.MESSAGES);
 				break;
 			default:
 				break;
@@ -526,498 +317,498 @@ public class MenuFactory {
 				IPatternElement patternInstance_parentInstance = (IPatternElement)item_patternInstance.getParentItem().getData("class_instance");
 				patternInstance_parentInstance.setGenericElement(patternInstance);
 				break;
-			case PATTERNINSTANCE_FORM:
-				TreeItem item_patternInstance_form = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form.setText(selectedItem.getText());
-				item_patternInstance_form.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form.setData("type",NodeType.PATTERNINSTANCE_FORM);
-				Form patternInstance_form = new Form();
+			case FORM:
+				TreeItem item_form = new TreeItem(this.parent.getSelection()[0], 0);
+				item_form.setText(selectedItem.getText());
+				item_form.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_form.setData("type",NodeType.FORM);
+				Form form = new Form();
 
-				item_patternInstance_form.setData("class_instance", patternInstance_form);
-				item_patternInstance_form.setData("parent_reference", item_patternInstance_form.getParentItem().getData("parent_reference"));
-				item_patternInstance_form.setData("reference", item_patternInstance_form.getParentItem().getData("reference"));
+				item_form.setData("class_instance", form);
+				item_form.setData("parent_reference", item_form.getParentItem().getData("parent_reference"));
+				item_form.setData("reference", item_form.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_parentInstance = (IPatternElement)item_patternInstance_form.getParentItem().getData("class_instance");
-				patternInstance_form_parentInstance.setGenericElement(patternInstance_form);
+				IPatternElement form_parentInstance = (IPatternElement)item_form.getParentItem().getData("class_instance");
+				form_parentInstance.setGenericElement(form);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID:
-				TreeItem item_patternInstance_form_panelGrid = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID);
-				PanelGrid patternInstance_form_panelGrid = new PanelGrid();
+			case PANELGRID:
+				TreeItem item_panelGrid = new TreeItem(this.parent.getSelection()[0], 0);
+				item_panelGrid.setText(selectedItem.getText());
+				item_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panelGrid.setData("type",NodeType.PANELGRID);
+				PanelGrid panelGrid = new PanelGrid();
 
-				item_patternInstance_form_panelGrid.setData("class_instance", patternInstance_form_panelGrid);
-				item_patternInstance_form_panelGrid.setData("parent_reference", item_patternInstance_form_panelGrid.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid.setData("reference", item_patternInstance_form_panelGrid.getParentItem().getData("reference"));
+				item_panelGrid.setData("class_instance", panelGrid);
+				item_panelGrid.setData("parent_reference", item_panelGrid.getParentItem().getData("parent_reference"));
+				item_panelGrid.setData("reference", item_panelGrid.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_parentInstance.setGenericElement(patternInstance_form_panelGrid);
+				IPatternElement panelGrid_parentInstance = (IPatternElement)item_panelGrid.getParentItem().getData("class_instance");
+				panelGrid_parentInstance.setGenericElement(panelGrid);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL:
-				TreeItem item_patternInstance_form_panelGrid_panel = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_panel.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL);
-				Panel patternInstance_form_panelGrid_panel = new Panel();
+			case PANEL:
+				TreeItem item_panel = new TreeItem(this.parent.getSelection()[0], 0);
+				item_panel.setText(selectedItem.getText());
+				item_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panel.setData("type",NodeType.PANEL);
+				Panel panel = new Panel();
 
-				item_patternInstance_form_panelGrid_panel.setData("class_instance", patternInstance_form_panelGrid_panel);
-				item_patternInstance_form_panelGrid_panel.setData("parent_reference", item_patternInstance_form_panelGrid_panel.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_panel.setData("reference", item_patternInstance_form_panelGrid_panel.getParentItem().getData("reference"));
+				item_panel.setData("class_instance", panel);
+				item_panel.setData("parent_reference", item_panel.getParentItem().getData("parent_reference"));
+				item_panel.setData("reference", item_panel.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_panel_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel);
+				IPatternElement panel_parentInstance = (IPatternElement)item_panel.getParentItem().getData("class_instance");
+				panel_parentInstance.setGenericElement(panel);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY:
-				TreeItem item_patternInstance_form_panelGrid_panel_property = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_panel_property.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY);
-				Property patternInstance_form_panelGrid_panel_property = new Property();
+			case PROPERTY:
+				TreeItem item_property = new TreeItem(this.parent.getSelection()[0], 0);
+				item_property.setText(selectedItem.getText());
+				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_property.setData("type",NodeType.PROPERTY);
+				Property property = new Property();
 
-				item_patternInstance_form_panelGrid_panel_property.setData("class_instance", patternInstance_form_panelGrid_panel_property);
-				item_patternInstance_form_panelGrid_panel_property.setData("parent_reference", item_patternInstance_form_panelGrid_panel_property.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_panel_property.setData("reference", item_patternInstance_form_panelGrid_panel_property.getParentItem().getData("reference"));
+				item_property.setData("class_instance", property);
+				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
+				item_property.setData("reference", item_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_property_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_property.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_panel_property_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_property);
+				IPatternElement property_parentInstance = (IPatternElement)item_property.getParentItem().getData("class_instance");
+				property_parentInstance.setGenericElement(property);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT:
-				TreeItem item_patternInstance_form_panelGrid_panel_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_panel_text.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT);
-				Text patternInstance_form_panelGrid_panel_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_panelGrid_panel_text.setData("class_instance", patternInstance_form_panelGrid_panel_text);
-				item_patternInstance_form_panelGrid_panel_text.setData("parent_reference", item_patternInstance_form_panelGrid_panel_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_panel_text.setData("reference", item_patternInstance_form_panelGrid_panel_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_text.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_panel_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON:
-				TreeItem item_patternInstance_form_panelGrid_panel_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_panel_commandButton.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON);
-				CommandButton patternInstance_form_panelGrid_panel_commandButton = new CommandButton();
+			case COMMANDBUTTON:
+				TreeItem item_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
+				item_commandButton.setText(selectedItem.getText());
+				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
+				CommandButton commandButton = new CommandButton();
 
-				item_patternInstance_form_panelGrid_panel_commandButton.setData("class_instance", patternInstance_form_panelGrid_panel_commandButton);
-				item_patternInstance_form_panelGrid_panel_commandButton.setData("parent_reference", item_patternInstance_form_panelGrid_panel_commandButton.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_panel_commandButton.setData("reference", item_patternInstance_form_panelGrid_panel_commandButton.getParentItem().getData("reference"));
+				item_commandButton.setData("class_instance", commandButton);
+				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
+				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_commandButton.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_panel_commandButton_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_commandButton);
+				IPatternElement commandButton_parentInstance = (IPatternElement)item_commandButton.getParentItem().getData("class_instance");
+				commandButton_parentInstance.setGenericElement(commandButton);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE:
-				TreeItem item_patternInstance_form_panelGrid_panel_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_panel_dataTable.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE);
-				DataTable patternInstance_form_panelGrid_panel_dataTable = new DataTable();
+			case DATATABLE:
+				TreeItem item_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
+				item_dataTable.setText(selectedItem.getText());
+				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_dataTable.setData("type",NodeType.DATATABLE);
+				DataTable dataTable = new DataTable();
 
-				item_patternInstance_form_panelGrid_panel_dataTable.setData("class_instance", patternInstance_form_panelGrid_panel_dataTable);
-				item_patternInstance_form_panelGrid_panel_dataTable.setData("parent_reference", item_patternInstance_form_panelGrid_panel_dataTable.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_panel_dataTable.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable.getParentItem().getData("reference"));
+				item_dataTable.setData("class_instance", dataTable);
+				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
+				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_panel_dataTable_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_dataTable);
+				IPatternElement dataTable_parentInstance = (IPatternElement)item_dataTable.getParentItem().getData("class_instance");
+				dataTable_parentInstance.setGenericElement(dataTable);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN:
-				TreeItem item_patternInstance_form_panelGrid_panel_dataTable_column = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN);
-				Column patternInstance_form_panelGrid_panel_dataTable_column = new Column();
+			case COLUMN:
+				TreeItem item_column = new TreeItem(this.parent.getSelection()[0], 0);
+				item_column.setText(selectedItem.getText());
+				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_column.setData("type",NodeType.COLUMN);
+				Column column = new Column();
 
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("class_instance", patternInstance_form_panelGrid_panel_dataTable_column);
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("parent_reference", item_patternInstance_form_panelGrid_panel_dataTable_column.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_panel_dataTable_column.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable_column.getParentItem().getData("reference"));
+				item_column.setData("class_instance", column);
+				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
+				item_column.setData("reference", item_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable_column.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_panel_dataTable_column_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_dataTable_column);
+				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
+				column_parentInstance.setGenericElement(column);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT:
-				TreeItem item_patternInstance_form_panelGrid_panel_dataTable_column_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT);
-				Text patternInstance_form_panelGrid_panel_dataTable_column_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("class_instance", patternInstance_form_panelGrid_panel_dataTable_column_text);
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("parent_reference", item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_panel_dataTable_column_text.setData("reference", item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_panel_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_panel_dataTable_column_text.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_panel_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_panel_dataTable_column_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PROPERTY:
-				TreeItem item_patternInstance_form_panelGrid_property = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_property.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_PROPERTY);
-				Property patternInstance_form_panelGrid_property = new Property();
+			case PROPERTY:
+				TreeItem item_property = new TreeItem(this.parent.getSelection()[0], 0);
+				item_property.setText(selectedItem.getText());
+				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_property.setData("type",NodeType.PROPERTY);
+				Property property = new Property();
 
-				item_patternInstance_form_panelGrid_property.setData("class_instance", patternInstance_form_panelGrid_property);
-				item_patternInstance_form_panelGrid_property.setData("parent_reference", item_patternInstance_form_panelGrid_property.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_property.setData("reference", item_patternInstance_form_panelGrid_property.getParentItem().getData("reference"));
+				item_property.setData("class_instance", property);
+				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
+				item_property.setData("reference", item_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_property_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_property.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_property_parentInstance.setGenericElement(patternInstance_form_panelGrid_property);
+				IPatternElement property_parentInstance = (IPatternElement)item_property.getParentItem().getData("class_instance");
+				property_parentInstance.setGenericElement(property);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_TEXT:
-				TreeItem item_patternInstance_form_panelGrid_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_text.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_TEXT);
-				Text patternInstance_form_panelGrid_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_panelGrid_text.setData("class_instance", patternInstance_form_panelGrid_text);
-				item_patternInstance_form_panelGrid_text.setData("parent_reference", item_patternInstance_form_panelGrid_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_text.setData("reference", item_patternInstance_form_panelGrid_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_text.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON:
-				TreeItem item_patternInstance_form_panelGrid_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_commandButton.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON);
-				CommandButton patternInstance_form_panelGrid_commandButton = new CommandButton();
+			case COMMANDBUTTON:
+				TreeItem item_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
+				item_commandButton.setText(selectedItem.getText());
+				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
+				CommandButton commandButton = new CommandButton();
 
-				item_patternInstance_form_panelGrid_commandButton.setData("class_instance", patternInstance_form_panelGrid_commandButton);
-				item_patternInstance_form_panelGrid_commandButton.setData("parent_reference", item_patternInstance_form_panelGrid_commandButton.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_commandButton.setData("reference", item_patternInstance_form_panelGrid_commandButton.getParentItem().getData("reference"));
+				item_commandButton.setData("class_instance", commandButton);
+				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
+				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_commandButton.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_commandButton_parentInstance.setGenericElement(patternInstance_form_panelGrid_commandButton);
+				IPatternElement commandButton_parentInstance = (IPatternElement)item_commandButton.getParentItem().getData("class_instance");
+				commandButton_parentInstance.setGenericElement(commandButton);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE:
-				TreeItem item_patternInstance_form_panelGrid_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_dataTable.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE);
-				DataTable patternInstance_form_panelGrid_dataTable = new DataTable();
+			case DATATABLE:
+				TreeItem item_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
+				item_dataTable.setText(selectedItem.getText());
+				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_dataTable.setData("type",NodeType.DATATABLE);
+				DataTable dataTable = new DataTable();
 
-				item_patternInstance_form_panelGrid_dataTable.setData("class_instance", patternInstance_form_panelGrid_dataTable);
-				item_patternInstance_form_panelGrid_dataTable.setData("parent_reference", item_patternInstance_form_panelGrid_dataTable.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_dataTable.setData("reference", item_patternInstance_form_panelGrid_dataTable.getParentItem().getData("reference"));
+				item_dataTable.setData("class_instance", dataTable);
+				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
+				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_dataTable_parentInstance.setGenericElement(patternInstance_form_panelGrid_dataTable);
+				IPatternElement dataTable_parentInstance = (IPatternElement)item_dataTable.getParentItem().getData("class_instance");
+				dataTable_parentInstance.setGenericElement(dataTable);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN:
-				TreeItem item_patternInstance_form_panelGrid_dataTable_column = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_dataTable_column.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN);
-				Column patternInstance_form_panelGrid_dataTable_column = new Column();
+			case COLUMN:
+				TreeItem item_column = new TreeItem(this.parent.getSelection()[0], 0);
+				item_column.setText(selectedItem.getText());
+				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_column.setData("type",NodeType.COLUMN);
+				Column column = new Column();
 
-				item_patternInstance_form_panelGrid_dataTable_column.setData("class_instance", patternInstance_form_panelGrid_dataTable_column);
-				item_patternInstance_form_panelGrid_dataTable_column.setData("parent_reference", item_patternInstance_form_panelGrid_dataTable_column.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_dataTable_column.setData("reference", item_patternInstance_form_panelGrid_dataTable_column.getParentItem().getData("reference"));
+				item_column.setData("class_instance", column);
+				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
+				item_column.setData("reference", item_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable_column.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_dataTable_column_parentInstance.setGenericElement(patternInstance_form_panelGrid_dataTable_column);
+				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
+				column_parentInstance.setGenericElement(column);
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT:
-				TreeItem item_patternInstance_form_panelGrid_dataTable_column_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panelGrid_dataTable_column_text.setText(selectedItem.getText());
-				item_patternInstance_form_panelGrid_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panelGrid_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT);
-				Text patternInstance_form_panelGrid_dataTable_column_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_panelGrid_dataTable_column_text.setData("class_instance", patternInstance_form_panelGrid_dataTable_column_text);
-				item_patternInstance_form_panelGrid_dataTable_column_text.setData("parent_reference", item_patternInstance_form_panelGrid_dataTable_column_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panelGrid_dataTable_column_text.setData("reference", item_patternInstance_form_panelGrid_dataTable_column_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panelGrid_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panelGrid_dataTable_column_text.getParentItem().getData("class_instance");
-				patternInstance_form_panelGrid_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_panelGrid_dataTable_column_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_PANEL:
-				TreeItem item_patternInstance_form_panel = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panel.setText(selectedItem.getText());
-				item_patternInstance_form_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL);
-				Panel patternInstance_form_panel = new Panel();
+			case PANEL:
+				TreeItem item_panel = new TreeItem(this.parent.getSelection()[0], 0);
+				item_panel.setText(selectedItem.getText());
+				item_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_panel.setData("type",NodeType.PANEL);
+				Panel panel = new Panel();
 
-				item_patternInstance_form_panel.setData("class_instance", patternInstance_form_panel);
-				item_patternInstance_form_panel.setData("parent_reference", item_patternInstance_form_panel.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panel.setData("reference", item_patternInstance_form_panel.getParentItem().getData("reference"));
+				item_panel.setData("class_instance", panel);
+				item_panel.setData("parent_reference", item_panel.getParentItem().getData("parent_reference"));
+				item_panel.setData("reference", item_panel.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_parentInstance = (IPatternElement)item_patternInstance_form_panel.getParentItem().getData("class_instance");
-				patternInstance_form_panel_parentInstance.setGenericElement(patternInstance_form_panel);
+				IPatternElement panel_parentInstance = (IPatternElement)item_panel.getParentItem().getData("class_instance");
+				panel_parentInstance.setGenericElement(panel);
 				break;
-			case PATTERNINSTANCE_FORM_PANEL_PROPERTY:
-				TreeItem item_patternInstance_form_panel_property = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panel_property.setText(selectedItem.getText());
-				item_patternInstance_form_panel_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_PROPERTY);
-				Property patternInstance_form_panel_property = new Property();
+			case PROPERTY:
+				TreeItem item_property = new TreeItem(this.parent.getSelection()[0], 0);
+				item_property.setText(selectedItem.getText());
+				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_property.setData("type",NodeType.PROPERTY);
+				Property property = new Property();
 
-				item_patternInstance_form_panel_property.setData("class_instance", patternInstance_form_panel_property);
-				item_patternInstance_form_panel_property.setData("parent_reference", item_patternInstance_form_panel_property.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panel_property.setData("reference", item_patternInstance_form_panel_property.getParentItem().getData("reference"));
+				item_property.setData("class_instance", property);
+				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
+				item_property.setData("reference", item_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_property_parentInstance = (IPatternElement)item_patternInstance_form_panel_property.getParentItem().getData("class_instance");
-				patternInstance_form_panel_property_parentInstance.setGenericElement(patternInstance_form_panel_property);
+				IPatternElement property_parentInstance = (IPatternElement)item_property.getParentItem().getData("class_instance");
+				property_parentInstance.setGenericElement(property);
 				break;
-			case PATTERNINSTANCE_FORM_PANEL_TEXT:
-				TreeItem item_patternInstance_form_panel_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panel_text.setText(selectedItem.getText());
-				item_patternInstance_form_panel_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_TEXT);
-				Text patternInstance_form_panel_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_panel_text.setData("class_instance", patternInstance_form_panel_text);
-				item_patternInstance_form_panel_text.setData("parent_reference", item_patternInstance_form_panel_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panel_text.setData("reference", item_patternInstance_form_panel_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_text_parentInstance = (IPatternElement)item_patternInstance_form_panel_text.getParentItem().getData("class_instance");
-				patternInstance_form_panel_text_parentInstance.setGenericElement(patternInstance_form_panel_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON:
-				TreeItem item_patternInstance_form_panel_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panel_commandButton.setText(selectedItem.getText());
-				item_patternInstance_form_panel_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON);
-				CommandButton patternInstance_form_panel_commandButton = new CommandButton();
+			case COMMANDBUTTON:
+				TreeItem item_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
+				item_commandButton.setText(selectedItem.getText());
+				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
+				CommandButton commandButton = new CommandButton();
 
-				item_patternInstance_form_panel_commandButton.setData("class_instance", patternInstance_form_panel_commandButton);
-				item_patternInstance_form_panel_commandButton.setData("parent_reference", item_patternInstance_form_panel_commandButton.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panel_commandButton.setData("reference", item_patternInstance_form_panel_commandButton.getParentItem().getData("reference"));
+				item_commandButton.setData("class_instance", commandButton);
+				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
+				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_panel_commandButton.getParentItem().getData("class_instance");
-				patternInstance_form_panel_commandButton_parentInstance.setGenericElement(patternInstance_form_panel_commandButton);
+				IPatternElement commandButton_parentInstance = (IPatternElement)item_commandButton.getParentItem().getData("class_instance");
+				commandButton_parentInstance.setGenericElement(commandButton);
 				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE:
-				TreeItem item_patternInstance_form_panel_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panel_dataTable.setText(selectedItem.getText());
-				item_patternInstance_form_panel_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE);
-				DataTable patternInstance_form_panel_dataTable = new DataTable();
+			case DATATABLE:
+				TreeItem item_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
+				item_dataTable.setText(selectedItem.getText());
+				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_dataTable.setData("type",NodeType.DATATABLE);
+				DataTable dataTable = new DataTable();
 
-				item_patternInstance_form_panel_dataTable.setData("class_instance", patternInstance_form_panel_dataTable);
-				item_patternInstance_form_panel_dataTable.setData("parent_reference", item_patternInstance_form_panel_dataTable.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panel_dataTable.setData("reference", item_patternInstance_form_panel_dataTable.getParentItem().getData("reference"));
+				item_dataTable.setData("class_instance", dataTable);
+				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
+				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable.getParentItem().getData("class_instance");
-				patternInstance_form_panel_dataTable_parentInstance.setGenericElement(patternInstance_form_panel_dataTable);
+				IPatternElement dataTable_parentInstance = (IPatternElement)item_dataTable.getParentItem().getData("class_instance");
+				dataTable_parentInstance.setGenericElement(dataTable);
 				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN:
-				TreeItem item_patternInstance_form_panel_dataTable_column = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panel_dataTable_column.setText(selectedItem.getText());
-				item_patternInstance_form_panel_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN);
-				Column patternInstance_form_panel_dataTable_column = new Column();
+			case COLUMN:
+				TreeItem item_column = new TreeItem(this.parent.getSelection()[0], 0);
+				item_column.setText(selectedItem.getText());
+				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_column.setData("type",NodeType.COLUMN);
+				Column column = new Column();
 
-				item_patternInstance_form_panel_dataTable_column.setData("class_instance", patternInstance_form_panel_dataTable_column);
-				item_patternInstance_form_panel_dataTable_column.setData("parent_reference", item_patternInstance_form_panel_dataTable_column.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panel_dataTable_column.setData("reference", item_patternInstance_form_panel_dataTable_column.getParentItem().getData("reference"));
+				item_column.setData("class_instance", column);
+				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
+				item_column.setData("reference", item_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable_column.getParentItem().getData("class_instance");
-				patternInstance_form_panel_dataTable_column_parentInstance.setGenericElement(patternInstance_form_panel_dataTable_column);
+				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
+				column_parentInstance.setGenericElement(column);
 				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT:
-				TreeItem item_patternInstance_form_panel_dataTable_column_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_panel_dataTable_column_text.setText(selectedItem.getText());
-				item_patternInstance_form_panel_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_panel_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT);
-				Text patternInstance_form_panel_dataTable_column_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_panel_dataTable_column_text.setData("class_instance", patternInstance_form_panel_dataTable_column_text);
-				item_patternInstance_form_panel_dataTable_column_text.setData("parent_reference", item_patternInstance_form_panel_dataTable_column_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_panel_dataTable_column_text.setData("reference", item_patternInstance_form_panel_dataTable_column_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_panel_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_panel_dataTable_column_text.getParentItem().getData("class_instance");
-				patternInstance_form_panel_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_panel_dataTable_column_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_PROPERTY:
-				TreeItem item_patternInstance_form_property = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_property.setText(selectedItem.getText());
-				item_patternInstance_form_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_property.setData("type",NodeType.PATTERNINSTANCE_FORM_PROPERTY);
-				Property patternInstance_form_property = new Property();
+			case PROPERTY:
+				TreeItem item_property = new TreeItem(this.parent.getSelection()[0], 0);
+				item_property.setText(selectedItem.getText());
+				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_property.setData("type",NodeType.PROPERTY);
+				Property property = new Property();
 
-				item_patternInstance_form_property.setData("class_instance", patternInstance_form_property);
-				item_patternInstance_form_property.setData("parent_reference", item_patternInstance_form_property.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_property.setData("reference", item_patternInstance_form_property.getParentItem().getData("reference"));
+				item_property.setData("class_instance", property);
+				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
+				item_property.setData("reference", item_property.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_property_parentInstance = (IPatternElement)item_patternInstance_form_property.getParentItem().getData("class_instance");
-				patternInstance_form_property_parentInstance.setGenericElement(patternInstance_form_property);
+				IPatternElement property_parentInstance = (IPatternElement)item_property.getParentItem().getData("class_instance");
+				property_parentInstance.setGenericElement(property);
 				break;
-			case PATTERNINSTANCE_FORM_TEXT:
-				TreeItem item_patternInstance_form_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_text.setText(selectedItem.getText());
-				item_patternInstance_form_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_text.setData("type",NodeType.PATTERNINSTANCE_FORM_TEXT);
-				Text patternInstance_form_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_text.setData("class_instance", patternInstance_form_text);
-				item_patternInstance_form_text.setData("parent_reference", item_patternInstance_form_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_text.setData("reference", item_patternInstance_form_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_text_parentInstance = (IPatternElement)item_patternInstance_form_text.getParentItem().getData("class_instance");
-				patternInstance_form_text_parentInstance.setGenericElement(patternInstance_form_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_MESSAGES:
-				TreeItem item_patternInstance_form_messages = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_messages.setText(selectedItem.getText());
-				item_patternInstance_form_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_messages.setData("type",NodeType.PATTERNINSTANCE_FORM_MESSAGES);
-				Messages patternInstance_form_messages = new Messages();
+			case MESSAGES:
+				TreeItem item_messages = new TreeItem(this.parent.getSelection()[0], 0);
+				item_messages.setText(selectedItem.getText());
+				item_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_messages.setData("type",NodeType.MESSAGES);
+				Messages messages = new Messages();
 
-				item_patternInstance_form_messages.setData("class_instance", patternInstance_form_messages);
-				item_patternInstance_form_messages.setData("parent_reference", item_patternInstance_form_messages.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_messages.setData("reference", item_patternInstance_form_messages.getParentItem().getData("reference"));
+				item_messages.setData("class_instance", messages);
+				item_messages.setData("parent_reference", item_messages.getParentItem().getData("parent_reference"));
+				item_messages.setData("reference", item_messages.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_messages_parentInstance = (IPatternElement)item_patternInstance_form_messages.getParentItem().getData("class_instance");
-				patternInstance_form_messages_parentInstance.setGenericElement(patternInstance_form_messages);
+				IPatternElement messages_parentInstance = (IPatternElement)item_messages.getParentItem().getData("class_instance");
+				messages_parentInstance.setGenericElement(messages);
 				break;
-			case PATTERNINSTANCE_FORM_DATATABLE:
-				TreeItem item_patternInstance_form_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_dataTable.setText(selectedItem.getText());
-				item_patternInstance_form_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_dataTable.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE);
-				DataTable patternInstance_form_dataTable = new DataTable();
+			case DATATABLE:
+				TreeItem item_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
+				item_dataTable.setText(selectedItem.getText());
+				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_dataTable.setData("type",NodeType.DATATABLE);
+				DataTable dataTable = new DataTable();
 
-				item_patternInstance_form_dataTable.setData("class_instance", patternInstance_form_dataTable);
-				item_patternInstance_form_dataTable.setData("parent_reference", item_patternInstance_form_dataTable.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_dataTable.setData("reference", item_patternInstance_form_dataTable.getParentItem().getData("reference"));
+				item_dataTable.setData("class_instance", dataTable);
+				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
+				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_dataTable_parentInstance = (IPatternElement)item_patternInstance_form_dataTable.getParentItem().getData("class_instance");
-				patternInstance_form_dataTable_parentInstance.setGenericElement(patternInstance_form_dataTable);
+				IPatternElement dataTable_parentInstance = (IPatternElement)item_dataTable.getParentItem().getData("class_instance");
+				dataTable_parentInstance.setGenericElement(dataTable);
 				break;
-			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN:
-				TreeItem item_patternInstance_form_dataTable_column = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_dataTable_column.setText(selectedItem.getText());
-				item_patternInstance_form_dataTable_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_dataTable_column.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN);
-				Column patternInstance_form_dataTable_column = new Column();
+			case COLUMN:
+				TreeItem item_column = new TreeItem(this.parent.getSelection()[0], 0);
+				item_column.setText(selectedItem.getText());
+				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_column.setData("type",NodeType.COLUMN);
+				Column column = new Column();
 
-				item_patternInstance_form_dataTable_column.setData("class_instance", patternInstance_form_dataTable_column);
-				item_patternInstance_form_dataTable_column.setData("parent_reference", item_patternInstance_form_dataTable_column.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_dataTable_column.setData("reference", item_patternInstance_form_dataTable_column.getParentItem().getData("reference"));
+				item_column.setData("class_instance", column);
+				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
+				item_column.setData("reference", item_column.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_dataTable_column_parentInstance = (IPatternElement)item_patternInstance_form_dataTable_column.getParentItem().getData("class_instance");
-				patternInstance_form_dataTable_column_parentInstance.setGenericElement(patternInstance_form_dataTable_column);
+				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
+				column_parentInstance.setGenericElement(column);
 				break;
-			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT:
-				TreeItem item_patternInstance_form_dataTable_column_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_dataTable_column_text.setText(selectedItem.getText());
-				item_patternInstance_form_dataTable_column_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_dataTable_column_text.setData("type",NodeType.PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT);
-				Text patternInstance_form_dataTable_column_text = new Text();
+			case TEXT:
+				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
+				item_text.setText(selectedItem.getText());
+				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_text.setData("type",NodeType.TEXT);
+				Text text = new Text();
 
-				item_patternInstance_form_dataTable_column_text.setData("class_instance", patternInstance_form_dataTable_column_text);
-				item_patternInstance_form_dataTable_column_text.setData("parent_reference", item_patternInstance_form_dataTable_column_text.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_dataTable_column_text.setData("reference", item_patternInstance_form_dataTable_column_text.getParentItem().getData("reference"));
+				item_text.setData("class_instance", text);
+				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
+				item_text.setData("reference", item_text.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_dataTable_column_text_parentInstance = (IPatternElement)item_patternInstance_form_dataTable_column_text.getParentItem().getData("class_instance");
-				patternInstance_form_dataTable_column_text_parentInstance.setGenericElement(patternInstance_form_dataTable_column_text);
+				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
+				text_parentInstance.setGenericElement(text);
 				break;
-			case PATTERNINSTANCE_FORM_COMMANDBUTTON:
-				TreeItem item_patternInstance_form_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
-				item_patternInstance_form_commandButton.setText(selectedItem.getText());
-				item_patternInstance_form_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_patternInstance_form_commandButton.setData("type",NodeType.PATTERNINSTANCE_FORM_COMMANDBUTTON);
-				CommandButton patternInstance_form_commandButton = new CommandButton();
+			case COMMANDBUTTON:
+				TreeItem item_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
+				item_commandButton.setText(selectedItem.getText());
+				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
+				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
+				CommandButton commandButton = new CommandButton();
 
-				item_patternInstance_form_commandButton.setData("class_instance", patternInstance_form_commandButton);
-				item_patternInstance_form_commandButton.setData("parent_reference", item_patternInstance_form_commandButton.getParentItem().getData("parent_reference"));
-				item_patternInstance_form_commandButton.setData("reference", item_patternInstance_form_commandButton.getParentItem().getData("reference"));
+				item_commandButton.setData("class_instance", commandButton);
+				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
+				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
-				IPatternElement patternInstance_form_commandButton_parentInstance = (IPatternElement)item_patternInstance_form_commandButton.getParentItem().getData("class_instance");
-				patternInstance_form_commandButton_parentInstance.setGenericElement(patternInstance_form_commandButton);
+				IPatternElement commandButton_parentInstance = (IPatternElement)item_commandButton.getParentItem().getData("class_instance");
+				commandButton_parentInstance.setGenericElement(commandButton);
 				break;
 			default:
 				break;
@@ -1032,179 +823,59 @@ public class MenuFactory {
 				jfacedialogpatternInstance.create();
 				jfacedialogpatternInstance.open();
 				break;
-			case PATTERNINSTANCE_FORM:
-				JFaceDialogForm jfacedialogpatternInstance_form = new JFaceDialogForm(this.parent.getShell());
-				jfacedialogpatternInstance_form.setParent(this.parent);
-				jfacedialogpatternInstance_form.create();
-				jfacedialogpatternInstance_form.open();
+			case FORM:
+				JFaceDialogForm jfacedialogform = new JFaceDialogForm(this.parent.getShell());
+				jfacedialogform.setParent(this.parent);
+				jfacedialogform.create();
+				jfacedialogform.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID:
-				JFaceDialogPanelGrid jfacedialogpatternInstance_form_panelGrid = new JFaceDialogPanelGrid(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid.create();
-				jfacedialogpatternInstance_form_panelGrid.open();
+			case PANELGRID:
+				JFaceDialogPanelGrid jfacedialogpanelGrid = new JFaceDialogPanelGrid(this.parent.getShell());
+				jfacedialogpanelGrid.setParent(this.parent);
+				jfacedialogpanelGrid.create();
+				jfacedialogpanelGrid.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL:
-				JFaceDialogPanel jfacedialogpatternInstance_form_panelGrid_panel = new JFaceDialogPanel(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_panel.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_panel.create();
-				jfacedialogpatternInstance_form_panelGrid_panel.open();
+			case PANEL:
+				JFaceDialogPanel jfacedialogpanel = new JFaceDialogPanel(this.parent.getShell());
+				jfacedialogpanel.setParent(this.parent);
+				jfacedialogpanel.create();
+				jfacedialogpanel.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_PROPERTY:
-				JFaceDialogProperty jfacedialogpatternInstance_form_panelGrid_panel_property = new JFaceDialogProperty(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_panel_property.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_panel_property.create();
-				jfacedialogpatternInstance_form_panelGrid_panel_property.open();
+			case PROPERTY:
+				JFaceDialogProperty jfacedialogproperty = new JFaceDialogProperty(this.parent.getShell());
+				jfacedialogproperty.setParent(this.parent);
+				jfacedialogproperty.create();
+				jfacedialogproperty.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_panelGrid_panel_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_panel_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_panel_text.create();
-				jfacedialogpatternInstance_form_panelGrid_panel_text.open();
+			case TEXT:
+				JFaceDialogText jfacedialogtext = new JFaceDialogText(this.parent.getShell());
+				jfacedialogtext.setParent(this.parent);
+				jfacedialogtext.create();
+				jfacedialogtext.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_COMMANDBUTTON:
-				JFaceDialogCommandButton jfacedialogpatternInstance_form_panelGrid_panel_commandButton = new JFaceDialogCommandButton(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_panel_commandButton.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_panel_commandButton.create();
-				jfacedialogpatternInstance_form_panelGrid_panel_commandButton.open();
+			case COMMANDBUTTON:
+				JFaceDialogCommandButton jfacedialogcommandButton = new JFaceDialogCommandButton(this.parent.getShell());
+				jfacedialogcommandButton.setParent(this.parent);
+				jfacedialogcommandButton.create();
+				jfacedialogcommandButton.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE:
-				JFaceDialogDataTable jfacedialogpatternInstance_form_panelGrid_panel_dataTable = new JFaceDialogDataTable(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable.create();
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable.open();
+			case DATATABLE:
+				JFaceDialogDataTable jfacedialogdataTable = new JFaceDialogDataTable(this.parent.getShell());
+				jfacedialogdataTable.setParent(this.parent);
+				jfacedialogdataTable.create();
+				jfacedialogdataTable.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN:
-				JFaceDialogColumn jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column = new JFaceDialogColumn(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column.create();
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column.open();
+			case COLUMN:
+				JFaceDialogColumn jfacedialogcolumn = new JFaceDialogColumn(this.parent.getShell());
+				jfacedialogcolumn.setParent(this.parent);
+				jfacedialogcolumn.create();
+				jfacedialogcolumn.open();
 				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PANEL_DATATABLE_COLUMN_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column_text.create();
-				jfacedialogpatternInstance_form_panelGrid_panel_dataTable_column_text.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_PROPERTY:
-				JFaceDialogProperty jfacedialogpatternInstance_form_panelGrid_property = new JFaceDialogProperty(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_property.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_property.create();
-				jfacedialogpatternInstance_form_panelGrid_property.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_panelGrid_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_text.create();
-				jfacedialogpatternInstance_form_panelGrid_text.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_COMMANDBUTTON:
-				JFaceDialogCommandButton jfacedialogpatternInstance_form_panelGrid_commandButton = new JFaceDialogCommandButton(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_commandButton.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_commandButton.create();
-				jfacedialogpatternInstance_form_panelGrid_commandButton.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE:
-				JFaceDialogDataTable jfacedialogpatternInstance_form_panelGrid_dataTable = new JFaceDialogDataTable(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_dataTable.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_dataTable.create();
-				jfacedialogpatternInstance_form_panelGrid_dataTable.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN:
-				JFaceDialogColumn jfacedialogpatternInstance_form_panelGrid_dataTable_column = new JFaceDialogColumn(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_dataTable_column.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_dataTable_column.create();
-				jfacedialogpatternInstance_form_panelGrid_dataTable_column.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANELGRID_DATATABLE_COLUMN_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_panelGrid_dataTable_column_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_panelGrid_dataTable_column_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_panelGrid_dataTable_column_text.create();
-				jfacedialogpatternInstance_form_panelGrid_dataTable_column_text.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANEL:
-				JFaceDialogPanel jfacedialogpatternInstance_form_panel = new JFaceDialogPanel(this.parent.getShell());
-				jfacedialogpatternInstance_form_panel.setParent(this.parent);
-				jfacedialogpatternInstance_form_panel.create();
-				jfacedialogpatternInstance_form_panel.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_PROPERTY:
-				JFaceDialogProperty jfacedialogpatternInstance_form_panel_property = new JFaceDialogProperty(this.parent.getShell());
-				jfacedialogpatternInstance_form_panel_property.setParent(this.parent);
-				jfacedialogpatternInstance_form_panel_property.create();
-				jfacedialogpatternInstance_form_panel_property.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_panel_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_panel_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_panel_text.create();
-				jfacedialogpatternInstance_form_panel_text.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_COMMANDBUTTON:
-				JFaceDialogCommandButton jfacedialogpatternInstance_form_panel_commandButton = new JFaceDialogCommandButton(this.parent.getShell());
-				jfacedialogpatternInstance_form_panel_commandButton.setParent(this.parent);
-				jfacedialogpatternInstance_form_panel_commandButton.create();
-				jfacedialogpatternInstance_form_panel_commandButton.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE:
-				JFaceDialogDataTable jfacedialogpatternInstance_form_panel_dataTable = new JFaceDialogDataTable(this.parent.getShell());
-				jfacedialogpatternInstance_form_panel_dataTable.setParent(this.parent);
-				jfacedialogpatternInstance_form_panel_dataTable.create();
-				jfacedialogpatternInstance_form_panel_dataTable.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN:
-				JFaceDialogColumn jfacedialogpatternInstance_form_panel_dataTable_column = new JFaceDialogColumn(this.parent.getShell());
-				jfacedialogpatternInstance_form_panel_dataTable_column.setParent(this.parent);
-				jfacedialogpatternInstance_form_panel_dataTable_column.create();
-				jfacedialogpatternInstance_form_panel_dataTable_column.open();
-				break;
-			case PATTERNINSTANCE_FORM_PANEL_DATATABLE_COLUMN_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_panel_dataTable_column_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_panel_dataTable_column_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_panel_dataTable_column_text.create();
-				jfacedialogpatternInstance_form_panel_dataTable_column_text.open();
-				break;
-			case PATTERNINSTANCE_FORM_PROPERTY:
-				JFaceDialogProperty jfacedialogpatternInstance_form_property = new JFaceDialogProperty(this.parent.getShell());
-				jfacedialogpatternInstance_form_property.setParent(this.parent);
-				jfacedialogpatternInstance_form_property.create();
-				jfacedialogpatternInstance_form_property.open();
-				break;
-			case PATTERNINSTANCE_FORM_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_text.create();
-				jfacedialogpatternInstance_form_text.open();
-				break;
-			case PATTERNINSTANCE_FORM_MESSAGES:
-				JFaceDialogMessages jfacedialogpatternInstance_form_messages = new JFaceDialogMessages(this.parent.getShell());
-				jfacedialogpatternInstance_form_messages.setParent(this.parent);
-				jfacedialogpatternInstance_form_messages.create();
-				jfacedialogpatternInstance_form_messages.open();
-				break;
-			case PATTERNINSTANCE_FORM_DATATABLE:
-				JFaceDialogDataTable jfacedialogpatternInstance_form_dataTable = new JFaceDialogDataTable(this.parent.getShell());
-				jfacedialogpatternInstance_form_dataTable.setParent(this.parent);
-				jfacedialogpatternInstance_form_dataTable.create();
-				jfacedialogpatternInstance_form_dataTable.open();
-				break;
-			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN:
-				JFaceDialogColumn jfacedialogpatternInstance_form_dataTable_column = new JFaceDialogColumn(this.parent.getShell());
-				jfacedialogpatternInstance_form_dataTable_column.setParent(this.parent);
-				jfacedialogpatternInstance_form_dataTable_column.create();
-				jfacedialogpatternInstance_form_dataTable_column.open();
-				break;
-			case PATTERNINSTANCE_FORM_DATATABLE_COLUMN_TEXT:
-				JFaceDialogText jfacedialogpatternInstance_form_dataTable_column_text = new JFaceDialogText(this.parent.getShell());
-				jfacedialogpatternInstance_form_dataTable_column_text.setParent(this.parent);
-				jfacedialogpatternInstance_form_dataTable_column_text.create();
-				jfacedialogpatternInstance_form_dataTable_column_text.open();
-				break;
-			case PATTERNINSTANCE_FORM_COMMANDBUTTON:
-				JFaceDialogCommandButton jfacedialogpatternInstance_form_commandButton = new JFaceDialogCommandButton(this.parent.getShell());
-				jfacedialogpatternInstance_form_commandButton.setParent(this.parent);
-				jfacedialogpatternInstance_form_commandButton.create();
-				jfacedialogpatternInstance_form_commandButton.open();
+			case MESSAGES:
+				JFaceDialogMessages jfacedialogmessages = new JFaceDialogMessages(this.parent.getShell());
+				jfacedialogmessages.setParent(this.parent);
+				jfacedialogmessages.create();
+				jfacedialogmessages.open();
 				break;
 			default:
 				break;
@@ -1212,6 +883,12 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
+
+
+
+
+
+
 
 
 

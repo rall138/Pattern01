@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Wed Mar 29 17:11:09 GFT 2017
+	* Creation date: Thu Mar 30 17:08:02 GFT 2017
 	* Creator: rlomez
 	**/
 public class PatternInstance implements IPatternElement{
@@ -11,7 +11,7 @@ public class PatternInstance implements IPatternElement{
 	private PatternType type = pattern01.helpers.generated.PatternType.WORKWITH;
 	private java.lang.String name = "";
 	private java.lang.String description = "";
-	private Form patternInstance_form;
+	private Form form;
 
 	public Generator getGenerator(){
 		return this.generator;
@@ -45,12 +45,12 @@ public class PatternInstance implements IPatternElement{
 		this.description = description;
 	}
 
-	public Form getpatternInstance_form(){
-		return this.patternInstance_form;
+	public Form getform(){
+		return this.form;
 	}
 
-	public void setForm(Form patternInstance_form){
-		this.patternInstance_form = patternInstance_form;
+	public void setForm(Form form){
+		this.form = form;
 	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){
@@ -72,8 +72,8 @@ public class PatternInstance implements IPatternElement{
 		xml+="name='"+this.name+"' ";
 		xml+="description='"+this.description+"' ";
 		xml+=">";
-		if(patternInstance_form != null)
-			xml+=this.patternInstance_form.toXml();
+		if(form != null)
+			xml+=this.form.toXml();
 		xml+="</PatternInstance>";
 		return xml;
 	}

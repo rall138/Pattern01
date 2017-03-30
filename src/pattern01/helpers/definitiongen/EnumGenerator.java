@@ -96,7 +96,6 @@ public class EnumGenerator extends Task{
 			//Generamos las clases
 			generateClasses(enumElement.getPrettyName(), builder.toString());
 			
-			
 		}
 	}
 	

@@ -92,18 +92,18 @@ public class JFaceDialogCommandButton extends TitleAreaDialog {
 	
 	
 	private void getPropertiesFromInstance(){
-		pattern01.helpers.generated.CommandButton patternInstance_form_commandButton = getSelectedInstance();
-		this.name_text.setText(patternInstance_form_commandButton.getName());
-		this.action_text.setText(patternInstance_form_commandButton.getAction());
-		this.description_text.setText(patternInstance_form_commandButton.getDescription());
+		pattern01.helpers.generated.CommandButton commandButton = getSelectedInstance();
+		this.name_text.setText(commandButton.getName());
+		this.action_text.setText(commandButton.getAction());
+		this.description_text.setText(commandButton.getDescription());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
-		pattern01.helpers.generated.CommandButton patternInstance_form_commandButton = getSelectedInstance();
-		patternInstance_form_commandButton.setName(this.name_text.getText());
-		patternInstance_form_commandButton.setAction(this.action_text.getText());
-		patternInstance_form_commandButton.setDescription(this.description_text.getText());
+		pattern01.helpers.generated.CommandButton commandButton = getSelectedInstance();
+		commandButton.setName(this.name_text.getText());
+		commandButton.setAction(this.action_text.getText());
+		commandButton.setDescription(this.description_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

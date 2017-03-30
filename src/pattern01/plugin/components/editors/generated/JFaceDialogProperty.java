@@ -102,20 +102,20 @@ public class JFaceDialogProperty extends TitleAreaDialog {
 	
 	
 	private void getPropertiesFromInstance(){
-		pattern01.helpers.generated.Property patternInstance_form_property = getSelectedInstance();
-		this.name_text.setText(patternInstance_form_property.getName());
-		this.description_text.setText(patternInstance_form_property.getDescription());
-		this.type_text.setText(patternInstance_form_property.getType());
-		this.defaultValue_text.setText(patternInstance_form_property.getDefaultValue());
+		pattern01.helpers.generated.Property property = getSelectedInstance();
+		this.name_text.setText(property.getName());
+		this.description_text.setText(property.getDescription());
+		this.type_text.setText(property.getType());
+		this.defaultValue_text.setText(property.getDefaultValue());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
-		pattern01.helpers.generated.Property patternInstance_form_property = getSelectedInstance();
-		patternInstance_form_property.setName(this.name_text.getText());
-		patternInstance_form_property.setDescription(this.description_text.getText());
-		patternInstance_form_property.setType(this.type_text.getText());
-		patternInstance_form_property.setDefaultValue(this.defaultValue_text.getText());
+		pattern01.helpers.generated.Property property = getSelectedInstance();
+		property.setName(this.name_text.getText());
+		property.setDescription(this.description_text.getText());
+		property.setType(this.type_text.getText());
+		property.setDefaultValue(this.defaultValue_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

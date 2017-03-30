@@ -62,12 +62,12 @@ public class JFaceDialogPanel extends TitleAreaDialog {
 	
 	
 	private void getPropertiesFromInstance(){
-		pattern01.helpers.generated.Panel patternInstance_form_panel = getSelectedInstance();
+		pattern01.helpers.generated.Panel panel = getSelectedInstance();
 	}
 	
 	
 	private void savePropertiesOnInstance(){
-		pattern01.helpers.generated.Panel patternInstance_form_panel = getSelectedInstance();
+		pattern01.helpers.generated.Panel panel = getSelectedInstance();
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

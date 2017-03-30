@@ -92,18 +92,18 @@ public class JFaceDialogDataTable extends TitleAreaDialog {
 	
 	
 	private void getPropertiesFromInstance(){
-		pattern01.helpers.generated.DataTable patternInstance_form_dataTable = getSelectedInstance();
-		this.name_text.setText(patternInstance_form_dataTable.getName());
-		this.managedBean_text.setText(patternInstance_form_dataTable.getManagedBean());
-		this.description_text.setText(patternInstance_form_dataTable.getDescription());
+		pattern01.helpers.generated.DataTable dataTable = getSelectedInstance();
+		this.name_text.setText(dataTable.getName());
+		this.managedBean_text.setText(dataTable.getManagedBean());
+		this.description_text.setText(dataTable.getDescription());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
-		pattern01.helpers.generated.DataTable patternInstance_form_dataTable = getSelectedInstance();
-		patternInstance_form_dataTable.setName(this.name_text.getText());
-		patternInstance_form_dataTable.setManagedBean(this.managedBean_text.getText());
-		patternInstance_form_dataTable.setDescription(this.description_text.getText());
+		pattern01.helpers.generated.DataTable dataTable = getSelectedInstance();
+		dataTable.setName(this.name_text.getText());
+		dataTable.setManagedBean(this.managedBean_text.getText());
+		dataTable.setDescription(this.description_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	
