@@ -58,10 +58,14 @@ public class MenuFactory {
 	
 	
 	
+	
+	
+	
+	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Mar 30 17:08:03 GFT 2017
+	* Creation date: Fri Mar 31 17:23:56 GFT 2017
 	* Creator: rlomez
 	**/
 
@@ -306,6 +310,7 @@ public class MenuFactory {
 				item_patternInstance.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance.setData("type",NodeType.PATTERNINSTANCE);
 				PatternInstance patternInstance = new PatternInstance();
+				patternInstance.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_patternInstance.setData("class_instance", patternInstance);
 				item_patternInstance.setData("reference",java.util.UUID.randomUUID());
@@ -323,10 +328,12 @@ public class MenuFactory {
 				item_form.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_form.setData("type",NodeType.FORM);
 				Form form = new Form();
+				form.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_form.setData("class_instance", form);
 				item_form.setData("parent_reference", item_form.getParentItem().getData("parent_reference"));
 				item_form.setData("reference", item_form.getParentItem().getData("reference"));
+				form.setParentUUID(item_form.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
@@ -340,10 +347,12 @@ public class MenuFactory {
 				item_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_panelGrid.setData("type",NodeType.PANELGRID);
 				PanelGrid panelGrid = new PanelGrid();
+				panelGrid.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_panelGrid.setData("class_instance", panelGrid);
 				item_panelGrid.setData("parent_reference", item_panelGrid.getParentItem().getData("parent_reference"));
 				item_panelGrid.setData("reference", item_panelGrid.getParentItem().getData("reference"));
+				panelGrid.setParentUUID(item_panelGrid.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
@@ -357,10 +366,12 @@ public class MenuFactory {
 				item_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_panel.setData("type",NodeType.PANEL);
 				Panel panel = new Panel();
+				panel.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_panel.setData("class_instance", panel);
 				item_panel.setData("parent_reference", item_panel.getParentItem().getData("parent_reference"));
 				item_panel.setData("reference", item_panel.getParentItem().getData("reference"));
+				panel.setParentUUID(item_panel.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
@@ -374,10 +385,12 @@ public class MenuFactory {
 				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_property.setData("type",NodeType.PROPERTY);
 				Property property = new Property();
+				property.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_property.setData("class_instance", property);
 				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
 				item_property.setData("reference", item_property.getParentItem().getData("reference"));
+				property.setParentUUID(item_property.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
@@ -391,10 +404,12 @@ public class MenuFactory {
 				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_text.setData("type",NodeType.TEXT);
 				Text text = new Text();
+				text.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_text.setData("class_instance", text);
 				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
 				item_text.setData("reference", item_text.getParentItem().getData("reference"));
+				text.setParentUUID(item_text.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
@@ -408,10 +423,12 @@ public class MenuFactory {
 				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
 				CommandButton commandButton = new CommandButton();
+				commandButton.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_commandButton.setData("class_instance", commandButton);
 				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
 				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
+				commandButton.setParentUUID(item_commandButton.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
@@ -425,10 +442,12 @@ public class MenuFactory {
 				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_dataTable.setData("type",NodeType.DATATABLE);
 				DataTable dataTable = new DataTable();
+				dataTable.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_dataTable.setData("class_instance", dataTable);
 				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
 				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
+				dataTable.setParentUUID(item_dataTable.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
@@ -442,288 +461,18 @@ public class MenuFactory {
 				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_column.setData("type",NodeType.COLUMN);
 				Column column = new Column();
+				column.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_column.setData("class_instance", column);
 				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
 				item_column.setData("reference", item_column.getParentItem().getData("reference"));
+				column.setParentUUID(item_column.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
 				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
 				column_parentInstance.setGenericElement(column);
-				break;
-			case TEXT:
-				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_text.setText(selectedItem.getText());
-				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_text.setData("type",NodeType.TEXT);
-				Text text = new Text();
-
-				item_text.setData("class_instance", text);
-				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
-				item_text.setData("reference", item_text.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
-				text_parentInstance.setGenericElement(text);
-				break;
-			case PROPERTY:
-				TreeItem item_property = new TreeItem(this.parent.getSelection()[0], 0);
-				item_property.setText(selectedItem.getText());
-				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_property.setData("type",NodeType.PROPERTY);
-				Property property = new Property();
-
-				item_property.setData("class_instance", property);
-				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
-				item_property.setData("reference", item_property.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement property_parentInstance = (IPatternElement)item_property.getParentItem().getData("class_instance");
-				property_parentInstance.setGenericElement(property);
-				break;
-			case TEXT:
-				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_text.setText(selectedItem.getText());
-				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_text.setData("type",NodeType.TEXT);
-				Text text = new Text();
-
-				item_text.setData("class_instance", text);
-				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
-				item_text.setData("reference", item_text.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
-				text_parentInstance.setGenericElement(text);
-				break;
-			case COMMANDBUTTON:
-				TreeItem item_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
-				item_commandButton.setText(selectedItem.getText());
-				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
-				CommandButton commandButton = new CommandButton();
-
-				item_commandButton.setData("class_instance", commandButton);
-				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
-				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement commandButton_parentInstance = (IPatternElement)item_commandButton.getParentItem().getData("class_instance");
-				commandButton_parentInstance.setGenericElement(commandButton);
-				break;
-			case DATATABLE:
-				TreeItem item_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
-				item_dataTable.setText(selectedItem.getText());
-				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_dataTable.setData("type",NodeType.DATATABLE);
-				DataTable dataTable = new DataTable();
-
-				item_dataTable.setData("class_instance", dataTable);
-				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
-				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement dataTable_parentInstance = (IPatternElement)item_dataTable.getParentItem().getData("class_instance");
-				dataTable_parentInstance.setGenericElement(dataTable);
-				break;
-			case COLUMN:
-				TreeItem item_column = new TreeItem(this.parent.getSelection()[0], 0);
-				item_column.setText(selectedItem.getText());
-				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_column.setData("type",NodeType.COLUMN);
-				Column column = new Column();
-
-				item_column.setData("class_instance", column);
-				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
-				item_column.setData("reference", item_column.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
-				column_parentInstance.setGenericElement(column);
-				break;
-			case TEXT:
-				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_text.setText(selectedItem.getText());
-				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_text.setData("type",NodeType.TEXT);
-				Text text = new Text();
-
-				item_text.setData("class_instance", text);
-				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
-				item_text.setData("reference", item_text.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
-				text_parentInstance.setGenericElement(text);
-				break;
-			case PANEL:
-				TreeItem item_panel = new TreeItem(this.parent.getSelection()[0], 0);
-				item_panel.setText(selectedItem.getText());
-				item_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_panel.setData("type",NodeType.PANEL);
-				Panel panel = new Panel();
-
-				item_panel.setData("class_instance", panel);
-				item_panel.setData("parent_reference", item_panel.getParentItem().getData("parent_reference"));
-				item_panel.setData("reference", item_panel.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement panel_parentInstance = (IPatternElement)item_panel.getParentItem().getData("class_instance");
-				panel_parentInstance.setGenericElement(panel);
-				break;
-			case PROPERTY:
-				TreeItem item_property = new TreeItem(this.parent.getSelection()[0], 0);
-				item_property.setText(selectedItem.getText());
-				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_property.setData("type",NodeType.PROPERTY);
-				Property property = new Property();
-
-				item_property.setData("class_instance", property);
-				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
-				item_property.setData("reference", item_property.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement property_parentInstance = (IPatternElement)item_property.getParentItem().getData("class_instance");
-				property_parentInstance.setGenericElement(property);
-				break;
-			case TEXT:
-				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_text.setText(selectedItem.getText());
-				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_text.setData("type",NodeType.TEXT);
-				Text text = new Text();
-
-				item_text.setData("class_instance", text);
-				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
-				item_text.setData("reference", item_text.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
-				text_parentInstance.setGenericElement(text);
-				break;
-			case COMMANDBUTTON:
-				TreeItem item_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
-				item_commandButton.setText(selectedItem.getText());
-				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
-				CommandButton commandButton = new CommandButton();
-
-				item_commandButton.setData("class_instance", commandButton);
-				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
-				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement commandButton_parentInstance = (IPatternElement)item_commandButton.getParentItem().getData("class_instance");
-				commandButton_parentInstance.setGenericElement(commandButton);
-				break;
-			case DATATABLE:
-				TreeItem item_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
-				item_dataTable.setText(selectedItem.getText());
-				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_dataTable.setData("type",NodeType.DATATABLE);
-				DataTable dataTable = new DataTable();
-
-				item_dataTable.setData("class_instance", dataTable);
-				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
-				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement dataTable_parentInstance = (IPatternElement)item_dataTable.getParentItem().getData("class_instance");
-				dataTable_parentInstance.setGenericElement(dataTable);
-				break;
-			case COLUMN:
-				TreeItem item_column = new TreeItem(this.parent.getSelection()[0], 0);
-				item_column.setText(selectedItem.getText());
-				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_column.setData("type",NodeType.COLUMN);
-				Column column = new Column();
-
-				item_column.setData("class_instance", column);
-				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
-				item_column.setData("reference", item_column.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
-				column_parentInstance.setGenericElement(column);
-				break;
-			case TEXT:
-				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_text.setText(selectedItem.getText());
-				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_text.setData("type",NodeType.TEXT);
-				Text text = new Text();
-
-				item_text.setData("class_instance", text);
-				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
-				item_text.setData("reference", item_text.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
-				text_parentInstance.setGenericElement(text);
-				break;
-			case PROPERTY:
-				TreeItem item_property = new TreeItem(this.parent.getSelection()[0], 0);
-				item_property.setText(selectedItem.getText());
-				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_property.setData("type",NodeType.PROPERTY);
-				Property property = new Property();
-
-				item_property.setData("class_instance", property);
-				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
-				item_property.setData("reference", item_property.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement property_parentInstance = (IPatternElement)item_property.getParentItem().getData("class_instance");
-				property_parentInstance.setGenericElement(property);
-				break;
-			case TEXT:
-				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_text.setText(selectedItem.getText());
-				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_text.setData("type",NodeType.TEXT);
-				Text text = new Text();
-
-				item_text.setData("class_instance", text);
-				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
-				item_text.setData("reference", item_text.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
-				text_parentInstance.setGenericElement(text);
 				break;
 			case MESSAGES:
 				TreeItem item_messages = new TreeItem(this.parent.getSelection()[0], 0);
@@ -731,84 +480,18 @@ public class MenuFactory {
 				item_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_messages.setData("type",NodeType.MESSAGES);
 				Messages messages = new Messages();
+				messages.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_messages.setData("class_instance", messages);
 				item_messages.setData("parent_reference", item_messages.getParentItem().getData("parent_reference"));
 				item_messages.setData("reference", item_messages.getParentItem().getData("reference"));
+				messages.setParentUUID(item_messages.getParentItem().getData("reference").toString());
 
 				/*
 				Vinculando las instancias nuevas con su respectivo padre
 				*/
 				IPatternElement messages_parentInstance = (IPatternElement)item_messages.getParentItem().getData("class_instance");
 				messages_parentInstance.setGenericElement(messages);
-				break;
-			case DATATABLE:
-				TreeItem item_dataTable = new TreeItem(this.parent.getSelection()[0], 0);
-				item_dataTable.setText(selectedItem.getText());
-				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_dataTable.setData("type",NodeType.DATATABLE);
-				DataTable dataTable = new DataTable();
-
-				item_dataTable.setData("class_instance", dataTable);
-				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
-				item_dataTable.setData("reference", item_dataTable.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement dataTable_parentInstance = (IPatternElement)item_dataTable.getParentItem().getData("class_instance");
-				dataTable_parentInstance.setGenericElement(dataTable);
-				break;
-			case COLUMN:
-				TreeItem item_column = new TreeItem(this.parent.getSelection()[0], 0);
-				item_column.setText(selectedItem.getText());
-				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_column.setData("type",NodeType.COLUMN);
-				Column column = new Column();
-
-				item_column.setData("class_instance", column);
-				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
-				item_column.setData("reference", item_column.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement column_parentInstance = (IPatternElement)item_column.getParentItem().getData("class_instance");
-				column_parentInstance.setGenericElement(column);
-				break;
-			case TEXT:
-				TreeItem item_text = new TreeItem(this.parent.getSelection()[0], 0);
-				item_text.setText(selectedItem.getText());
-				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_text.setData("type",NodeType.TEXT);
-				Text text = new Text();
-
-				item_text.setData("class_instance", text);
-				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
-				item_text.setData("reference", item_text.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement text_parentInstance = (IPatternElement)item_text.getParentItem().getData("class_instance");
-				text_parentInstance.setGenericElement(text);
-				break;
-			case COMMANDBUTTON:
-				TreeItem item_commandButton = new TreeItem(this.parent.getSelection()[0], 0);
-				item_commandButton.setText(selectedItem.getText());
-				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
-				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
-				CommandButton commandButton = new CommandButton();
-
-				item_commandButton.setData("class_instance", commandButton);
-				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
-				item_commandButton.setData("reference", item_commandButton.getParentItem().getData("reference"));
-
-				/*
-				Vinculando las instancias nuevas con su respectivo padre
-				*/
-				IPatternElement commandButton_parentInstance = (IPatternElement)item_commandButton.getParentItem().getData("class_instance");
-				commandButton_parentInstance.setGenericElement(commandButton);
 				break;
 			default:
 				break;
@@ -883,17 +566,6 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
-
-
-
-
-
-
-
-
-
-
-
 
 
 

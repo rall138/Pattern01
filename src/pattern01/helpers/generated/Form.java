@@ -3,10 +3,12 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Mar 30 17:08:02 GFT 2017
+	* Creation date: Fri Mar 31 17:23:54 GFT 2017
 	* Creator: rlomez
 	**/
 public class Form implements IPatternElement{
+	private java.lang.String uuid = "";
+	private java.lang.String parentUUID = "";
 	private java.lang.String id = "primefaces.jpg";
 	private java.util.List<PanelGrid> collection_PanelGrid = new java.util.ArrayList<>();
 	private java.util.List<Panel> collection_Panel = new java.util.ArrayList<>();
@@ -15,6 +17,22 @@ public class Form implements IPatternElement{
 	private java.util.List<Messages> collection_Messages = new java.util.ArrayList<>();
 	private java.util.List<DataTable> collection_DataTable = new java.util.ArrayList<>();
 	private java.util.List<CommandButton> collection_CommandButton = new java.util.ArrayList<>();
+
+	public java.lang.String getUuid(){
+		return this.uuid;
+	}
+
+	public void setUuid(java.lang.String uuid){
+		this.uuid = uuid;
+	}
+
+	public java.lang.String getParentUUID(){
+		return this.parentUUID;
+	}
+
+	public void setParentUUID(java.lang.String parentUUID){
+		this.parentUUID = parentUUID;
+	}
 
 	public java.lang.String getId(){
 		return this.id;
@@ -87,6 +105,8 @@ public class Form implements IPatternElement{
 	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml="<Form ";
+		xml+="uuid='"+this.uuid+"' ";
+		xml+="parentUUID='"+this.parentUUID+"' ";
 		xml+="id='"+this.id+"' ";
 		xml+=">";
 		if(collection_PanelGrid != null)

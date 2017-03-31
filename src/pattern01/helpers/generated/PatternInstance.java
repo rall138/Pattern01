@@ -3,15 +3,24 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Mar 30 17:08:02 GFT 2017
+	* Creation date: Fri Mar 31 17:23:54 GFT 2017
 	* Creator: rlomez
 	**/
 public class PatternInstance implements IPatternElement{
+	private java.lang.String uuid = "";
 	private Generator generator = pattern01.helpers.generated.Generator.WEB;
 	private PatternType type = pattern01.helpers.generated.PatternType.WORKWITH;
 	private java.lang.String name = "";
 	private java.lang.String description = "";
 	private Form form;
+
+	public java.lang.String getUuid(){
+		return this.uuid;
+	}
+
+	public void setUuid(java.lang.String uuid){
+		this.uuid = uuid;
+	}
 
 	public Generator getGenerator(){
 		return this.generator;
@@ -67,6 +76,7 @@ public class PatternInstance implements IPatternElement{
 	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml="<PatternInstance ";
+		xml+="uuid='"+this.uuid+"' ";
 		xml+="generator='"+this.generator+"' ";
 		xml+="type='"+this.type+"' ";
 		xml+="name='"+this.name+"' ";

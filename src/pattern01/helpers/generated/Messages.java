@@ -3,10 +3,28 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Mar 30 17:08:02 GFT 2017
+	* Creation date: Fri Mar 31 17:23:54 GFT 2017
 	* Creator: rlomez
 	**/
 public class Messages implements IPatternElement{
+	private java.lang.String uuid = "";
+	private java.lang.String parentUUID = "";
+
+	public java.lang.String getUuid(){
+		return this.uuid;
+	}
+
+	public void setUuid(java.lang.String uuid){
+		this.uuid = uuid;
+	}
+
+	public java.lang.String getParentUUID(){
+		return this.parentUUID;
+	}
+
+	public void setParentUUID(java.lang.String parentUUID){
+		this.parentUUID = parentUUID;
+	}
 
 	public java.lang.String getProperty(java.lang.String propertyName){
 		java.util.Properties properties = new java.util.Properties();
@@ -22,6 +40,8 @@ public class Messages implements IPatternElement{
 	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml="<Messages ";
+		xml+="uuid='"+this.uuid+"' ";
+		xml+="parentUUID='"+this.parentUUID+"' ";
 		xml+=">";
 		xml+="</Messages>";
 		return xml;

@@ -1,6 +1,8 @@
 package pattern01.helpers.definitiongen;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Task;
@@ -36,7 +38,7 @@ public class PatternInstanceParserGenerator extends Task{
 	private Element patternInstanceElement = null;
 	private CustomStringBuilder builder = null;
 	private Element parentElement = null;
-	
+	private Map<String, String> map = new HashMap<>();
 	
 	LoggerThread log = new LoggerThread();
 	
@@ -59,6 +61,8 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(beginTag);
 		builder.appendLn(classHeaderComment);
 		
+		generateMapFromIteration(this.patternInstanceElement);
+		
 		//Nodo padre (PatternInstance) para referencia en todos los nodos del arbol
 		generateParentReference(element);
 		
@@ -74,9 +78,12 @@ public class PatternInstanceParserGenerator extends Task{
 		builder.appendLn(3,"item.setData(actualNode.getAttributes().item(index).getNodeName(),"); 
 		builder.appendLn(4,"actualNode.getAttributes().item(index).getNodeValue().toString());");
 		builder.appendLn(2,"}");
-
+		builder.clrlf();
+		builder.appendLn(2,"switch(NodeType.valueOf(actualNode.getNodeName().toUpperCase())){");
+		generatePropertiesMethodSwitchOptions(element, builder);
+		builder.appendLn(2,"}");
+		builder.clrlf();
 		builder.appendLn(2,"classInstanceStrategy(actualNode, item);");
-		
 		builder.clrlf();
 		builder.appendLn(2,"// Recursion over child nodes");
 		builder.appendLn(2,"if (actualNode.getChildNodes().getLength() > 0){");
@@ -94,6 +101,7 @@ public class PatternInstanceParserGenerator extends Task{
 		generateElementStrategyHeader();
 		generateElementStrategy(element, true);
 		generateElementStrategyFooter();
+		generateGetValueByNameForNodeAttribute(element, builder);
 		builder.appendLn(endTag);
 		generateClasses("PatternInstanceParser", builder.toString());
 	}
@@ -192,6 +200,52 @@ public class PatternInstanceParserGenerator extends Task{
 					element.getPrettyName()+"("+element.getName()+");");
 			}
 		}
+	}
+	
+	private void generatePropertiesMethodSwitchOptions(Element element, CustomStringBuilder builder){
+		boolean notUsed = map.containsKey(element.getName().toUpperCase());
+		if (notUsed){
+			map.remove(element.getName().toUpperCase());
+			builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+			builder.appendLn(4,element.getPrettyName()+" "+element.getName());
+			builder.append(" = new "+element.getPrettyName()+"();");
+			
+			for (Attribute attr: element.getAttribute_collection()){
+				builder.appendLn(4,element.getName()+".set"+attr.getPrettyName());
+				if (attr.isCustomAttribute())
+					builder.append("(("+DataTypeConversion.getProcessedType(attr.getType())+")");
+				else
+					builder.append("(("+attr.getType()+")");
+				builder.append("getAttributeValueByName("+quotscape+attr.getName()+quotscape+", actualNode));");
+			}
+			
+			builder.appendLn(4,"break;");
+			
+			for (Element childElement: element.getChildElements_collection())
+				generatePropertiesMethodSwitchOptions(childElement, builder);
+		}
+	}
+	
+	private void generateMapFromIteration(Element element){
+		map.put(element.getName().toUpperCase(), element.getName().toUpperCase());
+		for(Element childElement : element.getChildElements_collection()){
+			generateMapFromIteration(childElement);
+		}
+	}
+	
+	private void generateGetValueByNameForNodeAttribute(Element element, CustomStringBuilder builder){
+		builder.appendLn(1,"private Object getAttributeValueByName(String name, org.w3c.dom.Node actualNode){");
+		builder.appendLn(2,"int index = 0; boolean itemfound = false; Object value=null;");
+		builder.appendLn(2,"while(index < actualNode.getAttributes().getLength() && !itemfound){");
+		builder.appendLn(3,"if(actualNode.getAttributes().item(index).getNodeName().equalsIgnoreCase(name)){");
+		builder.appendLn(4,"value = actualNode.getAttributes().item(index).getNodeValue();");
+		builder.appendLn(4,"itemfound = true;");
+		builder.appendLn(3,"}else{");
+		builder.appendLn(4,"index++;");
+		builder.appendLn(3,"}");
+		builder.appendLn(2,"}");
+		builder.appendLn(2,"return value;");
+		builder.appendLn(1,"}");
 	}
 	
 	private void generateClasses(String className, String classBody){

@@ -3,15 +3,33 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Mar 30 17:08:02 GFT 2017
+	* Creation date: Fri Mar 31 17:23:54 GFT 2017
 	* Creator: rlomez
 	**/
 public class PanelGrid implements IPatternElement{
+	private java.lang.String uuid = "";
+	private java.lang.String parentUUID = "";
 	private java.util.List<Panel> collection_Panel = new java.util.ArrayList<>();
 	private java.util.List<Property> collection_Property = new java.util.ArrayList<>();
 	private java.util.List<Text> collection_Text = new java.util.ArrayList<>();
 	private java.util.List<CommandButton> collection_CommandButton = new java.util.ArrayList<>();
 	private java.util.List<DataTable> collection_DataTable = new java.util.ArrayList<>();
+
+	public java.lang.String getUuid(){
+		return this.uuid;
+	}
+
+	public void setUuid(java.lang.String uuid){
+		this.uuid = uuid;
+	}
+
+	public java.lang.String getParentUUID(){
+		return this.parentUUID;
+	}
+
+	public void setParentUUID(java.lang.String parentUUID){
+		this.parentUUID = parentUUID;
+	}
 	public void setCollection_Panel(java.util.List<Panel> collection_Panel){
 		this.collection_Panel = collection_Panel;
 	}
@@ -62,6 +80,8 @@ public class PanelGrid implements IPatternElement{
 	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml="<PanelGrid ";
+		xml+="uuid='"+this.uuid+"' ";
+		xml+="parentUUID='"+this.parentUUID+"' ";
 		xml+=">";
 		if(collection_Panel != null)
 			for(int index = 0; index < collection_Panel.size(); index++){

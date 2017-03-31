@@ -3,14 +3,32 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Thu Mar 30 17:08:02 GFT 2017
+	* Creation date: Fri Mar 31 17:23:54 GFT 2017
 	* Creator: rlomez
 	**/
 public class Text implements IPatternElement{
+	private java.lang.String uuid = "";
+	private java.lang.String parentUUID = "";
 	private java.lang.String name = "";
 	private java.lang.String value = "";
 	private TextType type = pattern01.helpers.generated.TextType.PLAINTEXT;
 	private java.lang.String description = "";
+
+	public java.lang.String getUuid(){
+		return this.uuid;
+	}
+
+	public void setUuid(java.lang.String uuid){
+		this.uuid = uuid;
+	}
+
+	public java.lang.String getParentUUID(){
+		return this.parentUUID;
+	}
+
+	public void setParentUUID(java.lang.String parentUUID){
+		this.parentUUID = parentUUID;
+	}
 
 	public java.lang.String getName(){
 		return this.name;
@@ -58,6 +76,8 @@ public class Text implements IPatternElement{
 	@Override
 	public java.lang.String toXml(){
 		java.lang.String xml="<Text ";
+		xml+="uuid='"+this.uuid+"' ";
+		xml+="parentUUID='"+this.parentUUID+"' ";
 		xml+="name='"+this.name+"' ";
 		xml+="value='"+this.value+"' ";
 		xml+="type='"+this.type+"' ";

@@ -83,11 +83,14 @@ public class PreferencesDialogGenerator extends Task{
 	private CustomStringBuilder getPropertiesDefinitionCode(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(1,"private org.eclipse.swt.widgets.Label "+attr.getName()+"_label = null;");
-			if (attr.isCustomAttribute())
-				builder.appendLn(1,"private org.eclipse.swt.widgets.Combo "+attr.getName()+"_cmb = null;");
-			else
-				builder.appendLn(1,"private org.eclipse.swt.widgets.Text "+attr.getName()+"_text = null;");
+			// Solo si el atributo es editable por el usuario
+			if (attr.getUserEditable()){
+				builder.appendLn(1,"private org.eclipse.swt.widgets.Label "+attr.getName()+"_label = null;");
+				if (attr.isCustomAttribute())
+					builder.appendLn(1,"private org.eclipse.swt.widgets.Combo "+attr.getName()+"_cmb = null;");
+				else
+					builder.appendLn(1,"private org.eclipse.swt.widgets.Text "+attr.getName()+"_text = null;");
+			}
 		}
 		return builder;
 	}
@@ -95,30 +98,32 @@ public class PreferencesDialogGenerator extends Task{
 	private CustomStringBuilder getMethodBody(Element element){
 		CustomStringBuilder builder = new CustomStringBuilder();
 		for (Attribute attr : element.getAttribute_collection()){
-			builder.appendLn(2, attr.getName()+"_label");
-			builder.append(" = new org.eclipse.swt.widgets.Label(container,SWT.NONE);");
-			builder.appendLn(2,attr.getName()+"_label.setText("+quotscape+attr.getPrettyName()+quotscape+");");
-			
-			//Custom attributes producen combos
-			if (attr.isCustomAttribute()){
-				builder.appendLn(2, attr.getName()+"_cmb");
-				builder.append(" = new org.eclipse.swt.widgets.Combo(container, SWT.SINGLE);");				
-			}else{
-				builder.appendLn(2, attr.getName()+"_text");
-				builder.append(" = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);");				
-			}
-
-			builder.appendLn(2, "org.eclipse.swt.layout.GridData "+attr.getName()+"_layout");
-			builder.append(" = new org.eclipse.swt.layout.GridData();");
-			builder.appendLn(2, attr.getName()+"_layout.grabExcessHorizontalSpace = true;");
-			builder.appendLn(2, attr.getName()+"_layout.horizontalAlignment = GridData.FILL;");
-			if (attr.isCustomAttribute()){
-				builder.appendLn(2, attr.getName()+"_cmb.setLayoutData("+attr.getName()+"_layout);");
-			}else{
-				builder.appendLn(2, attr.getName()+"_text.setLayoutData("+attr.getName()+"_layout);");
-			}
-			if (element.getAttribute_collection().indexOf(attr) < element.getAttribute_collection().size()){
-				builder.clrlf();
+			if (attr.getUserEditable()){
+				builder.appendLn(2, attr.getName()+"_label");
+				builder.append(" = new org.eclipse.swt.widgets.Label(container,SWT.NONE);");
+				builder.appendLn(2,attr.getName()+"_label.setText("+quotscape+attr.getPrettyName()+quotscape+");");
+				
+				//Custom attributes producen combos
+				if (attr.isCustomAttribute()){
+					builder.appendLn(2, attr.getName()+"_cmb");
+					builder.append(" = new org.eclipse.swt.widgets.Combo(container, SWT.SINGLE);");				
+				}else{
+					builder.appendLn(2, attr.getName()+"_text");
+					builder.append(" = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);");				
+				}
+	
+				builder.appendLn(2, "org.eclipse.swt.layout.GridData "+attr.getName()+"_layout");
+				builder.append(" = new org.eclipse.swt.layout.GridData();");
+				builder.appendLn(2, attr.getName()+"_layout.grabExcessHorizontalSpace = true;");
+				builder.appendLn(2, attr.getName()+"_layout.horizontalAlignment = GridData.FILL;");
+				if (attr.isCustomAttribute()){
+					builder.appendLn(2, attr.getName()+"_cmb.setLayoutData("+attr.getName()+"_layout);");
+				}else{
+					builder.appendLn(2, attr.getName()+"_text.setLayoutData("+attr.getName()+"_layout);");
+				}
+				if (element.getAttribute_collection().indexOf(attr) < element.getAttribute_collection().size()){
+					builder.clrlf();
+				}
 			}
 		}
 		return builder;
@@ -143,18 +148,20 @@ public class PreferencesDialogGenerator extends Task{
 		
 		//Asignacion de valores en propiedades de pantalla modal
 		for (Attribute attr : element.getAttribute_collection()){
-			if (attr.isCustomAttribute()){
-				builder.appendLn(2,"for(String option : "+Element.classPackage+"."+DataTypeConversion.getProcessedType(attr.getType())
-				+".getOptionCollection()){");
-				builder.appendLn(3,"this."+attr.getName()+"_cmb.add(option);");
-				builder.appendLn(2,"}");
-				builder.clrlf();
-				builder.appendLn(2,"this."+attr.getName()+"_cmb.select(this."+attr.getName()+"_cmb.indexOf(");
-				builder.append(element.getName()+".get"+attr.getPrettyName()+"().toString()));");
-				
-			}else{
-				builder.appendLn(2,"this."+attr.getName()+"_text.setText(");
-				builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
+			if (attr.getUserEditable()){
+				if (attr.isCustomAttribute()){
+					builder.appendLn(2,"for(String option : "+Element.classPackage+"."+DataTypeConversion.getProcessedType(attr.getType())
+					+".getOptionCollection()){");
+					builder.appendLn(3,"this."+attr.getName()+"_cmb.add(option);");
+					builder.appendLn(2,"}");
+					builder.clrlf();
+					builder.appendLn(2,"this."+attr.getName()+"_cmb.select(this."+attr.getName()+"_cmb.indexOf(");
+					builder.append(element.getName()+".get"+attr.getPrettyName()+"().toString()));");
+					
+				}else{
+					builder.appendLn(2,"this."+attr.getName()+"_text.setText(");
+					builder.append(element.getName()+".get"+attr.getPrettyName()+"());");
+				}
 			}
 		}
 		builder.appendLn(1, "}");
@@ -171,13 +178,15 @@ public class PreferencesDialogGenerator extends Task{
 
 		//Asignacion de valores en instancia
 		for (Attribute attr : element.getAttribute_collection()){
-			if (attr.isCustomAttribute()){ 
-				builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
-				builder.append(Element.classPackage+"."+DataTypeConversion.getProcessedType(attr.getType())
-				+".valueOf(this."+attr.getName()+"_cmb.getText()));");
-			}else{
-				builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
-				builder.append("this."+attr.getName()+"_text.getText());");
+			if (attr.getUserEditable()){
+				if (attr.isCustomAttribute()){ 
+					builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
+					builder.append(Element.classPackage+"."+DataTypeConversion.getProcessedType(attr.getType())
+					+".valueOf(this."+attr.getName()+"_cmb.getText()));");
+				}else{
+					builder.appendLn(2, element.getName()+".set"+attr.getPrettyName()+"(");
+					builder.append("this."+attr.getName()+"_text.getText());");
+				}
 			}
 		}
 		builder.appendLn(2, "pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);");

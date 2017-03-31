@@ -17,14 +17,6 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private org.eclipse.swt.widgets.Label generator_label = null;
-	private org.eclipse.swt.widgets.Combo generator_cmb = null;
-	private org.eclipse.swt.widgets.Label type_label = null;
-	private org.eclipse.swt.widgets.Combo type_cmb = null;
-	private org.eclipse.swt.widgets.Label name_label = null;
-	private org.eclipse.swt.widgets.Text name_text = null;
-	private org.eclipse.swt.widgets.Label description_label = null;
-	private org.eclipse.swt.widgets.Text description_text = null;
 	
 	public JFaceDialogPatternInstance(Shell parentShell){
 		super(parentShell);
@@ -50,38 +42,6 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private void createProperties(Composite container){
 		
-		generator_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		generator_label.setText("Generator");
-		generator_cmb = new org.eclipse.swt.widgets.Combo(container, SWT.SINGLE);
-		org.eclipse.swt.layout.GridData generator_layout = new org.eclipse.swt.layout.GridData();
-		generator_layout.grabExcessHorizontalSpace = true;
-		generator_layout.horizontalAlignment = GridData.FILL;
-		generator_cmb.setLayoutData(generator_layout);
-
-		type_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		type_label.setText("Type");
-		type_cmb = new org.eclipse.swt.widgets.Combo(container, SWT.SINGLE);
-		org.eclipse.swt.layout.GridData type_layout = new org.eclipse.swt.layout.GridData();
-		type_layout.grabExcessHorizontalSpace = true;
-		type_layout.horizontalAlignment = GridData.FILL;
-		type_cmb.setLayoutData(type_layout);
-
-		name_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		name_label.setText("Name");
-		name_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
-		org.eclipse.swt.layout.GridData name_layout = new org.eclipse.swt.layout.GridData();
-		name_layout.grabExcessHorizontalSpace = true;
-		name_layout.horizontalAlignment = GridData.FILL;
-		name_text.setLayoutData(name_layout);
-
-		description_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		description_label.setText("Description");
-		description_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
-		org.eclipse.swt.layout.GridData description_layout = new org.eclipse.swt.layout.GridData();
-		description_layout.grabExcessHorizontalSpace = true;
-		description_layout.horizontalAlignment = GridData.FILL;
-		description_text.setLayoutData(description_layout);
-
 	}
 	
 	protected void createButtonsForButtonBar(Composite parent) {
@@ -103,27 +63,11 @@ public class JFaceDialogPatternInstance extends TitleAreaDialog {
 	
 	private void getPropertiesFromInstance(){
 		pattern01.helpers.generated.PatternInstance patternInstance = getSelectedInstance();
-		for(String option : pattern01.helpers.generated.Generator.getOptionCollection()){
-			this.generator_cmb.add(option);
-		}
-
-		this.generator_cmb.select(this.generator_cmb.indexOf(patternInstance.getGenerator().toString()));
-		for(String option : pattern01.helpers.generated.PatternType.getOptionCollection()){
-			this.type_cmb.add(option);
-		}
-
-		this.type_cmb.select(this.type_cmb.indexOf(patternInstance.getType().toString()));
-		this.name_text.setText(patternInstance.getName());
-		this.description_text.setText(patternInstance.getDescription());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.PatternInstance patternInstance = getSelectedInstance();
-		patternInstance.setGenerator(pattern01.helpers.generated.Generator.valueOf(this.generator_cmb.getText()));
-		patternInstance.setType(pattern01.helpers.generated.PatternType.valueOf(this.type_cmb.getText()));
-		patternInstance.setName(this.name_text.getText());
-		patternInstance.setDescription(this.description_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

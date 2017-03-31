@@ -7,6 +7,7 @@ public class Attribute {
 	private String default_value;
 	private boolean requiered;
 	private String group = "Default";
+	private boolean userEditable;
 	
 	public Attribute(){}
 	
@@ -64,10 +65,18 @@ public class Attribute {
 		this.default_value = default_value;
 	}
 	
+	public void setUserEditable(boolean userEditable){
+		this.userEditable = userEditable;
+	}
+	
+	public boolean getUserEditable(){
+		return this.userEditable;
+	}
+	
 	@Override
 	public String toString(){
 		return "Attribute: Name["+this.getName()+"], PrettyName["+this.getPrettyName()+"], Type["+this.getType()+"], "+
 				"Requiered["+Boolean.toString(this.isRequiered())+"], DefaultValue["+this.getDefault_value()+"], "+
-				"Group["+this.getGroup()+"]";
+				"Group["+this.getGroup()+"], UserEditable["+this.userEditable+"]";
 	}
 }

@@ -179,6 +179,7 @@ public class MenuFactoryGenerator extends Task {
 	private void generateAddElementMethod(Element element, CustomStringBuilder builder){
 		builder.appendLn(1,"private void addElement(MenuItem selectedItem){");
 		builder.appendLn(2,"switch(((NodeType)selectedItem.getData("+quotscape+"type"+quotscape+"))){");
+		generateMapFromIteration(this.patternInstanceElement);
 		generateAddElementMethodForClassItem(builder);
 		generateAddElementMethodSwitchOptions(element, builder,0);
 		builder.appendLn(3,"default:");
@@ -195,38 +196,49 @@ public class MenuFactoryGenerator extends Task {
 	}
 	
 	private void generateAddElementMethodSwitchOptions(Element element, CustomStringBuilder builder, int index){
-		builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
-		builder.appendLn(4,"TreeItem item_"+element.getName()+" = new TreeItem(this.parent.getSelection()[0], 0);");
-		builder.appendLn(4,"item_"+element.getName()+".setText(selectedItem.getText());");
-		builder.appendLn(4,"item_"+element.getName()+".setImage(ImageHelper.getImage("+quotscape+"primefaces.jpg"+quotscape+"));");
-		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"type"+quotscape+",NodeType."+element.getName().toUpperCase()+");");
-
-		builder.appendLn(4,element.getPrettyName()+" "+element.getName()+" = ");
-		builder.append("new "+element.getPrettyName()+"();");
-		builder.clrlf();
-
-		builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"class_instance"+quotscape+", "+element.getName()+");");
-
-		if (!element.getPrettyName().equalsIgnoreCase(NodeType.PATTERNINSTANCE.toString())){
-			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape);
-			builder.append(", item_"+element.getName()+".getParentItem().getData("+quotscape+"parent_reference"+quotscape+"));");
-			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+", ");
-			builder.append("item_"+element.getName()+".getParentItem().getData("+quotscape+"reference"+quotscape+"));");
-		}else{
-			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+",java.util.UUID.randomUUID());");
-			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape+",");
-			builder.append(element.getName()+");");			
-		}
-		builder.clrlf();
-
-		builder.appendComment(4, "Vinculando las instancias nuevas con su respectivo padre");
-		builder.appendLn(4,"IPatternElement "+element.getName()+"_parentInstance = ");
-		builder.append("(IPatternElement)item_"+element.getName()+".getParentItem().getData("+quotscape+"class_instance"+quotscape+");");
-
-		builder.appendLn(4,element.getName()+"_parentInstance.setGenericElement("+element.getName()+");");
-		builder.appendLn(4,"break;");
-		for(Element childElement : element.getChildElements_collection()){
-			generateAddElementMethodSwitchOptions(childElement, builder, index++);
+		boolean notUsed = map.containsValue(element.getName().toUpperCase());
+		if (notUsed){
+			map.remove(element.getName().toUpperCase());
+			builder.appendLn(3,"case "+element.getName().toUpperCase()+":");
+			builder.appendLn(4,"TreeItem item_"+element.getName()+" = new TreeItem(this.parent.getSelection()[0], 0);");
+			builder.appendLn(4,"item_"+element.getName()+".setText(selectedItem.getText());");
+			builder.appendLn(4,"item_"+element.getName()+".setImage(ImageHelper.getImage("+quotscape+"primefaces.jpg"+quotscape+"));");
+			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"type"+quotscape+",NodeType."+element.getName().toUpperCase()+");");
+	
+			builder.appendLn(4,element.getPrettyName()+" "+element.getName()+" = ");
+			builder.append("new "+element.getPrettyName()+"();");
+			
+			builder.appendLn(4,element.getName()+".setUuid(java.util.UUID.randomUUID().toString());");
+			builder.clrlf();
+	
+			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"class_instance"+quotscape+", "+element.getName()+");");
+	
+			if (!element.getPrettyName().equalsIgnoreCase(NodeType.PATTERNINSTANCE.toString())){
+				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape);
+				builder.append(", item_"+element.getName()+".getParentItem().getData("+quotscape+"parent_reference"+quotscape+"));");
+				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+", ");
+				builder.append("item_"+element.getName()+".getParentItem().getData("+quotscape+"reference"+quotscape+"));");
+				
+				//Agregamos la referencia del UUID del padre dentro del nodo hijo
+				builder.appendLn(4,element.getName()+".setParentUUID(item_"+element.getName());
+				builder.append(".getParentItem().getData("+quotscape+"reference"+quotscape+").toString());");
+				
+			}else{
+				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+",java.util.UUID.randomUUID());");
+				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape+",");
+				builder.append(element.getName()+");");			
+			}
+			builder.clrlf();
+	
+			builder.appendComment(4, "Vinculando las instancias nuevas con su respectivo padre");
+			builder.appendLn(4,"IPatternElement "+element.getName()+"_parentInstance = ");
+			builder.append("(IPatternElement)item_"+element.getName()+".getParentItem().getData("+quotscape+"class_instance"+quotscape+");");
+	
+			builder.appendLn(4,element.getName()+"_parentInstance.setGenericElement("+element.getName()+");");
+			builder.appendLn(4,"break;");
+			for(Element childElement : element.getChildElements_collection()){
+				generateAddElementMethodSwitchOptions(childElement, builder, index++);
+			}
 		}
 	}
 	

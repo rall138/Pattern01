@@ -17,8 +17,6 @@ public class JFaceDialogForm extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
-	private org.eclipse.swt.widgets.Label id_label = null;
-	private org.eclipse.swt.widgets.Text id_text = null;
 	
 	public JFaceDialogForm(Shell parentShell){
 		super(parentShell);
@@ -44,14 +42,6 @@ public class JFaceDialogForm extends TitleAreaDialog {
 	
 	private void createProperties(Composite container){
 		
-		id_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
-		id_label.setText("Id");
-		id_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
-		org.eclipse.swt.layout.GridData id_layout = new org.eclipse.swt.layout.GridData();
-		id_layout.grabExcessHorizontalSpace = true;
-		id_layout.horizontalAlignment = GridData.FILL;
-		id_text.setLayoutData(id_layout);
-
 	}
 	
 	protected void createButtonsForButtonBar(Composite parent) {
@@ -73,13 +63,11 @@ public class JFaceDialogForm extends TitleAreaDialog {
 	
 	private void getPropertiesFromInstance(){
 		pattern01.helpers.generated.Form form = getSelectedInstance();
-		this.id_text.setText(form.getId());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.Form form = getSelectedInstance();
-		form.setId(this.id_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	
