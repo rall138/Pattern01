@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated enum class via ClassGenerator.xml
-	* Creation date: Fri Mar 31 17:23:54 GFT 2017
+	* Creation date: Tue Apr 04 15:30:06 GFT 2017
 	* Creator: rlomez
 	**/
 public enum TextType {UNDEFINED, PLAINTEXT, TEXTAREA;

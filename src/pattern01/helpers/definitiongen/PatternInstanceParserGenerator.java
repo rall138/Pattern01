@@ -172,6 +172,7 @@ public class PatternInstanceParserGenerator extends Task{
 
 	private void generateElementStrategyFooter(){
 		builder.appendLn(2,"}");
+		builder.appendLn(2,"item.setExpanded(true);");
 		builder.appendLn(1,"}");
 	}
 	
@@ -187,19 +188,11 @@ public class PatternInstanceParserGenerator extends Task{
 	}
 	
 	private void generateDependenciesInjection(Element element){
-		if (element != null && ((CommonElement)element).getParentElement() != null){
-			if (!element.isUnique()){
-				builder.appendLn(3,
-					"((pattern01.helpers.generated."+((CommonElement)element).getParentElement().getPrettyName()+")"+
-					"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).getCollection_"+
-					element.getPrettyName()+"().add("+element.getName()+");");
-			}else {
-				builder.appendLn(3,
-					"((pattern01.helpers.generated."+((CommonElement)element).getParentElement().getPrettyName()+")"+
-					"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).set"+
-					element.getPrettyName()+"("+element.getName()+");");
-			}
-		}
+		if (element != null && ((CommonElement)element).getParentElement() != null)
+			builder.appendLn(3,
+				"((pattern01.helpers.generated.IPatternElement)"+
+				"item.getParentItem().getData("+quotscape+"class_instance"+quotscape+")).setGenericElement("+
+				element.getName()+");");
 	}
 	
 	private void generatePropertiesMethodSwitchOptions(Element element, CustomStringBuilder builder){
@@ -212,11 +205,13 @@ public class PatternInstanceParserGenerator extends Task{
 			
 			for (Attribute attr: element.getAttribute_collection()){
 				builder.appendLn(4,element.getName()+".set"+attr.getPrettyName());
-				if (attr.isCustomAttribute())
-					builder.append("(("+DataTypeConversion.getProcessedType(attr.getType())+")");
-				else
+				if (attr.isCustomAttribute()){
+					builder.append("("+DataTypeConversion.getProcessedType(attr.getType())+".valueOf(");
+					builder.append("getAttributeValueByName("+quotscape+attr.getName()+quotscape+", actualNode).toString()));");
+				}else{
 					builder.append("(("+attr.getType()+")");
-				builder.append("getAttributeValueByName("+quotscape+attr.getName()+quotscape+", actualNode));");
+					builder.append("getAttributeValueByName("+quotscape+attr.getName()+quotscape+", actualNode));");
+				}
 			}
 			
 			builder.appendLn(4,"break;");

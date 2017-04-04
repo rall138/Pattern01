@@ -17,6 +17,12 @@ public class JFaceDialogDataTable extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
+	private org.eclipse.swt.widgets.Label name_label = null;
+	private org.eclipse.swt.widgets.Text name_text = null;
+	private org.eclipse.swt.widgets.Label managedBean_label = null;
+	private org.eclipse.swt.widgets.Text managedBean_text = null;
+	private org.eclipse.swt.widgets.Label description_label = null;
+	private org.eclipse.swt.widgets.Text description_text = null;
 	
 	public JFaceDialogDataTable(Shell parentShell){
 		super(parentShell);
@@ -42,6 +48,30 @@ public class JFaceDialogDataTable extends TitleAreaDialog {
 	
 	private void createProperties(Composite container){
 		
+		name_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		name_label.setText("Name");
+		name_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		org.eclipse.swt.layout.GridData name_layout = new org.eclipse.swt.layout.GridData();
+		name_layout.grabExcessHorizontalSpace = true;
+		name_layout.horizontalAlignment = GridData.FILL;
+		name_text.setLayoutData(name_layout);
+
+		managedBean_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		managedBean_label.setText("ManagedBean");
+		managedBean_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		org.eclipse.swt.layout.GridData managedBean_layout = new org.eclipse.swt.layout.GridData();
+		managedBean_layout.grabExcessHorizontalSpace = true;
+		managedBean_layout.horizontalAlignment = GridData.FILL;
+		managedBean_text.setLayoutData(managedBean_layout);
+
+		description_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		description_label.setText("Description");
+		description_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		org.eclipse.swt.layout.GridData description_layout = new org.eclipse.swt.layout.GridData();
+		description_layout.grabExcessHorizontalSpace = true;
+		description_layout.horizontalAlignment = GridData.FILL;
+		description_text.setLayoutData(description_layout);
+
 	}
 	
 	protected void createButtonsForButtonBar(Composite parent) {
@@ -63,11 +93,17 @@ public class JFaceDialogDataTable extends TitleAreaDialog {
 	
 	private void getPropertiesFromInstance(){
 		pattern01.helpers.generated.DataTable dataTable = getSelectedInstance();
+		this.name_text.setText(dataTable.getName());
+		this.managedBean_text.setText(dataTable.getManagedBean());
+		this.description_text.setText(dataTable.getDescription());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.DataTable dataTable = getSelectedInstance();
+		dataTable.setName(this.name_text.getText());
+		dataTable.setManagedBean(this.managedBean_text.getText());
+		dataTable.setDescription(this.description_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

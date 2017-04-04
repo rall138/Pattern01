@@ -91,16 +91,10 @@ public class PatternDefinitionParser {
 		for (int hindex = 0; hindex < nodeElement.getAttributes().getLength(); hindex++){
 			Node attributeNode = nodeElement.getAttributes().item(hindex);
 			if (attributeNode.getNodeName().equalsIgnoreCase("name")){
-				
-				// PrettyName setting
-//				if (parentElement != null)
-//					commonElement.setName(parentElement.getName()+"_"+attributeNode.getNodeValue());
-//				else
-					commonElement.setName(attributeNode.getNodeValue());
-				
+				commonElement.setName(attributeNode.getNodeValue());
+
 				commonElement.setPrettyName(attributeNode.getNodeValue().substring(0, 1).toUpperCase()+
 						attributeNode.getNodeValue().substring(1, attributeNode.getNodeValue().length()));
-				
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("unique")){
 				commonElement.setUnique(Boolean.valueOf(attributeNode.getNodeValue()));
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("image")){
@@ -123,6 +117,8 @@ public class PatternDefinitionParser {
 				attr.setDefault_value(attributeNode.getNodeValue());
 			}else if (attributeNode.getNodeName().equalsIgnoreCase("group")){
 				attr.setGroup(attributeNode.getNodeValue());
+			}else if (attributeNode.getNodeName().equalsIgnoreCase("userEditable")){
+				attr.setUserEditable(Boolean.valueOf(attributeNode.getNodeValue().toString()));
 			}
 		}
 		commonElement.getAttribute_collection().add(attr);

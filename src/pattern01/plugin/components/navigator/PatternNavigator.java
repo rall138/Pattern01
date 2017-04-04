@@ -35,8 +35,6 @@ public class PatternNavigator extends ViewPart {
 		defineActionBarActions();
 	}
 	
-	
-	
 	private void generateTree(Composite parent){
 		this.instanceTree = new Tree(parent,0);
 		generateProjectNodeFromWorkspace();
@@ -53,6 +51,7 @@ public class PatternNavigator extends ViewPart {
 						projectParentItem.setText(potencialProjectFolder.getName());
 						projectParentItem.setImage(ImageHelper.getImage("prj_obj.png"));
 						projectParentItem.setData("path", potencialProjectFolder.getAbsolutePath());
+						projectParentItem.setExpanded(true);
 						try{
 							generateLeafs(projectParentItem, potencialProjectFolder.getPath());
 						}catch(XPathExpressionException e){
@@ -101,7 +100,7 @@ public class PatternNavigator extends ViewPart {
 	
 	private void generateLeafs(TreeItem parent, String projectFolderPath) throws XPathExpressionException{
 		TreeItem packageItem = null, classItem = null;
-		String packageName = "", className = "", patternUUID = "";
+		String packageName = "", className = "", patternUUID = "", uuid="";
 		NodeList packageList = this.getPackagesDeclared(projectFolderPath), classList = null;
 		
 		parent.getParent().setData("project_path", projectFolderPath);
@@ -115,18 +114,22 @@ public class PatternNavigator extends ViewPart {
 				packageItem.setText(packageName);
 				packageItem.setData("type", NodeType.PACKAGE);
 				packageItem.setImage(ImageHelper.getImage("package_obj.png"));
+				packageItem.setExpanded(true);
 				
 				classList = this.getClassesDeclared(projectFolderPath, packageName);
 				for (int hindex = 0; hindex < classList.getLength(); hindex++){ //Classes
 					if(classList.item(hindex).getNodeType() == Node.ELEMENT_NODE){						
 						className = classList.item(hindex).getAttributes().getNamedItem("name").getNodeValue();
+						uuid = classList.item(hindex).getAttributes().getNamedItem("uuid").getNodeValue();
 						
 						//Declaramos el tipo de nodo clase
 						classItem = new TreeItem(packageItem, 0);
 						classItem.setText(className);
 						classItem.setData("name", className);
+						classItem.setData("uuid", uuid);
 						classItem.setData("type", NodeType.CLASS);
 						classItem.setImage(ImageHelper.getImage("class_obj.png"));
+						classItem.setExpanded(true);
 						
 						PatternInstanceParser instanceParser = new PatternInstanceParser(classItem);
 						

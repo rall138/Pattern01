@@ -17,6 +17,8 @@ public class JFaceDialogColumn extends TitleAreaDialog {
 	
 	private Tree parent = null;
 	
+	private org.eclipse.swt.widgets.Label headerText_label = null;
+	private org.eclipse.swt.widgets.Text headerText_text = null;
 	
 	public JFaceDialogColumn(Shell parentShell){
 		super(parentShell);
@@ -42,6 +44,14 @@ public class JFaceDialogColumn extends TitleAreaDialog {
 	
 	private void createProperties(Composite container){
 		
+		headerText_label = new org.eclipse.swt.widgets.Label(container,SWT.NONE);
+		headerText_label.setText("HeaderText");
+		headerText_text = new org.eclipse.swt.widgets.Text(container, SWT.SINGLE);
+		org.eclipse.swt.layout.GridData headerText_layout = new org.eclipse.swt.layout.GridData();
+		headerText_layout.grabExcessHorizontalSpace = true;
+		headerText_layout.horizontalAlignment = GridData.FILL;
+		headerText_text.setLayoutData(headerText_layout);
+
 	}
 	
 	protected void createButtonsForButtonBar(Composite parent) {
@@ -63,11 +73,13 @@ public class JFaceDialogColumn extends TitleAreaDialog {
 	
 	private void getPropertiesFromInstance(){
 		pattern01.helpers.generated.Column column = getSelectedInstance();
+		this.headerText_text.setText(column.getHeaderText());
 	}
 	
 	
 	private void savePropertiesOnInstance(){
 		pattern01.helpers.generated.Column column = getSelectedInstance();
+		column.setHeaderText(this.headerText_text.getText());
 		pattern01.helpers.XMLPropertyHelper.saveProperties(this.parent.getSelection()[0]);
 	}
 	

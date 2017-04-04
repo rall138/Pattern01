@@ -226,19 +226,27 @@ public class MenuFactoryGenerator extends Task {
 			}else{
 				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+",java.util.UUID.randomUUID());");
 				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape+",");
-				builder.append(element.getName()+");");			
+				builder.append(element.getName()+");");
+
+				builder.appendComment(4, "Vinculando la nueva instancia con el mapper.xml");
+				builder.appendLn(4,"PatternInstanceSaver.addReferenceToMapper((PatternInstance)item_"+element.getName());
+				builder.append(".getData("+quotscape+"class_instance"+quotscape+"),");
+				builder.append("UUID.fromString(item_"+element.getName()+".getParentItem().getData(");
+				builder.append(quotscape+"uuid"+quotscape+").toString()));");
 			}
 			builder.clrlf();
 	
-			builder.appendComment(4, "Vinculando las instancias nuevas con su respectivo padre");
-			builder.appendLn(4,"IPatternElement "+element.getName()+"_parentInstance = ");
-			builder.append("(IPatternElement)item_"+element.getName()+".getParentItem().getData("+quotscape+"class_instance"+quotscape+");");
-	
-			builder.appendLn(4,element.getName()+"_parentInstance.setGenericElement("+element.getName()+");");
-			builder.appendLn(4,"break;");
-			for(Element childElement : element.getChildElements_collection()){
-				generateAddElementMethodSwitchOptions(childElement, builder, index++);
+			if (!element.getPrettyName().equalsIgnoreCase(NodeType.PATTERNINSTANCE.toString())){
+				builder.appendComment(4, "Vinculando las instancias nuevas con su respectivo padre");
+				builder.appendLn(4,"IPatternElement "+element.getName()+"_parentInstance = ");
+				builder.append("(IPatternElement)item_"+element.getName()+".getParentItem().getData("+quotscape+"class_instance"+quotscape+");");
+		
+				builder.appendLn(4,element.getName()+"_parentInstance.setGenericElement("+element.getName()+");");
+				builder.appendLn(4,"break;");
 			}
+			
+			for(Element childElement : element.getChildElements_collection())
+				generateAddElementMethodSwitchOptions(childElement, builder, index++);
 		}
 	}
 	

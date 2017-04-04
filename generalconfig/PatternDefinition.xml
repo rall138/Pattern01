@@ -7,16 +7,16 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 	<Element name="patternInstance" image="primefaces.jpg" unique="true" >
 		<AttributeElement name="uuid" type="java.lang.String" required="true" userEditable="false" />
 		<AttributeElement name="generator" type="#{Generator}" required="true" default="#{Generator.WEB}" />
-		<AttributeElement name="type" type="#{PatternType}" required="true" default="#{PatternType.WORKWITH}" />
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="type" type="#{PatternType}" required="true" default="#{PatternType.WORKWITH}" userEditable="true"/>
+		<AttributeElement name="name" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="description" type="java.lang.String" required="false" userEditable="true"/>
 		<ChildElement references="form" unique="true" />
 	</Element>
 
 	<Element name="form" image="primefaces.jpg"  unique="true">
 		<AttributeElement name="uuid" type="java.lang.String" required="true" userEditable="false" />
 		<AttributeElement name="parentUUID" type="java.lang.String" required="true" userEditable="false" />		
-		<AttributeElement name="id" type="java.lang.String" required="false" default="primefaces.jpg" />
+		<AttributeElement name="id" type="java.lang.String" required="false" default="primefaces.jpg" userEditable="false"/>
 		<ChildElement references="panelGrid" unique="false" />
 		<ChildElement references="panel" unique="false" />
 		<ChildElement references="property" unique="false" />		
@@ -48,19 +48,19 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 	<Element name="property" image="primefaces.jpg">
 		<AttributeElement name="uuid" type="java.lang.String" required="true" userEditable="false" />
 		<AttributeElement name="parentUUID" type="java.lang.String" required="true" userEditable="false" />		
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
-		<AttributeElement name="type" type="java.lang.String" required="true" />
-		<AttributeElement name="defaultValue" type="java.lang.String" required="false" />
+		<AttributeElement name="name" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="description" type="java.lang.String" required="false" userEditable="true"/>
+		<AttributeElement name="type" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="defaultValue" type="java.lang.String" required="false" userEditable="true"/>
 	</Element>
 
 	<Element name="text" image="primefaces.jpg">
 		<AttributeElement name="uuid" type="java.lang.String" required="true" userEditable="false" />
 		<AttributeElement name="parentUUID" type="java.lang.String" required="true" userEditable="false" />		
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="value" type="java.lang.String" required="true" />
-		<AttributeElement name="type" type="#{TextType}" default="#{TextType.PLAINTEXT}" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="name" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="value" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="type" type="#{TextType}" default="#{TextType.PLAINTEXT}" required="true" userEditable="true"/>
+		<AttributeElement name="description" type="java.lang.String" required="false" userEditable="true"/>
 	</Element>
 
 	<Element name="messages" image="primefaces.jpg">
@@ -71,25 +71,25 @@ xsi:noNamespaceSchemaLocation="PatternSchemaDefinition.xsd">
 	<Element name="dataTable" image="primefaces.jpg">
 		<AttributeElement name="uuid" type="java.lang.String" required="true" userEditable="false" />
 		<AttributeElement name="parentUUID" type="java.lang.String" required="true" userEditable="false" />		
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="managedBean" type="java.lang.String" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="name" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="managedBean" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="description" type="java.lang.String" required="false" userEditable="true"/>
 		<ChildElement references="column" unique="false" />		
 	</Element>
 
 	<Element name="column" image="primefaces.jpg">
 		<AttributeElement name="uuid" type="java.lang.String" required="true" userEditable="false" />
 		<AttributeElement name="parentUUID" type="java.lang.String" required="true" userEditable="false" />		
-		<AttributeElement name="headerText" type="java.lang.String" required="true" />
+		<AttributeElement name="headerText" type="java.lang.String" required="true" userEditable="true"/>
 		<ChildElement references="text" unique="true" />
 	</Element>
 
 	<Element name="commandButton" image="primefaces.jpg">
 		<AttributeElement name="uuid" type="java.lang.String" required="true" userEditable="false" />
 		<AttributeElement name="parentUUID" type="java.lang.String" required="true" userEditable="false" />		
-		<AttributeElement name="name" type="java.lang.String" required="true" />
-		<AttributeElement name="action" type="java.lang.String" required="true" />
-		<AttributeElement name="description" type="java.lang.String" required="false" />
+		<AttributeElement name="name" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="action" type="java.lang.String" required="true" userEditable="true"/>
+		<AttributeElement name="description" type="java.lang.String" required="false" userEditable="true"/>
 	</Element>
 
 </PatternDefinition>

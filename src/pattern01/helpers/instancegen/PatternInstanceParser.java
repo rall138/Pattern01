@@ -75,10 +75,15 @@ public class PatternInstanceParser {
 	}
 
 
+
+
+
+
+
 /* [Begin] Auto-generated code for pattern instance parser do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Fri Mar 31 17:23:56 GFT 2017
+	* Creation date: Tue Apr 04 15:30:09 GFT 2017
 	* Creator: rlomez
 	**/
 
@@ -100,8 +105,8 @@ public class PatternInstanceParser {
 			case PATTERNINSTANCE:
 				PatternInstance patternInstance = new PatternInstance();
 				patternInstance.setUuid((java.lang.String)getAttributeValueByName("uuid", actualNode));
-				patternInstance.setGenerator((Generator)getAttributeValueByName("generator", actualNode));
-				patternInstance.setType((PatternType)getAttributeValueByName("type", actualNode));
+				patternInstance.setGenerator(Generator.valueOf(getAttributeValueByName("generator", actualNode).toString()));
+				patternInstance.setType(PatternType.valueOf(getAttributeValueByName("type", actualNode).toString()));
 				patternInstance.setName((java.lang.String)getAttributeValueByName("name", actualNode));
 				patternInstance.setDescription((java.lang.String)getAttributeValueByName("description", actualNode));
 				break;
@@ -136,7 +141,7 @@ public class PatternInstanceParser {
 				text.setParentUUID((java.lang.String)getAttributeValueByName("parentUUID", actualNode));
 				text.setName((java.lang.String)getAttributeValueByName("name", actualNode));
 				text.setValue((java.lang.String)getAttributeValueByName("value", actualNode));
-				text.setType((TextType)getAttributeValueByName("type", actualNode));
+				text.setType(TextType.valueOf(getAttributeValueByName("type", actualNode).toString()));
 				text.setDescription((java.lang.String)getAttributeValueByName("description", actualNode));
 				break;
 			case COMMANDBUTTON:
@@ -207,7 +212,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",form);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","FORM");
-			((pattern01.helpers.generated.PatternInstance)item.getParentItem().getData("class_instance")).setForm(form);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(form);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("panelGrid")){
 			pattern01.helpers.generated.PanelGrid panelGrid = new pattern01.helpers.generated.PanelGrid();
 			panelGrid.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -218,7 +223,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",panelGrid);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","PANELGRID");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_PanelGrid().add(panelGrid);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(panelGrid);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("panel")){
 			pattern01.helpers.generated.Panel panel = new pattern01.helpers.generated.Panel();
 			panel.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -229,7 +234,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",panel);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","PANEL");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Panel().add(panel);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(panel);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
 			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
 			property.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -244,7 +249,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","PROPERTY");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(property);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -259,7 +264,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
 			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
 			commandButton.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -273,7 +278,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COMMANDBUTTON");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(commandButton);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
 			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
 			dataTable.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -287,7 +292,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","DATATABLE");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(dataTable);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
 			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
 			column.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -299,7 +304,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(column);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -314,7 +319,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
 			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
 			property.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -329,7 +334,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","PROPERTY");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(property);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -344,7 +349,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
 			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
 			commandButton.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -358,7 +363,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COMMANDBUTTON");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(commandButton);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
 			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
 			dataTable.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -372,7 +377,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","DATATABLE");
-			((pattern01.helpers.generated.PanelGrid)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(dataTable);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
 			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
 			column.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -384,7 +389,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(column);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -399,7 +404,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("panel")){
 			pattern01.helpers.generated.Panel panel = new pattern01.helpers.generated.Panel();
 			panel.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -410,7 +415,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",panel);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","PANEL");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Panel().add(panel);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(panel);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
 			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
 			property.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -425,7 +430,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","PROPERTY");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(property);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -440,7 +445,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
 			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
 			commandButton.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -454,7 +459,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COMMANDBUTTON");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(commandButton);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
 			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
 			dataTable.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -468,7 +473,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","DATATABLE");
-			((pattern01.helpers.generated.Panel)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(dataTable);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
 			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
 			column.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -480,7 +485,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(column);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -495,7 +500,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("property")){
 			pattern01.helpers.generated.Property property = new pattern01.helpers.generated.Property();
 			property.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -510,7 +515,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",property);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","PROPERTY");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Property().add(property);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(property);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -525,7 +530,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("messages")){
 			pattern01.helpers.generated.Messages messages = new pattern01.helpers.generated.Messages();
 			messages.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -536,7 +541,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",messages);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","MESSAGES");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_Messages().add(messages);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(messages);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("dataTable")){
 			pattern01.helpers.generated.DataTable dataTable = new pattern01.helpers.generated.DataTable();
 			dataTable.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -550,7 +555,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",dataTable);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","DATATABLE");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_DataTable().add(dataTable);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(dataTable);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("column")){
 			pattern01.helpers.generated.Column column = new pattern01.helpers.generated.Column();
 			column.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -562,7 +567,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",column);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COLUMN");
-			((pattern01.helpers.generated.DataTable)item.getParentItem().getData("class_instance")).getCollection_Column().add(column);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(column);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("text")){
 			pattern01.helpers.generated.Text text = new pattern01.helpers.generated.Text();
 			text.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -577,7 +582,7 @@ public class PatternInstanceParser {
 			item.setData("class_instance",text);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","TEXT");
-			((pattern01.helpers.generated.Column)item.getParentItem().getData("class_instance")).getCollection_Text().add(text);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(text);
 		}else if(actualNode.getNodeName().equalsIgnoreCase("commandButton")){
 			pattern01.helpers.generated.CommandButton commandButton = new pattern01.helpers.generated.CommandButton();
 			commandButton.setUuid(actualNode.getAttributes().getNamedItem("uuid") != null ? actualNode.getAttributes().getNamedItem("uuid").getNodeValue().toString():"");
@@ -591,8 +596,9 @@ public class PatternInstanceParser {
 			item.setData("class_instance",commandButton);
 			item.setData("parent_reference",this.patternInstance);
 			item.setData("type","COMMANDBUTTON");
-			((pattern01.helpers.generated.Form)item.getParentItem().getData("class_instance")).getCollection_CommandButton().add(commandButton);
+			((pattern01.helpers.generated.IPatternElement)item.getParentItem().getData("class_instance")).setGenericElement(commandButton);
 		}
+		item.setExpanded(true);
 	}
 	private Object getAttributeValueByName(String name, org.w3c.dom.Node actualNode){
 		int index = 0; boolean itemfound = false; Object value=null;

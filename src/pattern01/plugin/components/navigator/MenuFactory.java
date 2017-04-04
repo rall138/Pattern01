@@ -1,6 +1,7 @@
 package pattern01.plugin.components.navigator;
 
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -22,6 +23,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import pattern01.helpers.ImageHelper;
+import pattern01.helpers.PatternInstanceSaver;
 import pattern01.helpers.generated.*;
 import pattern01.helpers.instancegen.PatternInstanceParser;
 import pattern01.plugin.components.editors.generated.*;
@@ -56,16 +58,10 @@ public class MenuFactory {
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Fri Mar 31 17:23:56 GFT 2017
+	* Creation date: Tue Apr 04 15:30:09 GFT 2017
 	* Creator: rlomez
 	**/
 
@@ -315,13 +311,11 @@ public class MenuFactory {
 				item_patternInstance.setData("class_instance", patternInstance);
 				item_patternInstance.setData("reference",java.util.UUID.randomUUID());
 				item_patternInstance.setData("parent_reference",patternInstance);
-
 				/*
-				Vinculando las instancias nuevas con su respectivo padre
+				Vinculando la nueva instancia con el mapper.xml
 				*/
-				IPatternElement patternInstance_parentInstance = (IPatternElement)item_patternInstance.getParentItem().getData("class_instance");
-				patternInstance_parentInstance.setGenericElement(patternInstance);
-				break;
+				PatternInstanceSaver.addReferenceToMapper((PatternInstance)item_patternInstance.getData("class_instance"),UUID.fromString(item_patternInstance.getParentItem().getData("uuid").toString()));
+
 			case FORM:
 				TreeItem item_form = new TreeItem(this.parent.getSelection()[0], 0);
 				item_form.setText(selectedItem.getText());
@@ -566,18 +560,6 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
