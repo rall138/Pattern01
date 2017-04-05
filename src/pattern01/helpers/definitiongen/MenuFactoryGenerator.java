@@ -208,7 +208,6 @@ public class MenuFactoryGenerator extends Task {
 			builder.appendLn(4,element.getPrettyName()+" "+element.getName()+" = ");
 			builder.append("new "+element.getPrettyName()+"();");
 			
-			builder.appendLn(4,element.getName()+".setUuid(java.util.UUID.randomUUID().toString());");
 			builder.clrlf();
 	
 			builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"class_instance"+quotscape+", "+element.getName()+");");
@@ -224,9 +223,12 @@ public class MenuFactoryGenerator extends Task {
 				builder.append(".getParentItem().getData("+quotscape+"reference"+quotscape+").toString());");
 				
 			}else{
-				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+",java.util.UUID.randomUUID());");
-				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape+",");
-				builder.append(element.getName()+");");
+				builder.appendLn(4, "java.util.UUID reference_uuid = java.util.UUID.randomUUID();");
+				builder.appendLn(4,element.getName()+".setUuid(reference_uuid.toString());");
+				
+				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+", reference_uuid);");
+				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"parent_reference"+quotscape+", item_"+element.getName());
+				builder.append(".getParentItem().getData("+quotscape+"uuid"+quotscape+"));");
 
 				builder.appendComment(4, "Vinculando la nueva instancia con el mapper.xml");
 				builder.appendLn(4,"PatternInstanceSaver.addReferenceToMapper((PatternInstance)item_"+element.getName());

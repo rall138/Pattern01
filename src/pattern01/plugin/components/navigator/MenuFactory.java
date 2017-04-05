@@ -54,14 +54,10 @@ public class MenuFactory {
 		});
 	}
 	
-	
-	
-	
-	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Apr 04 15:30:09 GFT 2017
+	* Creation date: Tue Apr 04 20:36:17 UYT 2017
 	* Creator: rlomez
 	**/
 
@@ -306,11 +302,12 @@ public class MenuFactory {
 				item_patternInstance.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_patternInstance.setData("type",NodeType.PATTERNINSTANCE);
 				PatternInstance patternInstance = new PatternInstance();
-				patternInstance.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_patternInstance.setData("class_instance", patternInstance);
-				item_patternInstance.setData("reference",java.util.UUID.randomUUID());
-				item_patternInstance.setData("parent_reference",patternInstance);
+				java.util.UUID reference_uuid = java.util.UUID.randomUUID();
+				patternInstance.setUuid(reference_uuid.toString());
+				item_patternInstance.setData("reference", reference_uuid);
+				item_patternInstance.setData("parent_reference", item_patternInstance.getParentItem().getData("uuid"));
 				/*
 				Vinculando la nueva instancia con el mapper.xml
 				*/
@@ -322,7 +319,6 @@ public class MenuFactory {
 				item_form.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_form.setData("type",NodeType.FORM);
 				Form form = new Form();
-				form.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_form.setData("class_instance", form);
 				item_form.setData("parent_reference", item_form.getParentItem().getData("parent_reference"));
@@ -341,7 +337,6 @@ public class MenuFactory {
 				item_panelGrid.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_panelGrid.setData("type",NodeType.PANELGRID);
 				PanelGrid panelGrid = new PanelGrid();
-				panelGrid.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_panelGrid.setData("class_instance", panelGrid);
 				item_panelGrid.setData("parent_reference", item_panelGrid.getParentItem().getData("parent_reference"));
@@ -360,7 +355,6 @@ public class MenuFactory {
 				item_panel.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_panel.setData("type",NodeType.PANEL);
 				Panel panel = new Panel();
-				panel.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_panel.setData("class_instance", panel);
 				item_panel.setData("parent_reference", item_panel.getParentItem().getData("parent_reference"));
@@ -379,7 +373,6 @@ public class MenuFactory {
 				item_property.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_property.setData("type",NodeType.PROPERTY);
 				Property property = new Property();
-				property.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_property.setData("class_instance", property);
 				item_property.setData("parent_reference", item_property.getParentItem().getData("parent_reference"));
@@ -398,7 +391,6 @@ public class MenuFactory {
 				item_text.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_text.setData("type",NodeType.TEXT);
 				Text text = new Text();
-				text.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_text.setData("class_instance", text);
 				item_text.setData("parent_reference", item_text.getParentItem().getData("parent_reference"));
@@ -417,7 +409,6 @@ public class MenuFactory {
 				item_commandButton.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_commandButton.setData("type",NodeType.COMMANDBUTTON);
 				CommandButton commandButton = new CommandButton();
-				commandButton.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_commandButton.setData("class_instance", commandButton);
 				item_commandButton.setData("parent_reference", item_commandButton.getParentItem().getData("parent_reference"));
@@ -436,7 +427,6 @@ public class MenuFactory {
 				item_dataTable.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_dataTable.setData("type",NodeType.DATATABLE);
 				DataTable dataTable = new DataTable();
-				dataTable.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_dataTable.setData("class_instance", dataTable);
 				item_dataTable.setData("parent_reference", item_dataTable.getParentItem().getData("parent_reference"));
@@ -455,7 +445,6 @@ public class MenuFactory {
 				item_column.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_column.setData("type",NodeType.COLUMN);
 				Column column = new Column();
-				column.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_column.setData("class_instance", column);
 				item_column.setData("parent_reference", item_column.getParentItem().getData("parent_reference"));
@@ -474,7 +463,6 @@ public class MenuFactory {
 				item_messages.setImage(ImageHelper.getImage("primefaces.jpg"));
 				item_messages.setData("type",NodeType.MESSAGES);
 				Messages messages = new Messages();
-				messages.setUuid(java.util.UUID.randomUUID().toString());
 
 				item_messages.setData("class_instance", messages);
 				item_messages.setData("parent_reference", item_messages.getParentItem().getData("parent_reference"));
@@ -560,10 +548,6 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
-
-
-
-
 
 	private SelectionListener listenerFactory(){
 		SelectionListener listener = new SelectionListener() {
