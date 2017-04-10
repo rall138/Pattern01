@@ -57,7 +57,7 @@ public class MenuFactory {
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Apr 04 20:36:17 UYT 2017
+	* Creation date: Sun Apr 09 23:06:10 UYT 2017
 	* Creator: rlomez
 	**/
 
@@ -304,15 +304,16 @@ public class MenuFactory {
 				PatternInstance patternInstance = new PatternInstance();
 
 				item_patternInstance.setData("class_instance", patternInstance);
-				java.util.UUID reference_uuid = java.util.UUID.randomUUID();
+				java.util.UUID reference_uuid = java.util.UUID.fromString(selectedItem.getData("reference").toString());
 				patternInstance.setUuid(reference_uuid.toString());
 				item_patternInstance.setData("reference", reference_uuid);
 				item_patternInstance.setData("parent_reference", item_patternInstance.getParentItem().getData("uuid"));
 				/*
 				Vinculando la nueva instancia con el mapper.xml
 				*/
-				PatternInstanceSaver.addReferenceToMapper((PatternInstance)item_patternInstance.getData("class_instance"),UUID.fromString(item_patternInstance.getParentItem().getData("uuid").toString()));
+				PatternInstanceSaver.addReferenceToMapper((PatternInstance)patternInstance, UUID.fromString(this.parent.getSelection()[0].getData("class_uuid").toString()));
 
+				break;
 			case FORM:
 				TreeItem item_form = new TreeItem(this.parent.getSelection()[0], 0);
 				item_form.setText(selectedItem.getText());
@@ -548,6 +549,7 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
+
 
 	private SelectionListener listenerFactory(){
 		SelectionListener listener = new SelectionListener() {

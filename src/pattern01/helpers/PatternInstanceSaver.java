@@ -35,14 +35,14 @@ public class PatternInstanceSaver {
 				patternfolder = workspaceFolder.listFiles()[index];					
 				while (hindex < patternfolder.listFiles().length && !itemFound){
 					if (patternfolder.listFiles()[hindex].isDirectory() &&
-							patternfolder.listFiles()[hindex].getName().equalsIgnoreCase("patternfolder"))
+							patternfolder.listFiles()[hindex].getName().equals("patternfolder"))
 						itemFound = true;
 					else
 						hindex++;
 					
 				}
 				if (itemFound)
-					mapper = new File(patternfolder.listFiles()[hindex].getAbsoluteFile()+System.getProperty("file.separator")+"Mapper.xml");
+					mapper = new File(patternfolder.listFiles()[hindex].getAbsoluteFile()+System.getProperty("file.separator")+"mapper.xml");
 			}
 		}
 		return mapper;

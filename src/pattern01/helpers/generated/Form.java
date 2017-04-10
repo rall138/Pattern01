@@ -3,7 +3,7 @@ package pattern01.helpers.generated;
 
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Tue Apr 04 20:36:15 UYT 2017
+	* Creation date: Sun Apr 09 23:06:08 UYT 2017
 	* Creator: rlomez
 	**/
 public class Form implements IPatternElement{

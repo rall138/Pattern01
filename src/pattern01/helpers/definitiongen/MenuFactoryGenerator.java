@@ -223,7 +223,8 @@ public class MenuFactoryGenerator extends Task {
 				builder.append(".getParentItem().getData("+quotscape+"reference"+quotscape+").toString());");
 				
 			}else{
-				builder.appendLn(4, "java.util.UUID reference_uuid = java.util.UUID.randomUUID();");
+				builder.appendLn(4, "java.util.UUID reference_uuid = java.util.UUID.fromString(selectedItem.getData("+quotscape);
+				builder.append("reference"+quotscape+").toString());");
 				builder.appendLn(4,element.getName()+".setUuid(reference_uuid.toString());");
 				
 				builder.appendLn(4,"item_"+element.getName()+".setData("+quotscape+"reference"+quotscape+", reference_uuid);");
@@ -231,10 +232,8 @@ public class MenuFactoryGenerator extends Task {
 				builder.append(".getParentItem().getData("+quotscape+"uuid"+quotscape+"));");
 
 				builder.appendComment(4, "Vinculando la nueva instancia con el mapper.xml");
-				builder.appendLn(4,"PatternInstanceSaver.addReferenceToMapper((PatternInstance)item_"+element.getName());
-				builder.append(".getData("+quotscape+"class_instance"+quotscape+"),");
-				builder.append("UUID.fromString(item_"+element.getName()+".getParentItem().getData(");
-				builder.append(quotscape+"uuid"+quotscape+").toString()));");
+				builder.appendLn(4,"PatternInstanceSaver.addReferenceToMapper((PatternInstance)"+element.getName()+",");
+				builder.append(" UUID.fromString(this.parent.getSelection()[0].getData("+quotscape+"class_uuid"+quotscape+").toString());");
 			}
 			builder.clrlf();
 	
@@ -244,8 +243,8 @@ public class MenuFactoryGenerator extends Task {
 				builder.append("(IPatternElement)item_"+element.getName()+".getParentItem().getData("+quotscape+"class_instance"+quotscape+");");
 		
 				builder.appendLn(4,element.getName()+"_parentInstance.setGenericElement("+element.getName()+");");
-				builder.appendLn(4,"break;");
 			}
+			builder.appendLn(4,"break;");
 			
 			for(Element childElement : element.getChildElements_collection())
 				generateAddElementMethodSwitchOptions(childElement, builder, index++);

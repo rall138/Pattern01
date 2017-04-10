@@ -10,4 +10,13 @@
             restorable="true">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="pattern01.plugin.components.navigator.PatternPerspective"
+            icon="icons/pattern.ico"
+            id="pattern01.plugin.components.navigator.PatternPerspective"
+            name="Pattern perspective">
+      </perspective>
+   </extension>
 </plugin>

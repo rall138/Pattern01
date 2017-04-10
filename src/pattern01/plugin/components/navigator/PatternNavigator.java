@@ -25,6 +25,7 @@ import pattern01.helpers.tree.TreeInstancesHelper;
 
 public class PatternNavigator extends ViewPart {
 
+	public static final String ID = "Pattern01.NavigatorView";
 	private Action searchPatternAction, savePatternAction;
 	private Tree instanceTree = null;
 	
@@ -77,7 +78,7 @@ public class PatternNavigator extends ViewPart {
 			classNodeList = (NodeList) xpath.evaluate (expression, 
 					new InputSource(classInstancesXml), XPathConstants.NODESET);
 		}catch(XPathExpressionException e){
-			throw new XPathExpressionException("No packages defined at Mapper.xml file");			
+			throw new XPathExpressionException("No packages defined at mapper.xml file");			
 		}
 		return classNodeList;
 	}
