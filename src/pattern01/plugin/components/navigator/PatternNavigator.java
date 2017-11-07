@@ -127,7 +127,7 @@ public class PatternNavigator extends ViewPart {
 						classItem = new TreeItem(packageItem, 0);
 						classItem.setText(className);
 						classItem.setData("name", className);
-						classItem.setData("uuid", uuid);
+						classItem.setData("class_uuid", uuid);
 						classItem.setData("type", NodeType.CLASS);
 						classItem.setImage(ImageHelper.getImage("class_obj.png"));
 						classItem.setExpanded(true);

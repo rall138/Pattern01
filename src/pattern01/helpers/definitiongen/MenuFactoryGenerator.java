@@ -233,7 +233,7 @@ public class MenuFactoryGenerator extends Task {
 
 				builder.appendComment(4, "Vinculando la nueva instancia con el mapper.xml");
 				builder.appendLn(4,"PatternInstanceSaver.addReferenceToMapper((PatternInstance)"+element.getName()+",");
-				builder.append(" UUID.fromString(this.parent.getSelection()[0].getData("+quotscape+"class_uuid"+quotscape+").toString());");
+				builder.append(" UUID.fromString(this.parent.getSelection()[0].getData("+quotscape+"class_uuid"+quotscape+").toString()));");
 			}
 			builder.clrlf();
 	

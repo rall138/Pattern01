@@ -43,21 +43,26 @@ public class MenuFactory {
 	}
 	
 	private void attachSelectionListener(){
+				
 		parent.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				TreeItem aux_item = (TreeItem)event.item;
 				if (aux_item.getData("type") != null){
+					System.out.println("Nombre: "+aux_item.getData("name"));
+					System.out.println("Tipo de data "+aux_item.getData("type"));
 					generateDisplayableOptions((NodeType.valueOf(aux_item.getData("type").toString().toUpperCase())));
 				}
 			}
 		});
 	}
 	
+	
+	
 	/* [Begin] Auto-generated code for menu factory do not remove */
 	/**
 	* Generated class via ClassGenerator.xml
-	* Creation date: Sun Apr 09 23:06:10 UYT 2017
+	* Creation date: Mon Nov 06 22:42:44 UYST 2017
 	* Creator: rlomez
 	**/
 
@@ -67,8 +72,14 @@ public class MenuFactory {
 		MenuItem properties_item = null;
 		MenuItem add_item = null;
 		Menu add_itemMenu = null;
+		
+		System.out.println("Tipo de data recibida: "+nodeType.toString());
+		
 		switch (nodeType) {
 			case CLASS:
+				
+				System.out.println("Class: "+nodeType.toString());
+				
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
@@ -82,6 +93,9 @@ public class MenuFactory {
 				item_patternInstance.addSelectionListener(listenerFactory());
 				break;
 			case PATTERNINSTANCE:
+
+				System.out.println("PatternInstance: "+nodeType.toString());
+				
 				add_item = new MenuItem(menu, SWT.CASCADE);
 				add_item.setText("Add");
 				add_itemMenu = new Menu(add_item);
@@ -291,6 +305,9 @@ public class MenuFactory {
 	}
 
 	private void addElement(MenuItem selectedItem){
+		
+		System.out.println("Item seleccionado: "+selectedItem.getText());
+		System.out.println(((NodeType)selectedItem.getData("type")).toString());
 		switch(((NodeType)selectedItem.getData("type"))){
 			case UNDEFINED:
 				break;
@@ -549,6 +566,8 @@ public class MenuFactory {
 	}
 
 	/* [End] Auto-generated code for menu factory do not remove */
+
+
 
 
 	private SelectionListener listenerFactory(){
